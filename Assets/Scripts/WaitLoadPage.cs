@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaitLoadPage : MonoBehaviour
 {
@@ -14,6 +15,6 @@ public class WaitLoadPage : MonoBehaviour
     {
         //Wait for 2 seconds
         yield return new WaitForSeconds(2);
-        sceneController.cambiarEscena("MainMenuScene");
+        SceneManager.LoadScene("MainMenuScene");
     }
 }
