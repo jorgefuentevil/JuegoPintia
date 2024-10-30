@@ -851,8 +851,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 1103081826}
-<<<<<<< HEAD
-=======
 --- !u!1 &425010700
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,7 +952,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
->>>>>>> 3a018f32d4175042c0bb0f388f91fc5c56fcf5d8
 --- !u!1 &443062223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2255,11 +2252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  m_Material: {fileID: 1867478607}
-=======
   m_Material: {fileID: 777227384}
->>>>>>> 3a018f32d4175042c0bb0f388f91fc5c56fcf5d8
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -2824,11 +2817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  m_Material: {fileID: 456029275}
-=======
   m_Material: {fileID: 1904960261}
->>>>>>> 3a018f32d4175042c0bb0f388f91fc5c56fcf5d8
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -4087,11 +4076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  m_Material: {fileID: 2074995323}
-=======
   m_Material: {fileID: 822970465}
->>>>>>> 3a018f32d4175042c0bb0f388f91fc5c56fcf5d8
   m_Color: {r: 0.74509805, g: 0.6156863, b: 0.3019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
