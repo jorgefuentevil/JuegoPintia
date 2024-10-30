@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SwipeToMoveImage2 : MonoBehaviour{
 
-    public float swipeSpeed = 1.0f;
-    public float swipeThreshold = 50.0f;
-    public Vector2 fixedPositionRight = new Vector2(500, 0);
-    public Vector2 fixedPositionLeft = new Vector2(-500, 0);
+    public float swipeSpeed = 20.0f;
+    public float swipeThreshold = 150.0f;
+    private Vector2 swipeVector;
+    public Vector2 fixedPositionRight = new Vector2(150, 0);
+    public Vector2 fixedPositionLeft = new Vector2(-150, 0);
     public Vector2 fixedPositionCenter = new Vector2(0, 0);
 
     public string rightSceneName;
@@ -39,28 +40,19 @@ public class SwipeToMoveImage2 : MonoBehaviour{
             else if (touch.phase == TouchPhase.Moved)
             {
                 endTouchPosition = touch.position;
-                Vector2 swipeVector = endTouchPosition - startTouchPosition;
+                swipeVector = endTouchPosition - startTouchPosition;
 
                 if (Mathf.Abs(swipeVector.x) >= swipeThreshold)
                 {
-                    if (!awaitingConfirmation)
+                    if (swipeVector.x > swipeThreshold)
                     {
-                        if (swipeVector.x > swipeThreshold)
-                        {
-                            imageRectTransform.anchoredPosition = Vector2.Lerp(imageRectTransform.anchoredPosition, fixedPositionRight, swipeSpeed * Time.deltaTime);
-                            awaitingConfirmation = true;
-                            isSwipeRight = true;
-                        }
-                        else if (swipeVector.x < -swipeThreshold)
-                        {
-                            imageRectTransform.anchoredPosition = Vector2.Lerp(imageRectTransform.anchoredPosition, fixedPositionLeft, swipeSpeed * Time.deltaTime);
-                            awaitingConfirmation = true;
-                            isSwipeRight = false;
-                        }
+                        imageRectTransform.anchoredPosition = Vector2.Lerp(imageRectTransform.anchoredPosition, fixedPositionRight, swipeSpeed * Time.deltaTime);
+                        isSwipeRight = true;
                     }
-                    else
+                    else if (swipeVector.x < -swipeThreshold)
                     {
-                        ConfirmSwipe(swipeVector);
+                        imageRectTransform.anchoredPosition = Vector2.Lerp(imageRectTransform.anchoredPosition, fixedPositionLeft, swipeSpeed * Time.deltaTime);
+                        isSwipeRight = false;
                     }
                 }
                 else
@@ -73,6 +65,10 @@ public class SwipeToMoveImage2 : MonoBehaviour{
                 if (!awaitingConfirmation)
                 {
                     imageRectTransform.anchoredPosition = Vector2.Lerp(imageRectTransform.anchoredPosition, fixedPositionCenter, swipeSpeed * Time.deltaTime);
+                    awaitingConfirmation=true;
+                }else
+                {
+                    ConfirmSwipe(swipeVector);
                 }
             }
         }
@@ -130,12 +126,12 @@ public class SwipeToMoveImage2 : MonoBehaviour{
         {
             if (isSwipeRight)
             {
-                Debug.Log("Confirmado cambio a: " + rightSceneName);
+                Debug.Log("Confirmado cambio a: der " + rightSceneName);
                 //SceneManager.LoadScene(rightSceneName);
             }
             else
             {
-                Debug.Log("Confirmado cambio a: " + leftSceneName);
+                Debug.Log("Confirmado cambio a: izq" + leftSceneName);
                 //SceneManager.LoadScene(leftSceneName);
             }
         }
