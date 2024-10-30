@@ -22,7 +22,7 @@ public class Vibracion : MonoBehaviour
         }
     }
 
-    // Método para vibrar el dispositivo tan solo en android o ios
+    // Método para vibrar el dispositivo tan solo funciona en android o ios
     private void Vibrar()
     {
         #if UNITY_ANDROID || UNITY_IOS
