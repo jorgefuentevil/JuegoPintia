@@ -1,0 +1,16 @@
+{
+    "lenguaje": "es_ES",
+    "num_historias": 2,
+    "historias": [
+      {
+        "personaje": "Cazador",
+        "desc": "Descripción muy largaaaaaaa",
+        "coste": 200
+      },
+      {
+        "personaje": "Chamán",
+        "desc": "Eres un chaman man man mago mago chaman",
+        "coste": 420
+      }
+    ]
+  }
