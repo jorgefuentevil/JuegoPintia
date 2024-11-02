@@ -7,14 +7,20 @@ public class LevelManager : MonoBehaviour{
     public GameObject levelHolder;
     public GameObject levelIcon;
     public GameObject thisCanvas;
-    public int numberOfLevels = 6;
+    public int numberOfLevels = 8;
     private Rect panelDimensions;
     
     private Sprite[] images;
     void Start(){
         GameObject panelClone = Instantiate(levelHolder) as GameObject;
+        PageSwiper swiper = levelHolder.AddComponent<PageSwiper>();
+        swiper.totalPages = numberOfLevels;
+
+
+
         panelDimensions = levelHolder.GetComponent<RectTransform>().rect;
-        images = Resources.LoadAll<Sprite>("Assets/Images/Personajes");
+        images = Resources.LoadAll<Sprite>("Images/Personajes");
+        Debug.Log(images.Length);
 
         for (int i = 0; i < numberOfLevels; i++){
             GameObject panel = Instantiate(panelClone) as GameObject;
@@ -22,17 +28,18 @@ public class LevelManager : MonoBehaviour{
             panel.transform.SetParent(levelHolder.transform);
             panel.name = "Page-"+(i+1);
             panel.GetComponent<RectTransform>().localPosition = new Vector2(panelDimensions.width * (i),0);
-                
+            LoadImages(panel,i);
         }
         Destroy(panelClone);
+        Object.Destroy(levelHolder.transform.GetChild(0).gameObject);
     }
 
 
-    private void LoadImages(GameObject panel, int i){
+    private void LoadImages(GameObject parentPanel, int i){
         GameObject icon = Instantiate(levelIcon) as GameObject;
         //icon.transform.SetParent(thisCanvas.transform,false);
-        icon.transform.SetParent(panel.transform);
-        icon.GetComponent<Image>().sprite = images[i];
+        icon.transform.SetParent(parentPanel.transform);
+        //icon.GetComponent<Image>().sprite = images[i];
         icon.name = "Nivel "+ (i+1);
     }
 }
