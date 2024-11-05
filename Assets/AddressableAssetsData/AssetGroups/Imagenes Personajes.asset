@@ -12,11 +12,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: Imagenes Personajes
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: Imagenes Personajes
   m_Data:
     m_SerializedData: []
   m_GUID: b12583de804d45cb38b89ab53bb08bb0
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 0696ab25d7f7199cb928f00b427654c6
+    m_Address: Agricultor_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f905166185d8d129a505102541b5cfb
+    m_Address: Clerigo_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40f65ceab85ca64b69e92081850a5fba
+    m_Address: Guerrero_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c5715172b2d2c69e85b27e1c906fac8
+    m_Address: Ganadero_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a2f53de9e21d1fab804cc3611777f42
+    m_Address: Agricultor_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8293da193e3c88d45b140f20b8da8d85
+    m_Address: Guerrero_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d674c6a8aac754ed39d77aab18d2265c
+    m_Address: Cazador_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e316c19e5c3b1314784bd122d31b88be
+    m_Address: Cazador_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b1b906966e39fa0b4bc067d39bc97f32, type: 2}
   m_SchemaSet:
