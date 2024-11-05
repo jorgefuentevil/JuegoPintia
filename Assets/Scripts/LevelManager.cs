@@ -19,7 +19,8 @@ public class LevelManager : MonoBehaviour{
 
 
         panelDimensions = levelHolder.GetComponent<RectTransform>().rect;
-        images = Resources.LoadAll<Sprite>("Images/Personajes");
+
+
         Debug.Log(images.Length);
 
         for (int i = 0; i < numberOfLevels; i++){
@@ -31,7 +32,7 @@ public class LevelManager : MonoBehaviour{
             LoadImages(panel,i);
         }
         Destroy(panelClone);
-        Object.Destroy(levelHolder.transform.GetChild(0).gameObject);
+        Destroy(levelHolder.transform.GetChild(0).gameObject);
     }
 
 
