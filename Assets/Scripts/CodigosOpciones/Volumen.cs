@@ -10,13 +10,14 @@ public class Volumen : MonoBehaviour
     public Image imgMute;
 
     public void Start(){
-        slider.value=PlayerPrefs.GetFloat("volumen",0.5f);
+        slider.value=PlayerPrefs.GetFloat("volumen");
         AudioListener.volume=slider.value;
+        checkMute();
     }
 
     public void cambiaVolumen(float valor){
         sliderValor=valor;
-        PlayerPrefs.GetFloat("volumen",valor);
+        PlayerPrefs.SetFloat("volumen",valor);
         AudioListener.volume=slider.value;
         checkMute();
     }
