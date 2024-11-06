@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - opciones
+  - ImageCanva
+  - Image
   layers:
   - Default
   - TransparentFX
