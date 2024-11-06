@@ -24,6 +24,13 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
     public void OnDrag(PointerEventData data){
         float difference = data.pressPosition.x - data.position.x;
         transform.position = panelLocation - new Vector3(difference, 0, 0);
+        bool esMediaVuelta = ((image.transform.localRotation.eulerAngles.y>=180 && difference<0)||image.transform.localRotation.eulerAngles.y==0);
+        bool esMenosMediaVuelta = (image.transform.localRotation.eulerAngles.y<=180 && difference>0);
+        Debug.Log(esMenosMediaVuelta);
+        if(esMediaVuelta || esMenosMediaVuelta){
+            Debug.Log(image.transform.localRotation.eulerAngles.y);
+            transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
+        }
     }
     public void OnEndDrag(PointerEventData data){
         float percentage = (data.pressPosition.x - data.position.x) / Screen.width;
@@ -45,12 +52,10 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
             }else if(currentPage ==2){
                 image.color = new Color(0.2f,0.2f,0.2f,1f);
                 RespuestaDer.SetActive(true);
-                //Color a oscuro (333333) y pongo texto
             }else if (currentPage ==3){
                 image.color = new Color(1f,1f,1f,1f);
                 RespuestaIzq.SetActive(false);
                 RespuestaDer.SetActive(false);
-                //Color a blanco y elimino texto
             }else if(currentPage ==4){
                     Debug.Log("cambiando color");
                     image.color = new Color(0.2f,0.2f,0.2f,1f);
