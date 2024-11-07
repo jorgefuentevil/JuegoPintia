@@ -13,6 +13,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
     private Image image;
  public GameObject RespuestaIzq;
     public GameObject RespuestaDer;
+    public bool direccion;
 
     
 
@@ -21,15 +22,40 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
         panelLocation = transform.position;
         image = GetComponent<Image>();
     }
+
     public void OnDrag(PointerEventData data){
         float difference = data.pressPosition.x - data.position.x;
+        if(difference < 0){
+            direccion = true;
+        }else{
+            direccion = false;
+        }
         transform.position = panelLocation - new Vector3(difference, 0, 0);
-        bool esMediaVuelta = ((image.transform.localRotation.eulerAngles.y>=180 && difference<0)||image.transform.localRotation.eulerAngles.y==0);
-        bool esMenosMediaVuelta = (image.transform.localRotation.eulerAngles.y<=180 && difference>0);
-        Debug.Log(esMenosMediaVuelta);
-        if(esMediaVuelta || esMenosMediaVuelta){
-            Debug.Log(image.transform.localRotation.eulerAngles.y);
-            transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
+        bool esMediaVuelta = ((image.transform.localRotation.eulerAngles.y>=180 && direccion) || image.transform.localRotation.eulerAngles.y==0);
+        bool esMenosMediaVuelta = (image.transform.localRotation.eulerAngles.y<=180 && !direccion);
+        //image.transform.position.x<847 && image.transform.position.x>421
+        //NO funciona pero es lo mas parecido
+        //if(esMediaVuelta || esMenosMediaVuelta){
+        //    transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
+        //}
+        Debug.Log(image.transform.position.x);
+        switch(currentPage)
+        {
+            case 2:
+                if(!direccion && image.transform.position.x>621){
+                    transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
+                }
+                break;
+            case 3:
+                if(image.transform.position.x<847 && image.transform.position.x>380){
+                    transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
+                }
+                break;
+            case 4:
+                if(direccion && image.transform.position.x<621){
+                    transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
+                }
+                break;
         }
     }
     public void OnEndDrag(PointerEventData data){
@@ -66,6 +92,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
             }
         }else{
             StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
     }
     IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds){
@@ -75,5 +102,11 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
             transform.position = Vector3.Lerp(startpos, endpos, Mathf.SmoothStep(0f, 1f, t));
             yield return null;
         }
+    }
+//TODO no sirve de nada
+    float GetRotationYInRange(Image image)
+    {
+        float rotationY = image.transform.localRotation.eulerAngles.y;
+        return rotationY > 180 ? rotationY - 360 : rotationY;
     }
 }
