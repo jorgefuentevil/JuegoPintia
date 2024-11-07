@@ -35,9 +35,6 @@ public class LevelManager : MonoBehaviour
             retratosPersonajes.Add(sprite.name, sprite);
         }).WaitForCompletion();
 
-        Debug.Log(retratosPersonajes.Count);
-
-
         GameObject panelClone = Instantiate(levelHolder) as GameObject;
         PageSwiper swiper = levelHolder.AddComponent<PageSwiper>();
         swiper.totalPages = numberOfLevels;
