@@ -5,10 +5,11 @@ using UnityEngine.EventSystems;
 
 public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     private Vector3 panelLocation;
-    public float percentThreshold = 0.2f;
-    public float easing = 0.5f;
-    public int totalPages = 6;
-    private int currentPage = 1;
+    private float percentThreshold = 0.2f;
+    private float easing = 0.5f;
+    public int totalPages = 1;
+    public int currentPage = 1;
+    public LevelManager levelManager;
 
     // Start is called before the first frame update
     void Start(){
@@ -27,12 +28,14 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
                 newLocation += new Vector3(-Screen.width, 0, 0);
             }else if(percentage < 0 && currentPage > 1){
                 currentPage--;
-                newLocation += new Vector3(Screen.width, 0, 0);
+                newLocation += new Vector3(Screen.width, 0, 0); 
             }
             StartCoroutine(SmoothMove(transform.position, newLocation, easing));
             panelLocation = newLocation;
+            levelManager.SetLevelData(currentPage-1);
         }else{
             StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
+            levelManager.SetLevelData(currentPage-1);
         }
     }
     IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds){
