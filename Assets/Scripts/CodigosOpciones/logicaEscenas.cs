@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class logicaEscenas : MonoBehaviour
 {
-    public controladorEscenas panelOpciones;
+
+    public void Awake(){
+        var notDestroy=FindObjectsOfType<logicaEscenas>();
+        if(notDestroy.Length>1){
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
     // Start is called before the first frame update
     void Start()
     {
-        panelOpciones=GameObject.FindGameObjectWithTag("opciones").GetComponent<controladorEscenas>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public void mostrarOpciones(){
-        panelOpciones.vistaOpciones.SetActive(true);
     }
 }

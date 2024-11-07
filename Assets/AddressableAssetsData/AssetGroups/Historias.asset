@@ -10,22 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Imagenes Personajes
+  m_Name: Historias
   m_EditorClassIdentifier: 
-  m_GroupName: Imagenes Personajes
+  m_GroupName: Historias
   m_Data:
     m_SerializedData: []
-  m_GUID: b12583de804d45cb38b89ab53bb08bb0
+  m_GUID: df5ef9c76739c56bf9b7250878f630e2
   m_SerializeEntries:
-  - m_GUID: bb78c0383d5a1dee1b288bc429496f01
-    m_Address: Personajes
+  - m_GUID: 2cb567d21873f954ca9c9d4ab684615a
+    m_Address: Assets/Historias/historia_test.json
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Retratos Personajes
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b1b906966e39fa0b4bc067d39bc97f32, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: e1a1b14b092ab6fb0a4da8e55738fcb1, type: 2}
-    - {fileID: 11400000, guid: 58d7e04cb27d9536ea5e6448fc9da468, type: 2}
+    - {fileID: 11400000, guid: aea89b52b7c96db5ebe17389241b2839, type: 2}
+    - {fileID: 11400000, guid: d18c983b3cc43f453a84d71426d72dcb, type: 2}
