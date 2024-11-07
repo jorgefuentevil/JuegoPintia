@@ -1,0 +1,48 @@
+{
+    "lenguaje": "en_EN",
+    "num_historias": 7,
+    "historias": [
+      {
+        "personaje": "The Hunter",
+        "desc": "A hunter tracks an impossible creature in a dark forest, not knowing if he is the one truly being hunted.",
+        "coste": 200,
+        "imagen": "Cazador_1"
+      },
+      {
+        "personaje": "The Shaman",
+        "desc": "An ancestral shaman traverses a cursed forest to invoke protective spirits and face the dark force threatening to consume his village.",
+        "coste": 420,
+        "imagen": "Clerigo_1"
+      },
+      {
+        "personaje": "The Farmer",
+        "desc": "A farmer walks through his fields at dawn, wondering if he can protect his harvest from a wild beast lurking in the shadows of the forest.",
+        "coste": 180,
+        "imagen": "Ganadero_1"
+      },
+      {
+        "personaje": "The Warrior",
+        "desc": "A warrior hardened by countless battles enters a desolate battlefield, determined to face the warlord who threatens him.",
+        "coste": 300,
+        "imagen": "Guerrero_1"
+      },
+      {
+        "personaje": "The Rancher",
+        "desc": "A resilient rancher watches as his herd scatters at the sight of smoke rising on the horizon, knowing he must defend his home and everything he has worked so hard to build.",
+        "coste": 220,
+        "imagen": "Ganadero_1"
+      },
+      {
+        "personaje": "The Elder",
+        "desc": "A wise elder walks among the ruins of his village, his gaze filled with determination as he prepares to guide his people toward reconstruction.",
+        "coste": 350,
+        "imagen": "Anciano_1"
+      },
+      {
+        "personaje": "The Archer",
+        "desc": "An expert archer stealthily enters a dark forest in search of a legendary creature, unaware that he too is the target of a mystical beast.",
+        "coste": 230,
+        "imagen": "Cazador_2"
+      }
+    ]
+}

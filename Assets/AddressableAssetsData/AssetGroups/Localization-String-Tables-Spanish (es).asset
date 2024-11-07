@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Historias
+  m_Name: Localization-String-Tables-Spanish (es)
   m_EditorClassIdentifier: 
-  m_GroupName: Historias
+  m_GroupName: Localization-String-Tables-Spanish (es)
   m_Data:
     m_SerializedData: []
-  m_GUID: df5ef9c76739c56bf9b7250878f630e2
+  m_GUID: 106bab56866e9aee5aae2f2754e781ca
   m_SerializeEntries:
-  - m_GUID: 2cb567d21873f954ca9c9d4ab684615a
-    m_Address: Assets/Historias/historia_test.json
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+  - m_GUID: ac941ee813446c8f1a5fd94859857c49
+    m_Address: Strings Table_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
     FlaggedDuringContentUpdateRestriction: 0
-  m_ReadOnly: 0
+  m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: b1b906966e39fa0b4bc067d39bc97f32, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: aea89b52b7c96db5ebe17389241b2839, type: 2}
-    - {fileID: 11400000, guid: d18c983b3cc43f453a84d71426d72dcb, type: 2}
+    - {fileID: 11400000, guid: 168b45aa467b031e18ad68dac7cab1aa, type: 2}
+    - {fileID: 11400000, guid: 082d05aac0567105797387b810233eae, type: 2}

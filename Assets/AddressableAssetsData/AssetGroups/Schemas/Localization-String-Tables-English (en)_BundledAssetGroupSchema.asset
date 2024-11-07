@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5d17a21594effb4e9591490b009e7aa, type: 3}
-  m_Name: Historias_BundledAssetGroupSchema
+  m_Name: Localization-String-Tables-English (en)_BundledAssetGroupSchema
   m_EditorClassIdentifier: 
-  m_Group: {fileID: 11400000, guid: d08f4d2f51775942fbab529097f11104, type: 2}
+  m_Group: {fileID: 11400000, guid: 2a52a99256973bd989f7f2148f0eb663, type: 2}
   m_InternalBundleIdMode: 1
   m_Compression: 1
   m_IncludeAddressInCatalog: 1
@@ -41,5 +41,5 @@ MonoBehaviour:
   m_AssetBundleProviderType:
     m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider
-  m_BundleNaming: 0
+  m_BundleNaming: 1
   m_AssetLoadMode: 0

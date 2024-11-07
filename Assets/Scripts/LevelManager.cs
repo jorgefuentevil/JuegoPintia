@@ -1,16 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using TMPro;
+using UnityEngine.Localization;
+
+
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GameObject levelHolder;        //Panel padre de todos los niveles (LevelHolder en el editor).
     [SerializeField] private GameObject levelIcon;          //Creo que no lo necesitamos.
     [SerializeField] private GameObject thisCanvas;         //Canvas padre de toda la UI
-    [SerializeField] private TextAsset jsonHistorias;       //Json con las historias. TEMPORAL - Sustituir por addresable y locales.
+    [SerializeField] private LocalizedAsset<TextAsset>  jsonHistorias;       //Json con las historias. TEMPORAL - Sustituir por addresable y locales.
     [SerializeField] private TextMeshProUGUI contadorText;
     [SerializeField] private TextMeshProUGUI personajeText;
     [SerializeField] private TextMeshProUGUI descripcionText;
@@ -25,7 +27,8 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         //Cargamos Historias del Json
-        parsedHistorias = JsonUtility.FromJson<JsonRoot>(jsonHistorias.text);
+        parsedHistorias = JsonUtility.FromJson<JsonRoot>(jsonHistorias.LoadAsset().text);
+        
         numberOfLevels = parsedHistorias.num_historias;
 
         //Cargamos Sprites de personajes .....
