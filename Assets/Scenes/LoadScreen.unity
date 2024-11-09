@@ -471,7 +471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d09f4f254b726246b67cc8d493bda18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneController: {fileID: 0}
 --- !u!4 &280607612
 Transform:
   m_ObjectHideFlags: 0
@@ -963,7 +962,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: -1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
