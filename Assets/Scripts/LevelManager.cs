@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using TMPro;
 using UnityEngine.Localization;
+using System.Linq;
 
 
 
@@ -56,7 +57,7 @@ public class LevelManager : MonoBehaviour
             Sprite aux;
             if(!retratosPersonajes.TryGetValue(parsedHistorias.historias[i].imagen, out aux)){
                 Debug.Log("Error cargando retrato: " + parsedHistorias.historias[i].imagen);
-                aux = retratosPersonajes["Agricultor_1"];
+                aux = retratosPersonajes.ElementAt(0).Value;
             }
 
             panel.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = aux;

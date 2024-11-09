@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 6c8393a232786ce4186832d93bbc7a0a
+guid: 23d033866286a60a6b7113ff12e694c5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - sfx: {instanceID: 0}
-  - click: {fileID: 8300000, guid: eb964bd5fb6f38e4985ca4c433e8bd3b, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
