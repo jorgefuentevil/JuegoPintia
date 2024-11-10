@@ -33,12 +33,6 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
         transform.position = panelLocation - new Vector3(difference, 0, 0);
         bool esMediaVuelta = ((image.transform.localRotation.eulerAngles.y>=180 && direccion) || image.transform.localRotation.eulerAngles.y==0);
         bool esMenosMediaVuelta = (image.transform.localRotation.eulerAngles.y<=180 && !direccion);
-        //image.transform.position.x<847 && image.transform.position.x>421
-        //NO funciona pero es lo mas parecido
-        //if(esMediaVuelta || esMenosMediaVuelta){
-        //    transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
-        //}
-        Debug.Log(image.transform.position.x);
         switch(currentPage)
         {
             case 2:
@@ -78,14 +72,17 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
             }else if(currentPage ==2){
                 image.color = new Color(0.2f,0.2f,0.2f,1f);
                 RespuestaDer.SetActive(true);
+                transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             }else if (currentPage ==3){
                 image.color = new Color(1f,1f,1f,1f);
                 RespuestaIzq.SetActive(false);
                 RespuestaDer.SetActive(false);
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }else if(currentPage ==4){
                     Debug.Log("cambiando color");
                     image.color = new Color(0.2f,0.2f,0.2f,1f);
                     RespuestaIzq.SetActive(true);
+                    transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
             }else if(currentPage ==5){
                     //Cambio escena
                     Debug.Log("cambiando a izquierda");
