@@ -31,24 +31,36 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
             direccion = false;
         }
         transform.position = panelLocation - new Vector3(difference, 0, 0);
-        bool esMediaVuelta = ((image.transform.localRotation.eulerAngles.y>=180 && direccion) || image.transform.localRotation.eulerAngles.y==0);
-        bool esMenosMediaVuelta = (image.transform.localRotation.eulerAngles.y<=180 && !direccion);
         switch(currentPage)
         {
             case 2:
                 if(!direccion && image.transform.position.x>621){
                     transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
                 }
+                Debug.Log(image.transform.position.x);
+                //if(!direccion && image.transform.position.x>518){
                 break;
             case 3:
                 if(image.transform.position.x<847 && image.transform.position.x>380){
                     transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
                 }
+                /**
+                if(direccion && image.transform.position.x>660){
+                    //Cambiar sprite a RespuestaDerecha
+                    pass;
+                }
+                if(!direccion && image.transform.position.x<496,75){
+                    //Cambiar sprite a Respuesta izq
+                    pass;
+                }**/
                 break;
             case 4:
                 if(direccion && image.transform.position.x<621){
                     transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
                 }
+                //if(direccion && image.transform.position.x<721)
+                
+                Debug.Log(image.transform.position.x);
                 break;
         }
     }
