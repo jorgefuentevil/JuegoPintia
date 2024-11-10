@@ -22,6 +22,34 @@ MonoBehaviour:
     m_Localized: PLAY
     m_Metadata:
       m_Items: []
+  - m_Id: 1084491766927360
+    m_Localized: Loading
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1089204382044160
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1089297436872704
+    m_Localized: Sounf Effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1089867774136320
+    m_Localized: SETTINGS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1091500176281600
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1092212545261568
+    m_Localized: Vibration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1092546873233408
+    m_Localized: Legal Terms & Conditions
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

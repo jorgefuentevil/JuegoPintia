@@ -19,6 +19,34 @@ MonoBehaviour:
     m_Key: Boton_Jugar
     m_Metadata:
       m_Items: []
+  - m_Id: 1084491766927360
+    m_Key: Texto_Cargando
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1089204382044160
+    m_Key: Texto_Volumen_Musica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1089297436872704
+    m_Key: Texto_Volumen_SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1089867774136320
+    m_Key: Texto_Ajustes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1091500176281600
+    m_Key: Texto_Volver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1092212545261568
+    m_Key: Texto_Vibracion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1092546873233408
+    m_Key: Texto Legal
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

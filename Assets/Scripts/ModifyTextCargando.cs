@@ -5,27 +5,28 @@ using TMPro;
 
 public class ModifyTextCargando : MonoBehaviour
 {
-    public TMP_Text cargandoText;
+    [SerializeField]private TMP_Text cargandoText;
+    private string textoInicial = null;
+    private short contador = 0;
+
     // Start is called before the first frame update
     void Start()
-    {
-        cargandoText.text = "Cargando";
+    {   
         InvokeRepeating("anadePunto", 0.2f, 0.2f);
     }
 
-    // Update is called once per frame
     void anadePunto()
-    {
-        if(cargandoText.text == "Cargando...")
-        {
-            cargandoText.text = "Cargando";
+    {   
+        if(textoInicial == null){
+            textoInicial = cargandoText.text;
+            Debug.Log(textoInicial);
         }
-        else
-        {
-            cargandoText.text += ".";
+        if(contador == 3){
+            cargandoText.text = textoInicial;
+            contador = 0;
+        }else{
+            cargandoText.text+=".";
+            contador++;
         }
-    }
-    private void Update() {
-        
     }
 }
