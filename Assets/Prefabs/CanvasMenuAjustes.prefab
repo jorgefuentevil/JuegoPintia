@@ -36,6 +36,154 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -19.99998, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &909894479823306619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3721615398811666148}
+  - component: {fileID: 3792664722343362224}
+  - component: {fileID: 7709400686649511049}
+  - component: {fileID: 2946106968176975103}
+  - component: {fileID: 3231481783278884697}
+  m_Layer: 5
+  m_Name: Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3721615398811666148
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909894479823306619}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1807394871582193003}
+  m_Father: {fileID: 5452130399846845448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 471, y: 1168}
+  m_SizeDelta: {x: 149.7585, y: 143.4172}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3792664722343362224
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909894479823306619}
+  m_CullTransparentMesh: 1
+--- !u!114 &7709400686649511049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909894479823306619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.17101279, g: 0.5943396, b: 0.22713335, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2946106968176975103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909894479823306619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 7709400686649511049}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7171553761963477031}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3231481783278884697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909894479823306619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 70
+  image: {fileID: 7709400686649511049}
 --- !u!1 &1566866003234130165
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +359,140 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!1 &3693380501589540172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1807394871582193003}
+  - component: {fileID: 8563013985259933458}
+  - component: {fileID: 9150139675052760727}
+  m_Layer: 0
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1807394871582193003
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3693380501589540172}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3721615398811666148}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8563013985259933458
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3693380501589540172}
+  m_CullTransparentMesh: 1
+--- !u!114 &9150139675052760727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3693380501589540172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: x
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278979596
+  m_fontColor: {r: 0.047169805, g: 0.047169805, b: 0.047169805, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 70
+  m_fontSizeBase: 70
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3820441842444054015
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +565,127 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &4071937475567624213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3837791927021783944}
+  - component: {fileID: 4087898938774348519}
+  - component: {fileID: 4192652322543269204}
+  - component: {fileID: 4513042845770289639}
+  - component: {fileID: 6842708252470850233}
+  m_Layer: 6
+  m_Name: Scroll
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3837791927021783944
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4071937475567624213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1003591826983595789}
+  m_Father: {fileID: 5452130399846845448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 950, y: 2532}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4087898938774348519
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4071937475567624213}
+  m_CullTransparentMesh: 1
+--- !u!114 &4192652322543269204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4071937475567624213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4513042845770289639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4071937475567624213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Content: {fileID: 1003591826983595789}
+  m_Horizontal: 0
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 0}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 0}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6842708252470850233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4071937475567624213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &4205082760162942309
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,6 +1218,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 148211619314654972}
+  - {fileID: 4621353801718628634}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1345,7 +1749,7 @@ RectTransform:
   m_Father: {fileID: 2969330089842220337}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.85714287, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1539,9 +1943,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3666027091086031494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.85714287, y: 0}
-  m_AnchorMax: {x: 0.85714287, y: 1}
-  m_AnchoredPosition: {x: -2.0500183, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -2.0500488, y: 0}
   m_SizeDelta: {x: 24.1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8725107240592434399
@@ -1615,7 +2019,7 @@ RectTransform:
   m_Father: {fileID: 1486907222897291816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 24.1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1648,6 +2052,119 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7171553761963477031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4621353801718628634}
+  m_Layer: 0
+  m_Name: PopUpAvisoLegal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &4621353801718628634
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7171553761963477031}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5452130399846845448}
+  m_Father: {fileID: 5301574894435735684}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1170, y: 2532}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &7264335802432164961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5452130399846845448}
+  - component: {fileID: 2529256495275838847}
+  - component: {fileID: 5131019422911042712}
+  m_Layer: 0
+  m_Name: background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5452130399846845448
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264335802432164961}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3837791927021783944}
+  - {fileID: 3721615398811666148}
+  m_Father: {fileID: 4621353801718628634}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 292.5, y: 1266}
+  m_SizeDelta: {x: 585, y: 2532}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2529256495275838847
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264335802432164961}
+  m_CullTransparentMesh: 1
+--- !u!114 &5131019422911042712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264335802432164961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2139,17 +2656,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: enlace, Assembly-CSharp
-        m_MethodName: Enlaces
-        m_Mode: 5
+      - m_Target: {fileID: 7171553761963477031}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: https://pintiavaccea.es/seccion/aviso-legal
-          m_BoolArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &7963187106525028609
 GameObject:
@@ -2184,7 +2701,7 @@ RectTransform:
   m_Father: {fileID: 3970708543684250748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2316,6 +2833,344 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 15ad16af75f12fba99e97e6c3885cfdb, type: 2}
   musicSlider: {fileID: 5417848380659034319}
   sfxSlider: {fileID: 3909591752099316196}
+--- !u!1 &8133381691801856731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1003591826983595789}
+  - component: {fileID: 475145405025282304}
+  - component: {fileID: 2157261554086075008}
+  - component: {fileID: 7838348270756947016}
+  m_Layer: 6
+  m_Name: Contenido
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1003591826983595789
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133381691801856731}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3837791927021783944}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -5480.452}
+  m_SizeDelta: {x: 950, y: 13492.9}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &475145405025282304
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133381691801856731}
+  m_CullTransparentMesh: 1
+--- !u!114 &2157261554086075008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133381691801856731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "<size=200%><color=#418E50><b>Aviso legal</b></color></size>\r\n\n<b>1.
+    OBJETO Y ACEPTACI\xD3N\r</b>\n\n\u2022El presente Aviso legal regula el uso del
+    sitio web www.pintiavaccea.es, del que es titular el Centro de Estudios Vacceos
+    Federico Wattenberg de la Universidad de Valladolid (en adelante, el CEVFW).\r\n\n\u2022La
+    navegaci\xF3n por el sitio web del CEVFW atribuye la condici\xF3n de usuario
+    del mismo e implica la aceptaci\xF3n plena y sin reservas de todas y cada una
+    de las disposiciones incluidas en este Aviso legal, que podr\xE1n sufrir modificaciones.\r\n\n\u2022El
+    usuario se obliga a hacer un uso correcto del sitio web de conformidad con las
+    leyes, la buena fe, el orden p\xFAblico, los usos del tr\xE1fico de datos y el
+    presente Aviso legal. El usuario responder\xE1 frente al CEVFW o terceros de
+    cualquier da\xF1o y perjuicio que pudiera causarse como consecuencia del incumplimiento
+    de dicha obligaci\xF3n.\n\n<b>2. IDENTIFICACI\xD3N Y COMUNICACIONES\r</b>\n\n\u2022EL
+    CEVFW, en cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la
+    Sociedad de la Informaci\xF3n y de Comercio Electr\xF3nico, informa a los usuarios
+    que su denominaci\xF3n social es Centro de Estudios Vacceos Federico Wattenberg
+    de la Universidad de Valladolid, con C.I.F. Q-4718001C y domicilio social en
+    la calle Real, s/n de Padilla de Duero (47314 Valladolid). Para comunicarse con
+    nosotros ponemos a su disposici\xF3n el tel\xE9fono 983881240 y el correo electr\xF3nico
+    cevfw@uva.es. Todas las notificaciones y comunicaciones entre los usuarios y
+    el CEVFW se considerar\xE1n eficaces, a todos los efectos, cuando se realicen
+    a trav\xE9s de correo postal o de los medios detallados anteriormente.\r\n\r\n<b>3.
+    CONDICIONES DE ACCESO Y UTILIZACI\xD3N\r</b>\n\n\u2022Este sitio web y sus servicios
+    son de acceso libre y gratuito; no obstante, el CEVFW condiciona la utilizaci\xF3n
+    de algunos de los servicios ofrecidos en su web a la previa cumplimentaci\xF3n
+    del correspondiente formulario. El usuario garantiza la autenticidad y actualidad
+    de todos aquellos datos que comunique al CEVFW y ser\xE1 el \xFAnico responsable
+    de las manifestaciones falsas o inexactas que realice. El usuario se compromete
+    expresamente a hacer un uso adecuado de los contenidos y servicios del CEVFW
+    y a no emplearlos para, entre otros:\r\n\na) Difundir contenidos, delictivos,
+    violentos, pornogr\xE1ficos, racistas, xen\xF3fobo, ofensivos, de apolog\xEDa
+    del terrorismo o, en general, contrarios a la Ley o al orden p\xFAblico.\r\n\nb)
+    Introducir en la red virus inform\xE1ticos o realizar actuaciones susceptibles
+    de alterar, estropear, interrumpir o generar errores o da\xF1os en los documentos
+    electr\xF3nicos, datos o sistemas f\xEDsicos y l\xF3gicos del CEVFW o de terceras
+    personas o entidades, as\xED como obstaculizar el acceso de otros usuarios al
+    sitio web y a sus servicios mediante el consumo masivo de los recursos inform\xE1ticos
+    a trav\xE9s de los cuales el CEVFW presta sus servicios.\r\nc) Intentar acceder
+    a las cuentas de correo electr\xF3nico de otros usuarios o a \xE1reas restringidas
+    de los sistemas inform\xE1ticos del CEVFW o de terceros y, en su caso, extraer
+    informaci\xF3n.\r\n\nd) Vulnerar los derechos de propiedad intelectual o industrial,
+    as\xED como violar la confidencialidad de la informaci\xF3n del CEVFW o de terceros.\r\n\ne)
+    Suplantar la identidad de otro usuario, de las administraciones p\xFAblicas o
+    de un tercero.\r\n\nf) Reproducir, copiar, distribuir, poner a disposici\xF3n
+    o de cualquier otra forma comunicar p\xFAblicamente, transformar o modificar
+    los contenidos de esta web, a menos que se cuente con la autorizaci\xF3n del
+    titular de los correspondientes derechos o ello resulte legalmente permitido.\r\n\ng)
+    Recabar datos con finalidad publicitaria o de remitir publicidad de cualquier
+    clase y comunicaciones con fines de venta u otros de naturaleza comercial sin
+    que medie su previa solicitud o consentimiento.\r\n\n\u2022Todos los contenidos
+    del sitio web (como textos, fotograf\xEDas, gr\xE1ficos, im\xE1genes, iconos,
+    tecnolog\xEDa, software, as\xED como su dise\xF1o gr\xE1fico y c\xF3digos fuente)
+    constituyen una obra cuya propiedad pertenece al CEVFW, sin que puedan entenderse
+    cedidos al usuario ninguno de los derechos de explotaci\xF3n sobre los mismos
+    m\xE1s all\xE1 de lo estrictamente necesario para el correcto uso de la web.\r\n\n\u2022En
+    definitiva, los usuarios que accedan a este sitio web pueden visualizar los contenidos
+    y efectuar, en su caso, copias privadas autorizadas siempre que los elementos
+    reproducidos no sean cedidos posteriormente a terceros, ni se instalen en servidores
+    conectados a redes, ni sean objeto de ning\xFAn tipo de explotaci\xF3n.\r\n\n\u2022Asimismo,
+    todas las marcas, nombres comerciales o signos distintivos de cualquier clase
+    que aparecen en el sitio web son propiedad del CEVFW, sin que pueda entenderse
+    que el uso o acceso a dicho sitio web atribuya al usuario derecho alguno sobre
+    los mismos.\r\n\n\u2022La distribuci\xF3n, modificaci\xF3n, cesi\xF3n o comunicaci\xF3n
+    p\xFAblica de los contenidos y cualquier otro acto que no haya sido expresamente
+    autorizado por el titular de los derechos de explotaci\xF3n quedan prohibidos.\r\n\n\u2022El
+    establecimiento de un hiperenlace no implica en ning\xFAn caso la existencia
+    de relaciones entre el CEVFW y el propietario del sitio web en el que se establezca,
+    ni la aceptaci\xF3n y aprobaci\xF3n por parte del CEVFW de sus contenidos o servicios.
+    Aquellas personas que se propongan establecer un hiperenlace previamente deber\xE1n
+    solicitar autorizaci\xF3n por escrito al CEVFW. En todo caso, el hiperenlace
+    \xFAnicamente permitir\xE1 el acceso a la home-page o p\xE1gina de inicio de
+    nuestro sitio web. Asimismo, deber\xE1 abstenerse de realizar manifestaciones
+    o indicaciones falsas, inexactas o incorrectas sobre el CEVFW o incluir contenidos
+    il\xEDcitos, contrarios a las buenas costumbres y al orden p\xFAblico.\n\r\n\u2022El
+    CEVFW no se responsabiliza del uso que cada usuario d\xE9 a los materiales puestos
+    a disposici\xF3n en este sitio web ni de las actuaciones que realice en base
+    a los mismos.\r\n\r\n<b>4. EXCLUSI\xD3N DE GARANT\xCDAS Y DE RESPONSABILIDAD\r</b>\n\n\u2022El
+    contenido del presente sitio web es de car\xE1cter general y tiene una finalidad
+    meramente informativa, sin que se garantice plenamente el acceso a todos los
+    contenidos, ni su exhaustividad, correcci\xF3n, vigencia o actualidad, ni su
+    idoneidad o utilidad para un objetivo espec\xEDfico.\r\n\nEl CEVFW excluye, hasta
+    donde permite el ordenamiento jur\xEDdico, cualquier responsabilidad por los
+    da\xF1os y perjuicios de toda naturaleza derivados de:\r\n\na) La imposibilidad
+    de acceso al sitio web o la falta de veracidad, exactitud, exhaustividad y/o
+    actualidad de los contenidos, as\xED como la existencia de vicios y defectos
+    de toda clase de los contenidos transmitidos, difundidos, almacenados y puestos
+    a disposici\xF3n a los que se haya accedido a trav\xE9s del sitio web o de los
+    servicios que se ofrecen.\r\n\nb) La presencia de virus o de otros elementos
+    en los contenidos que puedan producir alteraciones en los sistemas inform\xE1ticos,
+    documentos electr\xF3nicos o datos de los usuarios.\r\n\nc) El incumplimiento
+    de las leyes, la buena fe, el orden p\xFAblico, los usos del tr\xE1fico de datos
+    y el presente Aviso legal como consecuencia del uso incorrecto del sitio web.
+    En particular, y a modo de ejemplo, el CEVFW no se hace responsable de las actuaciones
+    de terceros que vulneren derechos de propiedad intelectual e industrial, secretos
+    empresariales, derechos al honor, a la intimidad personal y familiar y a la propia
+    imagen, as\xED como la normativa en materia de competencia desleal o publicidad
+    il\xEDcita.\r\n\n\u2022Asimismo, el CEVFW declina cualquier responsabilidad respecto
+    a la informaci\xF3n que se halle fuera de esta web y no sea gestionada directamente
+    por nuestro webmaster. La funci\xF3n de los links que aparecen en esta web es
+    exclusivamente la de informar al usuario sobre la existencia de otras fuentes
+    susceptibles de ampliar los contenidos que ofrece este sitio web. El CEVFW no
+    garantiza ni se responsabiliza del funcionamiento o accesibilidad de los sitios
+    enlazados, ni sugiere, invita o recomienda la visita a los mismos, por lo que
+    tampoco ser\xE1 responsable del resultado obtenido. El CEVFW no se responsabiliza
+    del establecimiento de hiperv\xEDnculos por parte de terceros.\r\n\r\n<b>5. POL\xCDTICA
+    DE PRIVACIDAD\r</b>\n\n\u2022Cuando precisemos obtener informaci\xF3n de un usuario,
+    siempre solicitaremos que nos la proporcione voluntariamente de forma expresa.
+    Los datos recabados a trav\xE9s de los formularios del sitio web u otras v\xEDas
+    ser\xE1n incorporados a un fichero de datos de car\xE1cter personal debidamente
+    inscrito en el Registro General de Protecci\xF3n de Datos de la Agencia Espa\xF1ol
+    a de Protecci\xF3n de Datos, del cual es responsable el CEVFW. Esta entidad tratar\xE1
+    los datos de forma confidencial y exclusivamente con la finalidad de ofrecer
+    los servicios solicitados, con todas las garant\xEDas legales y de seguridad
+    que impone la Ley Org\xE1nica 15/1999, de 13 de diciembre, de Protecci\xF3n de
+    Datos de Car\xE1cter Personal, el Real Decreto 1720/2007, de 21 de diciembre,
+    y la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Informaci\xF3n
+    y Comercio Electr\xF3nico.\r\n\n\u2022El CEVFW se compromete a no ceder, vender,
+    ni compartir los datos con terceros sin la aprobaci\xF3n expresa del usuario.\r\n\n\u2022Asimismo,
+    el CEVFW cancelar\xE1 o rectificar\xE1 los datos cuando resulten inexactos, incompletos
+    o hayan dejado de ser necesarios o pertinentes para su finalidad, de conformidad
+    con lo previsto en la Ley Org\xE1nica 15/1999, de 13 de diciembre, de Protecci\xF3n
+    de Datos de Car\xE1cter Personal.\r\n\n\u2022El usuario podr\xE1 revocar el consentimiento
+    prestado y ejercer los derechos de acceso, rectificaci\xF3n, cancelaci\xF3n y
+    oposici\xF3n dirigi\xE9ndose a tal efecto al domicilio social del CEVFW, identific\xE1ndose
+    debidamente e indicando de forma visible el derecho concreto que se ejerce.\r\n\n\u2022El
+    CEVFW adopta los niveles de seguridad correspondientes requeridos por la citada
+    Ley Org\xE1nica 15/1999 y dem\xE1s normativa aplicable. No obstante, no asume
+    ninguna responsabilidad por los da\xF1os y perjuicios derivados de alteraciones
+    que terceros pueden causar en los sistemas inform\xE1ticos, documentos electr\xF3nicos
+    o ficheros del usuario.\r\n\n\u2022El CEVFW podr\xE1 utilizar cookies durante
+    la prestaci\xF3n de servicios del sitio web. Las cookies son ficheros f\xEDsicos
+    de informaci\xF3n personal alojados en el propio terminal del usuario. El usuario
+    tiene la posibilidad de configurar su programa navegador de manera que se impida
+    la creaci\xF3n de archivos cookie o se advierta de la misma.\r\n\n\u2022Si opta
+    por abandonar nuestro sitio web a trav\xE9s de enlaces a sitios web no pertenecientes
+    a nuestra entidad, el CEVFW no se har\xE1 responsable de las pol\xEDticas de
+    privacidad de dichos sitios web ni de las cookies que estos puedan almacenar
+    en el ordenador del usuario.\r\n\n\u2022Esta p\xE1gina web utiliza Google Analytics,
+    un servicio anal\xEDtico de la web prestado por Google, Inc., una compa\xF1\xEDa
+    de Delaware, cuya oficina principal radica en 1600 Amphitheatre Parkway, Mountain
+    View (California), CA 94043, Estados Unidos (en adelante, Google).\r\n\n\u2022Google
+    Analytics utiliza cookies, archivos de texto ubicados en el ordenador del usuario,
+    para ayudar al website a analizar el uso que hacen los distintos usuarios del
+    sitio web. La informaci\xF3n que genera la cookie acerca de su uso del website
+    (incluyendo su direcci\xF3n IP) ser\xE1 directamente transmitida y archivada
+    por Google en los servidores de Estados Unidos.\r\n\n\u2022Google usar\xE1 esta
+    informaci\xF3n por cuenta nuestra con el prop\xF3sito de seguir la pista de su
+    uso del website, recopilando informes de la actividad del website y prestando
+    otros servicios relacionados con la actividad del website y el uso de Internet.\r\n\n\u2022Google
+    podr\xE1 transmitir dicha informaci\xF3n a terceros cuando as\xED se lo requiera
+    la legislaci\xF3n o cuando dichos terceros procesen la informaci\xF3n por cuenta
+    de Google. Google no asociar\xE1 su direcci\xF3n I.P. con ning\xFAn otro dato
+    del que disponga Google.\r\n\n\u2022Puede Usted rechazar el tratamiento de los
+    datos o la informaci\xF3n rechazando el uso de cookies mediante la selecci\xF3n
+    de la configuraci\xF3n apropiada de su navegador. Al utilizar este website aceptando
+    las cookies, usted consiente el tratamiento de la informaci\xF3n an\xF3nima que
+    Google re\xFAne acerca del tipo de dispositivo, ubicaci\xF3n aproximada, etc.
+    con fines puramente estad\xEDsticos.\r\n\n\u2022Nuestra pol\xEDtica con respecto
+    al correo electr\xF3nico consiste en remitir \xFAnicamente comunicaciones que
+    el usuario haya solicitado recibir. Si prefiere no recibir estos mensajes por
+    correo electr\xF3nico le ofreceremos a trav\xE9s de los mismos la posibilidad
+    de ejercer su derecho de cancelaci\xF3n y renuncia a la recepci\xF3n de los mismos,
+    de conformidad con lo dispuesto en el art\xEDculo 22 del t\xEDtulo III de la
+    Ley 34/2002 de Servicios para la Sociedad de la Informaci\xF3n y de Comercio
+    Electr\xF3nico poni\xE9ndose en contacto con nosotros a trav\xE9s de la secci\xF3n
+    de contacto (email, tel\xE9fono o direcci\xF3n postal all\xED consignados)..\r\n\n\u2022El
+    CEVFW no almacena ning\xFAn tipo de informaci\xF3n sobre sus usuarios. Las cookies
+    s\xF3lo lo hacen a trav\xE9s del servicio de Google Analytics cuando el usuario
+    ha aceptado las cookies, y el CEVFW no tiene ning\xFAn control o decisi\xF3n
+    sobre lo que hace Google Analytics con la informaci\xF3n acerca de visitas y
+    las variables an\xF3nimas que almacena. De manera general, puede ejercer su derecho
+    a que se borre cualquier informaci\xF3n que pudiese afectarle escribiendo un
+    email a cevfw@uva.es o contactando en su caso con Google directamente, y si est\xE1
+    en nuestra mano, se borrar\xE1.\r\n\r\n<b>6. PROCEDIMIENTO EN CASO DE REALIZACI\xD3N
+    DE ACTIVIDADES DE CAR\xC1CTER IL\xCDCITO\r</b>\n\n\u2022En el caso de que cualquier
+    usuario o un tercero considere que existen hechos o circunstancias que revelen
+    el car\xE1cter il\xEDcito de la utilizaci\xF3n de cualquier contenido y/o de
+    la realizaci\xF3n de cualquier actividad en las p\xE1ginas web incluidas o accesibles
+    a trav\xE9s de este sitio web, deber\xE1 enviar una notificaci\xF3n al CEVFW
+    identific\xE1ndose debidamente, especificando las supuestas infracciones y declarando
+    expresamente y bajo su responsabilidad que la informaci\xF3n proporcionada en
+    la notificaci\xF3n es exacta.\r\n\n\u2022La relaci\xF3n entre el CEVFW y el usuario
+    se regir\xE1 por la normativa espa\xF1ola vigente y cualquier controversia se
+    someter\xE1 a los juzgados y tribunales de la ciudad de Valladolid (Espa\xF1a).\r\n\r\n<b>7.
+    PUBLICACIONES</b>\r\n\n\u2022La informaci\xF3n administrativa facilitada a trav\xE9s
+    de este sitio web no sustituye la publicidad legal de las leyes, normativas,
+    planes, disposiciones generales y actos que tengan que ser publicados formalmente
+    en los diarios oficiales de las administraciones p\xFAblicas, que constituyen
+    el \xFAnico instrumento que da fe de su autenticidad y contenido. La informaci\xF3n
+    disponible en este sitio web debe entenderse como una gu\xEDa sin prop\xF3sito
+    de validez legal."
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7838348270756947016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133381691801856731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &8512863154281389037
 GameObject:
   m_ObjectHideFlags: 0
