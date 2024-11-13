@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
     private Rect panelDimensions;
 
 
-    void Start()
+    public void Start()
     {
         //Cargamos Historias del Json
         parsedHistorias = JsonUtility.FromJson<JsonRoot>(jsonHistorias.LoadAsset().text);
