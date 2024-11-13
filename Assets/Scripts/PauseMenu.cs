@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject botonVibracion;
+    [SerializeField] private GameObject popupLegal;
+    [SerializeField] private GameObject textoLegal;
 
     public void Pause(){
         pauseMenu.SetActive(true);
@@ -21,5 +23,15 @@ public class PauseMenu : MonoBehaviour
 
     public void ToggleVibracion(){
 
+    }
+
+    public void ShowTerms(){
+        popupLegal.SetActive(true);
+        textoLegal.SetActive(false);
+    }
+
+    public void HideTerms(){
+        popupLegal.SetActive(false);
+        textoLegal.SetActive(true);
     }
 }
