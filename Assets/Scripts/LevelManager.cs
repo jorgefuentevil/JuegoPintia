@@ -98,7 +98,7 @@ public struct JsonRoot
 {
     public string lenguaje;
     public int num_historias;
-    public List<Historia> historias;
+    public Historia[] historias;
 }
 
 
