@@ -7,6 +7,14 @@ TagManager:
   - opciones
   - ImageCanva
   - Image
+  - ImagenDinero
+  - ImagenSocial
+  - ImagenSalud
+  - ImagenEspecifico
+  - varSalud
+  - varDinero
+  - varSocial
+  - varEspecifico
   layers:
   - Default
   - TransparentFX
