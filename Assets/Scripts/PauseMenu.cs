@@ -10,6 +10,11 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject popupLegal;
     [SerializeField] private GameObject textoLegal;
 
+    public void Start(){
+        popupLegal.SetActive(false);
+        textoLegal.SetActive(true);
+    }
+
     public void Pause(){
         pauseMenu.SetActive(true);
         mainMenu.SetActive(false);
