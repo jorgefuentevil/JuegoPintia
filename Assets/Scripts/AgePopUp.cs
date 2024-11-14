@@ -7,7 +7,7 @@ public class AgePopUp : MonoBehaviour
     public GameObject popupPanel;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         // Verifica si es la primera vez que se abre el juego
         if (PlayerPrefs.HasKey("FirstTime") == false)
