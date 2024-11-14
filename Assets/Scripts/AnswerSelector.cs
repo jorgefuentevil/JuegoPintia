@@ -11,10 +11,10 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
     private int totalPages = 5;
     private int currentPage = 3;
     private Image image;
- public GameObject RespuestaIzq;
+    public GameObject RespuestaIzq;
     public GameObject RespuestaDer;
-    public bool direccion;
-
+    private bool direccion;
+    public float variacionAtr;
     
 
     // Start is called before the first frame update
@@ -79,25 +79,32 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
             StartCoroutine(SmoothMove(transform.position, newLocation, easing));
             panelLocation = newLocation;
             if(currentPage ==1){
-                    //Cambio escena
-                    Debug.Log("cambiando a derecha");
+                //Cambio escena
+                Debug.Log("Actualizando atributos");
+                cambiarAtributo("ImagenSalud",1);
+                Debug.Log("cambiando a derecha");
             }else if(currentPage ==2){
                 image.color = new Color(0.2f,0.2f,0.2f,1f);
                 RespuestaDer.SetActive(true);
+                Debug.Log("Atributos a actualizar=on");
                 transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             }else if (currentPage ==3){
                 image.color = new Color(1f,1f,1f,1f);
                 RespuestaIzq.SetActive(false);
                 RespuestaDer.SetActive(false);
+                Debug.Log("Atributos=off");
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }else if(currentPage ==4){
-                    Debug.Log("cambiando color");
-                    image.color = new Color(0.2f,0.2f,0.2f,1f);
-                    RespuestaIzq.SetActive(true);
-                    transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
+                Debug.Log("cambiando color");
+                image.color = new Color(0.2f,0.2f,0.2f,1f);
+                RespuestaIzq.SetActive(true);
+                Debug.Log("Atributos a actualizar=on");
+                transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
             }else if(currentPage ==5){
-                    //Cambio escena
-                    Debug.Log("cambiando a izquierda");
+                //Cambio escena
+                Debug.Log("Actualizando atributos");
+                cambiarAtributo("ImagenSalud",-1);
+                Debug.Log("cambiando a izquierda");
             }
         }else{
             StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
@@ -117,5 +124,12 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
     {
         float rotationY = image.transform.localRotation.eulerAngles.y;
         return rotationY > 180 ? rotationY - 360 : rotationY;
+    }
+
+    void cambiarAtributo(string atributo, float cantidad){
+        GameObject[] attImage;
+        attImage = GameObject.FindGameObjectsWithTag(atributo);
+        attImage[0].GetComponent<Image>().fillAmount += cantidad*variacionAtr;
+        return;
     }
 }
