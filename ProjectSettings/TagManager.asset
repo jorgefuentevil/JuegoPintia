@@ -15,6 +15,7 @@ TagManager:
   - varDinero
   - varSocial
   - varEspecifico
+  - CanvaImagen
   layers:
   - Default
   - TransparentFX

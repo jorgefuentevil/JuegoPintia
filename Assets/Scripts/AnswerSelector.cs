@@ -15,6 +15,8 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
     public GameObject RespuestaDer;
     private bool direccion;
     public float variacionAtr;
+
+    private Animator anim;
     
 
     // Start is called before the first frame update
@@ -30,73 +32,39 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
         }else{
             direccion = false;
         }
-        transform.position = panelLocation - new Vector3(difference, 0, 0);
-        /**switch(currentPage)
-        {
-            case 2:
-                if(!direccion && image.transform.position.x>621){
-                    transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
-                }
-                Debug.Log(image.transform.position.x);
-                //if(!direccion && image.transform.position.x>518){
-                break;
-            case 3:
-                if(image.transform.position.x<847 && image.transform.position.x>380){
-                    transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
-                }
-                
-                break;
-            case 4:
-                if(direccion && image.transform.position.x<621){
-                    transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
-                }
-                //if(direccion && image.transform.position.x<721)
-                
-                Debug.Log(image.transform.position.x);
-                break;
-        }**/
+        if ((currentPage == 2 && direccion) || (currentPage ==4 && !direccion)){
+            transform.position = panelLocation - new Vector3(difference, 0, 0);
+        }
     }
+
     public void OnEndDrag(PointerEventData data){
         float percentage = (data.pressPosition.x - data.position.x) / Screen.width;
+        GameObject canvaImage = GameObject.FindGameObjectWithTag("CanvaImagen"); 
+        anim = canvaImage.GetComponent<Animator>();
         if(Mathf.Abs(percentage) >= percentThreshold){
             Vector3 newLocation = panelLocation;
             if(percentage > 0 && currentPage < totalPages){
                 currentPage++;
-                newLocation += new Vector3(-Screen.width/5, 0, 0);
-
+                if(currentPage ==4){
+                    anim.Play("cardFlipIzq");
+                    Debug.Log("Atributos a actualizar=on");
+                }else if (currentPage ==3){
+                    anim.Play("cardFlipVueltaDer");
+                    Debug.Log("Atributos=off");
+                }else if (currentPage ==5){
+                    Debug.Log("cambiando a izquierda");
+                }
             }else if(percentage < 0 && currentPage > 1){
                 currentPage--;
-                newLocation += new Vector3(Screen.width/5, 0, 0);
-            }
-            StartCoroutine(SmoothMove(transform.position, newLocation, easing));
-            panelLocation = newLocation;
-            if(currentPage ==1){
-                //Cambio escena
-                Debug.Log("Actualizando atributos");
-                cambiarAtributo("ImagenSalud",1);
-                Debug.Log("cambiando a derecha");
-            }else if(currentPage ==2){
-                image.color = new Color(0.2f,0.2f,0.2f,1f);
-                RespuestaDer.SetActive(true);
-                Debug.Log("Atributos a actualizar=on");
-                //transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-            }else if (currentPage ==3){
-                image.color = new Color(1f,1f,1f,1f);
-                RespuestaIzq.SetActive(false);
-                RespuestaDer.SetActive(false);
-                Debug.Log("Atributos=off");
-                //transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            }else if(currentPage ==4){
-                Debug.Log("cambiando color");
-                image.color = new Color(0.2f,0.2f,0.2f,1f);
-                RespuestaIzq.SetActive(true);
-                Debug.Log("Atributos a actualizar=on");
-                //transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
-            }else if(currentPage ==5){
-                //Cambio escena
-                Debug.Log("Actualizando atributos");
-                cambiarAtributo("ImagenSalud",-1);
-                Debug.Log("cambiando a izquierda");
+                if(currentPage ==2){
+                    anim.Play("cardFlipDer");
+                    Debug.Log("Atributos a actualizar=on");
+                }else if (currentPage ==3){
+                    anim.Play("cardFlipVueltaIzq");
+                    Debug.Log("Atributos=off");
+                }else if(currentPage ==1){
+                    Debug.Log("cambiando a derecha");
+                }
             }
         }else{
             StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
