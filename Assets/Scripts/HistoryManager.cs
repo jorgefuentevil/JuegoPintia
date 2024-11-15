@@ -21,17 +21,42 @@ public class HistoryManager : MonoBehaviour
     private HistoryJsonRoot parsedHistorias;
     [SerializeField] private int anosThreshold=5;
     private int nAnosIni=10;
+    private List<Decision> selectedHistoria;
 
     
     public void Start(){
+        
+        //Cargamos todas las decisiones del json
         parsedHistorias = JsonUtility.FromJson<HistoryJsonRoot>(jsonHistoria.LoadAsset().text);
+        string nombreHistoriaText = parsedHistorias.historia;
+        //Escogemos nPreguntas al "azar"
+        for(int i=0; i<nPreguntas; i++){
+            int randomIndex = Random.Range(0, parsedHistorias.decisions.Count);
+            Decision decisionAzar = parsedHistorias.decisions[randomIndex];
+            if(parsedHistorias.decisions[randomIndex].usada){
+                i=i-1;
+            }else{
+                selectedHistoria.Add(decisionAzar);
+                if(decisionAzar.res_der.siguiente != -1){
+                    selectedHistoria.Add(parsedHistorias.decisions[decisionAzar.res_der.siguiente]);
+                }
+                if(decisionAzar.res_izq.siguiente != -1){
+                    selectedHistoria.Add(parsedHistorias.decisions[decisionAzar.res_izq.siguiente]);
+                }
+            }
+        }
+        //El numero de preguntas puede variar si alguna respuesta tiene otra deceision asociada
+
+        nPreguntas = selectedHistoria.Count;
         Dictionary<string, Sprite> retratosPersonajes = new Dictionary<string, Sprite>();
-        //Crear la lista de decisiones al azar
-        //Cargar imagenes en diccionario
+
+        //Cargar imagenes en diccionarioii
 
         //cargar imagenes a distintas z o activar solo la q sale
 
         //Cargar nombre de usuario
+
+        SetLevelData(0);
         
     }
     public void SetLevelData(int level_index)
@@ -67,7 +92,7 @@ public struct ResDer
 {
     public string respuesta;
     public int[] efectos;
-    public object siguiente;
+    public int siguiente;
 }
 
 [System.Serializable]

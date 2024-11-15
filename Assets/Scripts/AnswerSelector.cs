@@ -31,7 +31,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
             direccion = false;
         }
         transform.position = panelLocation - new Vector3(difference, 0, 0);
-        switch(currentPage)
+        /**switch(currentPage)
         {
             case 2:
                 if(!direccion && image.transform.position.x>621){
@@ -44,15 +44,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
                 if(image.transform.position.x<847 && image.transform.position.x>380){
                     transform.rotation = Quaternion.Euler(new Vector3(0, difference*0.76f, 0));
                 }
-                /**
-                if(direccion && image.transform.position.x>660){
-                    //Cambiar sprite a RespuestaDerecha
-                    pass;
-                }
-                if(!direccion && image.transform.position.x<496,75){
-                    //Cambiar sprite a Respuesta izq
-                    pass;
-                }**/
+                
                 break;
             case 4:
                 if(direccion && image.transform.position.x<621){
@@ -62,7 +54,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
                 
                 Debug.Log(image.transform.position.x);
                 break;
-        }
+        }**/
     }
     public void OnEndDrag(PointerEventData data){
         float percentage = (data.pressPosition.x - data.position.x) / Screen.width;
@@ -87,19 +79,19 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
                 image.color = new Color(0.2f,0.2f,0.2f,1f);
                 RespuestaDer.SetActive(true);
                 Debug.Log("Atributos a actualizar=on");
-                transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                //transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             }else if (currentPage ==3){
                 image.color = new Color(1f,1f,1f,1f);
                 RespuestaIzq.SetActive(false);
                 RespuestaDer.SetActive(false);
                 Debug.Log("Atributos=off");
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                //transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }else if(currentPage ==4){
                 Debug.Log("cambiando color");
                 image.color = new Color(0.2f,0.2f,0.2f,1f);
                 RespuestaIzq.SetActive(true);
                 Debug.Log("Atributos a actualizar=on");
-                transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
+                //transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
             }else if(currentPage ==5){
                 //Cambio escena
                 Debug.Log("Actualizando atributos");
