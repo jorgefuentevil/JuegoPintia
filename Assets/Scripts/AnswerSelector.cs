@@ -79,12 +79,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler{
             yield return null;
         }
     }
-//TODO no sirve de nada
-    float GetRotationYInRange(Image image)
-    {
-        float rotationY = image.transform.localRotation.eulerAngles.y;
-        return rotationY > 180 ? rotationY - 360 : rotationY;
-    }
+
 
     void cambiarAtributo(string atributo, float cantidad){
         GameObject[] attImage;
