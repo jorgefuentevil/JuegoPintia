@@ -2741,7 +2741,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 8114456640237405644}
   mainMenu: {fileID: 0}
-  botonVibracion: {fileID: 0}
+  botonVibracion: {fileID: 8765248522612450573}
+  popupLegal: {fileID: 7171553761963477031}
+  textoLegal: {fileID: 7731339688139545864}
 --- !u!114 &2048084295428341803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3256,9 +3258,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
+      - m_Target: {fileID: 4794745455910429476}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ToggleVibracion
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
