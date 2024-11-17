@@ -1,6 +1,6 @@
 {
     "lenguaje": "es_ES",
-    "num_historias": 14,
+    "num_historias": 7,
     "historias": [
       {
         "personaje": "El Cazador",
@@ -42,49 +42,7 @@
         "personaje": "El Archero",
         "desc": "Un experto arquero se adentra sigilosamente en un bosque oscuro, en busca de una criatura legendaria, sin imaginar que él también es el objetivo de una bestia mística.",
         "coste": 230,
-        "imagen": "Cazador_2"
-      },
-      {
-        "personaje": "El Cazador",
-        "desc": "Un cazador sigue la pista de una criatura imposible en un bosque oscuro, sin saber si él es quien realmente está siendo cazado.",
-        "coste": 200,
-        "imagen": "Cazador_1"
-      },
-      {
-        "personaje": "El Chamán",
-        "desc": "Un chamán ancestral recorre un bosque maldito para invocar los espíritus protectores y así poder enfrentar a la oscura fuerza que amenaza con consumir su aldea.",
-        "coste": 420,
-        "imagen": "Clerigo_1"
-      },
-      {
-        "personaje": "El Granjero",
-        "desc": "Un granjero recorre sus campos al amanecer, preguntándose si podrá proteger su cosecha de una bestia salvaje que acecha en las sombras del bosque.",
-        "coste": 180,
-        "imagen": "Ganadero_1"
-      },
-      {
-        "personaje": "El Guerrero",
-        "desc": "Un guerrero curtido en innumerables batallas se adentra en un desolado campo de guerra, decidido a enfrentar al señor de la guerra que le amenaza.",
-        "coste": 300,
-        "imagen": "Guerrero_1"
-      },
-      {
-        "personaje": "El Ganadero",
-        "desc": "Un ganadero resiliente observa cómo su rebaño se dispersa ante el humo que se eleva en el horizonte, sabiendo que debe defender su hogar y todo lo que ha construido con tanto esfuerzo.",
-        "coste": 220,
-        "imagen": "Ganadero_1"
-      },
-      {
-        "personaje": "El anciano",
-        "desc": "Un sabio anciano camina entre las ruinas de su pueblo, su mirada llena de determinación mientras se prepara para guiar a los suyos hacia la reconstrucción.",
-        "coste": 350,
-        "imagen": "Anciano_1"
-      },
-      {
-        "personaje": "El Archero",
-        "desc": "Un experto arquero se adentra sigilosamente en un bosque oscuro, en busca de una criatura legendaria, sin imaginar que él también es el objetivo de una bestia mística.",
-        "coste": 230,
-        "imagen": "Cazador_2"
+        "imagen": "Jabali_2"
       }
     ]
   }

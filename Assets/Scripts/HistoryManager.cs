@@ -5,16 +5,20 @@ using UnityEngine.Localization;
 using TMPro;
 using System.Linq;
 using UnityEngine.AddressableAssets;
+using UnityEngine.UI;
+using Unity.VisualScripting;
 
 
 
 
 public class HistoryManager : MonoBehaviour
-{   
+{
 
     [Header("---- ASSETS ----")]
     [SerializeField] private LocalizedAsset<TextAsset> jsonHistoria;
     [SerializeField] private AssetLabelReference assetsPersonajes;
+    [SerializeField] private Sprite reversoCarta;
+    [SerializeField] private Sprite cartaActual;
 
     [Header("---- UI GAME OBJECTS ----")]
     [SerializeField] private TextMeshProUGUI nombrePersonajeText;
@@ -26,6 +30,9 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private GameObject flechaDerecha;
     [SerializeField] private GameObject flechaIzquierda;
 
+    [Header("---- ICONOS SUPERIORES ----")]
+
+
 
 
 
@@ -34,31 +41,38 @@ public class HistoryManager : MonoBehaviour
     private List<Decision> decisionesPartida;   //Almacena la lista de decisiones aleatorias con las que jugamos.
     private Decision decisionActual;            //Almacena la decisión actual. Puede ser decisión o respuesta a otra decision.
     private int numDecisionActual;              //Almacena el index de la decision actual. Solo decision, no respuestas. Solo incrementar en DECISIONES nuevas.
+    private Image imagenCartaPersonaje;
+    private Color sombreadoCarta = new Color(0.4078431f, 0.4078431f, 0.4078431f);
+    private Color colorNormal = new Color(1, 1, 1);
+
+
 
 
     public void Start()
-    {   
+    {
+        imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
+
 
         //Comentar desde aqui
 
-/*         //Cargamos todas las decisiones del json
-        parsedHistorias = JsonUtility.FromJson<HistoryJsonRoot>(jsonHistoria.LoadAsset().text);
+        /*      //Cargamos todas las decisiones del json
+                parsedHistorias = JsonUtility.FromJson<HistoryJsonRoot>(jsonHistoria.LoadAsset().text);
 
-        //Con cuantas preguntas aleatorias vamos a jugar
-        nPreguntas = (nPreguntas > parsedHistorias.decisions.Count) ? parsedHistorias.decisions.Count : nPreguntas;
-        int[] indexHistorias = Enumerable   //Genera n numeros aleatorios entre 0 y X.
-                                .Range(0, parsedHistorias.decisions.Count)
-                                .OrderBy(x => Random.value)
-                                .Take(nPreguntas).ToArray();
+                //Con cuantas preguntas aleatorias vamos a jugar
+                nPreguntas = (nPreguntas > parsedHistorias.decisions.Count) ? parsedHistorias.decisions.Count : nPreguntas;
+                int[] indexHistorias = Enumerable   //Genera n numeros aleatorios entre 0 y X.
+                                        .Range(0, parsedHistorias.decisions.Count)
+                                        .OrderBy(x => Random.value)
+                                        .Take(nPreguntas).ToArray();
 
-        //Llenamos decisionesPartida con nPreguntas decisiones aleatorias.
-        decisionesPartida = new(nPreguntas);
-        for(int i = 0; i<nPreguntas; i++){
-            decisionesPartida.Add(parsedHistorias.decisions[indexHistorias[i]]);
-        } */
+                //Llenamos decisionesPartida con nPreguntas decisiones aleatorias.
+                decisionesPartida = new(nPreguntas);
+                for(int i = 0; i<nPreguntas; i++){
+                    decisionesPartida.Add(parsedHistorias.decisions[indexHistorias[i]]);
+                } */
 
         //Hasta aqui. Si queremos probar funcionamiento sin tener historias.
-        
+
         //Cargamos imágenes. 
         //TODO: Filtrar retratos y cargar solo los que vayamos a usar.
         Dictionary<string, Sprite> retratosPersonajes = new();
@@ -78,34 +92,31 @@ public class HistoryManager : MonoBehaviour
 
 
 
-    public void SetRespuestaDerecha(){
+    public void SetRespuestaDerecha()
+    {
         respuestaText.text = "Texto de la respuesta de la DERECHA DERECHAAAA";
         flechaIzquierda.SetActive(false);
-
+        imagenCartaPersonaje.color = sombreadoCarta;
+        imagenCartaPersonaje.sprite = reversoCarta;
     }
 
-    public void SetRespuestaIzquierda(){
+    public void SetRespuestaIzquierda()
+    {
         respuestaText.text = "Texto de la respuesta de la IZQUIERDA IZQUIERDAAAAA";
         flechaDerecha.SetActive(false);
-
-
-
+        imagenCartaPersonaje.color = sombreadoCarta;
+        imagenCartaPersonaje.sprite = reversoCarta;
     }
 
-    public void SetEstadoInicial(){
+    public void SetEstadoInicial()
+    {
         respuestaText.text = "";
         flechaIzquierda.SetActive(true);
         flechaDerecha.SetActive(true);
-
+        imagenCartaPersonaje.color = colorNormal;
+        imagenCartaPersonaje.sprite = cartaActual;
     }
 }
-
-
-
-
-
-
-
 
 
 [System.Serializable]
