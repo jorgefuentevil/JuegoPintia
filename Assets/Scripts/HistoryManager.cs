@@ -10,31 +10,35 @@ using UnityEngine.AddressableAssets;
 
 
 public class HistoryManager : MonoBehaviour
-{
-    [SerializeField]
-    private LocalizedAsset<TextAsset> jsonHistoria;
+{   
+
+    [Header("---- ASSETS ----")]
+    [SerializeField] private LocalizedAsset<TextAsset> jsonHistoria;
     [SerializeField] private AssetLabelReference assetsPersonajes;
 
+    [Header("---- UI GAME OBJECTS ----")]
     [SerializeField] private TextMeshProUGUI nombrePersonajeText;
     [SerializeField] private TextMeshProUGUI usuarioText;
     [SerializeField] private TextMeshProUGUI preguntaText;
     [SerializeField] private TextMeshProUGUI anosText;
+    [SerializeField] private TextMeshProUGUI respuestaText;
+    [SerializeField] private GameObject cartaPersonaje;
 
-    [SerializeField] private TextMeshProUGUI respuestaIText;
-    [SerializeField] private TextMeshProUGUI respuestaDText;
-    [SerializeField] private int nPreguntas;
-        
 
+
+    private int nPreguntas = 10;
     private HistoryJsonRoot parsedHistorias;
-    [SerializeField] private int anosThreshold;
-    private int nAnosIni = 10;
-    private List<Decision> selectedHistoria;
+    private List<Decision> decisionesPartida;   //Almacena la lista de decisiones aleatorias con las que jugamos.
+    private Decision decisionActual;            //Almacena la decisión actual. Puede ser decisión o respuesta a otra decision.
+    private int numDecisionActual;              //Almacena el index de la decision actual. Solo decision, no respuestas. Solo incrementar en DECISIONES nuevas.
 
 
     public void Start()
-    {
+    {   
 
-        //Cargamos todas las decisiones del json
+        //Comentar desde aqui
+
+/*         //Cargamos todas las decisiones del json
         parsedHistorias = JsonUtility.FromJson<HistoryJsonRoot>(jsonHistoria.LoadAsset().text);
 
         //Con cuantas preguntas aleatorias vamos a jugar
@@ -43,9 +47,18 @@ public class HistoryManager : MonoBehaviour
                                 .Range(0, parsedHistorias.decisions.Count)
                                 .OrderBy(x => Random.value)
                                 .Take(nPreguntas).ToArray();
+
+        //Llenamos decisionesPartida con nPreguntas decisiones aleatorias.
+        decisionesPartida = new(nPreguntas);
+        for(int i = 0; i<nPreguntas; i++){
+            decisionesPartida.Add(parsedHistorias.decisions[indexHistorias[i]]);
+        } */
+
+        //Hasta aqui. Si queremos probar funcionamiento sin tener historias.
         
-        //Cargamos imágenes.
-        Dictionary<string, Sprite> retratosPersonajes = new Dictionary<string, Sprite>();
+        //Cargamos imágenes. 
+        //TODO: Filtrar retratos y cargar solo los que vayamos a usar.
+        Dictionary<string, Sprite> retratosPersonajes = new();
         Addressables.LoadAssetsAsync<Sprite>(assetsPersonajes, (sprite) =>
         {
             Debug.Log("Cargado retrato: " + sprite.name);
@@ -53,29 +66,31 @@ public class HistoryManager : MonoBehaviour
         }).WaitForCompletion();
 
 
+        AnswerSelector selector = cartaPersonaje.AddComponent<AnswerSelector>();
+        selector.historyManager = this;
 
-
-
-        SetLevelData(0);
-
-    }
-    public void SetLevelData(int level_index)
-    {
-        if (level_index < 0 || level_index >= nPreguntas)
-        {
-            Debug.Log("Error Level Index out of bounds " + level_index + " of " + nPreguntas);
-            return;
-        }
-        Decision decision = parsedHistorias.decisions[level_index];
-        nombrePersonajeText.SetText(decision.imagen);
-        preguntaText.SetText(decision.desc);
-        respuestaIText.SetText(decision.res_izq.respuesta);
-        respuestaDText.SetText(decision.res_der.respuesta);
-        int anos = anosThreshold * level_index + nAnosIni;
-        anosText.SetText(anos.ToString());
+        SetEstadoInicial();
     }
 
+
+
+
+    public void SetRespuestaDerecha(){
+        respuestaText.text = "Texto de la respuesta de la DERECHA DERECHAAAA";
+    }
+
+    public void SetRespuestaIzquierda(){
+        respuestaText.text = "Texto de la respuesta de la IZQUIERDA IZQUIERDAAAAA";
+    }
+
+    public void SetEstadoInicial(){
+        respuestaText.text = "";
+    }
 }
+
+
+
+
 
 
 

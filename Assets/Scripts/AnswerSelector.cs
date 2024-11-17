@@ -7,18 +7,17 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
-{
-    private Vector3 panelLocation;
-    public float percentThreshold = 0.2f;
-    public float easing = 0.5f;
-    public GameObject RespuestaIzq;
-    public GameObject RespuestaDer;
+{   
 
-    public float variacionAtr;
-
+    [Header("---- Parámetros Animaciones ----")]
+    [SerializeField] private float percentThreshold = 0.2f;
+    [SerializeField] private float easing = 0.5f;
+    
+    private Vector3 imageLocation;
     private CardState estadoCarta;
 
-    public GameObject RespuestaGeneral;
+    public HistoryManager historyManager;
+    
 
 
     private enum CardState
@@ -32,10 +31,10 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 
 
     public void Start()
-    {   
-        panelLocation = transform.position;
+    {
+        imageLocation = transform.position;
         estadoCarta = CardState.INICIAL;
-        RespuestaGeneral.SetActive(false);
+
     }
 
     public void OnDrag(PointerEventData data)
@@ -43,7 +42,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         float difference = data.pressPosition.x - data.position.x;
         if ((estadoCarta.Equals(CardState.FLIPPED_DERECHA) && difference < 0) || (estadoCarta.Equals(CardState.FLIPPED_IZQUIERDA) && difference > 0))
         {
-            transform.position = panelLocation - new Vector3(difference, 0, 0);
+            transform.position = imageLocation - new Vector3(difference, 0, 0);
         }
     }
 
@@ -65,7 +64,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         }
         else
         {
-            StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
+            StartCoroutine(SmoothMove(transform.position, imageLocation, easing));
         }
     }
 
@@ -74,7 +73,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         switch (estadoCarta)
         {
             case CardState.INICIAL: //Muestra atributos y respuesta derecha
-                StartCoroutine(RotateAndShow());
+                StartCoroutine(RotateAndShowDerecha());
                 Debug.Log("Carta rotada a la derecha");
                 estadoCarta = CardState.FLIPPED_DERECHA;
                 break;
@@ -88,6 +87,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
                 //estadoCarta = CardState.SWIPED_DERECHA;
                 break;
             default:
+                Debug.Log("Error: Estado Carta desconocido");
                 break;
         }
     }
@@ -97,8 +97,8 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         switch (estadoCarta)
         {
             case CardState.INICIAL: //Muestra atributos y respuesta derecha
-                
-                StartCoroutine(RotateAndShow());
+
+                StartCoroutine(RotateAndShowIzquierda());
                 Debug.Log("Carta rotada a la izquierda");
                 estadoCarta = CardState.FLIPPED_IZQUIERDA;
                 break;
@@ -112,12 +112,13 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
                 Debug.Log("Confirmamos Izquierda");
                 break;
             default:
+                Debug.Log("Error: Estado Carta desconocido");
                 break;
         }
     }
 
 
-    IEnumerator RotateAndShow()
+    IEnumerator RotateAndShowDerecha()
     {
         float t = 0f;
         Quaternion startRotation = transform.rotation;
@@ -129,16 +130,40 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             t += Time.deltaTime / 0.67f;  // 0:40 segundos
             transform.rotation = Quaternion.Lerp(startRotation, targetRotation, Mathf.SmoothStep(0f, 1f, t));
 
-            if(!respuestaActiva && t >=0.5f){
-                RespuestaGeneral.SetActive(true);
+            if (!respuestaActiva && t >= 0.5f)
+            {
                 respuestaActiva = true;
+                historyManager.SetRespuestaDerecha();
             }
             yield return null;
         }
         Debug.Log("Rotación terminada");
     }
 
-        IEnumerator RotateAndHide()
+
+    IEnumerator RotateAndShowIzquierda()
+    {
+        float t = 0f;
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(0, 180f, 0) * startRotation;
+        bool respuestaActiva = false;
+
+        while (t <= 1f)
+        {
+            t += Time.deltaTime / 0.67f;  // 0:40 segundos
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, Mathf.SmoothStep(0f, 1f, t));
+
+            if (!respuestaActiva && t >= 0.5f)
+            {
+                respuestaActiva = true;
+                historyManager.SetRespuestaIzquierda();
+            }
+            yield return null;
+        }
+        Debug.Log("Rotación terminada");
+    }
+
+    IEnumerator RotateAndHide()
     {
         float t = 0f;
         Quaternion startRotation = transform.rotation;
@@ -150,8 +175,10 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             t += Time.deltaTime / 0.67f;  // 0:40 segundos
             transform.rotation = Quaternion.Lerp(startRotation, targetRotation, Mathf.SmoothStep(0f, 1f, t));
 
-            if(respuestaActiva && t >=0.5f){
-                RespuestaGeneral.SetActive(false);
+            if (respuestaActiva && t >= 0.5f)
+            {
+                //RespuestaGeneral.SetActive(false);
+                historyManager.SetEstadoInicial();
                 respuestaActiva = false;
             }
             yield return null;

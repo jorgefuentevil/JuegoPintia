@@ -12,10 +12,7 @@ public class MainMenuEstadoInicial : MonoBehaviour{
 
     public void Start(){
         MainMenuPanel.SetActive(true);
-        //Activamos y Desactivamos para que se carguen los ajustes de volumen jejej Fix muy guarrete.
-        MenuAjustesPanel.SetActive(true);
         MenuAjustesPanel.SetActive(false);
-
         if(PlayerPrefs.HasKey("AgeRange")){
             PopUpEdadPanel.SetActive(false);
         }else{

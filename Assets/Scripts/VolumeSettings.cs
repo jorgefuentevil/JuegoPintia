@@ -9,7 +9,7 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
 
 
-    private void Awake(){
+    public void Awake(){
         if(PlayerPrefs.HasKey("musicVolume")){
             LoadVolume();
         }else{
