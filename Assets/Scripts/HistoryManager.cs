@@ -23,6 +23,9 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI anosText;
     [SerializeField] private TextMeshProUGUI respuestaText;
     [SerializeField] private GameObject cartaPersonaje;
+    [SerializeField] private GameObject flechaDerecha;
+    [SerializeField] private GameObject flechaIzquierda;
+
 
 
 
@@ -77,14 +80,23 @@ public class HistoryManager : MonoBehaviour
 
     public void SetRespuestaDerecha(){
         respuestaText.text = "Texto de la respuesta de la DERECHA DERECHAAAA";
+        flechaIzquierda.SetActive(false);
+
     }
 
     public void SetRespuestaIzquierda(){
         respuestaText.text = "Texto de la respuesta de la IZQUIERDA IZQUIERDAAAAA";
+        flechaDerecha.SetActive(false);
+
+
+
     }
 
     public void SetEstadoInicial(){
         respuestaText.text = "";
+        flechaIzquierda.SetActive(true);
+        flechaDerecha.SetActive(true);
+
     }
 }
 
