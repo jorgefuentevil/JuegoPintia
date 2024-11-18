@@ -10,9 +10,11 @@ public class MainMenuEstadoInicial : MonoBehaviour{
 
 
 
-    public void Start(){
+    public void Awake(){
         MainMenuPanel.SetActive(true);
+        MenuAjustesPanel.SetActive(true);
         MenuAjustesPanel.SetActive(false);
+
         if(PlayerPrefs.HasKey("AgeRange")){
             PopUpEdadPanel.SetActive(false);
         }else{
