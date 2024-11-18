@@ -20,6 +20,7 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private Sprite reversoCarta;
     [SerializeField] private Sprite cartaActual;
 
+
     [Header("---- UI GAME OBJECTS ----")]
     [SerializeField] private TextMeshProUGUI nombrePersonajeText;
     [SerializeField] private TextMeshProUGUI usuarioText;
