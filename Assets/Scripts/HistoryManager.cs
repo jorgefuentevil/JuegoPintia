@@ -31,10 +31,8 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private GameObject flechaDerecha;
     [SerializeField] private GameObject flechaIzquierda;
 
-    [Header("---- ICONOS SUPERIORES ----")]
-
-
-
+    [Header("---- ICONOS SUPERIORES")]
+    [SerializeField] private IconManager iconManager;
 
 
     private int nPreguntas = 10;
@@ -99,6 +97,7 @@ public class HistoryManager : MonoBehaviour
         flechaIzquierda.SetActive(false);
         imagenCartaPersonaje.color = sombreadoCarta;
         imagenCartaPersonaje.sprite = reversoCarta;
+        iconManager.PreviewEfectos(0,0,-1,2);
     }
 
     public void SetRespuestaIzquierda()
@@ -107,6 +106,7 @@ public class HistoryManager : MonoBehaviour
         flechaDerecha.SetActive(false);
         imagenCartaPersonaje.color = sombreadoCarta;
         imagenCartaPersonaje.sprite = reversoCarta;
+        iconManager.PreviewEfectos(1,-2,0,0);
     }
 
     public void SetEstadoInicial()
@@ -116,6 +116,7 @@ public class HistoryManager : MonoBehaviour
         flechaDerecha.SetActive(true);
         imagenCartaPersonaje.color = colorNormal;
         imagenCartaPersonaje.sprite = cartaActual;
+        iconManager.SetEstadoInicial();
     }
 }
 
