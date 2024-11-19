@@ -171,7 +171,7 @@ class JsonEditorApp:
 
     def agregar_decision(self,archivo):
         # Leer el archivo JSON
-        with open(archivo, 'r', encoding='utf-8') as f:
+        with open(f"{self.historia_entry.get()}.json", 'r', encoding='utf-8') as f:
             datos = json.load(f)
         
         decision = {
@@ -201,7 +201,7 @@ class JsonEditorApp:
         }
         print(decision)
         datos["decisiones"].append(decision)
-        with open(archivo, 'w', encoding='utf-8') as f:
+        with open(f"{self.historia_entry.get()}.json", 'w', encoding='utf-8') as f:
             json.dump(datos, f, indent=4, ensure_ascii=False)
         
 def changeWindow():
