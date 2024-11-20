@@ -1,0 +1,94 @@
+{
+    "historia": "Prueba",
+    "idioma": "es_ES",
+    "nivel": 1,
+    "aleatoria": false,
+    "decisions": [
+        {
+            "id": 0,
+            "imagen": "Anciano_1",
+            "personaje" : "Anciano Paco",
+            "desc": "Primera decisión, debería cargarse esto bien jejejej. Un poco de rellenoooooooo",
+            "res_der": {
+                "respuesta": "Esta es la descripción de la respuesta de la derecha",
+                "efectos": [
+                    0,
+                    -5,
+                    0,
+                    5
+                ],
+                "explicacion": "Esta es la explicacion derecha",
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Esta es la descripción de la respuesta de la izquierda",
+                "efectos": [
+                    5,
+                    0,
+                    -5,
+                    0
+                ],
+                "explicacion": null,
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 1,
+            "imagen": "Jabali_2",
+            "personaje" : "Hog Rider",
+            "desc": "Segunda decision. La derecha tiene respuesta y la izquierda expl. y respuesta.",
+            "res_der": {
+                "respuesta": "Esta es la descripción de la respuesta de la derecha",
+                "efectos": [
+                    0,
+                    -1,
+                    0,
+                    1
+                ],
+                "explicacion": null,
+                "siguiente": 1
+            },
+            "res_izq": {
+                "respuesta": "Esta es la descripción de la respuesta de la izquierda",
+                "efectos": [
+                    0,
+                    -1,
+                    0,
+                    1
+                ],
+                "explicacion": "Esta es la explicacion izquierda",
+                "siguiente": 1
+            }
+        }
+    ],
+    "decision_answers": [
+        {
+            "id": 0,
+            "imagen": "Armadura_1",
+            "personaje" : "Armadura de Diamante",
+            "desc": "Esta es la respuesta a una decision anterior",
+            "res_der": {
+                "respuesta": "Esta es la descripción de la respuesta de la derecha",
+                "efectos": [
+                    0,
+                    -1,
+                    0,
+                    1
+                ],
+                "explicacion": "Esta es la explicacion izquierda",
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Esta es la descripción de la respuesta de la izquierda",
+                "efectos": [
+                    0,
+                    -1,
+                    0,
+                    1
+                ],
+                "explicacion": "Esta es la explicacion izquierda",
+                "siguiente": -1
+            }
+        }
+    ]
+}

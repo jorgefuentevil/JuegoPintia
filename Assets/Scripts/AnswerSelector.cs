@@ -9,9 +9,9 @@ using UnityEngine.UI;
 public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 {
 
-    [Header("---- Parámetros Animaciones ----")]
-    [SerializeField] private float percentThreshold = 0.5f;
-    [SerializeField] private float easing = 0.5f;
+
+    private readonly float percentThreshold = 0.3f;
+    private readonly float easing = 0.5f;
 
     private Vector3 imageLocation;
     private CardState estadoCarta;
@@ -87,6 +87,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             case CardState.FLIPPED_DERECHA:     //Confirmamos seleccion derecha
                 Debug.Log("Confirmamos Derecha");
                 //estadoCarta = CardState.SWIPED_DERECHA;
+                historyManager.ConfirmaRespuestaDerecha();
                 break;
 
             default:
@@ -114,6 +115,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             case CardState.FLIPPED_IZQUIERDA:           //Confirmamos seleccion izquierda
                 //estadoCarta = CardState.SWIPED_IZQUIERDA;
                 Debug.Log("Confirmamos Izquierda");
+                historyManager.ConfirmaRespuestaIzquierda();
                 break;
 
             default:
@@ -138,7 +140,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             if (!respuestaActiva && t >= 0.5f)
             {
                 respuestaActiva = true;
-                historyManager.SetRespuestaDerecha();
+                historyManager.ShowRespuestaDerecha();
             }
             yield return null;
         }
@@ -161,7 +163,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             if (!respuestaActiva && t >= 0.5f)
             {
                 respuestaActiva = true;
-                historyManager.SetRespuestaIzquierda();
+                historyManager.ShowRespuestaIzquierda();
             }
             yield return null;
         }
@@ -183,7 +185,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             if (respuestaActiva && t >= 0.5f)
             {
                 //RespuestaGeneral.SetActive(false);
-                historyManager.SetEstadoInicial();
+                historyManager.SetEstadoDefault();
                 respuestaActiva = false;
             }
             yield return null;

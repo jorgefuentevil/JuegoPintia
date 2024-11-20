@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Localization;
 using TMPro;
 using DG.Tweening;
 using System.Linq;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
-using Unity.VisualScripting;
+using UnityEngine.Localization.SmartFormat;
+using Newtonsoft.Json;
 
 
 
@@ -16,10 +16,9 @@ public class HistoryManager : MonoBehaviour
 {
 
     [Header("---- ASSETS ----")]
-    [SerializeField] private LocalizedAsset<TextAsset> jsonHistoria;
+    [SerializeField] private TextAsset jsonHistoria;
     [SerializeField] private AssetLabelReference assetsPersonajes;
     [SerializeField] private Sprite reversoCarta;
-    [SerializeField] private Sprite cartaActual;
 
 
     [Header("---- UI GAME OBJECTS ----")]
@@ -35,12 +34,21 @@ public class HistoryManager : MonoBehaviour
     [Header("---- ICONOS SUPERIORES")]
     [SerializeField] private IconManager iconManager;
 
+    //Parámetros de la partida//
+    private readonly short puntuacionMax = 20;
+    private short puntuacionDinero = 10;
+    private short puntuacionSocial = 10;
+    private short puntuacionSalud = 10;
+    private short puntuacionEspecifico = 10;
+
 
     private int nPreguntas = 10;
+    Dictionary<string, Sprite> retratosPersonajes = new();
     private HistoryJsonRoot parsedHistorias;
     private List<Decision> decisionesPartida;   //Almacena la lista de decisiones aleatorias con las que jugamos.
     private Decision decisionActual;            //Almacena la decisión actual. Puede ser decisión o respuesta a otra decision.
     private int numDecisionActual;              //Almacena el index de la decision actual. Solo decision, no respuestas. Solo incrementar en DECISIONES nuevas.
+    private Sprite cartaActual;
     private Image imagenCartaPersonaje;
     private readonly Color sombreadoCarta = new Color(0.4078431f, 0.4078431f, 0.4078431f);
     private readonly Color colorNormal = new Color(1, 1, 1);
@@ -52,30 +60,22 @@ public class HistoryManager : MonoBehaviour
     {
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
 
+        //Cargamos todas las decisiones del json 
+        parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonHistoria.text);
 
-        //Comentar desde aqui
+        //Elegimos si queremos preguntas aleatorias o no.
+        if (parsedHistorias.aleatoria)
+        {
+            CargaPreguntasAleatorias();
+        }
+        else{
+            CargaAllPreguntas();            
+        }
+        Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; NumHistorias={2}",parsedHistorias.historia,parsedHistorias.decisions.Count,nPreguntas);
 
-        /*      //Cargamos todas las decisiones del json
-                parsedHistorias = JsonUtility.FromJson<HistoryJsonRoot>(jsonHistoria.LoadAsset().text);
-
-                //Con cuantas preguntas aleatorias vamos a jugar
-                nPreguntas = (nPreguntas > parsedHistorias.decisions.Count) ? parsedHistorias.decisions.Count : nPreguntas;
-                int[] indexHistorias = Enumerable   //Genera n numeros aleatorios entre 0 y X.
-                                        .Range(0, parsedHistorias.decisions.Count)
-                                        .OrderBy(x => Random.value)
-                                        .Take(nPreguntas).ToArray();
-
-                //Llenamos decisionesPartida con nPreguntas decisiones aleatorias.
-                decisionesPartida = new(nPreguntas);
-                for(int i = 0; i<nPreguntas; i++){
-                    decisionesPartida.Add(parsedHistorias.decisions[indexHistorias[i]]);
-                } */
-
-        //Hasta aqui. Si queremos probar funcionamiento sin tener historias.
 
         //Cargamos imágenes. 
         //TODO: Filtrar retratos y cargar solo los que vayamos a usar.
-        Dictionary<string, Sprite> retratosPersonajes = new();
         Addressables.LoadAssetsAsync<Sprite>(assetsPersonajes, (sprite) =>
         {
             Debug.Log("Cargado retrato: " + sprite.name);
@@ -86,87 +86,128 @@ public class HistoryManager : MonoBehaviour
         AnswerSelector selector = cartaPersonaje.AddComponent<AnswerSelector>();
         selector.historyManager = this;
 
-        SetEstadoInicial();
+        decisionActual = decisionesPartida[0];
+
+        SetTextosDecision();
+
+        SetEstadoDefault();
+    }
+
+    private void CargaPreguntasAleatorias()
+    {
+        //Con cuantas preguntas aleatorias vamos a jugar
+        nPreguntas = (nPreguntas > parsedHistorias.decisions.Count) ? parsedHistorias.decisions.Count : nPreguntas;
+        int[] indexHistorias = Enumerable   //Genera n numeros aleatorios entre 0 y X.
+                                .Range(0, parsedHistorias.decisions.Count)
+                                .OrderBy(x => Random.value)
+                                .Take(nPreguntas).ToArray();
+
+        //Llenamos decisionesPartida con nPreguntas decisiones aleatorias.
+        decisionesPartida = new(nPreguntas);
+        for (int i = 0; i < nPreguntas; i++)
+        {
+            decisionesPartida.Add(parsedHistorias.decisions[indexHistorias[i]]);
+        }
+    }
+
+    private void CargaAllPreguntas(){
+        nPreguntas = parsedHistorias.decisions.Count;
+        decisionesPartida = new(nPreguntas);
+        decisionesPartida.AddRange(parsedHistorias.decisions);
+    }
+
+    private void SetTextosDecision(){
+        cartaActual = retratosPersonajes[decisionActual.imagen];
+        nombrePersonajeText.text = decisionActual.personaje;
+        preguntaText.text = decisionActual.desc;
     }
 
 
-
-
-    public void SetRespuestaDerecha()
+    public void ShowRespuestaDerecha()
     {
-        respuestaText.text = "Texto de la respuesta de la DERECHA DERECHAAAA";
+        respuestaText.text = decisionActual.res_der.respuesta;
         flechaIzquierda.SetActive(false);
-        imagenCartaPersonaje.DOColor(sombreadoCarta,0.2f);
+        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
-        iconManager.PreviewEfectos(0,0,-1,2);
+        iconManager.PreviewEfectos(decisionActual.res_der.efectos);
     }
 
-    public void SetRespuestaIzquierda()
+    public void ShowRespuestaIzquierda()
     {
-        respuestaText.text = "Texto de la respuesta de la IZQUIERDA IZQUIERDAAAAA";
+        respuestaText.text = decisionActual.res_der.respuesta;
         flechaDerecha.SetActive(false);
-        imagenCartaPersonaje.DOColor(sombreadoCarta,0.2f);
+        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
-        iconManager.PreviewEfectos(1,-2,0,0);
+        iconManager.PreviewEfectos(decisionActual.res_izq.efectos);
     }
 
-    public void SetEstadoInicial()
+    public void ConfirmaRespuestaDerecha()
+    {
+        iconManager.AplicaEfectos(decisionActual.res_der.efectos,puntuacionMax);
+    }
+
+        public void ConfirmaRespuestaIzquierda()
+    {
+        iconManager.AplicaEfectos(decisionActual.res_izq.efectos,puntuacionMax);
+    }
+
+    public void SetEstadoDefault()
     {
         respuestaText.text = "";
         flechaIzquierda.SetActive(true);
         flechaDerecha.SetActive(true);
-        imagenCartaPersonaje.DOColor(colorNormal,0.2f);
+        imagenCartaPersonaje.DOColor(colorNormal, 0.2f);
         imagenCartaPersonaje.sprite = cartaActual;
-        iconManager.SetEstadoInicial();
+        iconManager.SetEstadoDefault();
     }
 }
 
 
-[System.Serializable]
 public struct Decision
 {
     public int id;
     public string imagen;
+    public string personaje;
     public string desc;
-    public bool usada;
     public ResDer res_der;
     public ResIzq res_izq;
 }
 
-[System.Serializable]
-public struct ResDer
-{
-    public string respuesta;
-    public int[] efectos;
-    public int siguiente;
-}
-
-[System.Serializable]
-public struct ResIzq
-{
-    public string respuesta;
-    public int[] efectos;
-    public int siguiente;
-}
-
-[System.Serializable]
-public struct RespuestaDecision
+public struct DecisionAnswer
 {
     public int id;
     public string imagen;
     public string desc;
-    public bool usada;
     public ResDer res_der;
     public ResIzq res_izq;
 }
 
-[System.Serializable]
+public struct ResDer
+{
+    public string respuesta;
+    public short[] efectos;
+    public string explicacion;
+    public int siguiente;
+}
+
+public struct ResIzq
+{
+    public string respuesta;
+    public short[] efectos;
+    public string explicacion;
+    public int siguiente;
+}
+
 public struct HistoryJsonRoot
 {
     public string historia;
-    public string imagen;
     public string idioma;
     public int nivel;
+    public bool aleatoria;
     public List<Decision> decisions;
-    public List<RespuestaDecision> respuesta_decisions;
+    public List<DecisionAnswer> decision_answers;
 }
+
+
+
+
