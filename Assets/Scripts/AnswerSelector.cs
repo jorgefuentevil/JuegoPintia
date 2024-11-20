@@ -7,17 +7,17 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
-{   
+{
 
     [Header("---- Parámetros Animaciones ----")]
-    [SerializeField] private float percentThreshold = 0.2f;
+    [SerializeField] private float percentThreshold = 0.5f;
     [SerializeField] private float easing = 0.5f;
-    
+
     private Vector3 imageLocation;
     private CardState estadoCarta;
 
     public HistoryManager historyManager;
-    
+
 
 
     private enum CardState
@@ -77,15 +77,18 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
                 Debug.Log("Carta rotada a la derecha");
                 estadoCarta = CardState.FLIPPED_DERECHA;
                 break;
+
             case CardState.FLIPPED_IZQUIERDA:   //Vuelve al estado inicial.
                 StartCoroutine(RotateAndHide());
                 Debug.Log("Volvemos a Inicial desde izquierda");
                 estadoCarta = CardState.INICIAL;
                 break;
+
             case CardState.FLIPPED_DERECHA:     //Confirmamos seleccion derecha
                 Debug.Log("Confirmamos Derecha");
                 //estadoCarta = CardState.SWIPED_DERECHA;
                 break;
+
             default:
                 Debug.Log("Error: Estado Carta desconocido");
                 break;
@@ -97,20 +100,22 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         switch (estadoCarta)
         {
             case CardState.INICIAL: //Muestra atributos y respuesta derecha
-
                 StartCoroutine(RotateAndShowIzquierda());
                 Debug.Log("Carta rotada a la izquierda");
                 estadoCarta = CardState.FLIPPED_IZQUIERDA;
                 break;
+
             case CardState.FLIPPED_DERECHA:             //Vuelve al estado inicial.
                 StartCoroutine(RotateAndHide());
                 Debug.Log("Volvemos a Inicial desde derecha");
                 estadoCarta = CardState.INICIAL;
                 break;
-            case CardState.FLIPPED_IZQUIERDA:           //Confirmamos seleccion derecha
+
+            case CardState.FLIPPED_IZQUIERDA:           //Confirmamos seleccion izquierda
                 //estadoCarta = CardState.SWIPED_IZQUIERDA;
                 Debug.Log("Confirmamos Izquierda");
                 break;
+
             default:
                 Debug.Log("Error: Estado Carta desconocido");
                 break;
