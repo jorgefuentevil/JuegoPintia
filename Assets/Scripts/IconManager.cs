@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class IconManager : MonoBehaviour
 {
@@ -37,52 +38,63 @@ public class IconManager : MonoBehaviour
     private short puntuacionSalud;
     private short puntuacionEspecifico;
 
+    private Image dineroVariacionImage;
+    private Image socialVariacionImage;
+    private Image saludVariacionImage;
+    private Image especificoVariacionImage;
+
+
+    // ---- Parámetros animaciones ---- //
+    private float easeInVariaciones = 0.3f;
+    private float easeOutVariaciones = 0.3f;
+    private float scaleVariacionSimple = 0.5f;
+    private float scaleVariacionDoble = 0.8f;
+
     public void Start()
     {
         //Inicializamos puntuaciones
         puntuacionDinero = puntuacionSocial = puntuacionSalud = puntuacionEspecifico = puntuacionInicial;
 
         //Escondemos variaciones
-
-        dineroVariacion.SetActive(false);
-        socialVariacion.SetActive(false);
-        saludVariacion.SetActive(false);
-        especificoVariacion.SetActive(false);
+        dineroVariacion.transform.DOScale(0,0);
+        socialVariacion.transform.DOScale(0,0);
+        saludVariacion.transform.DOScale(0,0);
+        especificoVariacion.transform.DOScale(0,0);
     }
-
-
-
 
     public void PreviewEfectos(short dinero, short social, short salud, short especifico)
     {
 
         if (dinero != 0)
         {
-            dineroVariacion.transform.localScale = Vector3.one * ((Math.Abs(dinero) == 1) ? 0.5f : 0.8f);
-            dineroVariacion.SetActive(true);
+            float scale = (Math.Abs(dinero) == 1) ? 0.5f : 0.8f;
+            dineroVariacion.transform.DOScale(scale,0.3f);
         }
         if (social != 0)
         {
-            socialVariacion.transform.localScale = Vector3.one * ((Math.Abs(social) == 1) ? 0.5f : 0.8f);
-            socialVariacion.SetActive(true);
+            float scale = (Math.Abs(social) == 1) ? 0.5f : 0.8f;
+            socialVariacion.transform.DOScale(scale,0.3f);    
         }
         if (salud != 0)
         {
-            saludVariacion.transform.localScale = Vector3.one * ((Math.Abs(salud) == 1) ? 0.5f : 0.8f);
-            saludVariacion.SetActive(true);
+            float scale = (Math.Abs(salud) == 1) ? 0.5f : 0.8f;
+            saludVariacion.transform.DOScale(scale,0.3f);
+
         }
         if (especifico != 0)
         {
-            especificoVariacion.transform.localScale = Vector3.one * ((Math.Abs(especifico) == 1) ? 0.5f : 0.8f);
-            especificoVariacion.SetActive(true);
+            float scale = (Math.Abs(especifico) == 1) ? 0.5f : 0.8f;
+            especificoVariacion.transform.DOScale(scale,0.3f);
+
         }
     }
 
-    public void SetEstadoInicial(){
-        dineroVariacion.SetActive(false);
-        socialVariacion.SetActive(false);
-        saludVariacion.SetActive(false);
-        especificoVariacion.SetActive(false);
+    public void SetEstadoInicial()
+    {
+        dineroVariacion.transform.DOScale(0,0.3f);
+        socialVariacion.transform.DOScale(0,0.3f);
+        saludVariacion.transform.DOScale(0,0.3f);
+        especificoVariacion.transform.DOScale(0,0.3f);
     }
 
 }
