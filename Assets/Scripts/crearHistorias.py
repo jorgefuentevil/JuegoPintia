@@ -65,58 +65,69 @@ class Decision(Toplevel):
         exit(0)
         
     def agregar_decision(self):
-        # Leer el archivo JSON
-        with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'r', encoding='utf-8') as f:
-            datos = json.load(f)
-        if self.respuesta == False:
-            id=len(datos["decisiones"]) + 1
-        else:
-            id=self.app.siguiente
-        decision = {
-            "id": id,
-            "imagen": self.decision_img_entry.get(),
-            "desc": self.decision_desc_entry.get(),
-            "res_der": {
-                "respuesta": self.decision_res1_entry.get(),
-                "explicacion": None,
-                "efectos": [
-                    self.decision_res1_at1.get(),
-                    self.decision_res1_at2.get(),
-                    self.decision_res1_at3.get(),
-                    self.decision_res1_at4.get()
-                ],
-                "siguiente": self.siguiente_der
-            },
-            "res_izq": {
-                "respuesta": self.decision_res2_entry.get(),
-                "explicacion": None,
-                "efectos": [
-                    self.decision_res2_at1.get(),
-                    self.decision_res2_at2.get(),
-                    self.decision_res2_at3.get(),
-                    self.decision_res2_at4.get()
-                ],
-                "siguiente": self.siguiente_izq
+        try:
+            if len(self.decision_desc_entry.get())>200:
+                raise Exception("La descripción es muy extensa")
+            if len(self.decision_res1_entry.get())>200:
+                raise Exception("La decision derecha es muy extensa")
+            if len(self.decision_res2_entry.get())>200:
+                raise Exception("La decision izquierda es muy extensa")
+            if self.decision_desc_entry.get()=="" or self.decision_res1_entry.get()=="" or self.decision_res2_entry.get()=="" or self.decision_img_entry.get()=="":
+                raise Exception("Todos los campos deben de estar rellenos")
+            # Leer el archivo JSON
+            with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'r', encoding='utf-8') as f:
+                datos = json.load(f)
+            if self.respuesta == False:
+                id=len(datos["decisiones"]) + 1
+            else:
+                id=self.app.siguiente
+            decision = {
+                "id": id,
+                "imagen": self.decision_img_entry.get(),
+                "desc": self.decision_desc_entry.get(),
+                "res_der": {
+                    "respuesta": self.decision_res1_entry.get(),
+                    "explicacion": None,
+                    "efectos": [
+                        self.decision_res1_at1.get(),
+                        self.decision_res1_at2.get(),
+                        self.decision_res1_at3.get(),
+                        self.decision_res1_at4.get()
+                    ],
+                    "siguiente": self.siguiente_der
+                },
+                "res_izq": {
+                    "respuesta": self.decision_res2_entry.get(),
+                    "explicacion": None,
+                    "efectos": [
+                        self.decision_res2_at1.get(),
+                        self.decision_res2_at2.get(),
+                        self.decision_res2_at3.get(),
+                        self.decision_res2_at4.get()
+                    ],
+                    "siguiente": self.siguiente_izq
+                }
             }
-        }
-        if self.respuesta == False:
-            datos["decisiones"].append(decision)
-        else:
-            datos["decisiones_respuesta"].append(decision)
-            self.app.siguiente+=1
-        with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'w', encoding='utf-8') as f:
-            json.dump(datos, f, indent=4, ensure_ascii=False)
-        if self.respuesta == False:
-            self.decision_res1_entry.delete(0,END)
-            self.decision_res2_entry.delete(0,END)
-            self.decision_img_entry.delete(0,END)
-            self.decision_desc_entry.delete(0,END)
-            self.siguiente_izq=None
-            self.siguiente_der=None
+            if self.respuesta == False:
+                datos["decisiones"].append(decision)
+            else:
+                datos["decisiones_respuesta"].append(decision)
+                self.app.siguiente+=1
+            with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'w', encoding='utf-8') as f:
+                json.dump(datos, f, indent=4, ensure_ascii=False)
+            if self.respuesta == False:
+                self.decision_res1_entry.delete(0,END)
+                self.decision_res2_entry.delete(0,END)
+                self.decision_img_entry.delete(0,END)
+                self.decision_desc_entry.delete(0,END)
+                self.siguiente_izq=None
+                self.siguiente_der=None
 
 
-        else:
-            self.destroy()
+            else:
+                self.destroy()
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo guardar el archivo: {e}")
         
 
     def decision_encadenada_der(self):        
@@ -198,7 +209,12 @@ class JsonEditorApp:
         try:
             if self.historia_entry.get()=="" or self.descripcion_entry.get()=="" or self.imagen_entry.get()=="" or self.coste_entry.get()=="" or self.idioma_entry.get()=="" or self.nivel_entry.get()=="":
                 raise Exception("Todos los campos deben estar rellenos")
+            if len(self.descripcion_entry.get())>200:
+                raise Exception("La descripción es muy extensa")
+            if len(self.historia_entry.get())>20:
+                raise Exception("El titulo es muy extenso")
             # Recoger datos de los campos
+            print(len(self.historia_entry.get()))
             data_historia = {
                 "personaje": self.historia_entry.get(),
                 "desc": self.descripcion_entry.get(),
