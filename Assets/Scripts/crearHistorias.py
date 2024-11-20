@@ -1,14 +1,141 @@
 import json
 from tkinter import Tk, Label, Entry, Button, Text, END, messagebox, ttk , Toplevel, Spinbox
 
+class Decision(Toplevel):
+     
+    def __init__(self, master = None, app=None, respuesta=False):
+         
+        super().__init__(master = master)
+        self.app = app
+        self.siguiente_izq= None
+        self.siguiente_der= None
+        self.respuesta=respuesta
+        #Creamos la ventana2
+        Label(self, text="Creacion de decision seguida de {xxxxxxx}").grid(row=0, column=0, sticky="w", padx=5, pady=5)
+        Label(self, text="Descripción decision:").grid(row=1, column=0, sticky="w", padx=5, pady=5)
+        self.decision_desc_entry = Entry(self, width=30)
+        self.decision_desc_entry.grid(row=1, column=1, padx=5, pady=5)
 
+        Label(self, text="Imagen:").grid(row=2, column=0, sticky="w", padx=5, pady=5)
+        self.decision_img_entry = Entry(self, width=30)
+        self.decision_img_entry.grid(row=2, column=1, padx=5, pady=5)
+
+        Label(self, text="Respuesta 1:").grid(row=3, column=0, sticky="w", padx=5, pady=5)
+        self.decision_res1_entry = Entry(self, width=30)
+        self.decision_res1_entry.grid(row=3, column=1, padx=5, pady=5)
+
+        Button(self, text="Añadir decision Encadenada", command=self.decision_encadenada_der).grid(row=3, column=2, padx=5, pady=5)
+
+        Label(self, text="At1:").grid(row=4, column=0, sticky="w", padx=5, pady=5)
+        Label(self, text="At2:").grid(row=4, column=2, sticky="w", padx=5, pady=5)
+        Label(self, text="At3:").grid(row=4, column=4, sticky="w", padx=5, pady=5)
+        Label(self, text="At4:").grid(row=4, column=6, sticky="w", padx=5, pady=5)
+        self.decision_res1_at1 = Spinbox(self, from_=-10, to=10)
+        self.decision_res1_at2 = Spinbox(self, from_=-10, to=10)
+        self.decision_res1_at3 = Spinbox(self, from_=-10, to=10)
+        self.decision_res1_at4 = Spinbox(self, from_=-10, to=10)
+        self.decision_res1_at1.grid(row=4, column=1, padx=5, pady=5)
+        self.decision_res1_at2.grid(row=4, column=3, padx=5, pady=5)
+        self.decision_res1_at3.grid(row=4, column=5, padx=5, pady=5)
+        self.decision_res1_at4.grid(row=4, column=7, padx=5, pady=5)
+
+        Label(self, text="Respuesta 2:").grid(row=5, column=0, sticky="w", padx=5, pady=5)
+        self.decision_res2_entry = Entry(self, width=30)
+        self.decision_res2_entry.grid(row=5, column=1, padx=5, pady=5)
+        
+        Button(self, text="Añadir decision Encadenada", command=self.decision_encadenada_izq).grid(row=5, column=2, padx=5, pady=5)
+
+        Label(self, text="At1:").grid(row=6, column=0, sticky="w", padx=5, pady=5)
+        Label(self, text="At2:").grid(row=6, column=2, sticky="w", padx=5, pady=5)
+        Label(self, text="At3:").grid(row=6, column=4, sticky="w", padx=5, pady=5)
+        Label(self, text="At4:").grid(row=6, column=6, sticky="w", padx=5, pady=5)
+        self.decision_res2_at1 = Spinbox(self, from_=-10, to=10)
+        self.decision_res2_at2 = Spinbox(self, from_=-10, to=10)
+        self.decision_res2_at3 = Spinbox(self, from_=-10, to=10)
+        self.decision_res2_at4 = Spinbox(self, from_=-10, to=10)
+        self.decision_res2_at1.grid(row=6, column=1, padx=5, pady=5)
+        self.decision_res2_at2.grid(row=6, column=3, padx=5, pady=5)
+        self.decision_res2_at3.grid(row=6, column=5, padx=5, pady=5)
+        self.decision_res2_at4.grid(row=6, column=7, padx=5, pady=5)
+
+        Button(self, text="Finalizar", command=self.close).grid(row=7, column=1, padx=5, pady=10)
+        Button(self, text="Añadir nueva decisión", command=self.agregar_decision).grid(row=7, column=2, padx=5, pady=10)
+
+    def close(self):
+        exit(0)
+        
+    def agregar_decision(self):
+        # Leer el archivo JSON
+        with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'r', encoding='utf-8') as f:
+            datos = json.load(f)
+        if self.respuesta == False:
+            id=len(datos["decisiones"]) + 1
+        else:
+            id=self.app.siguiente
+        decision = {
+            "id": id,
+            "imagen": self.decision_img_entry.get(),
+            "desc": self.decision_desc_entry.get(),
+            "res_der": {
+                "respuesta": self.decision_res1_entry.get(),
+                "explicacion": None,
+                "efectos": [
+                    self.decision_res1_at1.get(),
+                    self.decision_res1_at2.get(),
+                    self.decision_res1_at3.get(),
+                    self.decision_res1_at4.get()
+                ],
+                "siguiente": self.siguiente_der
+            },
+            "res_izq": {
+                "respuesta": self.decision_res2_entry.get(),
+                "explicacion": None,
+                "efectos": [
+                    self.decision_res2_at1.get(),
+                    self.decision_res2_at2.get(),
+                    self.decision_res2_at3.get(),
+                    self.decision_res2_at4.get()
+                ],
+                "siguiente": self.siguiente_izq
+            }
+        }
+        if self.respuesta == False:
+            datos["decisiones"].append(decision)
+        else:
+            datos["decisiones_respuesta"].append(decision)
+            self.app.siguiente+=1
+        with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'w', encoding='utf-8') as f:
+            json.dump(datos, f, indent=4, ensure_ascii=False)
+        if self.respuesta == False:
+            self.decision_res1_entry.delete(0,END)
+            self.decision_res2_entry.delete(0,END)
+            self.decision_img_entry.delete(0,END)
+            self.decision_desc_entry.delete(0,END)
+            self.siguiente_izq=None
+            self.siguiente_der=None
+
+
+        else:
+            self.destroy()
+        
+
+    def decision_encadenada_der(self):        
+        Decision(self.master,self.app,True)
+        self.siguiente_der=self.app.siguiente
+
+    def decision_encadenada_izq(self):
+        Decision(self.master,self.app,True)
+        self.siguiente_izq=self.app.siguiente
+        
+
+    
 class JsonEditorApp:
-    def __init__(self, root, window2):
+    def __init__(self, root):
         self.root = root
         self.root.title("Editor de JSON")
-        self.window2 = window2
-        self.window2.title("Añadir decision")
-
+        self.repetida=False
+        self.titulo=""
+        self.siguiente=1
         # Sección de encabezado
         Label(root, text="Titulo historia:").grid(row=0, column=0, sticky="w", padx=5, pady=5)
         self.historia_entry = Entry(root, width=30)
@@ -36,56 +163,9 @@ class JsonEditorApp:
 
         Button(root, text="Guardar JSON", command=self.save_json).grid(row=6, column=1, padx=5, pady=10)
 
-        #Creamos la ventana2
-        Label(window2, text="Descripción decision:").grid(row=0, column=0, sticky="w", padx=5, pady=5)
-        self.decision_desc_entry = Entry(window2, width=30)
-        self.decision_desc_entry.grid(row=0, column=1, padx=5, pady=5)
-
-        Label(window2, text="Imagen:").grid(row=1, column=0, sticky="w", padx=5, pady=5)
-        self.decision_img_entry = Entry(window2, width=30)
-        self.decision_img_entry.grid(row=1, column=1, padx=5, pady=5)
-
-        Label(window2, text="Respuesta 1:").grid(row=2, column=0, sticky="w", padx=5, pady=5)
-        self.decision_res1_entry = Entry(window2, width=30)
-        self.decision_res1_entry.grid(row=2, column=1, padx=5, pady=5)
-
-        Label(window2, text="At1:").grid(row=3, column=0, sticky="w", padx=5, pady=5)
-        Label(window2, text="At2:").grid(row=3, column=2, sticky="w", padx=5, pady=5)
-        Label(window2, text="At3:").grid(row=3, column=4, sticky="w", padx=5, pady=5)
-        Label(window2, text="At4:").grid(row=3, column=6, sticky="w", padx=5, pady=5)
-        self.decision_res1_at1 = Spinbox(window2, from_=-10, to=10)
-        self.decision_res1_at2 = Spinbox(window2, from_=-10, to=10)
-        self.decision_res1_at3 = Spinbox(window2, from_=-10, to=10)
-        self.decision_res1_at4 = Spinbox(window2, from_=-10, to=10)
-        self.decision_res1_at1.grid(row=3, column=1, padx=5, pady=5)
-        self.decision_res1_at2.grid(row=3, column=3, padx=5, pady=5)
-        self.decision_res1_at3.grid(row=3, column=5, padx=5, pady=5)
-        self.decision_res1_at4.grid(row=3, column=7, padx=5, pady=5)
-
-        Label(window2, text="Respuesta 2:").grid(row=4, column=0, sticky="w", padx=5, pady=5)
-        self.decision_res2_entry = Entry(window2, width=30)
-        self.decision_res2_entry.grid(row=4, column=1, padx=5, pady=5)
-
-        Label(window2, text="At1:").grid(row=5, column=0, sticky="w", padx=5, pady=5)
-        Label(window2, text="At2:").grid(row=5, column=2, sticky="w", padx=5, pady=5)
-        Label(window2, text="At3:").grid(row=5, column=4, sticky="w", padx=5, pady=5)
-        Label(window2, text="At4:").grid(row=5, column=6, sticky="w", padx=5, pady=5)
-        self.decision_res2_at1 = Spinbox(window2, from_=-10, to=10)
-        self.decision_res2_at2 = Spinbox(window2, from_=-10, to=10)
-        self.decision_res2_at3 = Spinbox(window2, from_=-10, to=10)
-        self.decision_res2_at4 = Spinbox(window2, from_=-10, to=10)
-        self.decision_res2_at1.grid(row=5, column=1, padx=5, pady=5)
-        self.decision_res2_at2.grid(row=5, column=3, padx=5, pady=5)
-        self.decision_res2_at3.grid(row=5, column=5, padx=5, pady=5)
-        self.decision_res2_at4.grid(row=5, column=7, padx=5, pady=5)
-
-        Button(window2, text="Finalizar", command=self.close).grid(row=6, column=1, padx=5, pady=10)
-        Button(window2, text="Añadir nueva decisión", command= lambda: self.agregar_decision("Guerrero_ES.json")).grid(row=6, column=2, padx=5, pady=10)
-
         # Crear JSON inicial vacío
         #self.create_empty_json()
-    def close(self):
-        exit(0)
+    
 
     def create_empty_json(self):
         """Crea un JSON vacío con el formato inicial y lo muestra en los campos."""
@@ -120,17 +200,18 @@ class JsonEditorApp:
                 raise Exception("Todos los campos deben estar rellenos")
             # Recoger datos de los campos
             data_historia = {
-                "historia": self.historia_entry.get(),
+                "personaje": self.historia_entry.get(),
                 "desc": self.descripcion_entry.get(),
                 "coste": self.coste_entry.get(),
                 "imagen": self.imagen_entry.get()
             }
-
+            self.titulo=self.historia_entry.get().replace(" ", "_")
             idioma=self.idioma_entry.get()[-2:]
             self.agregar_historia(f"Historias_{idioma}.json",data_historia)
-            self.crear_json_decisiones()
-
-            changeWindow()
+            if(self.repetida == False):
+                self.crear_json_decisiones()
+        
+            Decision(self.root,self,False)
             #messagebox.showinfo("Éxito", "Archivo JSON guardado correctamente.")
 
         except Exception as e:
@@ -141,6 +222,14 @@ class JsonEditorApp:
         with open(archivo, 'r', encoding='utf-8') as f:
             data = json.load(f)
         
+        for historia in data['historias']:
+           if historia['personaje'] == nueva_historia['personaje']:
+                print("repe")
+                self.repetida=True
+                with open(f"{self.titulo}_{self.idioma_entry.get()[-2:]}.json", 'r', encoding='utf-8') as f:
+                    datos = json.load(f)
+                self.siguiente=len(datos["decisiones_respuesta"])
+                return
         # Agregar la nueva historia
         data['historias'].append(nueva_historia)
         
@@ -166,52 +255,12 @@ class JsonEditorApp:
             "decisiones": [],
             "decisiones_respuesta": []
         }
-        with open(f"{self.historia_entry.get()}.json", "w", encoding="utf-8") as archivo:
+        with open(f"{self.titulo}_{self.idioma_entry.get()[-2:]}.json", "w", encoding="utf-8") as archivo:
             json.dump(datos, archivo, ensure_ascii=False, indent=4)
-
-    def agregar_decision(self,archivo):
-        # Leer el archivo JSON
-        with open(f"{self.historia_entry.get()}.json", 'r', encoding='utf-8') as f:
-            datos = json.load(f)
-        
-        decision = {
-            "id": len(datos["decisiones"]) + 1,
-            "imagen": self.decision_img_entry.get(),
-            "desc": self.decision_desc_entry.get(),
-            "res_der": {
-                "respuesta": self.decision_res1_entry.get(),
-                "efectos": [
-                    self.decision_res1_at1.get(),
-                    self.decision_res1_at2.get(),
-                    self.decision_res1_at3.get(),
-                    self.decision_res1_at4.get()
-                ],
-                "siguiente": None
-            },
-            "res_izq": {
-                "respuesta": self.decision_res2_entry.get(),
-                "efectos": [
-                    self.decision_res2_at1.get(),
-                    self.decision_res2_at2.get(),
-                    self.decision_res2_at3.get(),
-                    self.decision_res2_at4.get()
-                ],
-                "siguiente": None
-            }
-        }
-        print(decision)
-        datos["decisiones"].append(decision)
-        with open(f"{self.historia_entry.get()}.json", 'w', encoding='utf-8') as f:
-            json.dump(datos, f, indent=4, ensure_ascii=False)
-        
-def changeWindow():
-    window2.deiconify()  # Muestra la ventana2
 
 if __name__ == "__main__":
     root = Tk()
-    window2 = Toplevel()
-    window2.withdraw() 
-    app = JsonEditorApp(root,window2)
+    app = JsonEditorApp(root)
     root.mainloop()
 
 
