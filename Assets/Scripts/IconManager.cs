@@ -38,17 +38,11 @@ public class IconManager : MonoBehaviour
     private short puntuacionSalud;
     private short puntuacionEspecifico;
 
-    private Image dineroVariacionImage;
-    private Image socialVariacionImage;
-    private Image saludVariacionImage;
-    private Image especificoVariacionImage;
-
-
     // ---- Parámetros animaciones ---- //
-    private float easeInVariaciones = 0.3f;
-    private float easeOutVariaciones = 0.3f;
-    private float scaleVariacionSimple = 0.5f;
-    private float scaleVariacionDoble = 0.8f;
+    private readonly float easeInVariaciones = 0.3f;
+    private readonly float easeOutVariaciones = 0.3f;
+    private readonly float scaleVariacionSimple = 0.5f;
+    private readonly float scaleVariacionDoble = 0.8f;
 
     public void Start()
     {
@@ -67,34 +61,34 @@ public class IconManager : MonoBehaviour
 
         if (dinero != 0)
         {
-            float scale = (Math.Abs(dinero) == 1) ? 0.5f : 0.8f;
-            dineroVariacion.transform.DOScale(scale,0.3f);
+            float scale = (Math.Abs(dinero) == 1) ? scaleVariacionSimple : scaleVariacionDoble;
+            dineroVariacion.transform.DOScale(scale,easeInVariaciones);
         }
         if (social != 0)
         {
-            float scale = (Math.Abs(social) == 1) ? 0.5f : 0.8f;
-            socialVariacion.transform.DOScale(scale,0.3f);    
+            float scale = (Math.Abs(social) == 1) ? scaleVariacionSimple : scaleVariacionDoble;
+            socialVariacion.transform.DOScale(scale,easeInVariaciones);    
         }
         if (salud != 0)
         {
-            float scale = (Math.Abs(salud) == 1) ? 0.5f : 0.8f;
-            saludVariacion.transform.DOScale(scale,0.3f);
+            float scale = (Math.Abs(salud) == 1) ? scaleVariacionSimple : scaleVariacionDoble;
+            saludVariacion.transform.DOScale(scale,easeInVariaciones);
 
         }
         if (especifico != 0)
         {
-            float scale = (Math.Abs(especifico) == 1) ? 0.5f : 0.8f;
-            especificoVariacion.transform.DOScale(scale,0.3f);
+            float scale = (Math.Abs(especifico) == 1) ? scaleVariacionSimple : scaleVariacionDoble;
+            especificoVariacion.transform.DOScale(scale,easeInVariaciones);
 
         }
     }
 
     public void SetEstadoInicial()
     {
-        dineroVariacion.transform.DOScale(0,0.3f);
-        socialVariacion.transform.DOScale(0,0.3f);
-        saludVariacion.transform.DOScale(0,0.3f);
-        especificoVariacion.transform.DOScale(0,0.3f);
+        dineroVariacion.transform.DOScale(0,easeOutVariaciones);
+        socialVariacion.transform.DOScale(0,easeOutVariaciones);
+        saludVariacion.transform.DOScale(0,easeOutVariaciones);
+        especificoVariacion.transform.DOScale(0,easeOutVariaciones);
     }
 
 }

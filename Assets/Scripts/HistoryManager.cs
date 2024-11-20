@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 using TMPro;
+using DG.Tweening;
 using System.Linq;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
@@ -41,8 +42,8 @@ public class HistoryManager : MonoBehaviour
     private Decision decisionActual;            //Almacena la decisión actual. Puede ser decisión o respuesta a otra decision.
     private int numDecisionActual;              //Almacena el index de la decision actual. Solo decision, no respuestas. Solo incrementar en DECISIONES nuevas.
     private Image imagenCartaPersonaje;
-    private Color sombreadoCarta = new Color(0.4078431f, 0.4078431f, 0.4078431f);
-    private Color colorNormal = new Color(1, 1, 1);
+    private readonly Color sombreadoCarta = new Color(0.4078431f, 0.4078431f, 0.4078431f);
+    private readonly Color colorNormal = new Color(1, 1, 1);
 
 
 
@@ -95,7 +96,7 @@ public class HistoryManager : MonoBehaviour
     {
         respuestaText.text = "Texto de la respuesta de la DERECHA DERECHAAAA";
         flechaIzquierda.SetActive(false);
-        imagenCartaPersonaje.color = sombreadoCarta;
+        imagenCartaPersonaje.DOColor(sombreadoCarta,0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
         iconManager.PreviewEfectos(0,0,-1,2);
     }
@@ -104,7 +105,7 @@ public class HistoryManager : MonoBehaviour
     {
         respuestaText.text = "Texto de la respuesta de la IZQUIERDA IZQUIERDAAAAA";
         flechaDerecha.SetActive(false);
-        imagenCartaPersonaje.color = sombreadoCarta;
+        imagenCartaPersonaje.DOColor(sombreadoCarta,0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
         iconManager.PreviewEfectos(1,-2,0,0);
     }
@@ -114,7 +115,7 @@ public class HistoryManager : MonoBehaviour
         respuestaText.text = "";
         flechaIzquierda.SetActive(true);
         flechaDerecha.SetActive(true);
-        imagenCartaPersonaje.color = colorNormal;
+        imagenCartaPersonaje.DOColor(colorNormal,0.2f);
         imagenCartaPersonaje.sprite = cartaActual;
         iconManager.SetEstadoInicial();
     }
