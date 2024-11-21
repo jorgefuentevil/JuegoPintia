@@ -47,7 +47,6 @@ public class PauseMenu : MonoBehaviour
 
         if (value)
         {
-            Debug.Log("Vibro brrrrrrr");
             
             PlayerPrefs.SetInt("VibracionEnabled", 1);
             #if UNITY_ANDROID || UNITY_IOS
