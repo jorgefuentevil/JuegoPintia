@@ -29,8 +29,6 @@ public class IconManager : MonoBehaviour
     [SerializeField] private Image especificoContorno;
     [SerializeField] private Image especificoFill;
 
-    [SerializeField] private GameObject popupFinPartida;
-
     private readonly short puntuacionInicial = 10;
     private readonly short multiplicadorNormal = 1;
     private readonly short multiplicadorDoble = 2;
@@ -85,7 +83,6 @@ public class IconManager : MonoBehaviour
         AplicaEfectoIndividual(socialFill, socialContorno, stats[1], puntuacionMax);
         AplicaEfectoIndividual(saludFill, saludContorno, stats[2], puntuacionMax);
         AplicaEfectoIndividual(especificoFill, especificoContorno, stats[3], puntuacionMax);
-        StartCoroutine(checkFinParida());
     }
 
 
@@ -113,12 +110,5 @@ public class IconManager : MonoBehaviour
         especificoVariacion.transform.DOScale(0, easeOutVariaciones);
     }
 
-    IEnumerator checkFinParida()
-    {
-        yield return new WaitForSeconds(1.5f);
-        if (new[] { dineroFill, socialFill, saludFill, especificoFill }.Any(fill => fill.fillAmount == 0 || fill.fillAmount == 1))
-            popupFinPartida.SetActive(true);
-        
-    }
 
 }

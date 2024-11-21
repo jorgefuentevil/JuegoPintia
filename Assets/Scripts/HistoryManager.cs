@@ -30,6 +30,7 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private GameObject cartaPersonaje;
     [SerializeField] private GameObject flechaDerecha;
     [SerializeField] private GameObject flechaIzquierda;
+    [SerializeField] private GameObject popUpMuertePanel;
 
     [Header("---- ICONOS SUPERIORES")]
     [SerializeField] private IconManager iconManager;
@@ -144,11 +145,15 @@ public class HistoryManager : MonoBehaviour
     public void ConfirmaRespuestaDerecha()
     {
         iconManager.AplicaEfectos(decisionActual.res_der.efectos,puntuacionMax);
+        UpdatePuntuacion(decisionActual.res_der.efectos);
+        CheckFinParida();
     }
 
-        public void ConfirmaRespuestaIzquierda()
+    public void ConfirmaRespuestaIzquierda()
     {
         iconManager.AplicaEfectos(decisionActual.res_izq.efectos,puntuacionMax);
+        UpdatePuntuacion(decisionActual.res_izq.efectos);
+        CheckFinParida();
     }
 
     public void SetEstadoDefault()
@@ -159,6 +164,20 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.DOColor(colorNormal, 0.2f);
         imagenCartaPersonaje.sprite = cartaActual;
         iconManager.SetEstadoDefault();
+    }
+
+    private void UpdatePuntuacion(short[] efectos){
+        puntuacionDinero += efectos[0];
+        puntuacionSocial += efectos[1];
+        puntuacionSalud += efectos[2];
+        puntuacionEspecifico += efectos[3];
+        Debug.LogFormat("Puntuacion Actual: {0} - {1} - {2} - {3}", puntuacionDinero, puntuacionSocial, puntuacionSalud, puntuacionEspecifico);
+    }
+
+    private void CheckFinParida(){
+        if (new[] { puntuacionDinero, puntuacionSocial, puntuacionSalud, puntuacionEspecifico }.Any(valor => valor <= 0 || valor >= puntuacionMax))
+            popUpMuertePanel.SetActive(true);
+        
     }
 }
 
