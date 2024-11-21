@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour
 
 
     //Persistencia entre escenas;
-    private void Awake(){
+    public void Awake(){
         if(instance == null){
             instance = this;
             DontDestroyOnLoad(gameObject);
