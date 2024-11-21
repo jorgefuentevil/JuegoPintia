@@ -85,8 +85,7 @@ public class IconManager : MonoBehaviour
         AplicaEfectoIndividual(socialFill, socialContorno, stats[1], puntuacionMax);
         AplicaEfectoIndividual(saludFill, saludContorno, stats[2], puntuacionMax);
         AplicaEfectoIndividual(especificoFill, especificoContorno, stats[3], puntuacionMax);
-
-        checkFinParida();
+        StartCoroutine(checkFinParida());
     }
 
 
@@ -114,10 +113,12 @@ public class IconManager : MonoBehaviour
         especificoVariacion.transform.DOScale(0, easeOutVariaciones);
     }
 
-    public void checkFinParida()
+    IEnumerator checkFinParida()
     {
+        yield return new WaitForSeconds(1.5f);
         if (new[] { dineroFill, socialFill, saludFill, especificoFill }.Any(fill => fill.fillAmount == 0 || fill.fillAmount == 1))
             popupFinPartida.SetActive(true);
+        
     }
 
 }
