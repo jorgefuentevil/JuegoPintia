@@ -36,6 +36,10 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         mainMenu.SetActive(true);
+        Debug.Log("clik en volver");
+        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+            Vibracion.Vibrar(200);
+        }
     }
 
     public void ToggleVibracion(bool value)

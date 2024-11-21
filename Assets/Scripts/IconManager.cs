@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Linq;
 
 public class IconManager : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class IconManager : MonoBehaviour
     [SerializeField] private Image especificoContorno;
     [SerializeField] private Image especificoFill;
 
+    [SerializeField] private GameObject popupFinPartida;
 
     private readonly short puntuacionInicial = 10;
     private readonly short multiplicadorNormal = 1;
@@ -83,6 +85,8 @@ public class IconManager : MonoBehaviour
         AplicaEfectoIndividual(socialFill, socialContorno, stats[1], puntuacionMax);
         AplicaEfectoIndividual(saludFill, saludContorno, stats[2], puntuacionMax);
         AplicaEfectoIndividual(especificoFill, especificoContorno, stats[3], puntuacionMax);
+
+        checkFinParida();
     }
 
 
@@ -92,7 +96,6 @@ public class IconManager : MonoBehaviour
 
         float fill = fillImage.fillAmount + ((float)valorStat / puntuacionMax);
         Color color = (valorStat > 0) ? colorVerde : colorRojo;
-
         Sequence seq = DOTween.Sequence();
 
         seq.Append(contornoImage.DOColor(color, 0.3f));
@@ -109,6 +112,12 @@ public class IconManager : MonoBehaviour
         socialVariacion.transform.DOScale(0, easeOutVariaciones);
         saludVariacion.transform.DOScale(0, easeOutVariaciones);
         especificoVariacion.transform.DOScale(0, easeOutVariaciones);
+    }
+
+    public void checkFinParida()
+    {
+        if (new[] { dineroFill, socialFill, saludFill, especificoFill }.Any(fill => fill.fillAmount == 0 || fill.fillAmount == 1))
+            popupFinPartida.SetActive(true);
     }
 
 }
