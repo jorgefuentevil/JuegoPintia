@@ -3,7 +3,7 @@
     "idioma": "es_ES",
     "nivel": 1,
     "aleatoria": false,
-    "decisions": [
+    "decisiones": [
         {
             "id": 0,
             "imagen": "Anciano_1",
@@ -61,7 +61,7 @@
             }
         }
     ],
-    "decision_answers": [
+    "decisiones_respuesta": [
         {
             "id": 0,
             "imagen": "Armadura_1",

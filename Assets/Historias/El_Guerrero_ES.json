@@ -2,6 +2,7 @@
     "historia": "El Guerrero",
     "idioma": "es_ES",
     "nivel": 1,
+    "aleatoria": false,
     "decisiones": [
         {
             "id": 1,
@@ -16,7 +17,7 @@
                     "0",
                     "1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Decidir esperar y observar, pensando que podría ser solo un animal.",
@@ -32,7 +33,7 @@
         },
         {
             "id": 2,
-            "imagen": "Mercenario_1",
+            "imagen": "Jefe_1",
             "desc": "Un grupo de mercenarios propone al soldado unirse a su banda para ganar dinero extra en una misión contra un pueblo rival.",
             "res_der": {
                 "respuesta": "Unirse a los mercenarios para obtener recompensas.",
@@ -43,7 +44,7 @@
                     "-1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Rechazar la propuesta y mantenerse leal a su tribu.",
@@ -54,7 +55,7 @@
                     "1",
                     "-1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -70,7 +71,7 @@
                     "-1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Seguir avanzando y dejar al guerrero, asegurando su propia seguridad",
@@ -81,7 +82,7 @@
                     "1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -97,7 +98,7 @@
                     "0",
                     "1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Rechazar la alianza, confiando en la fuerza de su propio pueblo.",
@@ -108,7 +109,7 @@
                     "0",
                     "1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -124,7 +125,7 @@
                     "-1",
                     "-1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Optar por una armadura pesada y un escudo para tener mejor defensa.",
@@ -135,7 +136,7 @@
                     "1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -151,7 +152,7 @@
                     "1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Rechazar el ritual, confiando en sus propias habilidades.",
@@ -162,7 +163,7 @@
                     "0",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -178,7 +179,7 @@
                     "0",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Proponer un reparto equitativo entre los guerreros.",
@@ -189,7 +190,7 @@
                     "0",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -205,7 +206,7 @@
                     "0",
                     "1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Distribuir los alimentos de manera equitativa entre todos los miembros de la tribu, promoviendo la justicia.",
@@ -216,7 +217,7 @@
                     "0",
                     "-1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -232,7 +233,7 @@
                     "1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "No participar y enfocarte en tus tareas actuales.",
@@ -243,7 +244,7 @@
                     "0",
                     "-1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -259,7 +260,7 @@
                     "-1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Buscar una ruta alternativa, evitando el enfrentamiento.",
@@ -270,7 +271,7 @@
                     "0",
                     "-1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -286,7 +287,7 @@
                     "0",
                     "1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "No construir fortificaciones y destinar los recursos a otras áreas, como la agricultura o el comercio.",
@@ -297,7 +298,7 @@
                     "0",
                     "-1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -324,7 +325,7 @@
                     "0",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -340,7 +341,7 @@
                     "1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "No intervenir directamente y dejar que la enfermedad siga su curso.",
@@ -351,7 +352,7 @@
                     "-1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -367,7 +368,7 @@
                     "-1",
                     "1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Mantenerse en las tierras conocidas y enfocarse en fortalecer la tribu existente.",
@@ -378,7 +379,7 @@
                     "0",
                     "-1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -394,7 +395,7 @@
                     "0",
                     "1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Permitir que los jóvenes se entrenen de manera informal, sin gastar dinero",
@@ -405,7 +406,7 @@
                     "-1",
                     "1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -421,7 +422,7 @@
                     "0",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Ignorar los conflictos, esperando que se resuelvan por sí mismos.",
@@ -432,7 +433,7 @@
                     "0",
                     "-1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -448,7 +449,7 @@
                     "1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "No comprar el amuleto y guardar el dinero.",
@@ -459,7 +460,7 @@
                     "-1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         }
     ],
@@ -477,7 +478,7 @@
                     "-1",
                     "1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Retirarse estratégicamente.",
@@ -488,7 +489,7 @@
                     "1",
                     "-1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -504,7 +505,7 @@
                     "-1",
                     "-2"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "No hablar mas sobre ello",
@@ -515,7 +516,7 @@
                     "0",
                     "-2"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         }
     ]

@@ -34,6 +34,7 @@ public class HistoryManager : MonoBehaviour
 
     [Header("---- ICONOS SUPERIORES")]
     [SerializeField] private IconManager iconManager;
+    private AnswerSelector selector;
 
     //Parámetros de la partida//
     private readonly short puntuacionMax = 20;
@@ -53,6 +54,7 @@ public class HistoryManager : MonoBehaviour
     private Image imagenCartaPersonaje;
     private readonly Color sombreadoCarta = new Color(0.4078431f, 0.4078431f, 0.4078431f);
     private readonly Color colorNormal = new Color(1, 1, 1);
+    private int preguntaAct=0;
 
 
 
@@ -72,7 +74,7 @@ public class HistoryManager : MonoBehaviour
         else{
             CargaAllPreguntas();            
         }
-        Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; NumHistorias={2}",parsedHistorias.historia,parsedHistorias.decisions.Count,nPreguntas);
+        Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; NumHistorias={2}",parsedHistorias.historia,parsedHistorias.decisiones.Count,nPreguntas);
 
 
         //Cargamos imágenes. 
@@ -84,7 +86,7 @@ public class HistoryManager : MonoBehaviour
         }).WaitForCompletion();
 
 
-        AnswerSelector selector = cartaPersonaje.AddComponent<AnswerSelector>();
+        selector = cartaPersonaje.AddComponent<AnswerSelector>();
         selector.historyManager = this;
 
         decisionActual = decisionesPartida[0];
@@ -97,9 +99,9 @@ public class HistoryManager : MonoBehaviour
     private void CargaPreguntasAleatorias()
     {
         //Con cuantas preguntas aleatorias vamos a jugar
-        nPreguntas = (nPreguntas > parsedHistorias.decisions.Count) ? parsedHistorias.decisions.Count : nPreguntas;
+        nPreguntas = (nPreguntas > parsedHistorias.decisiones.Count) ? parsedHistorias.decisiones.Count : nPreguntas;
         int[] indexHistorias = Enumerable   //Genera n numeros aleatorios entre 0 y X.
-                                .Range(0, parsedHistorias.decisions.Count)
+                                .Range(0, parsedHistorias.decisiones.Count)
                                 .OrderBy(x => Random.value)
                                 .Take(nPreguntas).ToArray();
 
@@ -107,14 +109,15 @@ public class HistoryManager : MonoBehaviour
         decisionesPartida = new(nPreguntas);
         for (int i = 0; i < nPreguntas; i++)
         {
-            decisionesPartida.Add(parsedHistorias.decisions[indexHistorias[i]]);
+            decisionesPartida.Add(parsedHistorias.decisiones[indexHistorias[i]]);
         }
     }
 
     private void CargaAllPreguntas(){
-        nPreguntas = parsedHistorias.decisions.Count;
+        Debug.Log(parsedHistorias.decisiones.Count);
+        nPreguntas = parsedHistorias.decisiones.Count;
         decisionesPartida = new(nPreguntas);
-        decisionesPartida.AddRange(parsedHistorias.decisions);
+        decisionesPartida.AddRange(parsedHistorias.decisiones);
     }
 
     private void SetTextosDecision(){
@@ -146,14 +149,16 @@ public class HistoryManager : MonoBehaviour
     {
         iconManager.AplicaEfectos(decisionActual.res_der.efectos,puntuacionMax);
         UpdatePuntuacion(decisionActual.res_der.efectos);
-        CheckFinParida();
+        CheckFinPartida();
+        ChangeNextDecision();
     }
 
     public void ConfirmaRespuestaIzquierda()
     {
         iconManager.AplicaEfectos(decisionActual.res_izq.efectos,puntuacionMax);
         UpdatePuntuacion(decisionActual.res_izq.efectos);
-        CheckFinParida();
+        CheckFinPartida();
+        ChangeNextDecision();
     }
 
     public void SetEstadoDefault()
@@ -164,6 +169,7 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.DOColor(colorNormal, 0.2f);
         imagenCartaPersonaje.sprite = cartaActual;
         iconManager.SetEstadoDefault();
+        selector.SetEstadoDefault();
     }
 
     private void UpdatePuntuacion(short[] efectos){
@@ -174,10 +180,16 @@ public class HistoryManager : MonoBehaviour
         Debug.LogFormat("Puntuacion Actual: {0} - {1} - {2} - {3}", puntuacionDinero, puntuacionSocial, puntuacionSalud, puntuacionEspecifico);
     }
 
-    private void CheckFinParida(){
+    private void CheckFinPartida(){
         if (new[] { puntuacionDinero, puntuacionSocial, puntuacionSalud, puntuacionEspecifico }.Any(valor => valor <= 0 || valor >= puntuacionMax))
             popUpMuertePanel.SetActive(true);
         
+    }
+    private void ChangeNextDecision(){
+        preguntaAct+=1;
+        decisionActual = decisionesPartida[preguntaAct];
+        SetTextosDecision();
+        SetEstadoDefault();
     }
 }
 
@@ -223,7 +235,7 @@ public struct HistoryJsonRoot
     public string idioma;
     public int nivel;
     public bool aleatoria;
-    public List<Decision> decisions;
+    public List<Decision> decisiones;
     public List<DecisionAnswer> decision_answers;
 }
 

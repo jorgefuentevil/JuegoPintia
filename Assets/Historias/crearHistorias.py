@@ -134,8 +134,8 @@ class Decision(Toplevel):
                 self.decision_descripcion_entry.delete(0,END)
                 self.decision_res1_exp_entry.delete(0,END)
                 self.decision_res2_exp_entry.delete(0,END)
-                self.id_siguiente_izq=None
-                self.id_siguiente_der=None
+                self.id_siguiente_izq=-1
+                self.id_siguiente_der=-1
 
 
             else:
@@ -199,6 +199,7 @@ class JsonEditorApp:
             "historia": "",
             "idioma": "",
             "nivel": 1,
+            "aleatoria": "true",
             "decisiones": [],
             "decisiones_respuesta": []
         }

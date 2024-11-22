@@ -17,6 +17,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     private CardState estadoCarta;
 
     public HistoryManager historyManager;
+    private Vector3 startPosition;
 
 
 
@@ -33,6 +34,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     public void Start()
     {
         imageLocation = transform.position;
+        startPosition = transform.position;
         estadoCarta = CardState.INICIAL;
 
     }
@@ -87,7 +89,9 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             case CardState.FLIPPED_DERECHA:     //Confirmamos seleccion derecha
                 Debug.Log("Confirmamos Derecha");
                 //estadoCarta = CardState.SWIPED_DERECHA;
+                StartCoroutine(CardDisappearDerecha());
                 historyManager.ConfirmaRespuestaDerecha();
+                
                 break;
 
             default:
@@ -115,7 +119,9 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             case CardState.FLIPPED_IZQUIERDA:           //Confirmamos seleccion izquierda
                 //estadoCarta = CardState.SWIPED_IZQUIERDA;
                 Debug.Log("Confirmamos Izquierda");
+                StartCoroutine(CardDisappearIzquierda());
                 historyManager.ConfirmaRespuestaIzquierda();
+                
                 break;
 
             default:
@@ -193,6 +199,21 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Debug.Log("Rotación terminada");
     }
 
+    IEnumerator CardDisappearIzquierda()
+    {   
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = new Vector3(transform.position.x - Screen.width, transform.position.y,transform.position.z);
+        transform.position = Vector3.Lerp(startPosition, endPosition, Mathf.SmoothStep(0f, 1f, 0.5f));
+        yield return null;
+    }
+
+    IEnumerator CardDisappearDerecha()
+    {   
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = new Vector3(transform.position.x + Screen.width, transform.position.y, transform.position.z);
+        transform.position = Vector3.Lerp(startPosition, endPosition, Mathf.SmoothStep(0f, 1f, 0.5f));
+        yield return null;
+    }
 
 
     IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds)
@@ -205,5 +226,12 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             yield return null;
         }
         Debug.Log("Terminada");
+    }
+    public void SetEstadoDefault()
+    {
+        //transform.position = imageLocation;
+        estadoCarta = CardState.INICIAL;
+
+
     }
 }
