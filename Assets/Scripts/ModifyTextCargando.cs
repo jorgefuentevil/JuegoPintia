@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
 
 public class ModifyTextCargando : MonoBehaviour
 {
     [SerializeField]private TMP_Text cargandoText;
-    private string textoInicial = null;
+    private string textoInicial= null;
     private short contador = 0;
+    [SerializeField] private LocalizedString localizedString;
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +21,7 @@ public class ModifyTextCargando : MonoBehaviour
     void anadePunto()
     {   
         if(textoInicial == null){
-            textoInicial = cargandoText.text;
-            Debug.Log(textoInicial);
+            textoInicial = localizedString.GetLocalizedString();
         }
         if(contador == 3){
             cargandoText.text = textoInicial;

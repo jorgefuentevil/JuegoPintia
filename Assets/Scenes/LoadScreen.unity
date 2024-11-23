@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 516981989}
   - component: {fileID: 516981991}
   - component: {fileID: 516981990}
-  - component: {fileID: 516981992}
+  - component: {fileID: 516981994}
   - component: {fileID: 516981993}
   m_Layer: 5
   m_Name: TextoCargando
@@ -495,8 +495,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 1.4672248, y: 311.73703}
-  m_SizeDelta: {x: -320.59207, y: 115.4971}
+  m_AnchoredPosition: {x: 1.4672852, y: 294.7702}
+  m_SizeDelta: {x: -320.5921, y: 151.1194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &516981990
 MonoBehaviour:
@@ -581,7 +581,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 2.7373943, y: 0, z: 2.737564, w: 4.1226196}
+  m_margin: {x: 2.7373943, y: 0, z: 2.737564, w: -3.001896}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -595,19 +595,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516981988}
   m_CullTransparentMesh: 1
---- !u!114 &516981992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516981988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 635fb75ee74bb374f8f830a7303eb10c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cargandoText: {fileID: 516981990}
 --- !u!114 &516981993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,6 +635,32 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &516981994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516981988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635fb75ee74bb374f8f830a7303eb10c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cargandoText: {fileID: 516981990}
+  localizedString:
+    m_TableReference:
+      m_TableCollectionName: GUID:654f816c3244e8745a5dfcc3520d04d0
+    m_TableEntryReference:
+      m_KeyId: 1084491766927360
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  localizedStringEvent: {fileID: 516981993}
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &772889197
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +696,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 15.54303, y: 475}
+  m_AnchoredPosition: {x: 15.542969, y: 475}
   m_SizeDelta: {x: -378.6876, y: 514.8885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &772889199
@@ -1219,7 +1232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 15.544, y: 13.0612}
+  m_AnchoredPosition: {x: 15.543945, y: 13.0612}
   m_SizeDelta: {x: -341.58, y: 281.0743}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1795040105
