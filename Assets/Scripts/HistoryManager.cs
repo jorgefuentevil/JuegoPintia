@@ -55,7 +55,6 @@ public class HistoryManager : MonoBehaviour
     private List<Decision> decisionesPartida;   //Almacena la lista de decisiones aleatorias con las que jugamos.
     private Decision decisionActual;            //Almacena la decisión actual. Puede ser decisión o respuesta a otra decision.
     private int numDecisionActual;              //Almacena el index de la decision actual. Solo decision, no respuestas. Solo incrementar en DECISIONES nuevas.
-    private int preguntaActual = 0;
     private Vector3 posicionInicial;
     private AnswerSelector selector;
 
