@@ -126,7 +126,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     {
 
         Vector3 startpos = transform.position;
-        Vector3 endpos = transform.position + new Vector3(transform.position.x + Screen.width, transform.position.y, transform.position.z);
+        Vector3 endpos = new(transform.position.x + Screen.width, transform.position.y-Screen.height/2, transform.position.z);
         float t = 0f;
         while (t <= 1.0)
         {
@@ -143,7 +143,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     {
 
         Vector3 startpos = transform.position;
-        Vector3 endpos = transform.position + new Vector3(transform.position.x - Screen.width, transform.position.y, transform.position.z);
+        Vector3 endpos = new(transform.position.x - Screen.width, transform.position.y-Screen.height/2, transform.position.z);
         float t = 0f;
         while (t <= 1.0)
         {
