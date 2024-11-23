@@ -15,6 +15,8 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public HistoryManager historyManager;
 
+    private AudioManager audioManager;
+
 
     private enum CardState
     {
@@ -23,6 +25,12 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         FLIPPED_IZQUIERDA,
         SWIPED_DERECHA,
         SWIPED_IZQUIERDA
+    }
+
+    private void Awake(){
+        // Encuentra el GameObject con el tag "AudioManager" y obtiene el componente AudioManager
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
     }
 
 
@@ -73,12 +81,14 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 case CardState.INICIAL: //Muestra atributos y respuesta derecha
                     StartCoroutine(RotateAndShowDerecha());
+                    
                     Debug.Log("Carta rotada a la derecha");
                     estadoCarta = CardState.FLIPPED_DERECHA;
                     break;
 
                 case CardState.FLIPPED_IZQUIERDA:   //Vuelve al estado inicial.
                     StartCoroutine(RotateAndDefault());
+                    
                     Debug.Log("Volvemos a Inicial desde izquierda");
                     estadoCarta = CardState.INICIAL;
                     break;
@@ -86,6 +96,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
                 case CardState.FLIPPED_DERECHA:     //Confirmamos seleccion derecha
                     Debug.Log("Confirmamos Derecha");
                     //estadoCarta = CardState.SWIPED_DERECHA;
+                    
                     StartCoroutine(SlideDesapareceDerecha());
                     break;
 
@@ -108,12 +119,14 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 case CardState.INICIAL: //Muestra atributos y respuesta izquierda
                     StartCoroutine(RotateAndShowIzquierda());
+                    
                     Debug.Log("Carta rotada a la izquierda");
                     estadoCarta = CardState.FLIPPED_IZQUIERDA;
                     break;
 
                 case CardState.FLIPPED_DERECHA:             //Vuelve al estado inicial.
                     StartCoroutine(RotateAndDefault());
+                    
                     Debug.Log("Volvemos a Inicial desde derecha");
                     estadoCarta = CardState.INICIAL;
                     break;
@@ -143,6 +156,8 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Vector3 startpos = transform.position;
         Vector3 endpos = new(transform.position.x + Screen.width, transform.position.y - Screen.height / 2, transform.position.z);
         float t = 0f;
+        audioManager.PlaySlideSFX();
+
         while (t <= 1.0)
         {
             //TODO: Cambiar easing, añadir diferentes easings para cada animacion.
@@ -160,6 +175,8 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Vector3 startpos = transform.position;
         Vector3 endpos = new(transform.position.x - Screen.width, transform.position.y - Screen.height / 2, transform.position.z);
         float t = 0f;
+        audioManager.PlaySlideSFX();
+
         while (t <= 1.0)
         {
             //TODO: Cambiar easing, añadir diferentes easings para cada animacion.
@@ -178,7 +195,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, 180f, 0) * startRotation;
         bool respuestaActiva = false;
-
+        audioManager.PlayFlipSFX();
         while (t <= 1f)
         {
             t += Time.deltaTime / 0.67f;  // 0:40 segundos
@@ -201,7 +218,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, 180f, 0) * startRotation;
         bool respuestaActiva = false;
-
+        audioManager.PlayFlipSFX();
         while (t <= 1f)
         {
             t += Time.deltaTime / 0.67f;  // 0:40 segundos
@@ -223,7 +240,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, 180f, 0) * startRotation;
         bool respuestaActiva = true;
-
+        audioManager.PlayFlipSFX();
         while (t <= 1f)
         {
             t += Time.deltaTime / 0.67f;  // 0:40 segundos
@@ -246,7 +263,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, 180f, 0) * startRotation;
         bool respuestaActiva = true;
-
+        audioManager.PlayFlipSFX();
         while (t <= 1f)
         {
             t += Time.deltaTime / 0.67f;  // 0:40 segundos

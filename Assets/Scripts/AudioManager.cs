@@ -8,7 +8,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("----- Audio Clips -----")]
     [SerializeField] private AudioClip musicaDeFondo;
-    [SerializeField] public AudioClip swipeCard;
+    [SerializeField] private AudioClip swipeCard;
+    [SerializeField] private AudioClip pageFlip;
     
     public static AudioManager instance;
 
@@ -24,16 +25,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
-
-
     private void Start(){
         musicSource.clip = musicaDeFondo;
         musicSource.Play();
     }
 
+    public void PlaySlideSFX(){
+        sfxSource.PlayOneShot(swipeCard);
+    }
 
-    public void PlaySFX(AudioClip clip){
-        sfxSource.PlayOneShot(clip);
+    public void PlayFlipSFX(){
+        sfxSource.PlayOneShot(pageFlip);
     }
 }

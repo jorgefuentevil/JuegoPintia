@@ -22,6 +22,8 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private Sprite cartaExplicacion;
     private readonly Dictionary<string, Sprite> retratosPersonajes = new();
 
+    
+
 
     [Header("---- UI GAME OBJECTS ----")]
     [SerializeField] private TextMeshProUGUI nombrePersonajeText;
@@ -63,6 +65,8 @@ public class HistoryManager : MonoBehaviour
 
     private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
     private readonly Color colorNormal = new(1, 1, 1);
+
+
 
 
     public void Start()
