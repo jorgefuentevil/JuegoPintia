@@ -56,12 +56,15 @@ public class HistoryManager : MonoBehaviour
     private readonly Color colorNormal = new Color(1, 1, 1);
     private int preguntaAct=0;
 
+    private Vector3 posicionInicial;
+
 
 
 
     public void Start()
     {
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
+        posicionInicial = cartaPersonaje.transform.position;
 
         //Cargamos todas las decisiones del json 
         parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonHistoria.text);
@@ -149,16 +152,28 @@ public class HistoryManager : MonoBehaviour
     {
         iconManager.AplicaEfectos(decisionActual.res_der.efectos,puntuacionMax);
         UpdatePuntuacion(decisionActual.res_der.efectos);
-        CheckFinPartida();
+        //CheckFinPartida();
         ChangeNextDecision();
     }
 
     public void ConfirmaRespuestaIzquierda()
-    {
+    {   
+        cartaPersonaje.SetActive(false); // Escondemos carta
         iconManager.AplicaEfectos(decisionActual.res_izq.efectos,puntuacionMax);
         UpdatePuntuacion(decisionActual.res_izq.efectos);
-        CheckFinPartida();
+        respuestaText.text = "";
+        imagenCartaPersonaje.color = colorNormal;
+        //Devolvemos al centro y rotacion = 0;
+        cartaPersonaje.transform.position = posicionInicial;
+
+        imagenCartaPersonaje.sprite = reversoCarta;
+
+        cartaPersonaje.SetActive(true);
+
+        //CheckFinPartida();
         ChangeNextDecision();
+
+        
     }
 
     public void SetEstadoDefault()
@@ -189,7 +204,7 @@ public class HistoryManager : MonoBehaviour
         preguntaAct+=1;
         decisionActual = decisionesPartida[preguntaAct];
         SetTextosDecision();
-        SetEstadoDefault();
+        StartCoroutine(selector.RotateAndHide());
     }
 }
 
