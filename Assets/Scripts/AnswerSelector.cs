@@ -36,7 +36,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     public void OnDrag(PointerEventData data)
     {
         float difference = data.pressPosition.x - data.position.x;
-        if ((estadoCarta.Equals(CardState.FLIPPED_DERECHA) && difference < 0) || (estadoCarta.Equals(CardState.FLIPPED_IZQUIERDA) && difference > 0))
+        if ((estadoCarta == CardState.FLIPPED_DERECHA && difference < 0) || (estadoCarta == CardState.FLIPPED_IZQUIERDA && difference > 0) || historyManager.tipoCartaActual == CardType.EXPLICACION)
         {
             transform.position = imageLocation - new Vector3(difference, 0, 0);
         }
@@ -66,59 +66,74 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void GestionarSwipeDerecha()
     {
-        switch (estadoCarta)
+
+        if (historyManager.tipoCartaActual == CardType.NORMAL)
         {
-            case CardState.INICIAL: //Muestra atributos y respuesta derecha
-                StartCoroutine(RotateAndShowDerecha());
-                Debug.Log("Carta rotada a la derecha");
-                estadoCarta = CardState.FLIPPED_DERECHA;
-                break;
+            switch (estadoCarta)
+            {
+                case CardState.INICIAL: //Muestra atributos y respuesta derecha
+                    StartCoroutine(RotateAndShowDerecha());
+                    Debug.Log("Carta rotada a la derecha");
+                    estadoCarta = CardState.FLIPPED_DERECHA;
+                    break;
 
-            case CardState.FLIPPED_IZQUIERDA:   //Vuelve al estado inicial.
-                StartCoroutine(RotateAndHide());
-                Debug.Log("Volvemos a Inicial desde izquierda");
-                estadoCarta = CardState.INICIAL;
-                break;
+                case CardState.FLIPPED_IZQUIERDA:   //Vuelve al estado inicial.
+                    StartCoroutine(RotateAndDefault());
+                    Debug.Log("Volvemos a Inicial desde izquierda");
+                    estadoCarta = CardState.INICIAL;
+                    break;
 
-            case CardState.FLIPPED_DERECHA:     //Confirmamos seleccion derecha
-                Debug.Log("Confirmamos Derecha");
-                //estadoCarta = CardState.SWIPED_DERECHA;
-                StartCoroutine(SlideDesapareceDerecha());
-                break;
+                case CardState.FLIPPED_DERECHA:     //Confirmamos seleccion derecha
+                    Debug.Log("Confirmamos Derecha");
+                    //estadoCarta = CardState.SWIPED_DERECHA;
+                    StartCoroutine(SlideDesapareceDerecha());
+                    break;
 
-            default:
-                Debug.Log("Error: Estado Carta desconocido");
-                break;
+                default:
+                    Debug.Log("Error: Estado Carta desconocido");
+                    break;
+            }
+        }
+        else
+        {
+            StartCoroutine(SlideDesapareceDerecha());
         }
     }
 
     private void GestionarSwipeIzquierda()
     {
-        switch (estadoCarta)
+        if (historyManager.tipoCartaActual == CardType.NORMAL)
         {
-            case CardState.INICIAL: //Muestra atributos y respuesta izquierda
-                StartCoroutine(RotateAndShowIzquierda());
-                Debug.Log("Carta rotada a la izquierda");
-                estadoCarta = CardState.FLIPPED_IZQUIERDA;
-                break;
+            switch (estadoCarta)
+            {
+                case CardState.INICIAL: //Muestra atributos y respuesta izquierda
+                    StartCoroutine(RotateAndShowIzquierda());
+                    Debug.Log("Carta rotada a la izquierda");
+                    estadoCarta = CardState.FLIPPED_IZQUIERDA;
+                    break;
 
-            case CardState.FLIPPED_DERECHA:             //Vuelve al estado inicial.
-                StartCoroutine(RotateAndHide());
-                Debug.Log("Volvemos a Inicial desde derecha");
-                estadoCarta = CardState.INICIAL;
-                break;
+                case CardState.FLIPPED_DERECHA:             //Vuelve al estado inicial.
+                    StartCoroutine(RotateAndDefault());
+                    Debug.Log("Volvemos a Inicial desde derecha");
+                    estadoCarta = CardState.INICIAL;
+                    break;
 
-            case CardState.FLIPPED_IZQUIERDA:           //Confirmamos seleccion izquierda
-                //estadoCarta = CardState.SWIPED_IZQUIERDA;
-                Debug.Log("Confirmamos Izquierda");
-                StartCoroutine(SlideDesapareceIzquierda());
-                
+                case CardState.FLIPPED_IZQUIERDA:           //Confirmamos seleccion izquierda
+                                                            //estadoCarta = CardState.SWIPED_IZQUIERDA;
+                    Debug.Log("Confirmamos Izquierda");
+                    StartCoroutine(SlideDesapareceIzquierda());
 
-                break;
 
-            default:
-                Debug.Log("Error: Estado Carta desconocido");
-                break;
+                    break;
+
+                default:
+                    Debug.Log("Error: Estado Carta desconocido");
+                    break;
+            }
+        }
+        else
+        {
+            StartCoroutine(SlideDesapareceIzquierda());
         }
     }
 
@@ -126,7 +141,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     {
 
         Vector3 startpos = transform.position;
-        Vector3 endpos = new(transform.position.x + Screen.width, transform.position.y-Screen.height/2, transform.position.z);
+        Vector3 endpos = new(transform.position.x + Screen.width, transform.position.y - Screen.height / 2, transform.position.z);
         float t = 0f;
         while (t <= 1.0)
         {
@@ -143,7 +158,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     {
 
         Vector3 startpos = transform.position;
-        Vector3 endpos = new(transform.position.x - Screen.width, transform.position.y-Screen.height/2, transform.position.z);
+        Vector3 endpos = new(transform.position.x - Screen.width, transform.position.y - Screen.height / 2, transform.position.z);
         float t = 0f;
         while (t <= 1.0)
         {
@@ -202,7 +217,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Debug.Log("Rotación terminada");
     }
 
-    public IEnumerator RotateAndHide()
+    public IEnumerator RotateAndDefault()
     {
         float t = 0f;
         Quaternion startRotation = transform.rotation;
@@ -217,6 +232,29 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             if (respuestaActiva && t >= 0.5f)
             {
                 historyManager.SetEstadoDefault();
+                respuestaActiva = false;
+            }
+            yield return null;
+        }
+        Debug.Log("Rotación terminada");
+    }
+
+
+    public IEnumerator RotateAndExplicacion(string explicacion)
+    {
+        float t = 0f;
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(0, 180f, 0) * startRotation;
+        bool respuestaActiva = true;
+
+        while (t <= 1f)
+        {
+            t += Time.deltaTime / 0.67f;  // 0:40 segundos
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, Mathf.SmoothStep(0f, 1f, t));
+
+            if (respuestaActiva && t >= 0.5f)
+            {
+                historyManager.SetEstadoExplicacion(explicacion);
                 respuestaActiva = false;
             }
             yield return null;
