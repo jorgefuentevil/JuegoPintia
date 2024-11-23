@@ -16,6 +16,7 @@ TagManager:
   - varSocial
   - varEspecifico
   - CanvaImagen
+  - AudioManager
   layers:
   - Default
   - TransparentFX
