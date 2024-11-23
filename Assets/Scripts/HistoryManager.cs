@@ -62,6 +62,7 @@ public class HistoryManager : MonoBehaviour
 
 
     public CardType tipoCartaActual;
+    public EstadoJuego estadoActual;
 
     private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
     private readonly Color colorNormal = new(1, 1, 1);
@@ -74,6 +75,7 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
         posicionInicial = cartaPersonaje.transform.position;
         tipoCartaActual = CardType.NORMAL;
+        estadoActual = EstadoJuego.POR_DEFECTO;
 
         //Cargamos todas las decisiones del json 
         parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonHistoria.text);
@@ -138,13 +140,14 @@ public class HistoryManager : MonoBehaviour
         cartaActual = retratosPersonajes[decisionActual.imagen];
         nombrePersonajeText.text = decisionActual.personaje;
         preguntaText.text = decisionActual.desc;
+        anosText.SetText(numDecisionActual+" Años de Aventura");
     }
 
 
     public void ShowRespuestaDerecha()
     {
         respuestaText.text = decisionActual.res_der.respuesta;
-        flechaIzquierda.SetActive(false);
+        //flechaIzquierda.SetActive(false);
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
         iconManager.PreviewEfectos(decisionActual.res_der.efectos);
@@ -153,7 +156,7 @@ public class HistoryManager : MonoBehaviour
     public void ShowRespuestaIzquierda()
     {
         respuestaText.text = decisionActual.res_izq.respuesta;
-        flechaDerecha.SetActive(false);
+        //flechaDerecha.SetActive(false);
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
         iconManager.PreviewEfectos(decisionActual.res_izq.efectos);
@@ -164,6 +167,7 @@ public class HistoryManager : MonoBehaviour
         ConfirmaRespuesta(decisionActual.res_der.efectos);
         //CheckFinPartida();
         ChangeNextDecision(decisionActual.res_der);
+        anosText.SetText(numDecisionActual+1+" Años de Aventura");
     }
 
 
@@ -172,6 +176,7 @@ public class HistoryManager : MonoBehaviour
         ConfirmaRespuesta(decisionActual.res_izq.efectos);
         //CheckFinPartida();
         ChangeNextDecision(decisionActual.res_izq);
+        anosText.SetText(numDecisionActual+1+" Años de Aventura");
     }
 
     private void ConfirmaRespuesta(short[] efectos)
@@ -200,6 +205,58 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.sprite = cartaActual;
         iconManager.SetEstadoDefault();
         selector.SetEstadoDefault();
+    }
+
+    public void logicaBotonesJuego()
+    {
+        if(estadoActual == EstadoJuego.POR_DEFECTO){
+            SetEstadoDefault();
+            Debug.Log("Vuelvo por defecto");
+        }
+        else if(estadoActual == EstadoJuego.LEER_IZQUIERDA){
+            ShowRespuestaIzquierda();
+            Debug.Log("leo decision izq");
+        }
+        else if(estadoActual == EstadoJuego.LEER_DERECHA){
+            ShowRespuestaDerecha();
+            Debug.Log("leo decision der");
+        }
+        else if(estadoActual == EstadoJuego.CONFIRMAR_IZQUIERDA){
+            ConfirmaRespuestaIzquierda();
+            estadoActual = EstadoJuego.POR_DEFECTO;
+            Debug.Log("confirmo decision izq");
+        }
+        else{
+            ConfirmaRespuestaDerecha();
+            estadoActual = EstadoJuego.POR_DEFECTO;
+            Debug.Log("confirmo decision der");
+        }
+    }
+
+    public void bindBtnIzquierda()
+    {
+        if(estadoActual == EstadoJuego.POR_DEFECTO){
+            estadoActual=EstadoJuego.LEER_IZQUIERDA;
+        }
+        else if(estadoActual == EstadoJuego.LEER_IZQUIERDA)
+            estadoActual=EstadoJuego.CONFIRMAR_IZQUIERDA;
+        else
+            estadoActual=EstadoJuego.POR_DEFECTO;
+
+        logicaBotonesJuego();
+    }
+
+    public void bindBtnDerecha()
+    {
+        if(estadoActual == EstadoJuego.POR_DEFECTO){
+            estadoActual=EstadoJuego.LEER_DERECHA;
+        }
+        else if(estadoActual == EstadoJuego.LEER_DERECHA)
+            estadoActual=EstadoJuego.CONFIRMAR_DERECHA;
+        else
+            estadoActual=EstadoJuego.POR_DEFECTO;
+        
+        logicaBotonesJuego();
     }
 
     public void SetEstadoExplicacion(string textoExplicacion){
