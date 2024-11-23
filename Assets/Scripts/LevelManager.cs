@@ -17,6 +17,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI descripcionText;
     [SerializeField] private AssetLabelReference assetsPersonajes;
 
+    [SerializeField] private TTSManager ttSManager;
+    [SerializeField] private TextToSpeech ttS;
+
+
     private LevelsJsonRoot parsedNiveles;
     private int numberOfLevels = 1;
     private Rect panelDimensions;
@@ -80,6 +84,12 @@ public class LevelManager : MonoBehaviour
         contadorText.SetText(level_index + 1 + "/" + numberOfLevels);
         personajeText.SetText(parsedNiveles.historias[level_index].personaje);
         descripcionText.SetText(parsedNiveles.historias[level_index].desc);
+        leerData(parsedNiveles.historias[level_index].desc);
+    }
+
+    private void leerData( string desc)
+    {
+        ttSManager.Speak(desc);
     }
 
 }
