@@ -19,6 +19,7 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private TextAsset jsonHistoria;
     [SerializeField] private AssetLabelReference assetsPersonajes;
     [SerializeField] private Sprite reversoCarta;
+    private readonly Dictionary<string, Sprite> retratosPersonajes = new();
 
 
     [Header("---- UI GAME OBJECTS ----")]
@@ -31,10 +32,13 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private GameObject flechaDerecha;
     [SerializeField] private GameObject flechaIzquierda;
     [SerializeField] private GameObject popUpMuertePanel;
+    private Sprite cartaActual;
+    private Image imagenCartaPersonaje;
+
 
     [Header("---- ICONOS SUPERIORES")]
     [SerializeField] private IconManager iconManager;
-    private AnswerSelector selector;
+    
 
     //Parámetros de la partida//
     private readonly short puntuacionMax = 20;
@@ -45,26 +49,32 @@ public class HistoryManager : MonoBehaviour
 
 
     private int nPreguntas = 10;
-    Dictionary<string, Sprite> retratosPersonajes = new();
     private HistoryJsonRoot parsedHistorias;
     private List<Decision> decisionesPartida;   //Almacena la lista de decisiones aleatorias con las que jugamos.
     private Decision decisionActual;            //Almacena la decisión actual. Puede ser decisión o respuesta a otra decision.
     private int numDecisionActual;              //Almacena el index de la decision actual. Solo decision, no respuestas. Solo incrementar en DECISIONES nuevas.
-    private Sprite cartaActual;
-    private Image imagenCartaPersonaje;
-    private readonly Color sombreadoCarta = new Color(0.4078431f, 0.4078431f, 0.4078431f);
-    private readonly Color colorNormal = new Color(1, 1, 1);
     private int preguntaAct=0;
-
     private Vector3 posicionInicial;
+    private AnswerSelector selector;
+    private CardType tipoCartaActual;
 
-
+    private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
+    private readonly Color colorNormal = new(1, 1, 1);
+    
+    private enum CardType{
+        NORMAL,
+        EXPLICACION,
+        //Lo siento albert jejejeje
+        PRE_MUERTE,
+        MUERTE
+    }
 
 
     public void Start()
     {
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
         posicionInicial = cartaPersonaje.transform.position;
+        tipoCartaActual = CardType.NORMAL;
 
         //Cargamos todas las decisiones del json 
         parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonHistoria.text);
@@ -150,30 +160,32 @@ public class HistoryManager : MonoBehaviour
 
     public void ConfirmaRespuestaDerecha()
     {
-        iconManager.AplicaEfectos(decisionActual.res_der.efectos,puntuacionMax);
-        UpdatePuntuacion(decisionActual.res_der.efectos);
+        ConfirmaRespuesta(decisionActual.res_der.efectos);
         //CheckFinPartida();
         ChangeNextDecision();
     }
 
+
     public void ConfirmaRespuestaIzquierda()
     {   
+        ConfirmaRespuesta(decisionActual.res_izq.efectos);
+        //CheckFinPartida();
+        ChangeNextDecision();
+    }
+
+    private void ConfirmaRespuesta(short[] efectos){
         cartaPersonaje.SetActive(false); // Escondemos carta
-        iconManager.AplicaEfectos(decisionActual.res_izq.efectos,puntuacionMax);
-        UpdatePuntuacion(decisionActual.res_izq.efectos);
+
+        iconManager.AplicaEfectos(efectos,puntuacionMax);
+        UpdatePuntuacion(efectos);
+
         respuestaText.text = "";
         imagenCartaPersonaje.color = colorNormal;
-        //Devolvemos al centro y rotacion = 0;
+        //Devolvemos al centro
         cartaPersonaje.transform.position = posicionInicial;
-
         imagenCartaPersonaje.sprite = reversoCarta;
 
         cartaPersonaje.SetActive(true);
-
-        //CheckFinPartida();
-        ChangeNextDecision();
-
-        
     }
 
     public void SetEstadoDefault()
@@ -201,8 +213,8 @@ public class HistoryManager : MonoBehaviour
         
     }
     private void ChangeNextDecision(){
-        preguntaAct+=1;
-        decisionActual = decisionesPartida[preguntaAct];
+        //preguntaAct+=1;
+        //decisionActual = decisionesPartida[preguntaAct];
         SetTextosDecision();
         StartCoroutine(selector.RotateAndHide());
     }
@@ -215,20 +227,11 @@ public struct Decision
     public string imagen;
     public string personaje;
     public string desc;
-    public ResDer res_der;
-    public ResIzq res_izq;
+    public Respuesta res_der;
+    public Respuesta res_izq;
 }
 
-public struct DecisionAnswer
-{
-    public int id;
-    public string imagen;
-    public string desc;
-    public ResDer res_der;
-    public ResIzq res_izq;
-}
-
-public struct ResDer
+public struct Respuesta
 {
     public string respuesta;
     public short[] efectos;
@@ -236,13 +239,7 @@ public struct ResDer
     public int siguiente;
 }
 
-public struct ResIzq
-{
-    public string respuesta;
-    public short[] efectos;
-    public string explicacion;
-    public int siguiente;
-}
+
 
 public struct HistoryJsonRoot
 {
@@ -251,7 +248,7 @@ public struct HistoryJsonRoot
     public int nivel;
     public bool aleatoria;
     public List<Decision> decisiones;
-    public List<DecisionAnswer> decision_answers;
+    public List<Decision> decisiones_respuesta;
 }
 
 
