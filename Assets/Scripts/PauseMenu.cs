@@ -9,10 +9,14 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject popupLegal;
     [SerializeField] private GameObject textoLegal;
 
+    public AudioSource src { get { return GetComponent<AudioSource>();}}
+    public AudioClip clip;
+
     public void Start()
     {
         popupLegal.SetActive(false);
         textoLegal.SetActive(true);
+        gameObject.AddComponent<AudioSource>();
 
         //Carga ajustes de vibracion
         if (PlayerPrefs.GetInt("VibracionEnabled") == 1)
@@ -38,7 +42,7 @@ public class PauseMenu : MonoBehaviour
         mainMenu.SetActive(true);
         Debug.Log("clik en volver");
         if(PlayerPrefs.GetInt("VibracionEnabled")==1){
-            Vibracion.Vibrar(200);
+            PlaySound();
         }
     }
 
@@ -50,7 +54,7 @@ public class PauseMenu : MonoBehaviour
             
             PlayerPrefs.SetInt("VibracionEnabled", 1);
             #if UNITY_ANDROID || UNITY_IOS
-                Handheld.Vibrate();
+                PlaySound();
                 Debug.Log("Vibro brrrrrrr");
             #endif
         }
@@ -66,11 +70,17 @@ public class PauseMenu : MonoBehaviour
     {
         popupLegal.SetActive(true);
         textoLegal.SetActive(false);
+        PlaySound();
     }
 
     public void HideTerms()
     {
         popupLegal.SetActive(false);
         textoLegal.SetActive(true);
+        PlaySound();
+    }
+
+    public void PlaySound(){
+        src.PlayOneShot(clip);
     }
 }

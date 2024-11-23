@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public static class Vibracion
+public static class Vibracion 
 {
 #if UNITY_ANDROID && !UNITY_EDITOR
     public static AndroidJavaClass unityPlayer=new AndroidJavaClass("com.unity3d.player.UnityPlayer");
