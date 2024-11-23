@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using CandyCoded.HapticFeedback;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,8 +10,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject popupLegal;
     [SerializeField] private GameObject textoLegal;
 
-    public AudioSource src { get { return GetComponent<AudioSource>();}}
-    public AudioClip clip;
+
 
     public void Start()
     {
@@ -33,6 +33,10 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         mainMenu.SetActive(false);
+        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("vibro al entrar en ajustes");
+        }
 
     }
 
@@ -40,9 +44,9 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         mainMenu.SetActive(true);
-        Debug.Log("clik en volver");
         if(PlayerPrefs.GetInt("VibracionEnabled")==1){
-            PlaySound();
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("vibro en volver");
         }
     }
 
@@ -50,12 +54,11 @@ public class PauseMenu : MonoBehaviour
     {
 
         if (value)
-        {
-            
+        {            
             PlayerPrefs.SetInt("VibracionEnabled", 1);
             #if UNITY_ANDROID || UNITY_IOS
-                PlaySound();
-                Debug.Log("Vibro brrrrrrr");
+                HapticFeedback.HeavyFeedback();
+                Debug.Log("Vibro al pulsar el toggle");
             #endif
         }
         else
@@ -70,17 +73,20 @@ public class PauseMenu : MonoBehaviour
     {
         popupLegal.SetActive(true);
         textoLegal.SetActive(false);
-        PlaySound();
+        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("vibro en entrar terms legales");
+        }
     }
 
     public void HideTerms()
     {
         popupLegal.SetActive(false);
         textoLegal.SetActive(true);
-        PlaySound();
+        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("vibro en salir terms legales");
+        }
     }
 
-    public void PlaySound(){
-        src.PlayOneShot(clip);
-    }
 }
