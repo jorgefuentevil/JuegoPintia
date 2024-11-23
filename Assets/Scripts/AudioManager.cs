@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("----- Audio Clips -----")]
     [SerializeField] private AudioClip musicaDeFondo;
+    [SerializeField] public AudioClip swipeCard;
     
     public static AudioManager instance;
 
