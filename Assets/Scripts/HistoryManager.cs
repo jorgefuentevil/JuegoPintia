@@ -19,6 +19,7 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private TextAsset jsonHistoria;
     [SerializeField] private AssetLabelReference assetsPersonajes;
     [SerializeField] private Sprite reversoCarta;
+    [SerializeField] private Sprite cartaExplicacion;
     private readonly Dictionary<string, Sprite> retratosPersonajes = new();
 
 
@@ -28,6 +29,7 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI preguntaText;
     [SerializeField] private TextMeshProUGUI anosText;
     [SerializeField] private TextMeshProUGUI respuestaText;
+    [SerializeField] private TextMeshProUGUI explicacionText;
     [SerializeField] private GameObject cartaPersonaje;
     [SerializeField] private GameObject flechaDerecha;
     [SerializeField] private GameObject flechaIzquierda;
@@ -38,7 +40,7 @@ public class HistoryManager : MonoBehaviour
 
     [Header("---- ICONOS SUPERIORES")]
     [SerializeField] private IconManager iconManager;
-    
+
 
     //Parámetros de la partida//
     private readonly short puntuacionMax = 20;
@@ -53,21 +55,15 @@ public class HistoryManager : MonoBehaviour
     private List<Decision> decisionesPartida;   //Almacena la lista de decisiones aleatorias con las que jugamos.
     private Decision decisionActual;            //Almacena la decisión actual. Puede ser decisión o respuesta a otra decision.
     private int numDecisionActual;              //Almacena el index de la decision actual. Solo decision, no respuestas. Solo incrementar en DECISIONES nuevas.
-    private int preguntaAct=0;
+    private int preguntaActual = 0;
     private Vector3 posicionInicial;
     private AnswerSelector selector;
-    private CardType tipoCartaActual;
+
+
+    public CardType tipoCartaActual;
 
     private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
     private readonly Color colorNormal = new(1, 1, 1);
-    
-    private enum CardType{
-        NORMAL,
-        EXPLICACION,
-        //Lo siento albert jejejeje
-        PRE_MUERTE,
-        MUERTE
-    }
 
 
     public void Start()
@@ -84,10 +80,11 @@ public class HistoryManager : MonoBehaviour
         {
             CargaPreguntasAleatorias();
         }
-        else{
-            CargaAllPreguntas();            
+        else
+        {
+            CargaAllPreguntas();
         }
-        Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; NumHistorias={2}",parsedHistorias.historia,parsedHistorias.decisiones.Count,nPreguntas);
+        Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; NumHistorias={2}", parsedHistorias.historia, parsedHistorias.decisiones.Count, nPreguntas);
 
 
         //Cargamos imágenes. 
@@ -126,14 +123,15 @@ public class HistoryManager : MonoBehaviour
         }
     }
 
-    private void CargaAllPreguntas(){
-        Debug.Log(parsedHistorias.decisiones.Count);
+    private void CargaAllPreguntas()
+    {
         nPreguntas = parsedHistorias.decisiones.Count;
         decisionesPartida = new(nPreguntas);
         decisionesPartida.AddRange(parsedHistorias.decisiones);
     }
 
-    private void SetTextosDecision(){
+    private void SetTextosDecision()
+    {
         cartaActual = retratosPersonajes[decisionActual.imagen];
         nombrePersonajeText.text = decisionActual.personaje;
         preguntaText.text = decisionActual.desc;
@@ -151,7 +149,7 @@ public class HistoryManager : MonoBehaviour
 
     public void ShowRespuestaIzquierda()
     {
-        respuestaText.text = decisionActual.res_der.respuesta;
+        respuestaText.text = decisionActual.res_izq.respuesta;
         flechaDerecha.SetActive(false);
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
@@ -162,21 +160,22 @@ public class HistoryManager : MonoBehaviour
     {
         ConfirmaRespuesta(decisionActual.res_der.efectos);
         //CheckFinPartida();
-        ChangeNextDecision();
+        ChangeNextDecision(decisionActual.res_der);
     }
 
 
     public void ConfirmaRespuestaIzquierda()
-    {   
+    {
         ConfirmaRespuesta(decisionActual.res_izq.efectos);
         //CheckFinPartida();
-        ChangeNextDecision();
+        ChangeNextDecision(decisionActual.res_izq);
     }
 
-    private void ConfirmaRespuesta(short[] efectos){
+    private void ConfirmaRespuesta(short[] efectos)
+    {
         cartaPersonaje.SetActive(false); // Escondemos carta
 
-        iconManager.AplicaEfectos(efectos,puntuacionMax);
+        iconManager.AplicaEfectos(efectos, puntuacionMax);
         UpdatePuntuacion(efectos);
 
         respuestaText.text = "";
@@ -191,6 +190,7 @@ public class HistoryManager : MonoBehaviour
     public void SetEstadoDefault()
     {
         respuestaText.text = "";
+        explicacionText.text = "";
         flechaIzquierda.SetActive(true);
         flechaDerecha.SetActive(true);
         imagenCartaPersonaje.DOColor(colorNormal, 0.2f);
@@ -199,7 +199,18 @@ public class HistoryManager : MonoBehaviour
         selector.SetEstadoDefault();
     }
 
-    private void UpdatePuntuacion(short[] efectos){
+    public void SetEstadoExplicacion(string textoExplicacion){
+        respuestaText.text = "";
+        explicacionText.text = textoExplicacion;
+        imagenCartaPersonaje.sprite =cartaActual;
+        iconManager.SetEstadoDefault();
+        flechaIzquierda.SetActive(true);
+        flechaDerecha.SetActive(true);
+        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
+    }
+
+    private void UpdatePuntuacion(short[] efectos)
+    {
         puntuacionDinero += efectos[0];
         puntuacionSocial += efectos[1];
         puntuacionSalud += efectos[2];
@@ -207,16 +218,31 @@ public class HistoryManager : MonoBehaviour
         Debug.LogFormat("Puntuacion Actual: {0} - {1} - {2} - {3}", puntuacionDinero, puntuacionSocial, puntuacionSalud, puntuacionEspecifico);
     }
 
-    private void CheckFinPartida(){
+    private void CheckFinPartida()
+    {
         if (new[] { puntuacionDinero, puntuacionSocial, puntuacionSalud, puntuacionEspecifico }.Any(valor => valor <= 0 || valor >= puntuacionMax))
             popUpMuertePanel.SetActive(true);
-        
+
     }
-    private void ChangeNextDecision(){
-        //preguntaAct+=1;
-        //decisionActual = decisionesPartida[preguntaAct];
-        SetTextosDecision();
-        StartCoroutine(selector.RotateAndHide());
+    private void ChangeNextDecision(Respuesta respuesta)
+    {   
+        //Carta normal con explicación -> Mostrar explicacion
+        if(tipoCartaActual == CardType.NORMAL && respuesta.explicacion != null)
+        {   
+            tipoCartaActual = CardType.EXPLICACION;
+            cartaActual = cartaExplicacion;
+            StartCoroutine(selector.RotateAndExplicacion(respuesta.explicacion));
+        }   
+        //Carta normal sin explicación / Explicacion -> Mostrar siguiente carta
+        else if((tipoCartaActual == CardType.NORMAL && respuesta.explicacion == null) || tipoCartaActual == CardType.EXPLICACION)
+        {   
+            decisionActual = (respuesta.siguiente != -1) ? parsedHistorias.decisiones_respuesta[respuesta.siguiente] : decisionesPartida[++numDecisionActual];
+            SetTextosDecision();
+            cartaPersonaje.transform.eulerAngles = new Vector3(0,180,0);
+            tipoCartaActual = CardType.NORMAL;
+            explicacionText.text = "";
+            StartCoroutine(selector.RotateAndDefault());
+        }
     }
 }
 
