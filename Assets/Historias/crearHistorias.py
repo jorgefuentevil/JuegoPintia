@@ -87,7 +87,7 @@ class Decision(Toplevel):
             with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'r', encoding='utf-8') as f:
                 datos = json.load(f)
             if self.isRespuesta == False:
-                id=len(datos["decisiones"]) + 1
+                id=len(datos["decisiones"]) 
             else:
                 id=self.app.siguiente
 
@@ -160,7 +160,7 @@ class JsonEditorApp:
         self.root.title("Editor de JSON")
         self.repetida=False
         self.titulo=""
-        self.siguiente=1
+        self.siguiente=0
         # Sección de encabezado
         Label(root, text="Titulo historia:").grid(row=0, column=0, sticky="w", padx=5, pady=5)
         self.historia_entry = Entry(root, width=30)

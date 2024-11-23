@@ -1,15 +1,9 @@
 {
     "lenguaje": "es_ES",
-    "num_historias": 2,
+    "num_historias": 1,
     "historias": [
         {
             "personaje": "El Guerrero",
-            "desc": "Eres un guerrero del pueblo de Pintia, uno de los pueblos más grandes de toda la peninsula Iberica",
-            "coste": "0",
-            "imagen": "Guerrero_1"
-        },
-        {
-            "personaje": "El Guerrero2",
             "desc": "Eres un guerrero del pueblo de Pintia, uno de los pueblos más grandes de toda la peninsula Iberica",
             "coste": "0",
             "imagen": "Guerrero_1"
