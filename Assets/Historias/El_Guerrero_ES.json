@@ -33,7 +33,7 @@
         },
         {
             "id": 2,
-            "imagen": "Jefe_1",
+            "imagen": "Mercenario_1",
             "desc": "Un grupo de mercenarios propone al soldado unirse a su banda para ganar dinero extra en una misión contra un pueblo rival.",
             "res_der": {
                 "respuesta": "Unirse a los mercenarios para obtener recompensas.",
