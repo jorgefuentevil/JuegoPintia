@@ -67,14 +67,13 @@ public class HistoryManager : MonoBehaviour
 
 
     public CardType tipoCartaActual;
-<<<<<<< HEAD
-=======
-    public EstadoJuego estadoActual;
+
     private EndType tipoFin;
->>>>>>> 827777dde05aab1274d1cb0f0482d4bbda4c17ef
 
     private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
     private readonly Color colorNormal = new(1, 1, 1);
+
+
 
 
     private enum EndType
@@ -250,7 +249,6 @@ public class HistoryManager : MonoBehaviour
         selector.SetEstadoDefault();
     }
 
-<<<<<<< HEAD
     public void bindBtnDerecha(){
         selector.bindBtnDerecha();
     }
@@ -282,65 +280,6 @@ public class HistoryManager : MonoBehaviour
         //flechaIzquierda.DOMoveX(+180,3);
         //tickIzquierda.DOMoveX(-180,3);
         flechaIzquierda.DOScale(1,3);
-=======
-    public void logicaBotonesJuego()
-    {
-        if (estadoActual == EstadoJuego.POR_DEFECTO)
-        {
-            SetEstadoDefault();
-            Debug.Log("Vuelvo por defecto");
-        }
-        else if (estadoActual == EstadoJuego.LEER_IZQUIERDA)
-        {
-            ShowRespuestaIzquierda();
-            Debug.Log("leo decision izq");
-        }
-        else if (estadoActual == EstadoJuego.LEER_DERECHA)
-        {
-            ShowRespuestaDerecha();
-            Debug.Log("leo decision der");
-        }
-        else if (estadoActual == EstadoJuego.CONFIRMAR_IZQUIERDA)
-        {
-            ConfirmaRespuestaIzquierda();
-            estadoActual = EstadoJuego.POR_DEFECTO;
-            Debug.Log("confirmo decision izq");
-        }
-        else
-        {
-            ConfirmaRespuestaDerecha();
-            estadoActual = EstadoJuego.POR_DEFECTO;
-            Debug.Log("confirmo decision der");
-        }
-    }
-
-    public void bindBtnIzquierda()
-    {
-        if (estadoActual == EstadoJuego.POR_DEFECTO)
-        {
-            estadoActual = EstadoJuego.LEER_IZQUIERDA;
-        }
-        else if (estadoActual == EstadoJuego.LEER_IZQUIERDA)
-            estadoActual = EstadoJuego.CONFIRMAR_IZQUIERDA;
-        else
-            estadoActual = EstadoJuego.POR_DEFECTO;
-
-        logicaBotonesJuego();
-    }
-
-    public void bindBtnDerecha()
-    {
-        if (estadoActual == EstadoJuego.POR_DEFECTO)
-        {
-            estadoActual = EstadoJuego.LEER_DERECHA;
-        }
-        else if (estadoActual == EstadoJuego.LEER_DERECHA)
-            estadoActual = EstadoJuego.CONFIRMAR_DERECHA;
-        else
-            estadoActual = EstadoJuego.POR_DEFECTO;
-
-        logicaBotonesJuego();
->>>>>>> 827777dde05aab1274d1cb0f0482d4bbda4c17ef
     }
 
     public void SetEstadoExplicacion(string textoExplicacion)
