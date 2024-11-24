@@ -1,0 +1,373 @@
+{
+    "historia": "Tutorial",
+    "idioma": "es_ES",
+    "nivel": 1,
+    "aleatoria": false,
+    "decisiones": [
+        {
+            "id": 0,
+            "personaje": "Maquina",
+            "imagen": "Maquina_Sanson",
+            "desc": "El experimento salió mal. En lugar de observar la historia de los vacceos... ahora estás atrapado en ella. Desliza hacia los lados para ver las posibles decisiones a tomar",
+            "res_der": {
+                "respuesta": "Revisar tu entorno. (vuelve a deslizar para confirmar)",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": null
+            },
+            "res_izq": {
+                "respuesta": "Hablar con los lugareños. (vuelve a deslizar para confirmar)",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": null
+            }
+        },
+        {
+            "id": 1,
+            "personaje": "Aldea",
+            "imagen": "Aldea_Sanson",
+            "desc": "Hombres y mujeres trabajan la tierra y se organizan en torno a un granero comunal. (Pulsando las flechas tambien podrás decidir)",
+            "res_der": {
+                "respuesta": "Acercarse sin miedo (pulsa el tick para confirmar o la flecha para volver)",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Acercarse poco a poco (pulsa el tick para confirmar o la flecha para volver)",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 2,
+            "personaje": "Ganadero Branus",
+            "imagen": "Ganadero_Sanson",
+            "desc": "Un hombre mayor se te acerca y te pregunta de dónde vienes. (Los atributos de arriba variarán según tus decisiones)",
+            "res_der": {
+                "respuesta": "Inventar una historia convincente.",
+                "explicacion": "Se cree la historia que le cuentas (Esto es una explicación de la decision)",
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Decir que eres un viajero del tiempo.",
+                "explicacion": "Se cree que le estas engañando(Esto es una explicación de la decision)",
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 3,
+            "personaje": "Togodumnus",
+            "imagen": "Agricultor_Sanson",
+            "desc": "Al avanzar un poco más te encuentras a un chico cargando paja. Te pide ayuda para llevarla",
+            "res_der": {
+                "respuesta": "Ayudarle con la paja",
+                "explicacion": "Te da unas monedas que no reconoces a la que llaman \"Denarios\"",
+                "efectos": [
+                    "4",
+                    "1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No ayudarle",
+                "explicacion": "Te encuentras unas monedas más adelante en el camino. Los locales las llaman \"Denarios\"",
+                "efectos": [
+                    "4",
+                    "-1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 4,
+            "personaje": "Muchedumbre",
+            "imagen": "Gente_Sanson",
+            "desc": "Al llegar al centro del pueblo ves una gran muchedumbre haciendo cola, la gente parece entusiasmada. ",
+            "res_der": {
+                "respuesta": "Colarte y descubrir que hace la gente",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Esperar la cola ordenadamente",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "-1",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 5,
+            "personaje": "Mercader Caelus",
+            "imagen": "Mercader_Sanson",
+            "desc": "Tras un rato de espera descubres que la gente hacia cola para comprar al mercader del pueblo vecino",
+            "res_der": {
+                "respuesta": "Comprar especias con la moneda del chico de antes",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No comprar nada",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 6,
+            "personaje": "Amaia",
+            "imagen": "Uvas_Sanson",
+            "desc": "El viaje te ha dejado tan hambriento que decides acercarte a una señora recogiendo uvas",
+            "res_der": {
+                "respuesta": "Pedirla un racimo por una moneda",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "4"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Pedirla un racimo a cambio de trabajar un rato",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "-1",
+                    "4"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 7,
+            "personaje": "Lia",
+            "imagen": "Telar_Sanson",
+            "desc": "Tienes unas ropas muy modernas para la época y rotas por la explosion. Decides acercarte a una costurera que ves trabajando en el telar",
+            "res_der": {
+                "respuesta": "Comprar ropa adecuada",
+                "explicacion": "Te regala la ropa ya que ve tu ropa rota por la explosion",
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No comprar ropa y quedarte como estabas",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 8,
+            "personaje": "Constructor Artius",
+            "imagen": "Constructor_Sanson",
+            "desc": "Pasas al lado de una casa en construccion y el constructor te reconoce como \"Ambatus\"",
+            "res_der": {
+                "respuesta": "Le preguntas que quien es Ambatus",
+                "explicacion": "¡Resulta que estas en el cuerpo de otra persona!",
+                "efectos": [
+                    "0",
+                    "0",
+                    "1",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Haces como que si eres él y le preguntas que tal está",
+                "explicacion": "¡Resulta que estas en el cuerpo de otra persona!",
+                "efectos": [
+                    "0",
+                    "0",
+                    "1",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 9,
+            "personaje": "Herrero Viriatus",
+            "imagen": "Herrero_Sanson",
+            "desc": "Te encuentras con un herrero forjando espadas",
+            "res_der": {
+                "respuesta": "Quieres aprender y decides ayudarle",
+                "explicacion": "Te has quemado con el fuego",
+                "efectos": [
+                    "0",
+                    "1",
+                    "-1",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Te quedas mirando como lo hace",
+                "explicacion": "Recuperas el aliento despues de haber dado una vueta por Pintia",
+                "efectos": [
+                    "0",
+                    "0",
+                    "1",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 10,
+            "personaje": "Alfarera Drusila",
+            "imagen": "Alfarera_Sanson",
+            "desc": "Estas sediento y te acercas a la alfarera para pedirle una vasija que llenar con agua",
+            "res_der": {
+                "respuesta": "Comprar un cantaro grande ",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Comprar una vasija pequeña",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 11,
+            "personaje": "Ambicatus",
+            "imagen": "Vino_Sanson",
+            "desc": "No encuentras agua pero si un vendedor de vino. Estas muy sediento",
+            "res_der": {
+                "respuesta": "Comprar vino para beber ",
+                "explicacion": "Si un atributo llega al minimo o al maximo perderas la partida",
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "4"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Comprar vino para beber ",
+                "explicacion": "Si un atributo llega al minimo o al maximo perderas la partida",
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "4"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 12,
+            "personaje": "Entierro ",
+            "imagen": "Entierro_Sanson",
+            "desc": "Has muerto a causa de un golpe en la cabeza tras caerte por la borrachera",
+            "res_der": {
+                "respuesta": "¿QUÉ?",
+                "explicacion": "Tras la muerte saliste de la maquina, estas tan ilusionado con como fue la experiencia que la repetirás en la carne de otros habitantes de pintia",
+                "efectos": [
+                    "-10",
+                    "-10",
+                    "-10",
+                    "-10"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "¿QUÉ?",
+                "explicacion": "Tras la muerte saliste de la maquina, estas tan ilusionado con como fue la experiencia que la repetirás en la carne de otros habitantes de pintia",
+                "efectos": [
+                    "-10",
+                    "-10",
+                    "-10",
+                    "-10"
+                ],
+                "siguiente": -1
+            }
+        }
+    ],
+    "decisiones_respuesta": []
+}

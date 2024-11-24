@@ -17,12 +17,13 @@ public class HistoryManager : MonoBehaviour
 
     [Header("---- ASSETS ----")]
     [SerializeField] private TextAsset jsonHistoria;
+    [SerializeField] private TextAsset jsonTutorial;
     [SerializeField] private AssetLabelReference assetsPersonajes;
     [SerializeField] private Sprite reversoCarta;
     [SerializeField] private Sprite cartaExplicacion;
     private readonly Dictionary<string, Sprite> retratosPersonajes = new();
 
-    
+
 
 
     [Header("---- UI GAME OBJECTS ----")]
@@ -66,10 +67,27 @@ public class HistoryManager : MonoBehaviour
 
 
     public CardType tipoCartaActual;
+<<<<<<< HEAD
+=======
+    public EstadoJuego estadoActual;
+    private EndType tipoFin;
+>>>>>>> 827777dde05aab1274d1cb0f0482d4bbda4c17ef
 
     private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
     private readonly Color colorNormal = new(1, 1, 1);
 
+
+    private enum EndType
+    {
+        DINERO,
+        SOCIAL,
+        SALUD,
+        ESPECIFICO,
+        VICTORIA
+    }
+
+
+    private Decision muerteDinero = new Decision(-1,"tumba","muerte","¡Has perdido todo tu dinero, eres una decepción para tu familia!", new Respuesta("Que...", new short[] {0,0,0,0},null,-1), new Respuesta("Que...", new short[] {0,0,0,0},null,-1));
 
 
 
@@ -80,7 +98,15 @@ public class HistoryManager : MonoBehaviour
         tipoCartaActual = CardType.NORMAL;
 
         //Cargamos todas las decisiones del json 
-        parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonHistoria.text);
+        if (PlayerPrefs.HasKey("Tutorial"))
+        {
+            parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonHistoria.text);
+        }
+        else
+        {
+            parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonTutorial.text);
+            PlayerPrefs.SetInt("Tutorial", 1);
+        }
 
         //Elegimos si queremos preguntas aleatorias o no.
         if (parsedHistorias.aleatoria)
@@ -142,8 +168,11 @@ public class HistoryManager : MonoBehaviour
         cartaActual = retratosPersonajes[decisionActual.imagen];
         nombrePersonajeText.text = decisionActual.personaje;
         preguntaText.text = decisionActual.desc;
-        anosText.SetText(numDecisionActual+" Años de Aventura");
-        textToSpeachManager.StartSpeaking(decisionActual.desc);
+        anosText.SetText(numDecisionActual + " Años de Aventura");
+        if (PlayerPrefs.GetInt("TTSEnable") == 1)
+        {
+            textToSpeachManager.StartSpeaking(decisionActual.desc);
+        }
     }
 
 
@@ -154,7 +183,10 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
         iconManager.PreviewEfectos(decisionActual.res_der.efectos);
-        textToSpeachManager.StartSpeaking(decisionActual.res_der.respuesta);
+        if (PlayerPrefs.GetInt("TTSEnable") == 1)
+        {
+            textToSpeachManager.StartSpeaking(decisionActual.res_der.respuesta);
+        }
     }
 
     public void ShowRespuestaIzquierda()
@@ -164,7 +196,11 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
         iconManager.PreviewEfectos(decisionActual.res_izq.efectos);
-        textToSpeachManager.StartSpeaking(decisionActual.res_izq.respuesta);
+        Debug.Log(PlayerPrefs.GetInt("TTSEnable"));
+        if (PlayerPrefs.GetInt("TTSEnable") == 1)
+        {
+            textToSpeachManager.StartSpeaking(decisionActual.res_izq.respuesta);
+        }
     }
 
     public void ConfirmaRespuestaDerecha()
@@ -172,16 +208,18 @@ public class HistoryManager : MonoBehaviour
         ConfirmaRespuesta(decisionActual.res_der.efectos);
         //CheckFinPartida();
         ChangeNextDecision(decisionActual.res_der);
-        anosText.SetText(numDecisionActual+1+" Años de Aventura");
+        anosText.SetText(numDecisionActual + 1 + " Años de Aventura");
     }
 
 
     public void ConfirmaRespuestaIzquierda()
-    {
-        ConfirmaRespuesta(decisionActual.res_izq.efectos);
-        //CheckFinPartida();
-        ChangeNextDecision(decisionActual.res_izq);
-        anosText.SetText(numDecisionActual+1+" Años de Aventura");
+    {   
+        if(tipoCartaActual == CardType.NORMAL){
+            ConfirmaRespuesta(decisionActual.res_izq.efectos);
+            //CheckFinPartida();
+            ChangeNextDecision(decisionActual.res_izq);
+            anosText.SetText(numDecisionActual + 1 + " Años de Aventura");
+        }
     }
 
     private void ConfirmaRespuesta(short[] efectos)
@@ -212,6 +250,7 @@ public class HistoryManager : MonoBehaviour
         selector.SetEstadoDefault();
     }
 
+<<<<<<< HEAD
     public void bindBtnDerecha(){
         selector.bindBtnDerecha();
     }
@@ -243,18 +282,80 @@ public class HistoryManager : MonoBehaviour
         //flechaIzquierda.DOMoveX(+180,3);
         //tickIzquierda.DOMoveX(-180,3);
         flechaIzquierda.DOScale(1,3);
+=======
+    public void logicaBotonesJuego()
+    {
+        if (estadoActual == EstadoJuego.POR_DEFECTO)
+        {
+            SetEstadoDefault();
+            Debug.Log("Vuelvo por defecto");
+        }
+        else if (estadoActual == EstadoJuego.LEER_IZQUIERDA)
+        {
+            ShowRespuestaIzquierda();
+            Debug.Log("leo decision izq");
+        }
+        else if (estadoActual == EstadoJuego.LEER_DERECHA)
+        {
+            ShowRespuestaDerecha();
+            Debug.Log("leo decision der");
+        }
+        else if (estadoActual == EstadoJuego.CONFIRMAR_IZQUIERDA)
+        {
+            ConfirmaRespuestaIzquierda();
+            estadoActual = EstadoJuego.POR_DEFECTO;
+            Debug.Log("confirmo decision izq");
+        }
+        else
+        {
+            ConfirmaRespuestaDerecha();
+            estadoActual = EstadoJuego.POR_DEFECTO;
+            Debug.Log("confirmo decision der");
+        }
     }
 
-    public void SetEstadoExplicacion(string textoExplicacion){
+    public void bindBtnIzquierda()
+    {
+        if (estadoActual == EstadoJuego.POR_DEFECTO)
+        {
+            estadoActual = EstadoJuego.LEER_IZQUIERDA;
+        }
+        else if (estadoActual == EstadoJuego.LEER_IZQUIERDA)
+            estadoActual = EstadoJuego.CONFIRMAR_IZQUIERDA;
+        else
+            estadoActual = EstadoJuego.POR_DEFECTO;
+
+        logicaBotonesJuego();
+    }
+
+    public void bindBtnDerecha()
+    {
+        if (estadoActual == EstadoJuego.POR_DEFECTO)
+        {
+            estadoActual = EstadoJuego.LEER_DERECHA;
+        }
+        else if (estadoActual == EstadoJuego.LEER_DERECHA)
+            estadoActual = EstadoJuego.CONFIRMAR_DERECHA;
+        else
+            estadoActual = EstadoJuego.POR_DEFECTO;
+
+        logicaBotonesJuego();
+>>>>>>> 827777dde05aab1274d1cb0f0482d4bbda4c17ef
+    }
+
+    public void SetEstadoExplicacion(string textoExplicacion)
+    {
         respuestaText.text = "";
         explicacionText.text = textoExplicacion;
-        imagenCartaPersonaje.sprite =cartaActual;
+        imagenCartaPersonaje.sprite = cartaActual;
         iconManager.SetEstadoDefault();
         //flechaIzquierda.SetActive(true);
         //flechaDerecha.SetActive(true);
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
-        textToSpeachManager.StartSpeaking(textoExplicacion);
-
+        if (PlayerPrefs.GetInt("TTSEnable") == 1)
+        {
+            textToSpeachManager.StartSpeaking(textoExplicacion);
+        }
     }
 
     private void UpdatePuntuacion(short[] efectos)
@@ -266,30 +367,70 @@ public class HistoryManager : MonoBehaviour
         Debug.LogFormat("Puntuacion Actual: {0} - {1} - {2} - {3}", puntuacionDinero, puntuacionSocial, puntuacionSalud, puntuacionEspecifico);
     }
 
-    private void CheckFinPartida()
+    private bool CheckFinPartida()
     {
-        if (new[] { puntuacionDinero, puntuacionSocial, puntuacionSalud, puntuacionEspecifico }.Any(valor => valor <= 0 || valor >= puntuacionMax))
-            popUpMuertePanel.SetActive(true);
+        if (puntuacionDinero >= puntuacionMax || puntuacionDinero <= 0)
+        {
+            tipoFin = EndType.DINERO;
+            return true;
 
+        }
+        else if (puntuacionSocial >= puntuacionMax || puntuacionSocial <= 0)
+        {
+            tipoFin = EndType.SOCIAL;
+            return true;
+
+        }
+        else if (puntuacionSalud >= puntuacionMax || puntuacionSalud <= 0)
+        {
+            tipoFin = EndType.SALUD;
+            return true;
+
+        }
+        else if (puntuacionEspecifico >= puntuacionMax || puntuacionEspecifico <= 0)
+        {
+            tipoFin = EndType.ESPECIFICO;
+            return true;
+
+        }
+        else if (numDecisionActual == nPreguntas - 1)
+        {
+            tipoFin = EndType.VICTORIA;
+            return true;
+        }
+        return false;
     }
     private void ChangeNextDecision(Respuesta respuesta)
-    {   
+    {
         //Carta normal con explicación -> Mostrar explicacion
-        if(tipoCartaActual == CardType.NORMAL && respuesta.explicacion != null)
-        {   
+        if (tipoCartaActual == CardType.NORMAL && respuesta.explicacion != null)
+        {
             tipoCartaActual = CardType.EXPLICACION;
             cartaActual = cartaExplicacion;
             StartCoroutine(selector.RotateAndExplicacion(respuesta.explicacion));
-        }   
+        }
         //Carta normal sin explicación / Explicacion -> Mostrar siguiente carta
-        else if((tipoCartaActual == CardType.NORMAL && respuesta.explicacion == null) || tipoCartaActual == CardType.EXPLICACION)
-        {   
-            decisionActual = (respuesta.siguiente != -1) ? parsedHistorias.decisiones_respuesta[respuesta.siguiente] : decisionesPartida[++numDecisionActual];
-            SetTextosDecision();
-            cartaPersonaje.transform.eulerAngles = new Vector3(0,180,0);
-            tipoCartaActual = CardType.NORMAL;
+        else if ((tipoCartaActual == CardType.NORMAL && respuesta.explicacion == null) || tipoCartaActual == CardType.EXPLICACION)
+        {
+            cartaPersonaje.transform.eulerAngles = new Vector3(0, 180, 0);
             explicacionText.text = "";
+            //Checkeamos fin de partida
+            if (CheckFinPartida())
+            {
+                decisionActual = muerteDinero;  //Habría que comprobar que tipo de muerte es.
+                tipoCartaActual = CardType.PRE_MUERTE;
+            }
+            else
+            {
+
+                decisionActual = (respuesta.siguiente != -1) ? parsedHistorias.decisiones_respuesta[respuesta.siguiente] : decisionesPartida[++numDecisionActual];
+                tipoCartaActual = CardType.NORMAL;
+            }
+            SetTextosDecision();
             StartCoroutine(selector.RotateAndDefault());
+        }
+        else if(tipoCartaActual == CardType.PRE_MUERTE){
+            popUpMuertePanel.SetActive(true);
         }
     }
 }
@@ -297,6 +438,16 @@ public class HistoryManager : MonoBehaviour
 
 public struct Decision
 {
+    public Decision(int _id, string _imagen, string _personaje, string _desc, Respuesta _res_der, Respuesta _res_izq)
+    {
+        id = _id;
+        imagen = _imagen;
+        personaje = _personaje;
+        desc = _desc;
+        res_der = _res_der;
+        res_izq = _res_izq;
+    }
+
     public int id;
     public string imagen;
     public string personaje;
@@ -306,7 +457,14 @@ public struct Decision
 }
 
 public struct Respuesta
-{
+{   
+    public Respuesta(string _respuesta, short[] _efectos, string _explicacion, int _siguiente){
+        respuesta = _respuesta;
+        efectos = _efectos;
+        explicacion = _explicacion;
+        siguiente = _siguiente;
+    }
+
     public string respuesta;
     public short[] efectos;
     public string explicacion;

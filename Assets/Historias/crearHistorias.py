@@ -66,9 +66,13 @@ class Decision(Toplevel):
         self.decision_res2_exp_entry = Entry(self, width=30)
         self.decision_res2_exp_entry.grid(row=8, column=1, padx=5, pady=5)
 
+        Label(self, text="Personaje decision:").grid(row=9, column=0, sticky="w", padx=5, pady=5)
+        self.decision_personaje = Entry(self, width=30)
+        self.decision_personaje.grid(row=9, column=1, padx=5, pady=5)
 
-        Button(self, text="Finalizar", command=self.close).grid(row=9, column=1, padx=5, pady=10)
-        Button(self, text="Añadir nueva decisión", command=self.agregar_decision).grid(row=9, column=2, padx=5, pady=10)
+
+        Button(self, text="Finalizar", command=self.close).grid(row=10, column=1, padx=5, pady=10)
+        Button(self, text="Añadir nueva decisión", command=self.agregar_decision).grid(row=10, column=2, padx=5, pady=10)
 
     def close(self):
         exit(0)
@@ -81,7 +85,7 @@ class Decision(Toplevel):
                 raise Exception("La decision derecha es muy extensa")
             if len(self.decision_res2_entry.get())>200:
                 raise Exception("La decision izquierda es muy extensa")
-            if self.decision_descripcion_entry.get()=="" or self.decision_res1_entry.get()=="" or self.decision_res2_entry.get()=="" or self.decision_img_entry.get()=="":
+            if self.decision_descripcion_entry.get()=="" or self.decision_res1_entry.get()=="" or self.decision_res2_entry.get()=="" or self.decision_img_entry.get()=="" or self.decision_personaje.get()=="":
                 raise Exception("Todos los campos deben de estar rellenos")
             # Leer el archivo JSON
             with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'r', encoding='utf-8') as f:
@@ -95,6 +99,7 @@ class Decision(Toplevel):
             explicacionder = None if self.decision_res1_exp_entry.get() == "" else self.decision_res1_exp_entry.get()
             decision = {
                 "id": id,
+                "personaje": self.decision_personaje.get(),
                 "imagen": self.decision_img_entry.get(),
                 "desc": self.decision_descripcion_entry.get(),
                 "res_der": {
@@ -136,6 +141,7 @@ class Decision(Toplevel):
                 self.decision_res2_exp_entry.delete(0,END)
                 self.id_siguiente_izq=-1
                 self.id_siguiente_der=-1
+                self.decision_personaje.delete(0,END)
 
 
             else:
@@ -186,7 +192,11 @@ class JsonEditorApp:
         self.nivel_entry = ttk.Combobox(state="readonly",values=["0-10", "11-14","14-..."])
         self.nivel_entry.grid(row=5, column=1, padx=5, pady=5)
 
-        Button(root, text="Guardar JSON", command=self.save_json).grid(row=6, column=1, padx=5, pady=10)
+        Label(root, text="Atributo Especifico:").grid(row=6, column=0, sticky="w", padx=5, pady=5)
+        self.nivel_atributo_especifico = Entry(root, width=30)
+        self.nivel_atributo_especifico.grid(row=6, column=1, padx=5, pady=5)
+
+        Button(root, text="Guardar JSON", command=self.save_json).grid(row=7, column=1, padx=5, pady=10)
 
         # Crear JSON inicial vacío
         #self.create_empty_json()
@@ -216,6 +226,7 @@ class JsonEditorApp:
 
         self.decisiones_text.delete(1.0, END)
         self.decisiones_text.insert(1.0, json.dumps(data["decisiones"], indent=4, ensure_ascii=False))
+        
 
         messagebox.showinfo("Nuevo JSON", "Se ha iniciado un nuevo JSON vacío.")
         
@@ -233,7 +244,8 @@ class JsonEditorApp:
                 "personaje": self.historia_entry.get(),
                 "desc": self.descripcion_entry.get(),
                 "coste": self.coste_entry.get(),
-                "imagen": self.imagen_entry.get()
+                "imagen": self.imagen_entry.get(),
+                "atributo": self.nivel_atributo_especifico.get()
             }
             self.titulo=self.historia_entry.get().replace(" ", "_")
             idioma=self.idioma_entry.get()[-2:]
