@@ -5,7 +5,36 @@
     "aleatoria": false,
     "decisiones": [
         {
+            "id": 0,
+            "personaje": "Maecader Merlin",
+            "imagen": "Mercader_1",
+            "desc": "En un mercado, encuentras un comerciante que tiene un amuleto de protección para los guerreros. El amuleto es costoso, pero podría protegerte en batalla.",
+            "res_der": {
+                "respuesta": "Comprar el amuleto, gastando una gran cantidad de tu dinero.",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "1",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No comprar el amuleto y guardar el dinero.",
+                "explicacion": null,
+                "efectos": [
+                    "1",
+                    "0",
+                    "-1",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
             "id": 1,
+            "personaje": "Arbusto",
             "imagen": "Arbusto_1",
             "desc": "Durante una patrulla nocturna, el soldado escucha ruido en la oscuridad y sospecha que podrían ser exploradores de un pueblo enemigo.",
             "res_der": {
@@ -33,6 +62,7 @@
         },
         {
             "id": 2,
+            "personaje": "Mercenario Jefe",
             "imagen": "Mercenario_1",
             "desc": "Un grupo de mercenarios propone al soldado unirse a su banda para ganar dinero extra en una misión contra un pueblo rival.",
             "res_der": {
@@ -60,6 +90,7 @@
         },
         {
             "id": 3,
+            "personaje": "Guerrero Juan",
             "imagen": "Guerrero_2",
             "desc": "En una batalla, el soldado se encuentra con un compañero herido en el suelo. Si se detiene a ayudarlo, pone en riesgo su propia seguridad.",
             "res_der": {
@@ -87,6 +118,7 @@
         },
         {
             "id": 4,
+            "personaje": "Jefe Aidan",
             "imagen": "Jefe_1",
             "desc": "La tribu de Pintia ha propuesto una alianza con un pueblo vecino para enfrentar a un enemigo común, pero los vacceos son conocidos por ser desconfiados de otras tribus.",
             "res_der": {
@@ -114,6 +146,7 @@
         },
         {
             "id": 5,
+            "personaje": "Armadura",
             "imagen": "Armadura_1",
             "desc": "Antes de una batalla, tienes que elegir entre una armadura ligera para ser más rápido o una armadura pesada para mayor protección.",
             "res_der": {
@@ -141,6 +174,7 @@
         },
         {
             "id": 6,
+            "personaje": "Clerigo Alan",
             "imagen": "Clerigo_1",
             "desc": "El sacerdote del pueblo ofrece realizar un ritual de sanación y protección, pero requiere una ofrenda de dinero.",
             "res_der": {
@@ -168,6 +202,7 @@
         },
         {
             "id": 7,
+            "personaje": "Guerrero Balar",
             "imagen": "Guerrero_1",
             "desc": "Tras una victoria en combate, el líder propone repartir el botín, pero el soldado debe decidir si tomar más o repartirlo equitativamente.",
             "res_der": {
@@ -195,6 +230,7 @@
         },
         {
             "id": 8,
+            "personaje": "Jefe Brian",
             "imagen": "Jefe_2",
             "desc": "La tribu está enfrentando una escasez de alimentos debido a una mala cosecha. Se te asigna ayudar en la distribución de los recursos limitados.",
             "res_der": {
@@ -222,6 +258,7 @@
         },
         {
             "id": 9,
+            "personaje": "Jefe Eoin",
             "imagen": "Jefe_1",
             "desc": "El líder de la tribu ofrece un riguroso programa de entrenamiento para mejorar las habilidades de combate, pero requerirá tiempo y esfuerzo extra.",
             "res_der": {
@@ -249,6 +286,7 @@
         },
         {
             "id": 10,
+            "personaje": "Jabalí",
             "imagen": "Jabali_1",
             "desc": "Durante una expedición, te encuentras con una manada de animales salvajes que bloquea el camino.",
             "res_der": {
@@ -276,6 +314,7 @@
         },
         {
             "id": 11,
+            "personaje": "Jefe Tristan",
             "imagen": "Jefe_2",
             "desc": "Se propone construir murallas y fortificaciones para proteger la tribu de futuros ataques, pero requiere una inversión significativa de recursos.",
             "res_der": {
@@ -303,6 +342,7 @@
         },
         {
             "id": 12,
+            "personaje": "Jefe Vesper",
             "imagen": "Jefe_1",
             "desc": "La tribu organiza una cacería para obtener alimentos y fortalecer lazos comunitarios.",
             "res_der": {
@@ -330,6 +370,7 @@
         },
         {
             "id": 13,
+            "personaje": "Jefe Melvin",
             "imagen": "Jefe_2",
             "desc": "Una enfermedad ha comenzado a propagarse entre los miembros de la tribu",
             "res_der": {
@@ -357,6 +398,7 @@
         },
         {
             "id": 14,
+            "personaje": "Guerrero Tadhg",
             "imagen": "Guerrero_2",
             "desc": "Se presenta la oportunidad de explorar tierras desconocidas que podrían ofrecer nuevos recursos o alianzas.",
             "res_der": {
@@ -384,6 +426,7 @@
         },
         {
             "id": 15,
+            "personaje": "Niños de Pintia",
             "imagen": "Ninos_2",
             "desc": "Hay jóvenes en la tribu que desean entrenarse como guerreros. Debes decidir cómo manejar su entrenamiento.",
             "res_der": {
@@ -411,6 +454,7 @@
         },
         {
             "id": 16,
+            "personaje": "Agricultor Ronan",
             "imagen": "Agricultor_1",
             "desc": "Surgen tensiones entre diferentes grupos dentro de la tribu.",
             "res_der": {
@@ -435,38 +479,12 @@
                 ],
                 "siguiente": -1
             }
-        },
-        {
-            "id": 17,
-            "imagen": "Mercader_1",
-            "desc": "En un mercado, encuentras un comerciante que tiene un amuleto de protección para los guerreros. El amuleto es costoso, pero podría protegerte en batalla.",
-            "res_der": {
-                "respuesta": "Comprar el amuleto, gastando una gran cantidad de tu dinero.",
-                "explicacion": null,
-                "efectos": [
-                    "-1",
-                    "0",
-                    "1",
-                    "0"
-                ],
-                "siguiente": -1
-            },
-            "res_izq": {
-                "respuesta": "No comprar el amuleto y guardar el dinero.",
-                "explicacion": null,
-                "efectos": [
-                    "1",
-                    "0",
-                    "-1",
-                    "0"
-                ],
-                "siguiente": -1
-            }
         }
     ],
     "decisiones_respuesta": [
         {
             "id": 0,
+            "personaje": "Bosque",
             "imagen": "Bosque_1",
             "desc": "Resulta que no era un animal, tu grupo es emboscado por guerreros de una tribu rival.",
             "res_der": {
@@ -494,6 +512,7 @@
         },
         {
             "id": 1,
+            "personaje": "Guerrero Llyr",
             "imagen": "Guerrero_1",
             "desc": "Durante la cacería tu pueblo fue atacado, aun sin ti la defensa ganó",
             "res_der": {
