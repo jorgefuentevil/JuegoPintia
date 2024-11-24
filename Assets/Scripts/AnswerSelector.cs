@@ -29,7 +29,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void Awake(){
         // Encuentra el GameObject con el tag "AudioManager" y obtiene el componente AudioManager
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        //audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 
     }
 
@@ -167,8 +167,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Vector3 startpos = transform.position;
         Vector3 endpos = new(transform.position.x + Screen.width, transform.position.y - Screen.height / 2, transform.position.z);
         float t = 0f;
-        audioManager.PlaySlideSFX();
-        historyManager.HideTickDerecha();
+        //audioManager.PlaySlideSFX();
         while (t <= 1.0)
         {
             //TODO: Cambiar easing, añadir diferentes easings para cada animacion.
@@ -177,6 +176,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             yield return null;
         }
         historyManager.ConfirmaRespuestaDerecha();
+        historyManager.HideTickDerecha();
 
     }
 
@@ -186,8 +186,8 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Vector3 startpos = transform.position;
         Vector3 endpos = new(transform.position.x - Screen.width, transform.position.y - Screen.height / 2, transform.position.z);
         float t = 0f;
-        audioManager.PlaySlideSFX();
-        historyManager.HideTickIzquierda();
+        //audioManager.PlaySlideSFX();
+        
         while (t <= 1.0)
         {
             //TODO: Cambiar easing, añadir diferentes easings para cada animacion.
@@ -197,6 +197,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         }
 
         historyManager.ConfirmaRespuestaIzquierda();
+        historyManager.HideTickIzquierda();
     }
 
 
@@ -206,7 +207,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, 180f, 0) * startRotation;
         bool respuestaActiva = false;
-        audioManager.PlayFlipSFX();
+        //audioManager.PlayFlipSFX();
         historyManager.ShowTickDerecha();
         while (t <= 1f)
         {
@@ -230,7 +231,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, 180f, 0) * startRotation;
         bool respuestaActiva = false;
-        audioManager.PlayFlipSFX();
+        //audioManager.PlayFlipSFX();
         historyManager.ShowTickIzquierda();
         while (t <= 1f)
         {
@@ -253,7 +254,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, 180f, 0) * startRotation;
         bool respuestaActiva = true;
-        audioManager.PlayFlipSFX();
+        //audioManager.PlayFlipSFX();
         if(estadoCarta == CardState.FLIPPED_DERECHA)
             historyManager.HideTickDerecha();
         else
@@ -280,7 +281,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Quaternion startRotation = transform.rotation;
         Quaternion targetRotation = Quaternion.Euler(0, 180f, 0) * startRotation;
         bool respuestaActiva = true;
-        audioManager.PlayFlipSFX();
+        //audioManager.PlayFlipSFX();
         while (t <= 1f)
         {
             t += Time.deltaTime / 0.67f;  // 0:40 segundos

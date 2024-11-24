@@ -92,6 +92,8 @@ class Decision(Toplevel):
                 datos = json.load(f)
             if self.isRespuesta == False:
                 id=len(datos["decisiones"]) 
+                self.id_siguiente_der=-1
+                self.id_siguiente_izq=-1
             else:
                 id=self.app.siguiente
 

@@ -34,13 +34,18 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI respuestaText;
     [SerializeField] private TextMeshProUGUI explicacionText;
     [SerializeField] private GameObject cartaPersonaje;
-    [SerializeField] private Transform flechaDerecha;
-    [SerializeField] private Transform flechaIzquierda;
-    [SerializeField] private Transform tickDerecha;
-    [SerializeField] private Transform tickIzquierda;
+    [SerializeField] private GameObject flechaDerecha;
+    [SerializeField] private GameObject flechaIzquierda;
+    [SerializeField] private GameObject tickDerecho;
+    [SerializeField] private GameObject tickIzquierdo;
     [SerializeField] private GameObject popUpMuertePanel;
     [SerializeField] private TTS textToSpeachManager;
 
+    private Vector3 posicionFlechaDerecha;
+    private Vector3 posicionFlechaIzquierda;
+    private Vector3 posicionTickDerecha;
+    private Vector3 posicionTickIzquierda;
+    
     private Sprite cartaActual;
     private Image imagenCartaPersonaje;
 
@@ -92,6 +97,11 @@ public class HistoryManager : MonoBehaviour
 
     public void Start()
     {
+        posicionFlechaDerecha=flechaDerecha.transform.position;
+        posicionFlechaIzquierda=flechaIzquierda.transform.position;
+        posicionTickIzquierda=tickIzquierdo.transform.position;
+        posicionTickDerecha=tickDerecho.transform.position;
+
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
         posicionInicial = cartaPersonaje.transform.position;
         tipoCartaActual = CardType.NORMAL;
@@ -258,28 +268,24 @@ public class HistoryManager : MonoBehaviour
     }
 
     public void ShowTickDerecha(){
-        //flechaDerecha.DOMoveX(+180,3);
-        //tickDerecha.DOMoveX(-180,3);
-        flechaDerecha.DOScale(2,3);
+
+        flechaDerecha.transform.DOMove(posicionTickDerecha, 2);
+        tickDerecho.transform.DOMove(posicionFlechaDerecha, 2);
     }
 
     public void HideTickDerecha(){
-        //flechaDerecha.DOMoveX(-180,3);
-        //tickDerecha.DOMoveX(+180,3);
-        flechaDerecha.DOScale(1,3);
-        Debug.Log("reduzco");
+        tickDerecho.transform.DOMove(posicionTickDerecha, 2);
+        flechaDerecha.transform.DOMove(posicionFlechaDerecha, 2);;
     }
 
     public void ShowTickIzquierda(){
-        //flechaIzquierda.DOMoveX(-180,3);
-        //tickIzquierda.DOMoveX(+180,3);
-        flechaIzquierda.DOScale(2,3);
+        flechaIzquierda.transform.DOMove(posicionTickIzquierda, 2);
+        tickDerecho.transform.DOMove(posicionFlechaDerecha, 2);
     }
 
     public void HideTickIzquierda(){
-        //flechaIzquierda.DOMoveX(+180,3);
-        //tickIzquierda.DOMoveX(-180,3);
-        flechaIzquierda.DOScale(1,3);
+        flechaIzquierda.transform.DOMove(posicionFlechaIzquierda, 2);
+        tickDerecho.transform.DOMove(posicionTickIzquierda, 2);
     }
 
     public void SetEstadoExplicacion(string textoExplicacion)
