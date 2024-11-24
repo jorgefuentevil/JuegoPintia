@@ -280,12 +280,12 @@ public class HistoryManager : MonoBehaviour
 
     public void ShowTickIzquierda(){
         flechaIzquierda.transform.DOMove(posicionTickIzquierda, 2);
-        tickDerecho.transform.DOMove(posicionFlechaDerecha, 2);
+        tickIzquierdo.transform.DOMove(posicionFlechaIzquierda, 2);
     }
 
     public void HideTickIzquierda(){
         flechaIzquierda.transform.DOMove(posicionFlechaIzquierda, 2);
-        tickDerecho.transform.DOMove(posicionTickIzquierda, 2);
+        tickIzquierdo.transform.DOMove(posicionTickIzquierda, 2);
     }
 
     public void SetEstadoExplicacion(string textoExplicacion)
