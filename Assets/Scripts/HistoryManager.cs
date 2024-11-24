@@ -17,6 +17,7 @@ public class HistoryManager : MonoBehaviour
 
     [Header("---- ASSETS ----")]
     [SerializeField] private TextAsset jsonHistoria;
+    [SerializeField] private TextAsset jsonTutorial;
     [SerializeField] private AssetLabelReference assetsPersonajes;
     [SerializeField] private Sprite reversoCarta;
     [SerializeField] private Sprite cartaExplicacion;
@@ -80,7 +81,12 @@ public class HistoryManager : MonoBehaviour
         estadoActual = EstadoJuego.POR_DEFECTO;
 
         //Cargamos todas las decisiones del json 
-        parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonHistoria.text);
+        if(PlayerPrefs.HasKey("Tutorial")){
+            parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonHistoria.text);
+        }else{
+            parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonTutorial.text);
+            PlayerPrefs.SetInt("Tutorial", 1);
+        }
 
         //Elegimos si queremos preguntas aleatorias o no.
         if (parsedHistorias.aleatoria)
