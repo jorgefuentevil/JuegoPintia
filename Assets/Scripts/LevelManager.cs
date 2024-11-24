@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI personajeText;
     [SerializeField] private TextMeshProUGUI descripcionText;
     [SerializeField] private AssetLabelReference assetsPersonajes;
+    [SerializeField] private TTS textToSpeachManager;
 
     private LevelsJsonRoot parsedNiveles;
     private int numberOfLevels = 1;
@@ -80,6 +81,8 @@ public class LevelManager : MonoBehaviour
         contadorText.SetText(level_index + 1 + "/" + numberOfLevels);
         personajeText.SetText(parsedNiveles.historias[level_index].personaje);
         descripcionText.SetText(parsedNiveles.historias[level_index].desc);
+        string textToSpeech = parsedNiveles.historias[level_index].personaje+"\n"+parsedNiveles.historias[level_index].desc;
+        textToSpeachManager.StartSpeaking(textToSpeech);
     }
 
 
