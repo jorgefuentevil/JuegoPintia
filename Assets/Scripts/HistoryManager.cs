@@ -36,6 +36,8 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private GameObject flechaDerecha;
     [SerializeField] private GameObject flechaIzquierda;
     [SerializeField] private GameObject popUpMuertePanel;
+    [SerializeField] private TTS textToSpeachManager;
+
     private Sprite cartaActual;
     private Image imagenCartaPersonaje;
 
@@ -141,6 +143,7 @@ public class HistoryManager : MonoBehaviour
         nombrePersonajeText.text = decisionActual.personaje;
         preguntaText.text = decisionActual.desc;
         anosText.SetText(numDecisionActual+" Años de Aventura");
+        textToSpeachManager.StartSpeaking(decisionActual.desc);
     }
 
 
@@ -151,6 +154,7 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
         iconManager.PreviewEfectos(decisionActual.res_der.efectos);
+        textToSpeachManager.StartSpeaking(decisionActual.res_der.respuesta);
     }
 
     public void ShowRespuestaIzquierda()
@@ -160,6 +164,7 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
         iconManager.PreviewEfectos(decisionActual.res_izq.efectos);
+        textToSpeachManager.StartSpeaking(decisionActual.res_izq.respuesta);
     }
 
     public void ConfirmaRespuestaDerecha()
@@ -267,6 +272,8 @@ public class HistoryManager : MonoBehaviour
         flechaIzquierda.SetActive(true);
         flechaDerecha.SetActive(true);
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
+        textToSpeachManager.StartSpeaking(textoExplicacion);
+
     }
 
     private void UpdatePuntuacion(short[] efectos)
