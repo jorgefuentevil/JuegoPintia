@@ -67,10 +67,7 @@ public class HistoryManager : MonoBehaviour
 
 
     public CardType tipoCartaActual;
-<<<<<<< HEAD
-=======
 
->>>>>>> 354db2dcaa348ba3331344703bca063a354a33ae
     private EndType tipoFin;
 
     private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
