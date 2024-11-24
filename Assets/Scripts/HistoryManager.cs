@@ -33,8 +33,10 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI respuestaText;
     [SerializeField] private TextMeshProUGUI explicacionText;
     [SerializeField] private GameObject cartaPersonaje;
-    [SerializeField] private GameObject flechaDerecha;
-    [SerializeField] private GameObject flechaIzquierda;
+    [SerializeField] private Transform flechaDerecha;
+    [SerializeField] private Transform flechaIzquierda;
+    [SerializeField] private Transform tickDerecha;
+    [SerializeField] private Transform tickIzquierda;
     [SerializeField] private GameObject popUpMuertePanel;
     [SerializeField] private TTS textToSpeachManager;
 
@@ -64,7 +66,6 @@ public class HistoryManager : MonoBehaviour
 
 
     public CardType tipoCartaActual;
-    public EstadoJuego estadoActual;
 
     private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
     private readonly Color colorNormal = new(1, 1, 1);
@@ -77,7 +78,6 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
         posicionInicial = cartaPersonaje.transform.position;
         tipoCartaActual = CardType.NORMAL;
-        estadoActual = EstadoJuego.POR_DEFECTO;
 
         //Cargamos todas las decisiones del json 
         parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonHistoria.text);
@@ -204,64 +204,45 @@ public class HistoryManager : MonoBehaviour
     {
         respuestaText.text = "";
         explicacionText.text = "";
-        flechaIzquierda.SetActive(true);
-        flechaDerecha.SetActive(true);
+        //flechaIzquierda.SetActive(true);
+        //flechaDerecha.SetActive(true);
         imagenCartaPersonaje.DOColor(colorNormal, 0.2f);
         imagenCartaPersonaje.sprite = cartaActual;
         iconManager.SetEstadoDefault();
         selector.SetEstadoDefault();
     }
 
-    public void logicaBotonesJuego()
-    {
-        if(estadoActual == EstadoJuego.POR_DEFECTO){
-            SetEstadoDefault();
-            Debug.Log("Vuelvo por defecto");
-        }
-        else if(estadoActual == EstadoJuego.LEER_IZQUIERDA){
-            ShowRespuestaIzquierda();
-            Debug.Log("leo decision izq");
-        }
-        else if(estadoActual == EstadoJuego.LEER_DERECHA){
-            ShowRespuestaDerecha();
-            Debug.Log("leo decision der");
-        }
-        else if(estadoActual == EstadoJuego.CONFIRMAR_IZQUIERDA){
-            ConfirmaRespuestaIzquierda();
-            estadoActual = EstadoJuego.POR_DEFECTO;
-            Debug.Log("confirmo decision izq");
-        }
-        else{
-            ConfirmaRespuestaDerecha();
-            estadoActual = EstadoJuego.POR_DEFECTO;
-            Debug.Log("confirmo decision der");
-        }
+    public void bindBtnDerecha(){
+        selector.bindBtnDerecha();
     }
 
-    public void bindBtnIzquierda()
-    {
-        if(estadoActual == EstadoJuego.POR_DEFECTO){
-            estadoActual=EstadoJuego.LEER_IZQUIERDA;
-        }
-        else if(estadoActual == EstadoJuego.LEER_IZQUIERDA)
-            estadoActual=EstadoJuego.CONFIRMAR_IZQUIERDA;
-        else
-            estadoActual=EstadoJuego.POR_DEFECTO;
-
-        logicaBotonesJuego();
+    public void bindBtnIzquierda(){
+        selector.bindBtnIzquierda();
     }
 
-    public void bindBtnDerecha()
-    {
-        if(estadoActual == EstadoJuego.POR_DEFECTO){
-            estadoActual=EstadoJuego.LEER_DERECHA;
-        }
-        else if(estadoActual == EstadoJuego.LEER_DERECHA)
-            estadoActual=EstadoJuego.CONFIRMAR_DERECHA;
-        else
-            estadoActual=EstadoJuego.POR_DEFECTO;
-        
-        logicaBotonesJuego();
+    public void ShowTickDerecha(){
+        //flechaDerecha.DOMoveX(+180,3);
+        //tickDerecha.DOMoveX(-180,3);
+        flechaDerecha.DOScale(2,3);
+    }
+
+    public void HideTickDerecha(){
+        //flechaDerecha.DOMoveX(-180,3);
+        //tickDerecha.DOMoveX(+180,3);
+        flechaDerecha.DOScale(1,3);
+        Debug.Log("reduzco");
+    }
+
+    public void ShowTickIzquierda(){
+        //flechaIzquierda.DOMoveX(-180,3);
+        //tickIzquierda.DOMoveX(+180,3);
+        flechaIzquierda.DOScale(2,3);
+    }
+
+    public void HideTickIzquierda(){
+        //flechaIzquierda.DOMoveX(+180,3);
+        //tickIzquierda.DOMoveX(-180,3);
+        flechaIzquierda.DOScale(1,3);
     }
 
     public void SetEstadoExplicacion(string textoExplicacion){
@@ -269,8 +250,8 @@ public class HistoryManager : MonoBehaviour
         explicacionText.text = textoExplicacion;
         imagenCartaPersonaje.sprite =cartaActual;
         iconManager.SetEstadoDefault();
-        flechaIzquierda.SetActive(true);
-        flechaDerecha.SetActive(true);
+        //flechaIzquierda.SetActive(true);
+        //flechaDerecha.SetActive(true);
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         textToSpeachManager.StartSpeaking(textoExplicacion);
 

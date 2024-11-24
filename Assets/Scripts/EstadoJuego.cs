@@ -1,9 +1,0 @@
-public enum EstadoJuego
-{
-    POR_DEFECTO,
-    LEER_IZQUIERDA,
-    LEER_DERECHA,
-    CONFIRMAR_IZQUIERDA,
-    CONFIRMAR_DERECHA
-
-}
