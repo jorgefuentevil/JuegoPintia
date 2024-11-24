@@ -143,7 +143,9 @@ public class HistoryManager : MonoBehaviour
         nombrePersonajeText.text = decisionActual.personaje;
         preguntaText.text = decisionActual.desc;
         anosText.SetText(numDecisionActual+" Años de Aventura");
-        textToSpeachManager.StartSpeaking(decisionActual.desc);
+        if(PlayerPrefs.GetInt("TTSEnable")==1){
+            textToSpeachManager.StartSpeaking(decisionActual.desc);
+        }
     }
 
 
@@ -154,7 +156,9 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
         iconManager.PreviewEfectos(decisionActual.res_der.efectos);
-        textToSpeachManager.StartSpeaking(decisionActual.res_der.respuesta);
+        if(PlayerPrefs.GetInt("TTSEnable")==1){
+            textToSpeachManager.StartSpeaking(decisionActual.res_der.respuesta);
+        }    
     }
 
     public void ShowRespuestaIzquierda()
@@ -164,7 +168,10 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = reversoCarta;
         iconManager.PreviewEfectos(decisionActual.res_izq.efectos);
-        textToSpeachManager.StartSpeaking(decisionActual.res_izq.respuesta);
+        Debug.Log(PlayerPrefs.GetInt("TTSEnable"));
+        if(PlayerPrefs.GetInt("TTSEnable")==1){
+            textToSpeachManager.StartSpeaking(decisionActual.res_izq.respuesta);
+        }
     }
 
     public void ConfirmaRespuestaDerecha()
@@ -272,8 +279,9 @@ public class HistoryManager : MonoBehaviour
         flechaIzquierda.SetActive(true);
         flechaDerecha.SetActive(true);
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
-        textToSpeachManager.StartSpeaking(textoExplicacion);
-
+        if(PlayerPrefs.GetInt("TTSEnable")==1){
+            textToSpeachManager.StartSpeaking(textoExplicacion);
+        }
     }
 
     private void UpdatePuntuacion(short[] efectos)

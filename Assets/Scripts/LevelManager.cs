@@ -82,7 +82,10 @@ public class LevelManager : MonoBehaviour
         personajeText.SetText(parsedNiveles.historias[level_index].personaje);
         descripcionText.SetText(parsedNiveles.historias[level_index].desc);
         string textToSpeech = parsedNiveles.historias[level_index].personaje+"\n"+parsedNiveles.historias[level_index].desc;
-        textToSpeachManager.StartSpeaking(textToSpeech);
+        if(PlayerPrefs.GetInt("TTSEnable")==1){
+            textToSpeachManager.StartSpeaking(textToSpeech);
+        }
+        
     }
 
 

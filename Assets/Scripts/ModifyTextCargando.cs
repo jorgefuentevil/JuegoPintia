@@ -16,6 +16,8 @@ public class ModifyTextCargando : MonoBehaviour
     void Start()
     {   
         InvokeRepeating("anadePunto", 0.2f, 0.2f);
+
+        PlayerPrefs.SetInt("TTSEnable", 0);
     }
 
     void anadePunto()

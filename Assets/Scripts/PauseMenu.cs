@@ -40,6 +40,7 @@ public class PauseMenu : MonoBehaviour
 
     }
 
+
     public void Resume()
     {
         pauseMenu.SetActive(false);
@@ -66,6 +67,18 @@ public class PauseMenu : MonoBehaviour
             PlayerPrefs.SetInt("VibracionEnabled", 0);
             Debug.Log("No Vibro :(((((");
 
+        }
+    }
+
+    public void ToggleTTS(bool value)
+    {
+        if (value)
+        {            
+            PlayerPrefs.SetInt("TTSEnable", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("TTSEnable", 0);
         }
     }
 
