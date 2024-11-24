@@ -82,7 +82,7 @@ public class HistoryManager : MonoBehaviour
     }
 
 
-    private Decision muerteDinero = new Decision(-1,"Muerte_Dinero","muerte","¡Has perdido todo tu dinero, eres una decepción para tu familia!", new Respuesta("Que...", null,null,-1), new Respuesta("Que...", null,null,-1));
+    private Decision muerteDinero = new Decision(-1,"tumba","muerte","¡Has perdido todo tu dinero, eres una decepción para tu familia!", new Respuesta("Que...", new short[] {0,0,0,0},null,-1), new Respuesta("Que...", new short[] {0,0,0,0},null,-1));
 
 
 
@@ -209,11 +209,13 @@ public class HistoryManager : MonoBehaviour
 
 
     public void ConfirmaRespuestaIzquierda()
-    {
-        ConfirmaRespuesta(decisionActual.res_izq.efectos);
-        //CheckFinPartida();
-        ChangeNextDecision(decisionActual.res_izq);
-        anosText.SetText(numDecisionActual + 1 + " Años de Aventura");
+    {   
+        if(tipoCartaActual == CardType.NORMAL){
+            ConfirmaRespuesta(decisionActual.res_izq.efectos);
+            //CheckFinPartida();
+            ChangeNextDecision(decisionActual.res_izq);
+            anosText.SetText(numDecisionActual + 1 + " Años de Aventura");
+        }
     }
 
     private void ConfirmaRespuesta(short[] efectos)
@@ -353,7 +355,7 @@ public class HistoryManager : MonoBehaviour
             return true;
 
         }
-        else if (numDecisionActual == nPreguntas)
+        else if (numDecisionActual == nPreguntas - 1)
         {
             tipoFin = EndType.VICTORIA;
             return true;

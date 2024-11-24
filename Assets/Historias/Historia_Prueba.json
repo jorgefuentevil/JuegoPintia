@@ -12,9 +12,9 @@
             "res_der": {
                 "respuesta": "Esta es la descripción de la respuesta de la derecha",
                 "efectos": [
-                    0,
-                    -5,
-                    0,
+                    -110,
+                    -100,
+                    -100,
                     5
                 ],
                 "explicacion": "Esta es la explicacion derecha",
