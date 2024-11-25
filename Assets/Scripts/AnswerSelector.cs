@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using CandyCoded.HapticFeedback;
 
 public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 {
@@ -74,12 +75,18 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 
 
     public void bindBtnDerecha(){
-        Debug.Log("Soy diestro");
+        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("vibro en btn drcha");
+        }
         GestionarSwipeDerecha();
     }
 
     public void bindBtnIzquierda(){
-        Debug.Log("Soy zurdo");
+        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("vibro en btn izq");
+        }
         GestionarSwipeIzquierda();
     }
 
