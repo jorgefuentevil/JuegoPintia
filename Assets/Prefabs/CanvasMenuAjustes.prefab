@@ -2991,7 +2991,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 8114456640237405644}
   mainMenu: {fileID: 0}
-  botonVibracion: {fileID: 8765248522612450573}
+  toggleVibracion: {fileID: 8765248522612450573}
+  toggleTTS: {fileID: 6105062019588272915}
   popupLegal: {fileID: 7171553761963477031}
   textoLegal: {fileID: 7731339688139545864}
 --- !u!114 &2048084295428341803

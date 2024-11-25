@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using CandyCoded.HapticFeedback;
+using TextSpeech;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject toggleTTS;
     [SerializeField] private GameObject popupLegal;
     [SerializeField] private GameObject textoLegal;
+    [SerializeField] private TTS tts;
 
 
 
@@ -89,6 +91,7 @@ public class PauseMenu : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("TTSEnable", 0);
+            tts.StopSpeak();
         }
     }
 
