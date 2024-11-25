@@ -45,7 +45,7 @@ public class HistoryManager : MonoBehaviour
     private Vector3 posicionFlechaIzquierda;
     private Vector3 posicionTickDerecha;
     private Vector3 posicionTickIzquierda;
-    
+
     private Sprite cartaActual;
     private Image imagenCartaPersonaje;
 
@@ -83,24 +83,44 @@ public class HistoryManager : MonoBehaviour
 
     private enum EndType
     {
-        DINERO,
-        SOCIAL,
-        SALUD,
-        ESPECIFICO,
+        DINERO_MUCHO,
+        DINERO_POCO,
+
+        SOCIAL_MUCHO,
+        SOCIAL_POCO,
+
+        SALUD_MUCHO,
+        SALUD_POCO,
+
+        ESPECIFICO_MUCHO,
+        ESPECIFICO_POCO,
+
         VICTORIA
     }
 
 
-    private Decision muerteDinero = new Decision(-1,"tumba","muerte","¡Has perdido todo tu dinero, eres una decepción para tu familia!", new Respuesta("Que...", new short[] {0,0,0,0},null,-1), new Respuesta("Que...", new short[] {0,0,0,0},null,-1));
+    private readonly Decision muerteDineroPoco = new(-1, "tumba", "muerte", "¡Has perdido todo tu dinero, eres una decepción para tu familia!", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+    private readonly Decision muerteDineroMucho = new(-1, "tumba", "muerte", "¡No puedes ir con tanto dinero por la calle! Un ladrón te roba en mitad de la noche", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+
+    private readonly Decision muerteSocialPoco = new(-1, "tumba", "muerte", "Nadie te considera su amigo. Deberías comportarte mejor con el resto", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+    private readonly Decision muerteSocialMucho = new Decision(-1, "tumba", "muerte", "Eres una persona exitosa, pero tus enemigos te envidian. Eso nunca es bueno...", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+
+    private readonly Decision muerteSaludPoco = new(-1, "tumba", "muerte", "Tienes que cuidarte más, con tan poca salud no llegarás a viejo", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+    private readonly Decision muerteSaludMucho = new(-1, "tumba", "muerte", "Te creías el mas fuerte de la aldea, pero había alguien mejor que tú...", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+
+
+    private readonly Decision muerteEspecificoPoco = new(-1, "tumba", "muerte", "Especifico Poco", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+    private readonly Decision muerteEspecificoMucho = new(-1, "tumba", "muerte", "Especifico mucho", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+
 
 
 
     public void Start()
     {
-        posicionFlechaDerecha=flechaDerecha.transform.position;
-        posicionFlechaIzquierda=flechaIzquierda.transform.position;
-        posicionTickIzquierda=tickIzquierdo.transform.position;
-        posicionTickDerecha=tickDerecho.transform.position;
+        posicionFlechaDerecha = flechaDerecha.transform.position;
+        posicionFlechaIzquierda = flechaIzquierda.transform.position;
+        posicionTickIzquierda = tickIzquierdo.transform.position;
+        posicionTickDerecha = tickDerecho.transform.position;
 
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
         posicionInicial = cartaPersonaje.transform.position;
@@ -222,8 +242,9 @@ public class HistoryManager : MonoBehaviour
 
 
     public void ConfirmaRespuestaIzquierda()
-    {   
-        if(tipoCartaActual == CardType.NORMAL){
+    {
+        if (tipoCartaActual == CardType.NORMAL)
+        {
             ConfirmaRespuesta(decisionActual.res_izq.efectos);
             //CheckFinPartida();
             ChangeNextDecision(decisionActual.res_izq);
@@ -259,33 +280,39 @@ public class HistoryManager : MonoBehaviour
         selector.SetEstadoDefault();
     }
 
-    public void bindBtnDerecha(){
+    public void bindBtnDerecha()
+    {
         selector.bindBtnDerecha();
     }
 
-    public void bindBtnIzquierda(){
+    public void bindBtnIzquierda()
+    {
         selector.bindBtnIzquierda();
     }
 
-    public void ShowTickDerecha(){
+    public void ShowTickDerecha()
+    {
 
-        flechaDerecha.transform.DOMove(posicionTickDerecha, 2);
-        tickDerecho.transform.DOMove(posicionFlechaDerecha, 2);
+        flechaDerecha.transform.DOMove(posicionTickDerecha, 1);
+        tickDerecho.transform.DOMove(posicionFlechaDerecha, 1);
     }
 
-    public void HideTickDerecha(){
-        tickDerecho.transform.DOMove(posicionTickDerecha, 2);
-        flechaDerecha.transform.DOMove(posicionFlechaDerecha, 2);;
+    public void HideTickDerecha()
+    {
+        tickDerecho.transform.DOMove(posicionTickDerecha, 1);
+        flechaDerecha.transform.DOMove(posicionFlechaDerecha, 1); ;
     }
 
-    public void ShowTickIzquierda(){
-        flechaIzquierda.transform.DOMove(posicionTickIzquierda, 2);
-        tickIzquierdo.transform.DOMove(posicionFlechaIzquierda, 2);
+    public void ShowTickIzquierda()
+    {
+        flechaIzquierda.transform.DOMove(posicionTickIzquierda, 1);
+        tickIzquierdo.transform.DOMove(posicionFlechaIzquierda, 1);
     }
 
-    public void HideTickIzquierda(){
-        flechaIzquierda.transform.DOMove(posicionFlechaIzquierda, 2);
-        tickIzquierdo.transform.DOMove(posicionTickIzquierda, 2);
+    public void HideTickIzquierda()
+    {
+        flechaIzquierda.transform.DOMove(posicionFlechaIzquierda, 1);
+        tickIzquierdo.transform.DOMove(posicionTickIzquierda, 1);
     }
 
     public void SetEstadoExplicacion(string textoExplicacion)
@@ -314,36 +341,46 @@ public class HistoryManager : MonoBehaviour
 
     private bool CheckFinPartida()
     {
-        if (puntuacionDinero >= puntuacionMax || puntuacionDinero <= 0)
+        if (puntuacionDinero >= puntuacionMax)
         {
-            tipoFin = EndType.DINERO;
-            return true;
-
-        }
-        else if (puntuacionSocial >= puntuacionMax || puntuacionSocial <= 0)
-        {
-            tipoFin = EndType.SOCIAL;
-            return true;
-
-        }
-        else if (puntuacionSalud >= puntuacionMax || puntuacionSalud <= 0)
-        {
-            tipoFin = EndType.SALUD;
-            return true;
-
-        }
-        else if (puntuacionEspecifico >= puntuacionMax || puntuacionEspecifico <= 0)
-        {
-            tipoFin = EndType.ESPECIFICO;
-            return true;
-
-        }
-        else if (numDecisionActual == nPreguntas - 1)
-        {
-            tipoFin = EndType.VICTORIA;
+            tipoFin = EndType.DINERO_MUCHO;
             return true;
         }
-        return false;
+        else if (puntuacionDinero <= 0)
+        {
+            tipoFin = EndType.DINERO_POCO;
+            return true;
+        }
+        else if (puntuacionSocial >= puntuacionMax)
+        {
+            tipoFin = EndType.SOCIAL_MUCHO;
+            return true;
+        }
+        else if (puntuacionSocial <= 0)
+        {
+            tipoFin = EndType.SOCIAL_POCO;
+            return true;
+        }
+        else if (puntuacionSalud >= puntuacionMax)
+        {
+            tipoFin = EndType.SALUD_MUCHO;
+            return true;
+        }
+        else if (puntuacionSalud <= 0)
+        {
+            tipoFin = EndType.SALUD_POCO;
+            return true;
+        }
+        else if (puntuacionEspecifico >= puntuacionMax)
+        {
+            tipoFin = EndType.ESPECIFICO_MUCHO;
+            return true;
+        }
+        else if (puntuacionEspecifico <= 0)
+        {
+            tipoFin = EndType.ESPECIFICO_POCO;
+            return true;
+        }
     }
     private void ChangeNextDecision(Respuesta respuesta)
     {
@@ -374,7 +411,8 @@ public class HistoryManager : MonoBehaviour
             SetTextosDecision();
             StartCoroutine(selector.RotateAndDefault());
         }
-        else if(tipoCartaActual == CardType.PRE_MUERTE){
+        else if (tipoCartaActual == CardType.PRE_MUERTE)
+        {
             popUpMuertePanel.SetActive(true);
         }
     }
@@ -402,8 +440,9 @@ public struct Decision
 }
 
 public struct Respuesta
-{   
-    public Respuesta(string _respuesta, short[] _efectos, string _explicacion, int _siguiente){
+{
+    public Respuesta(string _respuesta, short[] _efectos, string _explicacion, int _siguiente)
+    {
         respuesta = _respuesta;
         efectos = _efectos;
         explicacion = _explicacion;
