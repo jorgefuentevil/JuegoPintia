@@ -103,7 +103,7 @@ public class HistoryManager : MonoBehaviour
     private readonly Decision muerteDineroMucho = new(-1, "tumba", "muerte", "¡No puedes ir con tanto dinero por la calle! Un ladrón te roba en mitad de la noche", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
 
     private readonly Decision muerteSocialPoco = new(-1, "tumba", "muerte", "Nadie te considera su amigo. Deberías comportarte mejor con el resto", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
-    private readonly Decision muerteSocialMucho = new Decision(-1, "tumba", "muerte", "Eres una persona exitosa, pero tus enemigos te envidian. Eso nunca es bueno...", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+    private readonly Decision muerteSocialMucho = new(-1, "tumba", "muerte", "Eres una persona exitosa, pero tus enemigos te envidian. Eso nunca es bueno...", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
 
     private readonly Decision muerteSaludPoco = new(-1, "tumba", "muerte", "Tienes que cuidarte más, con tan poca salud no llegarás a viejo", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
     private readonly Decision muerteSaludMucho = new(-1, "tumba", "muerte", "Te creías el mas fuerte de la aldea, pero había alguien mejor que tú...", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
@@ -344,43 +344,52 @@ public class HistoryManager : MonoBehaviour
         if (puntuacionDinero >= puntuacionMax)
         {
             tipoFin = EndType.DINERO_MUCHO;
+            decisionActual = muerteDineroMucho;
             return true;
         }
         else if (puntuacionDinero <= 0)
         {
             tipoFin = EndType.DINERO_POCO;
+            decisionActual = muerteDineroPoco;
             return true;
         }
         else if (puntuacionSocial >= puntuacionMax)
         {
             tipoFin = EndType.SOCIAL_MUCHO;
+            decisionActual = muerteSocialMucho;
             return true;
         }
         else if (puntuacionSocial <= 0)
         {
             tipoFin = EndType.SOCIAL_POCO;
+            decisionActual = muerteSocialPoco;
             return true;
         }
         else if (puntuacionSalud >= puntuacionMax)
         {
             tipoFin = EndType.SALUD_MUCHO;
+            decisionActual = muerteSaludMucho;
             return true;
         }
         else if (puntuacionSalud <= 0)
         {
             tipoFin = EndType.SALUD_POCO;
+            decisionActual = muerteSaludPoco;
             return true;
         }
         else if (puntuacionEspecifico >= puntuacionMax)
         {
             tipoFin = EndType.ESPECIFICO_MUCHO;
+            decisionActual = muerteEspecificoMucho;
             return true;
         }
         else if (puntuacionEspecifico <= 0)
-        {
+        {   
+            decisionActual = muerteEspecificoPoco;
             tipoFin = EndType.ESPECIFICO_POCO;
             return true;
         }
+        return false;
     }
     private void ChangeNextDecision(Respuesta respuesta)
     {
@@ -399,7 +408,6 @@ public class HistoryManager : MonoBehaviour
             //Checkeamos fin de partida
             if (CheckFinPartida())
             {
-                decisionActual = muerteDinero;  //Habría que comprobar que tipo de muerte es.
                 tipoCartaActual = CardType.PRE_MUERTE;
             }
             else
