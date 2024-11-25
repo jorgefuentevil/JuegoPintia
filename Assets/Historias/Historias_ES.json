@@ -3,6 +3,13 @@
     "num_historias": 1,
     "historias": [
         {
+            "personaje": "Paco el Granjero",
+            "desc": "Eres un granjero del pueblo de Pintia, uno de los pueblos más grandes de toda la península Iberica",
+            "coste": "0",
+            "imagen": "Ganadero_1",
+            "atributo": "Espada"
+        },
+        {
             "personaje": "El Guerrero",
             "desc": "Eres un guerrero del pueblo de Pintia, uno de los pueblos más grandes de toda la península Iberica",
             "coste": "0",
