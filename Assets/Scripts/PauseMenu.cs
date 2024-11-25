@@ -6,7 +6,8 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject mainMenu;
-    [SerializeField] private GameObject botonVibracion;
+    [SerializeField] private GameObject toggleVibracion;
+    [SerializeField] private GameObject toggleTTS;
     [SerializeField] private GameObject popupLegal;
     [SerializeField] private GameObject textoLegal;
 
@@ -21,11 +22,20 @@ public class PauseMenu : MonoBehaviour
         //Carga ajustes de vibracion
         if (PlayerPrefs.GetInt("VibracionEnabled") == 1)
         {
-            botonVibracion.GetComponent<Toggle>().isOn = true;
+            toggleVibracion.GetComponent<Toggle>().isOn = true;
         }
         else
         {
-            botonVibracion.GetComponent<Toggle>().isOn = false;
+            toggleVibracion.GetComponent<Toggle>().isOn = false;
+        }
+
+        if (PlayerPrefs.GetInt("TTSEnable") == 1)
+        {
+            toggleTTS.GetComponent<Toggle>().isOn = true;
+        }
+        else
+        {
+            toggleTTS.GetComponent<Toggle>().isOn = false;
         }
     }
 

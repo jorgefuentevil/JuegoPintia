@@ -293,26 +293,26 @@ public class HistoryManager : MonoBehaviour
     public void ShowTickDerecha()
     {
 
-        flechaDerecha.transform.DOMove(posicionTickDerecha, 1);
-        tickDerecho.transform.DOMove(posicionFlechaDerecha, 1);
+        flechaDerecha.transform.DOMove(posicionTickDerecha, 0.5f);
+        tickDerecho.transform.DOMove(posicionFlechaDerecha, 0.5f);
     }
 
     public void HideTickDerecha()
     {
-        tickDerecho.transform.DOMove(posicionTickDerecha, 1);
-        flechaDerecha.transform.DOMove(posicionFlechaDerecha, 1); ;
+        tickDerecho.transform.DOMove(posicionTickDerecha, 0.5f);
+        flechaDerecha.transform.DOMove(posicionFlechaDerecha, 0.5f); ;
     }
 
     public void ShowTickIzquierda()
     {
-        flechaIzquierda.transform.DOMove(posicionTickIzquierda, 1);
-        tickIzquierdo.transform.DOMove(posicionFlechaIzquierda, 1);
+        flechaIzquierda.transform.DOMove(posicionTickIzquierda, 0.5f);
+        tickIzquierdo.transform.DOMove(posicionFlechaIzquierda, 0.5f);
     }
 
     public void HideTickIzquierda()
     {
-        flechaIzquierda.transform.DOMove(posicionFlechaIzquierda, 1);
-        tickIzquierdo.transform.DOMove(posicionTickIzquierda, 1);
+        flechaIzquierda.transform.DOMove(posicionFlechaIzquierda, 0.5f);
+        tickIzquierdo.transform.DOMove(posicionTickIzquierda, 0.5f);
     }
 
     public void SetEstadoExplicacion(string textoExplicacion)
