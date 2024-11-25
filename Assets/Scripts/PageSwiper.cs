@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using CandyCoded.HapticFeedback;
 
 public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     private Vector3 panelLocation;
@@ -33,10 +34,12 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
             Vector3 newLocation = panelLocation;
             if(percentage > 0 && currentPage < totalPages){
                 currentPage++;
+                Vibracion();
                 audioManager.PlaySlideSFX();
                 newLocation += new Vector3(-Screen.width, 0, 0);
             }else if(percentage < 0 && currentPage > 1){
                 currentPage--;
+                Vibracion();
                 audioManager.PlaySlideSFX();
                 newLocation += new Vector3(Screen.width, 0, 0); 
             }
@@ -54,6 +57,14 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
             t += Time.deltaTime / seconds;
             transform.position = Vector3.Lerp(startpos, endpos, Mathf.SmoothStep(0f, 1f, t));
             yield return null;
+        }
+    }
+
+    public void Vibracion()
+    {
+        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("vibro cambiando el lvl");
         }
     }
 }

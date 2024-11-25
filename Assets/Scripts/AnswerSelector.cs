@@ -75,23 +75,20 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 
 
     public void bindBtnDerecha(){
-        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
-            HapticFeedback.HeavyFeedback();
-            Debug.Log("vibro en btn drcha");
-        }
         GestionarSwipeDerecha();
     }
 
     public void bindBtnIzquierda(){
-        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
-            HapticFeedback.HeavyFeedback();
-            Debug.Log("vibro en btn izq");
-        }
         GestionarSwipeIzquierda();
     }
 
     private void GestionarSwipeDerecha()
     {
+
+        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("vibro hacia la der");
+        }
 
         if (historyManager.tipoCartaActual == CardType.NORMAL)
         {
@@ -131,6 +128,12 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void GestionarSwipeIzquierda()
     {
+
+        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("vibro hacia la izq");
+        }
+
         if (historyManager.tipoCartaActual == CardType.NORMAL)
         {
             switch (estadoCarta)
