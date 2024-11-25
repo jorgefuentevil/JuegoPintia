@@ -133,8 +133,8 @@ public class HistoryManager : MonoBehaviour
         }
         else
         {
-            parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonTutorial.text);
             PlayerPrefs.SetInt("Tutorial", 1);
+            parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonTutorial.text);
         }
 
         //Elegimos si queremos preguntas aleatorias o no.

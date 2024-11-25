@@ -14,6 +14,14 @@ public class WaitLoadPage : MonoBehaviour
     {
         //Wait for 2 seconds
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene("MainMenuScene");
+        if (PlayerPrefs.HasKey("Tutorial"))
+        {
+            SceneManager.LoadScene("MainMenuScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("GamePrincipalScene");
+        }
+        
     }
 }
