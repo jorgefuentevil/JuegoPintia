@@ -7,10 +7,16 @@ public class MainMenuEstadoInicial : MonoBehaviour{
 [SerializeField] private GameObject MainMenuPanel;
 [SerializeField] private GameObject PopUpEdadPanel;
 [SerializeField] private GameObject MenuAjustesPanel;
+[SerializeField] private GameObject AudioManager;
 
 
 
     public void Awake(){
+
+        if(GameObject.FindGameObjectWithTag("AudioManager") == null){
+            Instantiate(AudioManager);
+        }
+
         MainMenuPanel.SetActive(true);
         MenuAjustesPanel.SetActive(true);
         MenuAjustesPanel.SetActive(false);

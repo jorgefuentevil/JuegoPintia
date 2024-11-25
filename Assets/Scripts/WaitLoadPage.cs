@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class WaitLoadPage : MonoBehaviour
-{
-
+{   
+    
     void Start()
     {
         StartCoroutine(waiter());
