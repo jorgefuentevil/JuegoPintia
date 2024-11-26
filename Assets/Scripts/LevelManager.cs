@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     private LevelsJsonRoot parsedNiveles;
     private int numberOfLevels = 1;
     private Rect panelDimensions;
+    private PageSwiper swiper;
 
 
     public void Start()
@@ -40,7 +41,7 @@ public class LevelManager : MonoBehaviour
         }).WaitForCompletion();
 
         GameObject panelClone = Instantiate(levelHolder) as GameObject;
-        PageSwiper swiper = levelHolder.AddComponent<PageSwiper>();
+        swiper = levelHolder.AddComponent<PageSwiper>();
         swiper.totalPages = numberOfLevels;
         swiper.levelManager = this;
         panelDimensions = levelHolder.GetComponent<RectTransform>().rect;
@@ -86,6 +87,12 @@ public class LevelManager : MonoBehaviour
             textToSpeachManager.StartSpeaking(textToSpeech);
         }
         
+    }
+
+    public void JuegaHistoria(){
+        //TODO: Aqui habría que pillar el nombre del fichero que contiene la historia.
+        //La string que le pases al método da igual de momento.
+        GameManager.Instance.CambiaEscenaGamePrincipal("este texto da igual xd");
     }
 
 

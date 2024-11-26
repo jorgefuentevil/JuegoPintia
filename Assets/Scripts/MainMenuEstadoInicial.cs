@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class MainMenuEstadoInicial : MonoBehaviour{
 
-[SerializeField] private GameObject MainMenuPanel;
-[SerializeField] private GameObject PopUpEdadPanel;
-[SerializeField] private GameObject MenuAjustesPanel;
-[SerializeField] private GameObject AudioManager;
-
-
+    [SerializeField] private GameObject MainMenuPanel;
+    [SerializeField] private GameObject PopUpEdadPanel;
+    [SerializeField] private GameObject MenuAjustesPanel;
+    [SerializeField] private GameObject AudioManagerPrefab;
 
     public void Awake(){
 
         if(GameObject.FindGameObjectWithTag("AudioManager") == null){
-            Instantiate(AudioManager);
+            Instantiate(AudioManagerPrefab);
         }
 
         MainMenuPanel.SetActive(true);

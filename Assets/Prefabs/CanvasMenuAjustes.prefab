@@ -2995,6 +2995,7 @@ MonoBehaviour:
   toggleTTS: {fileID: 6105062019588272915}
   popupLegal: {fileID: 7171553761963477031}
   textoLegal: {fileID: 7731339688139545864}
+  tts: {fileID: 0}
 --- !u!114 &2048084295428341803
 MonoBehaviour:
   m_ObjectHideFlags: 0
