@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,9 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public AsyncOperation EstadoLoadScene; //TODO
-
-    public string currentLevel;
+    [System.NonSerialized] public AsyncOperation EstadoLoadScene; //TODO
+    [System.NonSerialized] public string currentLevel;
 
     
     public void Awake()
