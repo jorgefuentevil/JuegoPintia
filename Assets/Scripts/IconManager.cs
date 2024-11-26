@@ -29,6 +29,17 @@ public class IconManager : MonoBehaviour
     [SerializeField] private Image especificoContorno;
     [SerializeField] private Image especificoFill;
 
+    [Header("FLECHAS SELECCION")]
+    [SerializeField] private GameObject flechaDerecha;
+    [SerializeField] private GameObject flechaIzquierda;
+    [SerializeField] private GameObject tickDerecha;
+    [SerializeField] private GameObject tickIzquierda;
+
+    private Vector3 posicionFlechaDerecha;
+    private Vector3 posicionFlechaIzquierda;
+    private Vector3 posicionTickDerecha;
+    private Vector3 posicionTickIzquierda;
+
     private readonly short puntuacionInicial = 10;
     private readonly short multiplicadorNormal = 1;
     private readonly short multiplicadorDoble = 2;
@@ -47,6 +58,12 @@ public class IconManager : MonoBehaviour
     public void Start()
     {
 
+        //Guardamos posiciones de animaciones
+        posicionFlechaDerecha = flechaDerecha.transform.position;
+        posicionFlechaIzquierda = flechaIzquierda.transform.position;
+        posicionTickIzquierda = tickIzquierda.transform.position;
+        posicionTickDerecha = tickDerecha.transform.position;
+
         //Escondemos variaciones
         dineroVariacion.transform.localScale = Vector3.zero;
         socialVariacion.transform.localScale = Vector3.zero;
@@ -63,13 +80,14 @@ public class IconManager : MonoBehaviour
 
     public void PreviewEfectos(short[] stats)
     {
-        PreviewEfectoIndividual(dineroVariacion,stats[0]);
-        PreviewEfectoIndividual(socialVariacion,stats[1]);
-        PreviewEfectoIndividual(saludVariacion,stats[2]);
-        PreviewEfectoIndividual(especificoVariacion,stats[3]);
+        PreviewEfectoIndividual(dineroVariacion, stats[0]);
+        PreviewEfectoIndividual(socialVariacion, stats[1]);
+        PreviewEfectoIndividual(saludVariacion, stats[2]);
+        PreviewEfectoIndividual(especificoVariacion, stats[3]);
     }
 
-    private void PreviewEfectoIndividual(GameObject variacion, short stat){
+    private void PreviewEfectoIndividual(GameObject variacion, short stat)
+    {
         if (stat == 0) return;
 
         float scale = (Math.Abs(stat) == 1) ? scaleVariacionSimple : scaleVariacionDoble;
@@ -77,7 +95,7 @@ public class IconManager : MonoBehaviour
     }
 
     public void AplicaEfectos(short[] stats, short puntuacionMax)
-    {   
+    {
 
         AplicaEfectoIndividual(dineroFill, dineroContorno, stats[0], puntuacionMax);
         AplicaEfectoIndividual(socialFill, socialContorno, stats[1], puntuacionMax);
@@ -97,8 +115,8 @@ public class IconManager : MonoBehaviour
         seq.Append(contornoImage.DOColor(color, 0.3f));
         seq.Insert(0, fillImage.DOColor(color, 0.3f));
         seq.Append(fillImage.DOFillAmount(fill, 1.2f));
-        seq.Insert(1, contornoImage.DOColor(colorBlanco, 1.8f));
-        seq.Insert(1, fillImage.DOColor(colorBlanco, 1.8f));
+        seq.Insert(1, contornoImage.DOColor(colorBlanco, 1.5f));
+        seq.Insert(1, fillImage.DOColor(colorBlanco, 1.5f));
     }
 
 
@@ -108,6 +126,34 @@ public class IconManager : MonoBehaviour
         socialVariacion.transform.DOScale(0, easeOutVariaciones);
         saludVariacion.transform.DOScale(0, easeOutVariaciones);
         especificoVariacion.transform.DOScale(0, easeOutVariaciones);
+
+        ShowFlechaDerecha();
+        ShowFlechaIzquierda();
+    }
+
+    public void ShowFlechaDerecha()
+    {
+        tickDerecha.transform.DOMove(posicionTickDerecha, 0.5f);
+        flechaDerecha.transform.DOMove(posicionFlechaDerecha, 0.5f);
+    }
+
+    public void ShowTickDerecha()
+    {
+        flechaDerecha.transform.DOMove(posicionTickDerecha, 0.5f);
+        tickDerecha.transform.DOMove(posicionFlechaDerecha, 0.5f);
+    }
+
+    public void ShowFlechaIzquierda()
+    {
+        flechaIzquierda.transform.DOMove(posicionFlechaIzquierda, 0.5f);
+        tickIzquierda.transform.DOMove(posicionTickIzquierda, 0.5f);
+
+    }
+
+    public void ShowTickIzquierda()
+    {
+        flechaIzquierda.transform.DOMove(posicionTickIzquierda, 0.5f);
+        tickIzquierda.transform.DOMove(posicionFlechaIzquierda, 0.5f);
     }
 
 
