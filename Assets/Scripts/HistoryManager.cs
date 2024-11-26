@@ -165,6 +165,8 @@ public class HistoryManager : MonoBehaviour
         SetTextosDecision();
 
         SetEstadoDefault();
+
+        GameObject.FindGameObjectWithTag("GamePrincipalManager").GetComponent<GamePrincipalEstadoInicial>().TerminaTransicion();
     }
 
     private void CargaPreguntasAleatorias()

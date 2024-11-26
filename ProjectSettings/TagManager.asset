@@ -17,6 +17,7 @@ TagManager:
   - varEspecifico
   - CanvaImagen
   - AudioManager
+  - GamePrincipalManager
   layers:
   - Default
   - TransparentFX
