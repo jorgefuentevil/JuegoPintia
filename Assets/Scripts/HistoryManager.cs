@@ -39,7 +39,7 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private GameObject tickDerecho;
     [SerializeField] private GameObject tickIzquierdo;
     [SerializeField] private GameObject popUpMuertePanel;
-    [SerializeField] private TTS textToSpeachManager;
+    [SerializeField] private TTS textToSpeechManager;
 
     private Vector3 posicionFlechaDerecha;
     private Vector3 posicionFlechaIzquierda;
@@ -50,7 +50,7 @@ public class HistoryManager : MonoBehaviour
     private Image imagenCartaPersonaje;
 
 
-    [Header("---- ICONOS SUPERIORES")]
+    [Header("---- ICONOS SUPERIORES ----")]
     [SerializeField] private IconManager iconManager;
 
 
@@ -71,13 +71,12 @@ public class HistoryManager : MonoBehaviour
     private AnswerSelector selector;
 
 
-    public CardType tipoCartaActual;
+    [System.NonSerialized] public CardType tipoCartaActual;
 
     private EndType tipoFin;
 
     private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
     private readonly Color colorNormal = new(1, 1, 1);
-
 
 
 
@@ -200,7 +199,7 @@ public class HistoryManager : MonoBehaviour
         anosText.SetText(numDecisionActual + " Años de Aventura");
         if (PlayerPrefs.GetInt("TTSEnable") == 1)
         {
-            textToSpeachManager.StartSpeaking(decisionActual.desc);
+            textToSpeechManager.StartSpeaking(decisionActual.desc);
         }
     }
 
@@ -214,7 +213,7 @@ public class HistoryManager : MonoBehaviour
         iconManager.PreviewEfectos(decisionActual.res_der.efectos);
         if (PlayerPrefs.GetInt("TTSEnable") == 1)
         {
-            textToSpeachManager.StartSpeaking(decisionActual.res_der.respuesta);
+            textToSpeechManager.StartSpeaking(decisionActual.res_der.respuesta);
         }
     }
 
@@ -228,7 +227,7 @@ public class HistoryManager : MonoBehaviour
         Debug.Log(PlayerPrefs.GetInt("TTSEnable"));
         if (PlayerPrefs.GetInt("TTSEnable") == 1)
         {
-            textToSpeachManager.StartSpeaking(decisionActual.res_izq.respuesta);
+            textToSpeechManager.StartSpeaking(decisionActual.res_izq.respuesta);
         }
     }
 
@@ -326,7 +325,7 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         if (PlayerPrefs.GetInt("TTSEnable") == 1)
         {
-            textToSpeachManager.StartSpeaking(textoExplicacion);
+            textToSpeechManager.StartSpeaking(textoExplicacion);
         }
     }
 

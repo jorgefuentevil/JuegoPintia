@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 626811592}
   - component: {fileID: 626811594}
   m_Layer: 0
-  m_Name: LoadingScreen Estado Inicial
+  m_Name: LoadingScreen Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
