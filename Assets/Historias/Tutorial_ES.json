@@ -35,7 +35,7 @@
         {
             "id": 1,
             "personaje": "Aldea",
-            "imagen": "Gente_Sanson",
+            "imagen": "Aldea_Sanson",
             "desc": "Hombres y mujeres trabajan la tierra y se organizan en torno a un granero comunal. (Pulsando las flechas tambien podrás decidir)",
             "res_der": {
                 "respuesta": "Acercarse sin miedo (pulsa el tick para confirmar o la flecha para volver)",
