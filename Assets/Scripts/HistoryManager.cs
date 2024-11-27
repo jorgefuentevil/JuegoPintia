@@ -294,7 +294,7 @@ public class HistoryManager : MonoBehaviour
     public void HideTickDerecha()
     {
         tickDerecho.transform.DOMove(posicionTickDerecha, 0.5f);
-        flechaDerecha.transform.DOMove(posicionFlechaDerecha, 0.5f); ;
+        flechaDerecha.transform.DOMove(posicionFlechaDerecha, 0.5f);
     }
 
     public void ShowTickIzquierda()

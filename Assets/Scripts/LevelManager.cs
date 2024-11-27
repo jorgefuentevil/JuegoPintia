@@ -5,6 +5,8 @@ using UnityEngine.AddressableAssets;
 using TMPro;
 using UnityEngine.Localization;
 using System.Linq;
+using DG.Tweening;
+using CandyCoded.HapticFeedback;
   
 public class LevelManager : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject thisCanvas;         //Canvas padre de toda la UI
     [SerializeField] private LocalizedAsset<TextAsset>  jsonHistorias;
     [SerializeField] private TextMeshProUGUI contadorText;
+    [SerializeField] private GameObject flechaIzq;
+    [SerializeField] private GameObject flechaDer;
     [SerializeField] private TextMeshProUGUI personajeText;
     [SerializeField] private TextMeshProUGUI descripcionText;
     [SerializeField] private AssetLabelReference assetsPersonajes;
@@ -22,6 +26,8 @@ public class LevelManager : MonoBehaviour
     private int numberOfLevels = 1;
     private Rect panelDimensions;
     private PageSwiper swiper;
+    private Vector3 posFlechaDer;
+    private Vector3 posFlechaIzq;
 
 
     public void Start()
@@ -45,6 +51,8 @@ public class LevelManager : MonoBehaviour
         swiper.totalPages = numberOfLevels;
         swiper.levelManager = this;
         panelDimensions = levelHolder.GetComponent<RectTransform>().rect;
+        posFlechaDer=flechaDer.transform.position;
+        posFlechaIzq=flechaIzq.transform.position;
 
 
         for (int i = 0; i < numberOfLevels; i++)
@@ -63,6 +71,9 @@ public class LevelManager : MonoBehaviour
 
             panel.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = aux;
         }
+
+        flechaIzq.transform.DOMoveX(-700,2);
+
         Destroy(panelClone);
         Destroy(levelHolder.transform.GetChild(0).gameObject);
 
@@ -86,12 +97,45 @@ public class LevelManager : MonoBehaviour
         textToSpeachManager.StartSpeaking(textToSpeech);       
     }
 
-    public void JuegaHistoria(){
+
+    public void BindBtnDerecha()
+    {
+        Debug.Log("total lvl: "+numberOfLevels);        
+        Vibracion();
+        swiper.BindBtnDerecha();
+        if(swiper.getCurrentPage()==2) //si estamos en el lvl 1 desplazamos btn a la izq
+            flechaIzq.transform.DOMoveX(posFlechaIzq.x,1.5f);
+        else if(swiper.getCurrentPage()==numberOfLevels)
+            flechaDer.transform.DOMoveX(Screen.width+50,1.5f);
+        Debug.Log("lvl: "+swiper.getCurrentPage());
+    }
+
+    public void BindBtnIzquierda()
+    {
+        Debug.Log("lvl: "+swiper.getCurrentPage());
+        Vibracion();
+        swiper.BindBtnIzquierda();
+        if(swiper.getCurrentPage()==1) //si estamos en el lvl 1 desplazamos btn a la izq
+            flechaIzq.transform.DOMoveX(-Screen.width/4,1.5f);
+        else if(swiper.getCurrentPage()==numberOfLevels-1)
+            flechaDer.transform.DOMoveX(posFlechaDer.x,1.5f);
+    }
+
+    public void JuegaHistoria()
+    {
         //TODO: Aqui habría que pillar el nombre del fichero que contiene la historia.
         //La string que le pases al método da igual de momento.
+        Vibracion();
         GameManager.Instance.CambiaEscenaGamePrincipal("este texto da igual xd");
     }
 
+    public void Vibracion()
+    {
+        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("vibro cambiando el lvl");
+        }
+    }
 
 }
 

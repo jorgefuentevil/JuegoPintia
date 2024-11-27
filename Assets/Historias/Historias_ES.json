@@ -1,6 +1,6 @@
 {
     "lenguaje": "es_ES",
-    "num_historias": 2,
+    "num_historias": 3,
     "historias": [
         {
             "personaje": "Togodumnus el Granjero",
@@ -14,6 +14,13 @@
             "desc": "Eres un guerrero del pueblo de Pintia, uno de los pueblos más grandes de toda la península Iberica",
             "coste": "0",
             "imagen": "Guerrero_1",
+            "atributo": "Espada"
+        },
+        {
+            "personaje": "Korean Muebles",
+            "desc": "Eres un koreano del pueblo de Pintia, uno de los pueblos más grandes de toda la península Iberica",
+            "coste": "0",
+            "imagen": "Mercenario_1",
             "atributo": "Espada"
         }
     ]

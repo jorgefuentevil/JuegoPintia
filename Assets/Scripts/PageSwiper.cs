@@ -33,25 +33,51 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
         if(Mathf.Abs(percentage) >= percentThreshold){
             Vector3 newLocation = panelLocation;
             if(percentage > 0 && currentPage < totalPages){
-                currentPage++;
-                Vibracion();
-                audioManager.PlaySlideSFX();
-                newLocation += new Vector3(-Screen.width, 0, 0);
+                GestionarSwipeDerecha(newLocation);
             }else if(percentage < 0 && currentPage > 1){
-                currentPage--;
-                Vibracion();
-                audioManager.PlaySlideSFX();
-                newLocation += new Vector3(Screen.width, 0, 0); 
+                GestionarSwipeIzquierda(newLocation);
             }
-            StartCoroutine(SmoothMove(transform.position, newLocation, easing));
-            panelLocation = newLocation;
-            levelManager.SetLevelData(currentPage-1);
         }else{
             StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
             levelManager.SetLevelData(currentPage-1);
         }
     }
-    IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds){
+
+    public void GestionarSwipeDerecha(Vector3 nl)
+    {
+        currentPage++;
+        Vibracion();
+        audioManager.PlaySlideSFX();
+        nl += new Vector3(-Screen.width, 0, 0);
+        StartCoroutine(SmoothMove(transform.position, nl, easing));
+        panelLocation = nl;
+        levelManager.SetLevelData(currentPage-1);
+    }
+
+    public void GestionarSwipeIzquierda(Vector3 nl)
+    {
+        currentPage--;
+        Vibracion();
+        audioManager.PlaySlideSFX();
+        nl += new Vector3(Screen.width, 0, 0); 
+        StartCoroutine(SmoothMove(transform.position, nl, easing));
+        panelLocation = nl;
+        levelManager.SetLevelData(currentPage-1);
+    }
+
+    public void BindBtnDerecha()
+    {
+        GestionarSwipeDerecha(panelLocation);
+    }
+
+    public void BindBtnIzquierda()
+    {
+        GestionarSwipeIzquierda(panelLocation);
+    }
+
+
+    IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds)
+    {
         float t = 0f;
         while(t <= 1.0){
             t += Time.deltaTime / seconds;
@@ -66,5 +92,9 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro cambiando el lvl");
         }
+    }
+    public int getCurrentPage()
+    {
+        return currentPage;
     }
 }
