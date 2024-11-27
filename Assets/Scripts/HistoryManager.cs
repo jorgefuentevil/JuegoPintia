@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.Localization.SmartFormat;
 using Newtonsoft.Json;
 
-public class HistoryManager2 : MonoBehaviour
+public class HistoryManager : MonoBehaviour
 {
     [Header("---- ASSETS ----")]
     [SerializeField] private TextAsset jsonHistoria;
@@ -46,8 +46,8 @@ public class HistoryManager2 : MonoBehaviour
     private Respuesta respuestaActual;
 
 
-    private AnswerSelector2 selector;
-    private MaquinaEstadosCartas1 maquinaEstados;
+    private AnswerSelector selector;
+    private MaquinaEstadosCartas maquinaEstados;
 
     private Sprite spriteCartaActual;
     private Image imagenCartaPersonaje;
@@ -84,18 +84,18 @@ public class HistoryManager2 : MonoBehaviour
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
         posicionInicial = cartaPersonaje.transform.position;
         
-        selector = cartaPersonaje.AddComponent<AnswerSelector2>();
+        selector = cartaPersonaje.AddComponent<AnswerSelector>();
         selector.historyManager = this;
 
 
-        maquinaEstados = gameObject.AddComponent<MaquinaEstadosCartas1>();
+        maquinaEstados = gameObject.AddComponent<MaquinaEstadosCartas>();
         maquinaEstados.historyManager = this;
         maquinaEstados.selector = selector;
         maquinaEstados.iconManager = iconManager;
         
         selector.maquinaEstados = maquinaEstados;
 
-        maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.INICIALIZANDO);
+        maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.INICIALIZANDO);
 
     }
 
@@ -298,7 +298,7 @@ public class HistoryManager2 : MonoBehaviour
         {
             spriteCartaActual = spriteCartaExplicacion;
             //TODO: Set Elementos decision????
-            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.SHOW_EXPLICACION);
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.SHOW_EXPLICACION);
         }
         //else if(final de partida){}
         else if(respuestaActual.siguiente != -1 ) //Comprobar si está commiting o no
@@ -307,13 +307,13 @@ public class HistoryManager2 : MonoBehaviour
             //Confiamos en que de verdad existe la siguiente decision xddd🍆🍆🍆
             decisionActual = parsedHistorias.decisiones_respuesta[respuestaActual.siguiente];
             SetElementosDecision();
-            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.ELIGE_CARTA);
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.ELIGE_CARTA);
         }
         else if(respuestaActual.siguiente == -1)
         {
             decisionActual = decisionesPartida[++numDecisionActual];
             SetElementosDecision();
-            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.ELIGE_CARTA);
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.ELIGE_CARTA);
         }
     }
 }

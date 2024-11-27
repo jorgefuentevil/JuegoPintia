@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class MaquinaEstadosCartas1 : MonoBehaviour
+public class MaquinaEstadosCartas : MonoBehaviour
 {
     public enum GameState
     {
@@ -31,8 +31,8 @@ public class MaquinaEstadosCartas1 : MonoBehaviour
 
     public GameState estadoActual { get; private set; }
     private GameState estadoAuxiliar = GameState.NINGUNO;
-    public HistoryManager2 historyManager;
-    public AnswerSelector2 selector;
+    public HistoryManager historyManager;
+    public AnswerSelector selector;
     public IconManager iconManager;
 
     public void Awake(){
@@ -169,12 +169,6 @@ public class MaquinaEstadosCartas1 : MonoBehaviour
         estadoActual = estadoAuxiliar;
         estadoAuxiliar = GameState.NINGUNO;
     }
-
-
-
-
-
-
 
 
     //Getters del Enum de Estados

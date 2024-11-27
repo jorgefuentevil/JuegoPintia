@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using CandyCoded.HapticFeedback;
 
-public class AnswerSelector2 : MonoBehaviour, IDragHandler, IEndDragHandler
+public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 {
 
 
@@ -13,8 +13,8 @@ public class AnswerSelector2 : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private Vector3 imageLocation;
 
-    public HistoryManager2 historyManager;
-    public MaquinaEstadosCartas1 maquinaEstados;
+    public HistoryManager historyManager;
+    public MaquinaEstadosCartas maquinaEstados;
 
     private AudioManager audioManager;
 
@@ -84,20 +84,20 @@ public class AnswerSelector2 : MonoBehaviour, IDragHandler, IEndDragHandler
         if (maquinaEstados.EstaEligeCarta())
         {
             //Cambiamos a Show_Respuesta_Derecha
-            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.SHOW_RESPUESTA_DERECHA);
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.SHOW_RESPUESTA_DERECHA);
         }
         else if (maquinaEstados.EstaShowRespuestaDerecha())
         {
             //Cambiamos a Commit_Respuesta_Derecha
-            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.COMMIT_RESPUESTA_DERECHA);
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_RESPUESTA_DERECHA);
         }
         else if (maquinaEstados.EstaShowRespuestaIzquierda())
         {
-            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.ELIGE_CARTA);
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.ELIGE_CARTA);
         }
         else if (maquinaEstados.EstaShowExplicacion())
         {
-            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.COMMIT_EXPLICACION_DERECHA);
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_EXPLICACION_DERECHA);
         }
 
 
@@ -115,21 +115,21 @@ public class AnswerSelector2 : MonoBehaviour, IDragHandler, IEndDragHandler
         if (maquinaEstados.EstaEligeCarta())
         {
             //Cambiamos a Show_Respuesta_Izquierda
-            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.SHOW_RESPUESTA_IZQUIERDA);
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.SHOW_RESPUESTA_IZQUIERDA);
         }
         else if (maquinaEstados.EstaShowRespuestaIzquierda())
         {
             //Cambiamos a Commit_Respuesta_Izquierda
-            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.COMMIT_RESPUESTA_IZQUIERDA);
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_RESPUESTA_IZQUIERDA);
 
         }
         else if (maquinaEstados.EstaShowRespuestaDerecha())
         {
-            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.ELIGE_CARTA);
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.ELIGE_CARTA);
         }
         else if (maquinaEstados.EstaShowExplicacion())
         {
-            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.COMMIT_EXPLICACION_IZQUIERDA);
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_EXPLICACION_IZQUIERDA);
         }
 
 
