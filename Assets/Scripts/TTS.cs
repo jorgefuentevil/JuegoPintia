@@ -19,7 +19,10 @@ public class TTS : MonoBehaviour
     }
 
     public void StartSpeaking(string textToSpeak){
-        TextToSpeech.Instance.StartSpeak(textToSpeak);
+        if (PlayerPrefs.GetInt("TTSEnable") == 1)
+        {
+            TextToSpeech.Instance.StartSpeak(textToSpeak);
+        }
     }
     public void StopSpeak(){
         TextToSpeech.Instance.StopSpeak();
