@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TextSpeech;
 using UnityEngine.Android;
+using UnityEngine.Localization.Settings;
+
 
 public class TTS : MonoBehaviour
 {
-    [SerializeField] private string language = "es-ES";
+    [SerializeField] private string language = "es";
     // Start is called before the first frame update
     void Start()
     {
+        var selectedLocale = LocalizationSettings.SelectedLocale;
+        language = selectedLocale.Identifier.Code;
         TextToSpeech.Instance.Setting(language,1,1);
 
     }
