@@ -1,92 +1,177 @@
 {
-    "historia": "Prueba",
+    "historia": "El Guerrero",
     "idioma": "es_ES",
     "nivel": 1,
     "aleatoria": false,
     "decisiones": [
         {
             "id": 0,
-            "imagen": "Anciano_1",
-            "personaje" : "Anciano Paco",
-            "desc": "Primera decisión, debería cargarse esto bien jejejej. Un poco de rellenoooooooo",
+            "personaje": "Maecader Merlin",
+            "imagen": "Mercader_1",
+            "desc": "En un mercado, encuentras un comerciante que tiene un amuleto de protección para los guerreros. El amuleto es costoso, pero podría protegerte en batalla.",
             "res_der": {
-                "respuesta": "Esta es la descripción de la respuesta de la derecha",
-                "efectos": [
-                    -110,
-                    -100,
-                    -100,
-                    5
-                ],
+                "respuesta": "Comprar el amuleto, gastando una gran cantidad de tu dinero.",
                 "explicacion": "Esta es la explicacion derecha",
+                "efectos": [
+                    "-1",
+                    "0",
+                    "1",
+                    "0"
+                ],
                 "siguiente": -1
             },
             "res_izq": {
-                "respuesta": "Esta es la descripción de la respuesta de la izquierda",
+                "respuesta": "No comprar el amuleto y guardar el dinero.",
+                "explicacion": "Esta es la explicacion izquierda",
                 "efectos": [
-                    5,
-                    0,
-                    -5,
-                    0
+                    "1",
+                    "0",
+                    "-1",
+                    "0"
                 ],
-                "explicacion": null,
                 "siguiente": -1
             }
         },
         {
             "id": 1,
-            "imagen": "Jabali_2",
-            "personaje" : "Hog Rider",
-            "desc": "Segunda decision. La derecha tiene respuesta y la izquierda expl. y respuesta.",
+            "personaje": "Arbusto",
+            "imagen": "Arbusto_1",
+            "desc": "Durante una patrulla nocturna, el soldado escucha ruido en la oscuridad y sospecha que podrían ser exploradores de un pueblo enemigo.",
             "res_der": {
-                "respuesta": "Esta es la descripción de la respuesta de la derecha",
-                "efectos": [
-                    0,
-                    -1,
-                    0,
-                    1
-                ],
+                "respuesta": "Informar inmediatamente a los superiores, alertando al resto de la tribu.",
                 "explicacion": null,
-                "siguiente": 1
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
             },
             "res_izq": {
-                "respuesta": "Esta es la descripción de la respuesta de la izquierda",
+                "respuesta": "Decidir esperar y observar, pensando que podría ser solo un animal.",
+                "explicacion": null,
                 "efectos": [
-                    0,
-                    -1,
-                    0,
-                    1
+                    "0",
+                    "0",
+                    "0",
+                    "0"
                 ],
-                "explicacion": "Esta es la explicacion izquierda",
-                "siguiente": 1
+                "siguiente": 0
+            }
+        },
+        {
+            "id": 2,
+            "personaje": "Mercenario Jefe",
+            "imagen": "Mercenario_1",
+            "desc": "Un grupo de mercenarios propone al soldado unirse a su banda para ganar dinero extra en una misión contra un pueblo rival.",
+            "res_der": {
+                "respuesta": "Unirse a los mercenarios para obtener recompensas.",
+                "explicacion": null,
+                "efectos": [
+                    "1",
+                    "0",
+                    "-1",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Rechazar la propuesta y mantenerse leal a su tribu.",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "1",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 3,
+            "personaje": "Guerrero Juan",
+            "imagen": "Guerrero_2",
+            "desc": "En una batalla, el soldado se encuentra con un compañero herido en el suelo. Si se detiene a ayudarlo, pone en riesgo su propia seguridad.",
+            "res_der": {
+                "respuesta": "Ayudar al compañero y llevarlo a un lugar seguro.",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "1",
+                    "-1",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Seguir avanzando y dejar al guerrero, asegurando su propia seguridad",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-1",
+                    "1",
+                    "0"
+                ],
+                "siguiente": -1
             }
         }
+
     ],
     "decisiones_respuesta": [
         {
             "id": 0,
-            "imagen": "Armadura_1",
-            "personaje" : "Armadura de Diamante",
-            "desc": "Esta es la respuesta a una decision anterior",
+            "personaje": "Bosque",
+            "imagen": "Bosque_1",
+            "desc": "Resulta que no era un animal, tu grupo es emboscado por guerreros de una tribu rival.",
             "res_der": {
-                "respuesta": "Esta es la descripción de la respuesta de la derecha",
+                "respuesta": "Atacar, mostrando valentía.",
+                "explicacion": null,
                 "efectos": [
-                    0,
-                    -1,
-                    0,
-                    1
+                    "0",
+                    "0",
+                    "-1",
+                    "1"
                 ],
-                "explicacion": "Esta es la explicacion izquierda",
                 "siguiente": -1
             },
             "res_izq": {
-                "respuesta": "Esta es la descripción de la respuesta de la izquierda",
+                "respuesta": "Retirarse estratégicamente.",
+                "explicacion": null,
                 "efectos": [
-                    0,
-                    -1,
-                    0,
-                    1
+                    "0",
+                    "0",
+                    "1",
+                    "-1"
                 ],
-                "explicacion": "Esta es la explicacion izquierda",
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 1,
+            "personaje": "Guerrero Llyr",
+            "imagen": "Guerrero_1",
+            "desc": "Durante la cacería tu pueblo fue atacado, aun sin ti la defensa ganó",
+            "res_der": {
+                "respuesta": "Pedir disculpas y hacer doble turno",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "1",
+                    "-1",
+                    "-2"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No hablar mas sobre ello",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "-2"
+                ],
                 "siguiente": -1
             }
         }

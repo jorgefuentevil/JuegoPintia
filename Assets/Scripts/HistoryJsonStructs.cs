@@ -40,6 +40,6 @@ public struct HistoryJsonRoot
     public string idioma;
     public int nivel;
     public bool aleatoria;
-    public List<Decision> decisiones;
-    public List<Decision> decisiones_respuesta;
+    public System.Collections.Generic.List<Decision> decisiones;
+    public System.Collections.Generic.List<Decision> decisiones_respuesta;
 }

@@ -35,10 +35,10 @@ public class IconManager : MonoBehaviour
     [SerializeField] private GameObject tickDerecha;
     [SerializeField] private GameObject tickIzquierda;
 
-    private Vector3 posicionFlechaDerecha;
-    private Vector3 posicionFlechaIzquierda;
-    private Vector3 posicionTickDerecha;
-    private Vector3 posicionTickIzquierda;
+    private Vector3 posicionShowDerecha;
+    private Vector3 posicionShowIzquierda;
+    private Vector3 posicionHideDerecha;
+    private Vector3 posicionHideIzquierda;
 
     private readonly short puntuacionInicial = 10;
     private readonly short multiplicadorNormal = 1;
@@ -59,10 +59,10 @@ public class IconManager : MonoBehaviour
     {
 
         //Guardamos posiciones de animaciones
-        posicionFlechaDerecha = flechaDerecha.transform.position;
-        posicionFlechaIzquierda = flechaIzquierda.transform.position;
-        posicionTickIzquierda = tickIzquierda.transform.position;
-        posicionTickDerecha = tickDerecha.transform.position;
+        posicionShowDerecha = flechaDerecha.transform.position;
+        posicionShowIzquierda = flechaIzquierda.transform.position;
+        posicionHideIzquierda = tickIzquierda.transform.position;
+        posicionHideDerecha = tickDerecha.transform.position;
 
         //Escondemos variaciones
         dineroVariacion.transform.localScale = Vector3.zero;
@@ -120,40 +120,58 @@ public class IconManager : MonoBehaviour
     }
 
 
-    public void SetEstadoDefault()
+    public void SetEstadoEligeCarta()
+    {   
+        //Esconde circulos variacion.
+        dineroVariacion.transform.DOScale(0, easeOutVariaciones);
+        socialVariacion.transform.DOScale(0, easeOutVariaciones);
+        saludVariacion.transform.DOScale(0, easeOutVariaciones);
+        especificoVariacion.transform.DOScale(0, easeOutVariaciones);
+        //Esconde Ticks
+        tickDerecha.transform.DOMove(posicionHideDerecha, 0.5f);
+        tickIzquierda.transform.DOMove(posicionHideIzquierda, 0.5f);
+        //Enseña Flechas
+        flechaDerecha.transform.DOMove(posicionShowDerecha, 0.5f);
+        flechaIzquierda.transform.DOMove(posicionShowIzquierda, 0.5f);
+    }
+
+
+    public void SetEstadoShowRespuestaDerecha()
     {
+        flechaDerecha.transform.DOMove(posicionHideDerecha, 0.5f);
+        tickDerecha.transform.DOMove(posicionShowDerecha, 0.5f);
+    }
+
+    public void SetEstadoShowRespuestaIzquierda()
+    {
+        flechaIzquierda.transform.DOMove(posicionHideIzquierda, 0.5f);
+        tickIzquierda.transform.DOMove(posicionShowIzquierda, 0.5f);
+    }
+
+    public void SetEstadoShowExplicacion()
+    {   
+        //Esconde Flechas
+        flechaDerecha.transform.DOMove(posicionHideDerecha, 0.5f);
+        flechaIzquierda.transform.DOMove(posicionHideIzquierda, 0.5f);
+        //Enseña Ticks
+        tickDerecha.transform.DOMove(posicionShowDerecha, 0.5f);
+        tickIzquierda.transform.DOMove(posicionShowIzquierda, 0.5f);
+        //Esconde circulos variacion.
         dineroVariacion.transform.DOScale(0, easeOutVariaciones);
         socialVariacion.transform.DOScale(0, easeOutVariaciones);
         saludVariacion.transform.DOScale(0, easeOutVariaciones);
         especificoVariacion.transform.DOScale(0, easeOutVariaciones);
 
-        ShowFlechaDerecha();
-        ShowFlechaIzquierda();
     }
 
-    public void ShowFlechaDerecha()
+    public void SetEstadoCommit()
     {
-        tickDerecha.transform.DOMove(posicionTickDerecha, 0.5f);
-        flechaDerecha.transform.DOMove(posicionFlechaDerecha, 0.5f);
-    }
-
-    public void ShowTickDerecha()
-    {
-        flechaDerecha.transform.DOMove(posicionTickDerecha, 0.5f);
-        tickDerecha.transform.DOMove(posicionFlechaDerecha, 0.5f);
-    }
-
-    public void ShowFlechaIzquierda()
-    {
-        flechaIzquierda.transform.DOMove(posicionFlechaIzquierda, 0.5f);
-        tickIzquierda.transform.DOMove(posicionTickIzquierda, 0.5f);
-
-    }
-
-    public void ShowTickIzquierda()
-    {
-        flechaIzquierda.transform.DOMove(posicionTickIzquierda, 0.5f);
-        tickIzquierda.transform.DOMove(posicionFlechaIzquierda, 0.5f);
+        //Esconde Flechas
+        flechaDerecha.transform.DOMove(posicionHideDerecha, 0.5f);
+        flechaIzquierda.transform.DOMove(posicionHideIzquierda, 0.5f);
+        //Esconde Ticks
+        tickDerecha.transform.DOMove(posicionHideDerecha, 0.5f);
+        tickIzquierda.transform.DOMove(posicionHideIzquierda, 0.5f);
     }
 
 

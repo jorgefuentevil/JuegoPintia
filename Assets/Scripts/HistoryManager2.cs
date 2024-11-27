@@ -15,8 +15,8 @@ public class HistoryManager2 : MonoBehaviour
     [SerializeField] private TextAsset jsonHistoria;
     [SerializeField] private TextAsset jsonTutorial;
     [SerializeField] private AssetLabelReference assetsPersonajes;
-    [SerializeField] private Sprite reversoCarta;
-    [SerializeField] private Sprite cartaExplicacion;
+    [SerializeField] private Sprite spriteReversoCarta;
+    [SerializeField] private Sprite spriteCartaExplicacion;
     private readonly Dictionary<string, Sprite> retratosPersonajes = new();
 
 
@@ -28,21 +28,40 @@ public class HistoryManager2 : MonoBehaviour
     [SerializeField] private TextMeshProUGUI respuestaText;
     [SerializeField] private TextMeshProUGUI explicacionText;
     [SerializeField] private GameObject cartaPersonaje;
-    [SerializeField] private GameObject flechaDerecha;
-    [SerializeField] private GameObject flechaIzquierda;
-    [SerializeField] private GameObject tickDerecho;
-    [SerializeField] private GameObject tickIzquierdo;
-    [SerializeField] private GameObject popUpMuertePanel;
+
+
+
+
     [SerializeField] private TTS textToSpeechManager;
 
-    private Sprite spritecartaActual;
-    private Image imagenCartaPersonaje;
+    [Header("--- ICON MANAGER ----")]
+    [SerializeField] private IconManager iconManager;
+
     private int nPreguntas = 10;
-    private List<Decision> decisionesPartida;
     private HistoryJsonRoot parsedHistorias;
-    private AnswerSelector selector;
+    private List<Decision> decisionesPartida;   //Almacena la lista de decisiones aleatorias con las que jugamos.
+    private Decision decisionActual;            //Almacena la decisión actual. Puede ser decisión o respuesta a otra decision.
+    private int numDecisionActual;              //Almacena el index de la decision actual. Solo decision, no respuestas. Solo incrementar en DECISIONES nuevas.
+    private Vector3 posicionInicial;
+    private Respuesta respuestaActual;
 
 
+    private AnswerSelector2 selector;
+    private MaquinaEstadosCartas1 maquinaEstados;
+
+    private Sprite spriteCartaActual;
+    private Image imagenCartaPersonaje;
+
+    //Parámetros de la partida//
+    private readonly short puntuacionMax = 20;
+    private short puntuacionDinero = 10;
+    private short puntuacionSocial = 10;
+    private short puntuacionSalud = 10;
+    private short puntuacionEspecifico = 10;
+
+
+    private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
+    private readonly Color colorNormal = new(1, 1, 1);
 
 
 
@@ -63,34 +82,143 @@ public class HistoryManager2 : MonoBehaviour
     public void Start()
     {
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
-        selector = cartaPersonaje.AddComponent<AnswerSelector>();
+        posicionInicial = cartaPersonaje.transform.position;
+        
+        selector = cartaPersonaje.AddComponent<AnswerSelector2>();
+        selector.historyManager = this;
+
+
+        maquinaEstados = gameObject.AddComponent<MaquinaEstadosCartas1>();
+        maquinaEstados.historyManager = this;
+        maquinaEstados.selector = selector;
+        maquinaEstados.iconManager = iconManager;
+        
+        selector.maquinaEstados = maquinaEstados;
+
+        maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.INICIALIZANDO);
+
     }
 
 
-    public void InicializaJuego()
+    public void SetEstadoInicializando()
     {
         CargaHistoria();
         LoadRetratos();
 
+        decisionActual = decisionesPartida[0];
+
+        imagenCartaPersonaje.color = colorNormal;
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        respuestaText.text = "";
+        explicacionText.text = "";
+
+        GameObject.FindGameObjectWithTag("GamePrincipalManager").GetComponent<GamePrincipalEstadoInicial>().TerminaTransicion();
+
+
+        SetElementosDecision();
+
+    }
+
+
+    private void SetElementosDecision()
+    {   
+        //TODO: ¿ABSTRAER A UN ASSET MANAGER?
+        spriteCartaActual = retratosPersonajes[decisionActual.imagen];
+        nombrePersonajeText.text = decisionActual.personaje;
+        preguntaText.text = decisionActual.desc;
+        //TODO: ESTA STRING DEBERÍA ESTAR LOCALIZADA
+        anosText.text = $"{numDecisionActual} Años de Aventura";
+    }
+
+
+    public void SetEstadoEligeCarta()
+    {   
+        iconManager.SetEstadoEligeCarta();
+        respuestaText.text = "";
+        explicacionText.text = "";
+        imagenCartaPersonaje.DOColor(colorNormal, 0.2f);
+        imagenCartaPersonaje.sprite = spriteCartaActual;
+        //TODO: TTS HABLA DESCRIPCION
+    }
+
+
+    public void SetEstadoShowRespuestaDerecha(){
+        respuestaText.text = decisionActual.res_der.respuesta;
+        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        iconManager.PreviewEfectos(decisionActual.res_der.efectos);
+        //TODO: TTS HABLA RESPUESTA
+    }
+
+    public void SetEstadoShowRespuestaIzquierda(){
+        respuestaText.text = decisionActual.res_izq.respuesta;
+        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        iconManager.PreviewEfectos(decisionActual.res_izq.efectos);
+        //TODO: TTS HABLA RESPUESTA
+    }
+
+    public void SetEstadoCommitRespuestaDerecha()
+    {   
+        respuestaActual = decisionActual.res_der;
+        CommitRespuesta();
+
+    }
+
+    public void SetEstadoCommitRespuestaIzquierda()
+    {   
+        respuestaActual = decisionActual.res_izq;
+        CommitRespuesta();
+
+    }
+
+    public void SetEstadoCommitExplicacion()
+    {   
+        cartaPersonaje.SetActive(false);
+
+        explicacionText.text = "";
+        respuestaText.text = "";
+
+        imagenCartaPersonaje.color = colorNormal;
+        cartaPersonaje.transform.position = posicionInicial;
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+
+        cartaPersonaje.SetActive(true);
+
+        ChangeNextCarta();
+    }
+
+    public void SetEstadoShowExplicacion()
+    {
+        respuestaText.text = "";
+        explicacionText.text = respuestaActual.explicacion;
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
+        //TODO: IconManager estado Explicacion????
+        //TODO: TTS HABLA EXPLICACION
     }
 
 
 
-    
+    private void CommitRespuesta()
+    {   
+        cartaPersonaje.SetActive(false);
+
+        iconManager.AplicaEfectos(respuestaActual.efectos, puntuacionMax);
+        UpdatePuntuacion(respuestaActual.efectos);
+
+        respuestaText.text = "";
+        explicacionText.text = "";
+
+        imagenCartaPersonaje.color = colorNormal;
+        cartaPersonaje.transform.position = posicionInicial;
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        cartaPersonaje.SetActive(true);
+
+        ChangeNextCarta();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
     private void CargaHistoria()
     {
@@ -143,5 +271,49 @@ public class HistoryManager2 : MonoBehaviour
             Debug.Log("Cargado retrato: " + sprite.name);
             retratosPersonajes.Add(sprite.name, sprite);
         }).WaitForCompletion();
+    }
+
+    private void UpdatePuntuacion(short[] efectos)
+    {
+        puntuacionDinero += efectos[0];
+        puntuacionSocial += efectos[1];
+        puntuacionSalud += efectos[2];
+        puntuacionEspecifico += efectos[3];
+        Debug.LogFormat("Puntuacion Actual: {0} - {1} - {2} - {3}", puntuacionDinero, puntuacionSocial, puntuacionSalud, puntuacionEspecifico);
+    }
+
+
+
+    private void ChangeNextCarta()
+    {
+        /*5 Opciones
+            - Normal con explicacion -> Mostrar Explicacion
+            - FinPartida -> Sacar tarjeta muerte
+            - Normal sin explicacion con respuesta
+            - Normal sin explicacion sin respuesta
+            - Tarjeta muerte -> Sacar Popup fin
+        */
+
+        if(respuestaActual.explicacion != null && !maquinaEstados.EstaShowExplicacion())
+        {
+            spriteCartaActual = spriteCartaExplicacion;
+            //TODO: Set Elementos decision????
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.SHOW_EXPLICACION);
+        }
+        //else if(final de partida){}
+        else if(respuestaActual.siguiente != -1 ) //Comprobar si está commiting o no
+        {   
+
+            //Confiamos en que de verdad existe la siguiente decision xddd🍆🍆🍆
+            decisionActual = parsedHistorias.decisiones_respuesta[respuestaActual.siguiente];
+            SetElementosDecision();
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.ELIGE_CARTA);
+        }
+        else if(respuestaActual.siguiente == -1)
+        {
+            decisionActual = decisionesPartida[++numDecisionActual];
+            SetElementosDecision();
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas1.GameState.ELIGE_CARTA);
+        }
     }
 }
