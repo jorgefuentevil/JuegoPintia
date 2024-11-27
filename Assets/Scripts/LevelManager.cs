@@ -5,7 +5,8 @@ using UnityEngine.AddressableAssets;
 using TMPro;
 using UnityEngine.Localization;
 using System.Linq;
-  
+using UnityEngine.Localization.Settings;
+
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GameObject levelHolder;        //Panel padre de todos los niveles (LevelHolder en el editor).
@@ -25,7 +26,8 @@ public class LevelManager : MonoBehaviour
 
 
     public void Start()
-    {
+    {      
+    
         //Cargamos Historias del Json
         parsedNiveles = JsonUtility.FromJson<LevelsJsonRoot>(jsonHistorias.LoadAsset().text);
         

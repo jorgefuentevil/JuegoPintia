@@ -5,8 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [System.NonSerialized] public AsyncOperation EstadoLoadScene; //TODO
-    [System.NonSerialized] public string currentLevel;
+    public AsyncOperation EstadoLoadScene; //TODO
+    public string currentLevel {get; private set;} = null;
 
     
     public void Awake()
@@ -36,6 +36,5 @@ public class GameManager : MonoBehaviour
         currentLevel = "Tutorial";
         SceneManager.LoadScene("GamePrincipalScene");
     }
-
 
 }
