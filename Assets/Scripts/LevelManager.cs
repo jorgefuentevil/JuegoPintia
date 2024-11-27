@@ -7,7 +7,8 @@ using UnityEngine.Localization;
 using System.Linq;
 using DG.Tweening;
 using CandyCoded.HapticFeedback;
-  
+using Unity.VisualScripting;
+
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GameObject levelHolder;        //Panel padre de todos los niveles (LevelHolder en el editor).
@@ -103,10 +104,7 @@ public class LevelManager : MonoBehaviour
         Debug.Log("total lvl: "+numberOfLevels);        
         Vibracion();
         swiper.BindBtnDerecha();
-        if(swiper.getCurrentPage()==2) //si estamos en el lvl 1 desplazamos btn a la izq
-            flechaIzq.transform.DOMoveX(posFlechaIzq.x,1.5f);
-        else if(swiper.getCurrentPage()==numberOfLevels)
-            flechaDer.transform.DOMoveX(Screen.width+50,1.5f);
+        
         Debug.Log("lvl: "+swiper.getCurrentPage());
     }
 
@@ -115,10 +113,7 @@ public class LevelManager : MonoBehaviour
         Debug.Log("lvl: "+swiper.getCurrentPage());
         Vibracion();
         swiper.BindBtnIzquierda();
-        if(swiper.getCurrentPage()==1) //si estamos en el lvl 1 desplazamos btn a la izq
-            flechaIzq.transform.DOMoveX(-Screen.width/4,1.5f);
-        else if(swiper.getCurrentPage()==numberOfLevels-1)
-            flechaDer.transform.DOMoveX(posFlechaDer.x,1.5f);
+        
     }
 
     public void JuegaHistoria()
@@ -135,6 +130,19 @@ public class LevelManager : MonoBehaviour
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro cambiando el lvl");
         }
+    }
+
+    public GameObject getFlechaDer(){
+        return flechaDer;
+    }
+    public GameObject getFlechaIzq(){
+        return flechaIzq;
+    }
+    public Vector3 getPosFlechaDer(){
+        return posFlechaDer;
+    }
+    public Vector3 getPosFlechaIzq(){
+        return posFlechaIzq;
     }
 
 }

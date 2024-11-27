@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using CandyCoded.HapticFeedback;
+using DG.Tweening;
+
 
 public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     private Vector3 panelLocation;
@@ -37,31 +39,50 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
             }else if(percentage < 0 && currentPage > 1){
                 GestionarSwipeIzquierda(newLocation);
             }
+            else
+            {
+                gestionarSwipeExtremo(newLocation);
+            }
         }else{
             StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
             levelManager.SetLevelData(currentPage-1);
         }
     }
 
-    public void GestionarSwipeDerecha(Vector3 nl)
+    public void GestionarSwipeDerecha(Vector3 newLocation)
     {
         currentPage++;
         Vibracion();
         audioManager.PlaySlideSFX();
-        nl += new Vector3(-Screen.width, 0, 0);
-        StartCoroutine(SmoothMove(transform.position, nl, easing));
-        panelLocation = nl;
+        newLocation += new Vector3(-Screen.width, 0, 0);
+        StartCoroutine(SmoothMove(transform.position, newLocation, easing));
+        panelLocation = newLocation;
         levelManager.SetLevelData(currentPage-1);
+        if(currentPage==2) //si estamos en el lvl 1 desplazamos btn a la izq
+            levelManager.getFlechaIzq().transform.DOMoveX(levelManager.getPosFlechaIzq().x,1.5f);
+        else if(currentPage==totalPages)
+            levelManager.getFlechaDer().transform.DOMoveX(Screen.width+50,1.5f);
     }
 
-    public void GestionarSwipeIzquierda(Vector3 nl)
+    public void GestionarSwipeIzquierda(Vector3 newLocation)
     {
         currentPage--;
         Vibracion();
         audioManager.PlaySlideSFX();
-        nl += new Vector3(Screen.width, 0, 0); 
-        StartCoroutine(SmoothMove(transform.position, nl, easing));
-        panelLocation = nl;
+        newLocation += new Vector3(Screen.width, 0, 0); 
+        StartCoroutine(SmoothMove(transform.position, newLocation, easing));
+        panelLocation = newLocation;
+        levelManager.SetLevelData(currentPage-1);
+        if(currentPage==1) //si estamos en el lvl 1 desplazamos btn a la izq
+            levelManager.getFlechaIzq().transform.DOMoveX(-50,1.5f);
+        else if(currentPage==totalPages-1)
+            levelManager.getFlechaDer().transform.DOMoveX(levelManager.getPosFlechaDer().x,1.5f);
+    }
+
+    public void gestionarSwipeExtremo(Vector3 newLocation)
+    {
+        StartCoroutine(SmoothMove(transform.position, newLocation, easing));
+        panelLocation = newLocation;
         levelManager.SetLevelData(currentPage-1);
     }
 
@@ -93,8 +114,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
             Debug.Log("vibro cambiando el lvl");
         }
     }
-    public int getCurrentPage()
-    {
+    public int getCurrentPage(){
         return currentPage;
     }
 }
