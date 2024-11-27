@@ -1,4 +1,4 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +39,8 @@ public class IconManager : MonoBehaviour
     private Vector3 posicionShowIzquierda;
     private Vector3 posicionHideDerecha;
     private Vector3 posicionHideIzquierda;
+
+    [System.NonSerialized] public AnswerSelector selector;
 
     private readonly short puntuacionInicial = 10;
     private readonly short multiplicadorNormal = 1;
@@ -90,7 +92,7 @@ public class IconManager : MonoBehaviour
     {
         if (stat == 0) return;
 
-        float scale = (Math.Abs(stat) == 1) ? scaleVariacionSimple : scaleVariacionDoble;
+        float scale = (System.Math.Abs(stat) == 1) ? scaleVariacionSimple : scaleVariacionDoble;
         variacion.transform.DOScale(scale, easeInVariaciones);
     }
 
@@ -121,7 +123,7 @@ public class IconManager : MonoBehaviour
 
 
     public void SetEstadoEligeCarta()
-    {   
+    {
         //Esconde circulos variacion.
         dineroVariacion.transform.DOScale(0, easeOutVariaciones);
         socialVariacion.transform.DOScale(0, easeOutVariaciones);
@@ -149,7 +151,7 @@ public class IconManager : MonoBehaviour
     }
 
     public void SetEstadoShowExplicacion()
-    {   
+    {
         //Esconde Flechas
         flechaDerecha.transform.DOMove(posicionHideDerecha, 0.5f);
         flechaIzquierda.transform.DOMove(posicionHideIzquierda, 0.5f);
@@ -172,6 +174,25 @@ public class IconManager : MonoBehaviour
         //Esconde Ticks
         tickDerecha.transform.DOMove(posicionHideDerecha, 0.5f);
         tickIzquierda.transform.DOMove(posicionHideIzquierda, 0.5f);
+    }
+
+    public void BindRightArrow()
+    {
+        selector.RightArrowPressed();
+    }
+
+    public void BindLeftArrow()
+    {
+        selector.LeftArrowPressed();
+    }
+
+    public void BindRightCheck()
+    {
+        selector.RightCheckPressed();
+    }
+    public void BindLeftCheck()
+    {
+        selector.LeftCheckPressed();
     }
 
 

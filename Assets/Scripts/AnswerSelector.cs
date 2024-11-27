@@ -135,8 +135,6 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 
     }
 
-
-
     public void ShowEligeCarta()
     {
         StartCoroutine(RotateAndAccion(historyManager.SetEstadoEligeCarta));
@@ -175,6 +173,28 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     public void CommitExplicacionIzquierda()
     {
         StartCoroutine(SlideAndActionIzquierda(historyManager.SetEstadoCommitExplicacion));
+    }
+
+
+
+    public void RightArrowPressed()
+    {
+        GestionarSwipeDerecha();
+    }
+
+    public void LeftArrowPressed()
+    {
+        GestionarSwipeIzquierda();
+    }
+
+    public void RightCheckPressed()
+    {
+        GestionarSwipeDerecha();
+    }
+
+    public void LeftCheckPressed()
+    {
+        GestionarSwipeIzquierda();
     }
 
 

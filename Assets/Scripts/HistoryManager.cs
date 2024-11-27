@@ -46,8 +46,8 @@ public class HistoryManager : MonoBehaviour
     private Respuesta respuestaActual;
 
 
-    private AnswerSelector selector;
-    private MaquinaEstadosCartas maquinaEstados;
+    public AnswerSelector selector;
+    public MaquinaEstadosCartas maquinaEstados;
 
     private Sprite spriteCartaActual;
     private Image imagenCartaPersonaje;
@@ -94,6 +94,7 @@ public class HistoryManager : MonoBehaviour
         maquinaEstados.iconManager = iconManager;
         
         selector.maquinaEstados = maquinaEstados;
+        iconManager.selector = selector;
 
         maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.INICIALIZANDO);
 
@@ -180,8 +181,9 @@ public class HistoryManager : MonoBehaviour
         respuestaText.text = "";
 
         imagenCartaPersonaje.color = colorNormal;
-        cartaPersonaje.transform.position = posicionInicial;
+        cartaPersonaje.transform.SetPositionAndRotation(posicionInicial,Quaternion.identity);
         imagenCartaPersonaje.sprite = spriteReversoCarta;
+        
 
         cartaPersonaje.SetActive(true);
 
