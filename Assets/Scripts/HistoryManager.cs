@@ -124,6 +124,9 @@ public class HistoryManager : MonoBehaviour
         GameObject.FindGameObjectWithTag("GamePrincipalManager").GetComponent<GamePrincipalEstadoInicial>().TerminaTransicion();
 
 
+        //TODO: Meter aqui animacion de inicio
+
+
         SetElementosDecision();
 
     }
