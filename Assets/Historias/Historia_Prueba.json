@@ -11,9 +11,9 @@
             "desc": "En un mercado, encuentras un comerciante que tiene un amuleto de protección para los guerreros. El amuleto es costoso, pero podría protegerte en batalla.",
             "res_der": {
                 "respuesta": "Comprar el amuleto, gastando una gran cantidad de tu dinero.",
-                "explicacion": "Esta es la explicacion derecha",
+                "explicacion": null,
                 "efectos": [
-                    "-1",
+                    "100",
                     "0",
                     "1",
                     "0"

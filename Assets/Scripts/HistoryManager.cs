@@ -54,18 +54,20 @@ public class HistoryManager : MonoBehaviour
 
     //Parámetros de la partida//
     private readonly short puntuacionMax = 20;
-    private short puntuacionDinero = 10;
-    private short puntuacionSocial = 10;
-    private short puntuacionSalud = 10;
-    private short puntuacionEspecifico = 10;
+    private short puntuacionDinero;
+    private short puntuacionSocial;
+    private short puntuacionSalud;
+    private short puntuacionEspecifico;
 
 
     private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
     private readonly Color colorNormal = new(1, 1, 1);
 
+    private bool trueIfVictoria = false;
 
 
-    private readonly Decision muerteDineroPoco = new(-1, "Mendigo_1", "muerte", "¡Has perdido todo tu dinero, eres una decepción para tu familia!", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+
+    private readonly Decision muerteDineroPoco = new(-1, "Mendigo_1", "muerte", "¡Has perdido todo tu dinero, eres una decepción para tu familia y tus amigos!", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
     private readonly Decision muerteDineroMucho = new(-1, "Ladron_1", "muerte", "¡No puedes ir con tanto dinero por la calle! Un ladrón te roba en mitad de la noche", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
 
     private readonly Decision muerteSocialPoco = new(-1, "tumba", "muerte", "Nadie te considera su amigo. Deberías comportarte mejor con el resto", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
@@ -78,12 +80,15 @@ public class HistoryManager : MonoBehaviour
     private readonly Decision muerteEspecificoPoco = new(-1, "tumba", "muerte", "Especifico Poco", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
     private readonly Decision muerteEspecificoMucho = new(-1, "tumba", "muerte", "Especifico mucho", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
 
+    private readonly Decision decisionVictoria = new(-1, "tumba", "VICTORIA", "Victoria suuuuu", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+
+
 
     public void Start()
     {
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
         posicionInicial = cartaPersonaje.transform.position;
-        
+
         selector = cartaPersonaje.AddComponent<AnswerSelector>();
         selector.historyManager = this;
 
@@ -92,9 +97,12 @@ public class HistoryManager : MonoBehaviour
         maquinaEstados.historyManager = this;
         maquinaEstados.selector = selector;
         maquinaEstados.iconManager = iconManager;
-        
+
         selector.maquinaEstados = maquinaEstados;
         iconManager.selector = selector;
+
+
+        puntuacionDinero = puntuacionSocial = puntuacionSalud = puntuacionEspecifico = (short)(puntuacionMax / 2);
 
         maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.INICIALIZANDO);
 
@@ -122,7 +130,7 @@ public class HistoryManager : MonoBehaviour
 
 
     private void SetElementosDecision()
-    {   
+    {
         //TODO: ¿ABSTRAER A UN ASSET MANAGER?
         spriteCartaActual = retratosPersonajes[decisionActual.imagen];
         nombrePersonajeText.text = decisionActual.personaje;
@@ -133,7 +141,7 @@ public class HistoryManager : MonoBehaviour
 
 
     public void SetEstadoEligeCarta()
-    {   
+    {
         iconManager.SetEstadoEligeCarta();
         respuestaText.text = "";
         explicacionText.text = "";
@@ -143,7 +151,8 @@ public class HistoryManager : MonoBehaviour
     }
 
 
-    public void SetEstadoShowRespuestaDerecha(){
+    public void SetEstadoShowRespuestaDerecha()
+    {
         respuestaText.text = decisionActual.res_der.respuesta;
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = spriteReversoCarta;
@@ -151,7 +160,8 @@ public class HistoryManager : MonoBehaviour
         //TODO: TTS HABLA RESPUESTA
     }
 
-    public void SetEstadoShowRespuestaIzquierda(){
+    public void SetEstadoShowRespuestaIzquierda()
+    {
         respuestaText.text = decisionActual.res_izq.respuesta;
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = spriteReversoCarta;
@@ -160,50 +170,21 @@ public class HistoryManager : MonoBehaviour
     }
 
     public void SetEstadoCommitRespuestaDerecha()
-    {   
+    {
         respuestaActual = decisionActual.res_der;
         CommitRespuesta();
 
     }
 
     public void SetEstadoCommitRespuestaIzquierda()
-    {   
+    {
         respuestaActual = decisionActual.res_izq;
         CommitRespuesta();
 
     }
 
-    public void SetEstadoCommitExplicacion()
-    {   
-        cartaPersonaje.SetActive(false);
-
-        explicacionText.text = "";
-        respuestaText.text = "";
-
-        imagenCartaPersonaje.color = colorNormal;
-        cartaPersonaje.transform.SetPositionAndRotation(posicionInicial,Quaternion.identity);
-        imagenCartaPersonaje.sprite = spriteReversoCarta;
-        
-
-        cartaPersonaje.SetActive(true);
-
-        ChangeNextCarta();
-    }
-
-    public void SetEstadoShowExplicacion()
-    {
-        respuestaText.text = "";
-        explicacionText.text = respuestaActual.explicacion;
-        imagenCartaPersonaje.sprite = spriteReversoCarta;
-        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
-        //TODO: IconManager estado Explicacion????
-        //TODO: TTS HABLA EXPLICACION
-    }
-
-
-
     private void CommitRespuesta()
-    {   
+    {
         cartaPersonaje.SetActive(false);
 
         iconManager.AplicaEfectos(respuestaActual.efectos, puntuacionMax);
@@ -220,6 +201,39 @@ public class HistoryManager : MonoBehaviour
         ChangeNextCarta();
 
 
+    }
+
+    public void SetEstadoCommitExplicacion()
+    {
+        cartaPersonaje.SetActive(false);
+
+        explicacionText.text = "";
+        respuestaText.text = "";
+
+        imagenCartaPersonaje.color = colorNormal;
+        cartaPersonaje.transform.SetPositionAndRotation(posicionInicial, Quaternion.identity);
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+
+
+        cartaPersonaje.SetActive(true);
+
+        ChangeNextCarta();
+    }
+
+    public void SetEstadoShowExplicacion()
+    {
+        respuestaText.text = "";
+        explicacionText.text = respuestaActual.explicacion;
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
+        //TODO: IconManager estado Explicacion????
+        //TODO: TTS HABLA EXPLICACION
+    }
+
+    public void SetEstadoCommitMuerte()
+    {
+        Debug.Log($"Fin de Partida por {(trueIfVictoria ? "victoria" : "derrota")}");
+        //TODO: Sacar popup aquí
     }
 
     private void CargaHistoria()
@@ -284,36 +298,83 @@ public class HistoryManager : MonoBehaviour
         Debug.LogFormat("Puntuacion Actual: {0} - {1} - {2} - {3}", puntuacionDinero, puntuacionSocial, puntuacionSalud, puntuacionEspecifico);
     }
 
+    private bool CheckFinPartida()
+    {
+
+        if (numDecisionActual >= nPreguntas - 1)
+        {
+            trueIfVictoria = true;
+            decisionActual = decisionVictoria;
+            return true;
+        }
+
+        else if (puntuacionDinero >= puntuacionMax || puntuacionDinero <= 0)
+        {
+            decisionActual = (puntuacionDinero >= puntuacionMax) ? muerteDineroMucho : muerteDineroPoco;
+            return true;
+        }
+
+        else if (puntuacionSocial >= puntuacionMax || puntuacionSocial <= 0)
+        {
+            decisionActual = (puntuacionSocial >= puntuacionMax) ? muerteSocialMucho : muerteSocialPoco;
+            return true;
+        }
+
+        else if (puntuacionSalud >= puntuacionMax || puntuacionSalud <= 0)
+        {
+            decisionActual = (puntuacionSalud >= puntuacionMax) ? muerteSaludMucho : muerteSaludPoco;
+            return true;
+        }
+
+        else if (puntuacionEspecifico >= puntuacionMax || puntuacionEspecifico <= 0)
+        {
+            decisionActual = (puntuacionEspecifico >= puntuacionMax) ? muerteEspecificoMucho : muerteEspecificoPoco;
+            return true;
+        }
+
+        return false;
+    }
+
+
 
 
     private void ChangeNextCarta()
     {
-        /*5 Opciones
+        /*4 Opciones
             - Normal con explicacion -> Mostrar Explicacion
             - FinPartida -> Sacar tarjeta muerte
             - Normal sin explicacion con respuesta
             - Normal sin explicacion sin respuesta
-            - Tarjeta muerte -> Sacar Popup fin
         */
-
-        if(respuestaActual.explicacion != null && !maquinaEstados.EstaShowExplicacion())
+        
+        //Si tiene explicacion y no la está enseñando -> Enseña explicación
+        if (respuestaActual.explicacion != null && !maquinaEstados.EstaShowExplicacion())
         {
             spriteCartaActual = spriteCartaExplicacion;
             //TODO: Set Elementos decision????
             maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.SHOW_EXPLICACION);
         }
-        //else if(final de partida){}
-        else if(respuestaActual.siguiente != -1 ) //Comprobar si está commiting o no
-        {   
+        //Acabamos de hacer commit de una decisión -> Checkeamos si hemos ganado/perdido
+        else if (CheckFinPartida())
+        {
+            //decision actual ya es la carta de victoria/derrota.
+            SetElementosDecision();
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.PRE_MUERTE);
+        }
+        //Si tiene decision encadenada -> Pillamos la decision encadenada.
+        else if (respuestaActual.siguiente != -1) //Comprobar si está commiting o no???
+        {
 
             //Confiamos en que de verdad existe la siguiente decision xddd🍆🍆🍆
             decisionActual = parsedHistorias.decisiones_respuesta[respuestaActual.siguiente];
             SetElementosDecision();
             maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.ELIGE_CARTA);
         }
-        else if(respuestaActual.siguiente == -1)
+        //Si no tiene decision encadenada -> Pillamos la siguiente de la lista.
+        else if (respuestaActual.siguiente == -1)
         {
             decisionActual = decisionesPartida[++numDecisionActual];
+            Debug.Log($"Decision {numDecisionActual} de {nPreguntas}");
             SetElementosDecision();
             maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.ELIGE_CARTA);
         }

@@ -32,7 +32,8 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         Debug.Log(difference);
         if ((maquinaEstados.EstaShowRespuestaDerecha() && difference < 0) ||
             (maquinaEstados.EstaShowRespuestaIzquierda() && difference > 0) ||
-            maquinaEstados.EstaShowExplicacion())
+            maquinaEstados.EstaShowExplicacion()||
+            maquinaEstados.EstaPreMuerte())
         {
             transform.position = imageLocation - new Vector3(difference, 0, 0);
         }
@@ -99,6 +100,10 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_EXPLICACION_DERECHA);
         }
+        else if(maquinaEstados.EstaPreMuerte())
+        {
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_MUERTE_DERECHA);
+        }
 
 
     }
@@ -130,6 +135,10 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         else if (maquinaEstados.EstaShowExplicacion())
         {
             maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_EXPLICACION_IZQUIERDA);
+        }
+        else if(maquinaEstados.EstaPreMuerte())
+        {
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_MUERTE_IZQUIERDA);
         }
 
 
@@ -173,6 +182,16 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     public void CommitExplicacionIzquierda()
     {
         StartCoroutine(SlideAndActionIzquierda(historyManager.SetEstadoCommitExplicacion));
+    }
+
+    public void CommitMuerteDerecha()
+    {
+        StartCoroutine(SlideAndActionDerecha(historyManager.SetEstadoCommitMuerte));
+    }
+
+    public void CommitMuerteIzquierda()
+    {
+        StartCoroutine(SlideAndActionIzquierda(historyManager.SetEstadoCommitMuerte));
     }
 
 

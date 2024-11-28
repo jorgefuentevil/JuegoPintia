@@ -22,6 +22,8 @@ public class MaquinaEstadosCartas : MonoBehaviour
         COMMIT_EXPLICACION_IZQUIERDA,
 
         PRE_MUERTE,
+        COMMIT_MUERTE_DERECHA,
+        COMMIT_MUERTE_IZQUIERDA,
 
         TRANSICIONANDO,
 
@@ -41,13 +43,8 @@ public class MaquinaEstadosCartas : MonoBehaviour
 
     public void CambiarDeEstado(GameState nuevoEstado)
     {
-        switch (estadoActual)
-        {
 
-            default:
-                break;
-        }
-        Debug.Log($"Iniciando cambio de estado a {nuevoEstado}");
+        Debug.Log($"Cambiando a {nuevoEstado} desde {estadoActual}");
         switch (nuevoEstado)
         {
             case GameState.INICIALIZANDO:
@@ -78,11 +75,17 @@ public class MaquinaEstadosCartas : MonoBehaviour
             case GameState.COMMIT_EXPLICACION_IZQUIERDA:
                 EntraEstadoCommitExplicacionIzquierda();
                 break;
+            case GameState.PRE_MUERTE:
+                EntraEstadoPreMuerte();
+                break;
+            case GameState.COMMIT_MUERTE_DERECHA:
+                EntraEstadoCommitMuerteDerecha();
+                break;
+            case GameState.COMMIT_MUERTE_IZQUIERDA:
+                EntraEstadoCommitMuerteIzquierda();
+                break;
 
         }
-        Debug.Log($"Estado Actual");
-
-    
     }
 
     private void EntraEstadoInicializando()
@@ -162,12 +165,38 @@ public class MaquinaEstadosCartas : MonoBehaviour
         selector.CommitExplicacionIzquierda();
     }
 
+    private void EntraEstadoPreMuerte()
+    {
+        estadoActual = GameState.TRANSICIONANDO;
+        estadoAuxiliar = GameState.PRE_MUERTE;
+        iconManager.SetEstadoEligeCarta();
+        selector.ShowEligeCarta();
+    }
+
+    private void EntraEstadoCommitMuerteDerecha()
+    {
+        estadoActual = GameState.TRANSICIONANDO;
+        estadoAuxiliar = GameState.COMMIT_MUERTE_DERECHA;
+        iconManager.SetEstadoCommit();
+        selector.CommitMuerteDerecha();
+    }
+
+    private void EntraEstadoCommitMuerteIzquierda()
+    {
+        estadoActual = GameState.TRANSICIONANDO;
+        estadoAuxiliar = GameState.COMMIT_MUERTE_IZQUIERDA;
+        iconManager.SetEstadoCommit();
+        selector.CommitMuerteIzquierda();
+    }
+
+
     public void AvisaFinalAnimacion()
     {
         if (estadoActual != GameState.TRANSICIONANDO || estadoAuxiliar == GameState.NINGUNO) return;
 
         estadoActual = estadoAuxiliar;
         estadoAuxiliar = GameState.NINGUNO;
+        Debug.Log("Señalando fin de transicion");
     }
 
 
@@ -222,7 +251,7 @@ public class MaquinaEstadosCartas : MonoBehaviour
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool EstaPreMuerte()
     {
-        return estadoActual == GameState.PRE_MUERTE;
+        return estadoActual == GameState.PRE_MUERTE || estadoAuxiliar == GameState.PRE_MUERTE; 
     }
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool EstaTransicionando()
