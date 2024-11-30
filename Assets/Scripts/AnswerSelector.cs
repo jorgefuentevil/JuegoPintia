@@ -55,13 +55,11 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             //Desliza hacia la derecha
             if (percentage < 0)
             {
-                Debug.Log("Deslizamos derecha");
                 GestionarSwipeDerecha();
             }
             //Desliza hacia la izquierda
             else
             {
-                Debug.Log("Deslizamos izquierda");
                 GestionarSwipeIzquierda();
             }
         }
@@ -194,8 +192,6 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         StartCoroutine(SlideAndActionIzquierda(historyManager.SetEstadoCommitMuerte));
     }
 
-
-
     public void RightArrowPressed()
     {
         GestionarSwipeDerecha();
@@ -287,7 +283,6 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
             transform.position = Vector3.Lerp(startpos, endpos, Mathf.SmoothStep(0f, 1f, t));
             yield return null;
         }
-        Debug.Log("Terminada");
     }
 
 }
