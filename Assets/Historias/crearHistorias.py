@@ -7,8 +7,8 @@ class Decision(Toplevel):
          
         super().__init__(master = master)
         self.app = app
-        self.id_siguiente_izq= None
-        self.id_siguiente_der= None
+        self.id_siguiente_izq= -1
+        self.id_siguiente_der= -1
         self.isRespuesta=isRespuesta
         #Creamos la ventana2
         Label(self, text="Creacion de decision seguida de {xxxxxxx}").grid(row=0, column=0, sticky="w", padx=5, pady=5)
@@ -92,8 +92,7 @@ class Decision(Toplevel):
                 datos = json.load(f)
             if self.isRespuesta == False:
                 id=len(datos["decisiones"]) 
-                self.id_siguiente_der=-1
-                self.id_siguiente_izq=-1
+
             else:
                 id=self.app.siguiente
 
@@ -242,13 +241,14 @@ class JsonEditorApp:
             if len(self.historia_entry.get())>20:
                 raise Exception("El titulo es muy extenso")
             self.titulo=self.historia_entry.get().replace(" ", "_")
+            archivo = f"Files_Historias_{self.idioma_entry.get()[-2:]}/{self.titulo}_{self.idioma_entry.get()[-2:]}.json"
             data_historia = {
                 "personaje": self.historia_entry.get(),
                 "desc": self.descripcion_entry.get(),
                 "coste": self.coste_entry.get(),
                 "imagen": self.imagen_entry.get(),
                 "atributo": self.nivel_atributo_especifico.get(),
-                "archivo": f"{self.titulo}_{self.idioma_entry.get()[-2:]}.json"
+                "archivo": archivo
             }
             idioma=self.idioma_entry.get()[-2:]
             self.agregar_historia(f"Historias_{idioma}.json",data_historia)
