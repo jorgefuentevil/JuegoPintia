@@ -14,6 +14,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject thisCanvas;         //Canvas padre de toda la UI
     [SerializeField] private LocalizedAsset<TextAsset>  jsonHistorias;
     [SerializeField] private TextMeshProUGUI contadorText;
+    [SerializeField] private GameObject flechaIzq;
+    [SerializeField] private GameObject flechaDer;
     [SerializeField] private TextMeshProUGUI personajeText;
     [SerializeField] private TextMeshProUGUI descripcionText;
     [SerializeField] private AssetLabelReference assetsPersonajes;
@@ -23,6 +25,8 @@ public class LevelManager : MonoBehaviour
     private int numberOfLevels = 1;
     private Rect panelDimensions;
     private PageSwiper swiper;
+    private Vector3 posFlechaDer;
+    private Vector3 posFlechaIzq;
 
 
     public void Start()
@@ -47,6 +51,8 @@ public class LevelManager : MonoBehaviour
         swiper.totalPages = numberOfLevels;
         swiper.levelManager = this;
         panelDimensions = levelHolder.GetComponent<RectTransform>().rect;
+        posFlechaDer=flechaDer.transform.position;
+        posFlechaIzq=flechaIzq.transform.position;
 
 
         for (int i = 0; i < numberOfLevels; i++)
@@ -65,6 +71,9 @@ public class LevelManager : MonoBehaviour
 
             panel.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = aux;
         }
+
+        flechaIzq.transform.DOMoveX(-700,2);
+
         Destroy(panelClone);
         Destroy(levelHolder.transform.GetChild(0).gameObject);
 
@@ -85,18 +94,55 @@ public class LevelManager : MonoBehaviour
         personajeText.SetText(parsedNiveles.historias[level_index].personaje);
         descripcionText.SetText(parsedNiveles.historias[level_index].desc);
         string textToSpeech = parsedNiveles.historias[level_index].personaje+"\n"+parsedNiveles.historias[level_index].desc;
-        if(PlayerPrefs.GetInt("TTSEnable")==1){
-            textToSpeachManager.StartSpeaking(textToSpeech);
-        }
+        textToSpeachManager.StartSpeaking(textToSpeech);       
+    }
+
+
+    public void BindBtnDerecha()
+    {
+        Debug.Log("total lvl: "+numberOfLevels);        
+        Vibracion();
+        swiper.BindBtnDerecha();
+        
+        Debug.Log("lvl: "+swiper.getCurrentPage());
+    }
+
+    public void BindBtnIzquierda()
+    {
+        Debug.Log("lvl: "+swiper.getCurrentPage());
+        Vibracion();
+        swiper.BindBtnIzquierda();
         
     }
 
-    public void JuegaHistoria(){
+    public void JuegaHistoria()
+    {
         //TODO: Aqui habría que pillar el nombre del fichero que contiene la historia.
         //La string que le pases al método da igual de momento.
+        Vibracion();
         GameManager.Instance.CambiaEscenaGamePrincipal("este texto da igual xd");
     }
 
+    public void Vibracion()
+    {
+        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("vibro cambiando el lvl");
+        }
+    }
+
+    public GameObject getFlechaDer(){
+        return flechaDer;
+    }
+    public GameObject getFlechaIzq(){
+        return flechaIzq;
+    }
+    public Vector3 getPosFlechaDer(){
+        return posFlechaDer;
+    }
+    public Vector3 getPosFlechaIzq(){
+        return posFlechaIzq;
+    }
 
 }
 
