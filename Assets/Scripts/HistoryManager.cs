@@ -246,7 +246,7 @@ public class HistoryManager : MonoBehaviour
     {
         string historiaToLoad = GameManager.Instance.currentLevel;
 
-        AsyncOperationHandle<TextAsset> opHandle = historiaToLoad.Equals("Tutorial") ? Addressables.LoadAssetAsync<TextAsset>(historiaTutorial) : Addressables.LoadAssetAsync<TextAsset>(historiaToLoad);
+        AsyncOperationHandle<TextAsset> opHandle = historiaToLoad.Equals("Tutorial") ? historiaTutorial.LoadAssetAsync<TextAsset>() : Addressables.LoadAssetAsync<TextAsset>(historiaToLoad);
 
         opHandle.WaitForCompletion();
 

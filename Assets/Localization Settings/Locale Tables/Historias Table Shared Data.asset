@@ -19,6 +19,10 @@ MonoBehaviour:
     m_Key: Historias
     m_Metadata:
       m_Items: []
+  - m_Id: 8303717766369280
+    m_Key: Tutoriales
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items:
     - rid: 5088134270003183670
@@ -36,6 +40,10 @@ MonoBehaviour:
       data:
         m_Entries:
         - m_KeyId: 16345698304
+          m_TableCodes:
+          - en
+          - es
+        - m_KeyId: 8303717766369280
           m_TableCodes:
           - en
           - es
