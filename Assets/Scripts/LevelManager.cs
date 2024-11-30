@@ -82,6 +82,9 @@ public class LevelManager : MonoBehaviour
         SetLevelData(0);
 
         Canvas.ForceUpdateCanvases();
+
+        GameObject.FindGameObjectWithTag("MainMenuManager").GetComponent<MainMenuEstadoInicial>().TerminaTransicion();
+
     }
 
     //level_index es [0,numLvl-1]

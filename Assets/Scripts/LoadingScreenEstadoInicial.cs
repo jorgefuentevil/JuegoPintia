@@ -21,7 +21,7 @@ public class LoadingScreenEstadoInicial : MonoBehaviour
     {
         //Wait for 2 seconds
         yield return new WaitForSeconds(2);
-        if (PlayerPrefs.HasKey("Tutorial"))
+        if ( true || PlayerPrefs.HasKey("Tutorial"))
         {
             GameManager.Instance.CambiaEscenaMainMenu();
         }
