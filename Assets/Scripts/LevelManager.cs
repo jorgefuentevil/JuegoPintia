@@ -8,6 +8,7 @@ using System.Linq;
 using DG.Tweening;
 using CandyCoded.HapticFeedback;
 using UnityEngine.Localization.Settings;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
@@ -122,11 +123,19 @@ public class LevelManager : MonoBehaviour
 
     public void JuegaHistoria()
     {
-        //TODO: Aqui habría que pillar el nombre del fichero que contiene la historia.
-        //La string que le pases al método da igual de momento.
         Vibracion();
-        GameManager.Instance.CambiaEscenaGamePrincipal(parsedNiveles.historias[swiper.currentPage-1].archivo);
+        StartCoroutine(AuxTransicion());
     }
+
+    private IEnumerator AuxTransicion()
+    {   
+        GameObject.FindGameObjectWithTag("MainMenuManager").GetComponent<MainMenuEstadoInicial>().EmpiezaTransicion();
+        yield return new WaitForSeconds(1);
+        GameManager.Instance.CambiaEscenaGamePrincipal(parsedNiveles.historias[swiper.currentPage-1].archivo);
+
+    }
+
+    
 
     public void Vibracion()
     {

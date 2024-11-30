@@ -47,6 +47,6 @@ public class MainMenuEstadoInicial : MonoBehaviour{
     {   
         PanelTransicion.SetActive(true);
         PanelTransicion.GetComponent<Image>().raycastTarget=false;
-        PanelTransicion.GetComponent<Image>().DOFade(1, 1).WaitForCompletion();
+        PanelTransicion.GetComponent<Image>().DOFade(1, 1);
     }
 }
