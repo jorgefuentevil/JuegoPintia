@@ -16,8 +16,9 @@ public class GamePrincipalEstadoInicial : MonoBehaviour
 
 
     public void Awake()
-    {   
-        if(GameObject.FindGameObjectWithTag("AudioManager") == null){
+    {
+        if (GameObject.FindGameObjectWithTag("AudioManager") == null)
+        {
             Instantiate(AudioManagerPrefab);
         }
 
@@ -26,12 +27,19 @@ public class GamePrincipalEstadoInicial : MonoBehaviour
         MenuAjustesPanel.SetActive(true);
         MenuAjustesPanel.SetActive(false);
         PanelTransicion.SetActive(true);
+        PanelTransicion.GetComponent<Image>().raycastTarget=false;
+
     }
 
-    public void TerminaTransicion(){
-        PanelTransicion.GetComponent<Image>().DOFade(0,1).onComplete = () => PanelTransicion.SetActive(false);
-    }   
+    public void TerminaTransicion()
+    {
+        PanelTransicion.GetComponent<Image>().DOFade(0, 1).onComplete = () =>
+        {
+            PanelTransicion.SetActive(false);
+            PanelTransicion.GetComponent<Image>().raycastTarget=true;
+        };
+    }
 
 
-    
+
 }

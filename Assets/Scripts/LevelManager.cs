@@ -7,7 +7,8 @@ using UnityEngine.Localization;
 using System.Linq;
 using DG.Tweening;
 using CandyCoded.HapticFeedback;
-using Unity.VisualScripting;
+using UnityEngine.Localization.Settings;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
@@ -32,7 +33,8 @@ public class LevelManager : MonoBehaviour
 
 
     public void Start()
-    {
+    {      
+    
         //Cargamos Historias del Json
         parsedNiveles = JsonUtility.FromJson<LevelsJsonRoot>(jsonHistorias.LoadAsset().text);
         
@@ -81,6 +83,9 @@ public class LevelManager : MonoBehaviour
         SetLevelData(0);
 
         Canvas.ForceUpdateCanvases();
+
+        GameObject.FindGameObjectWithTag("MainMenuManager").GetComponent<MainMenuEstadoInicial>().TerminaTransicion();
+
     }
 
     //level_index es [0,numLvl-1]
@@ -118,11 +123,19 @@ public class LevelManager : MonoBehaviour
 
     public void JuegaHistoria()
     {
-        //TODO: Aqui habría que pillar el nombre del fichero que contiene la historia.
-        //La string que le pases al método da igual de momento.
         Vibracion();
-        GameManager.Instance.CambiaEscenaGamePrincipal("este texto da igual xd");
+        StartCoroutine(AuxTransicion());
     }
+
+    private IEnumerator AuxTransicion()
+    {   
+        GameObject.FindGameObjectWithTag("MainMenuManager").GetComponent<MainMenuEstadoInicial>().EmpiezaTransicion();
+        yield return new WaitForSeconds(1);
+        GameManager.Instance.CambiaEscenaGamePrincipal(parsedNiveles.historias[swiper.currentPage-1].archivo);
+
+    }
+
+    
 
     public void Vibracion()
     {
@@ -154,6 +167,8 @@ public struct Historia
     public string desc;
     public int coste;
     public string imagen;
+    public string atributo;
+    public string archivo;
 }
 [System.Serializable]
 public struct LevelsJsonRoot

@@ -8,22 +8,17 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 using UnityEngine.Localization.SmartFormat;
 using Newtonsoft.Json;
-
-
-
+using UnityEngine.ResourceManagement.AsyncOperations;
+using Unity.VisualScripting;
 
 public class HistoryManager : MonoBehaviour
 {
-
     [Header("---- ASSETS ----")]
-    [SerializeField] private TextAsset jsonHistoria;
-    [SerializeField] private TextAsset jsonTutorial;
+    [SerializeField] private TextAsset jsonHistoriaFallback;
     [SerializeField] private AssetLabelReference assetsPersonajes;
-    [SerializeField] private Sprite reversoCarta;
-    [SerializeField] private Sprite cartaExplicacion;
+    [SerializeField] private Sprite spriteReversoCarta;
+    [SerializeField] private Sprite spriteCartaExplicacion;
     private readonly Dictionary<string, Sprite> retratosPersonajes = new();
-
-
 
 
     [Header("---- UI GAME OBJECTS ----")]
@@ -34,33 +29,14 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI respuestaText;
     [SerializeField] private TextMeshProUGUI explicacionText;
     [SerializeField] private GameObject cartaPersonaje;
-    [SerializeField] private GameObject flechaDerecha;
-    [SerializeField] private GameObject flechaIzquierda;
-    [SerializeField] private GameObject tickDerecho;
-    [SerializeField] private GameObject tickIzquierdo;
-    [SerializeField] private GameObject popUpMuertePanel;
+
+
+
+
     [SerializeField] private TTS textToSpeechManager;
 
-    private Vector3 posicionFlechaDerecha;
-    private Vector3 posicionFlechaIzquierda;
-    private Vector3 posicionTickDerecha;
-    private Vector3 posicionTickIzquierda;
-
-    private Sprite cartaActual;
-    private Image imagenCartaPersonaje;
-
-
-    [Header("---- ICONOS SUPERIORES ----")]
+    [Header("--- ICON MANAGER ----")]
     [SerializeField] private IconManager iconManager;
-
-
-    //Parámetros de la partida//
-    private readonly short puntuacionMax = 20;
-    private short puntuacionDinero = 10;
-    private short puntuacionSocial = 10;
-    private short puntuacionSalud = 10;
-    private short puntuacionEspecifico = 10;
-
 
     private int nPreguntas = 10;
     private HistoryJsonRoot parsedHistorias;
@@ -68,37 +44,31 @@ public class HistoryManager : MonoBehaviour
     private Decision decisionActual;            //Almacena la decisión actual. Puede ser decisión o respuesta a otra decision.
     private int numDecisionActual;              //Almacena el index de la decision actual. Solo decision, no respuestas. Solo incrementar en DECISIONES nuevas.
     private Vector3 posicionInicial;
-    private AnswerSelector selector;
+    private Respuesta respuestaActual;
 
 
-    [System.NonSerialized] public CardType tipoCartaActual;
+    public AnswerSelector selector;
+    public MaquinaEstadosCartas maquinaEstados;
 
-    private EndType tipoFin;
+    private Sprite spriteCartaActual;
+    private Image imagenCartaPersonaje;
+
+    //Parámetros de la partida//
+    private readonly short puntuacionMax = 20;
+    private short puntuacionDinero;
+    private short puntuacionSocial;
+    private short puntuacionSalud;
+    private short puntuacionEspecifico;
+
 
     private readonly Color sombreadoCarta = new(0.4078431f, 0.4078431f, 0.4078431f);
     private readonly Color colorNormal = new(1, 1, 1);
 
+    private bool trueIfVictoria = false;
 
 
-    private enum EndType
-    {
-        DINERO_MUCHO,
-        DINERO_POCO,
 
-        SOCIAL_MUCHO,
-        SOCIAL_POCO,
-
-        SALUD_MUCHO,
-        SALUD_POCO,
-
-        ESPECIFICO_MUCHO,
-        ESPECIFICO_POCO,
-
-        VICTORIA
-    }
-
-
-    private readonly Decision muerteDineroPoco = new(-1, "Mendigo_1", "muerte", "¡Has perdido todo tu dinero, eres una decepción para tu familia!", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
+    private readonly Decision muerteDineroPoco = new(-1, "Mendigo_1", "muerte", "¡Has perdido todo tu dinero, eres una decepción para tu familia y tus amigos!", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
     private readonly Decision muerteDineroMucho = new(-1, "Ladron_1", "muerte", "¡No puedes ir con tanto dinero por la calle! Un ladrón te roba en mitad de la noche", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
 
     private readonly Decision muerteSocialPoco = new(-1, "tumba", "muerte", "Nadie te considera su amigo. Deberías comportarte mejor con el resto", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
@@ -111,32 +81,176 @@ public class HistoryManager : MonoBehaviour
     private readonly Decision muerteEspecificoPoco = new(-1, "tumba", "muerte", "Especifico Poco", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
     private readonly Decision muerteEspecificoMucho = new(-1, "tumba", "muerte", "Especifico mucho", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
 
+    private readonly Decision decisionVictoria = new(-1, "tumba", "VICTORIA", "Victoria suuuuu", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
 
 
 
     public void Start()
     {
-        posicionFlechaDerecha = flechaDerecha.transform.position;
-        posicionFlechaIzquierda = flechaIzquierda.transform.position;
-        posicionTickIzquierda = tickIzquierdo.transform.position;
-        posicionTickDerecha = tickDerecho.transform.position;
-
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
         posicionInicial = cartaPersonaje.transform.position;
-        tipoCartaActual = CardType.NORMAL;
 
-        //Cargamos todas las decisiones del json 
-        if (PlayerPrefs.HasKey("Tutorial"))
-        {
-            parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonHistoria.text);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("Tutorial", 1);
-            parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonTutorial.text);
-        }
+        selector = cartaPersonaje.AddComponent<AnswerSelector>();
+        selector.historyManager = this;
 
-        //Elegimos si queremos preguntas aleatorias o no.
+
+        maquinaEstados = gameObject.AddComponent<MaquinaEstadosCartas>();
+        maquinaEstados.historyManager = this;
+        maquinaEstados.selector = selector;
+        maquinaEstados.iconManager = iconManager;
+
+        selector.maquinaEstados = maquinaEstados;
+        iconManager.selector = selector;
+
+
+        puntuacionDinero = puntuacionSocial = puntuacionSalud = puntuacionEspecifico = (short)(puntuacionMax / 2);
+
+        maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.INICIALIZANDO);
+
+    }
+
+
+    public void SetEstadoInicializando()
+    {
+        CargaHistoria();
+        LoadRetratos();
+
+        decisionActual = decisionesPartida[0];
+
+        imagenCartaPersonaje.color = colorNormal;
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        respuestaText.text = "";
+        explicacionText.text = "";
+
+        GameObject.FindGameObjectWithTag("GamePrincipalManager").GetComponent<GamePrincipalEstadoInicial>().TerminaTransicion();
+
+
+        //TODO: Meter aqui animacion de inicio
+
+
+        SetElementosDecision();
+
+    }
+
+
+    private void SetElementosDecision()
+    {
+        //TODO: ¿ABSTRAER A UN ASSET MANAGER?
+        spriteCartaActual = retratosPersonajes[decisionActual.imagen];
+        nombrePersonajeText.text = decisionActual.personaje;
+        preguntaText.text = decisionActual.desc;
+        //TODO: ESTA STRING DEBERÍA ESTAR LOCALIZADA
+        anosText.text = $"{numDecisionActual} Años de Aventura";
+    }
+
+
+    public void SetEstadoEligeCarta()
+    {
+        iconManager.SetEstadoEligeCarta();
+        respuestaText.text = "";
+        explicacionText.text = "";
+        imagenCartaPersonaje.DOColor(colorNormal, 0.2f);
+        imagenCartaPersonaje.sprite = spriteCartaActual;
+        //TODO: TTS HABLA DESCRIPCION
+    }
+
+
+    public void SetEstadoShowRespuestaDerecha()
+    {
+        respuestaText.text = decisionActual.res_der.respuesta;
+        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        iconManager.PreviewEfectos(decisionActual.res_der.efectos);
+        //TODO: TTS HABLA RESPUESTA
+    }
+
+    public void SetEstadoShowRespuestaIzquierda()
+    {
+        respuestaText.text = decisionActual.res_izq.respuesta;
+        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        iconManager.PreviewEfectos(decisionActual.res_izq.efectos);
+        //TODO: TTS HABLA RESPUESTA
+    }
+
+    public void SetEstadoCommitRespuestaDerecha()
+    {
+        respuestaActual = decisionActual.res_der;
+        CommitRespuesta();
+
+    }
+
+    public void SetEstadoCommitRespuestaIzquierda()
+    {
+        respuestaActual = decisionActual.res_izq;
+        CommitRespuesta();
+
+    }
+
+    private void CommitRespuesta()
+    {
+        cartaPersonaje.SetActive(false);
+
+        iconManager.AplicaEfectos(respuestaActual.efectos, puntuacionMax);
+        UpdatePuntuacion(respuestaActual.efectos);
+
+        respuestaText.text = "";
+        explicacionText.text = "";
+
+        imagenCartaPersonaje.color = colorNormal;
+        cartaPersonaje.transform.position = posicionInicial;
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        cartaPersonaje.SetActive(true);
+
+        ChangeNextCarta();
+
+
+    }
+
+    public void SetEstadoCommitExplicacion()
+    {
+        cartaPersonaje.SetActive(false);
+
+        explicacionText.text = "";
+        respuestaText.text = "";
+
+        imagenCartaPersonaje.color = colorNormal;
+        cartaPersonaje.transform.SetPositionAndRotation(posicionInicial, Quaternion.identity);
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+
+
+        cartaPersonaje.SetActive(true);
+
+        ChangeNextCarta();
+    }
+
+    public void SetEstadoShowExplicacion()
+    {
+        respuestaText.text = "";
+        explicacionText.text = respuestaActual.explicacion;
+        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
+        //TODO: IconManager estado Explicacion????
+        //TODO: TTS HABLA EXPLICACION
+    }
+
+    public void SetEstadoCommitMuerte()
+    {
+        Debug.Log($"Fin de Partida por {(trueIfVictoria ? "victoria" : "derrota")}");
+        //TODO: Sacar popup aquí
+    }
+
+    private void CargaHistoria()
+    {
+        string historiaToLoad = GameManager.Instance.currentLevel;
+        AsyncOperationHandle<TextAsset> opHandle = Addressables.LoadAssetAsync<TextAsset>(historiaToLoad);
+
+        opHandle.WaitForCompletion();
+
+        TextAsset assetHistoria = (opHandle.Status == AsyncOperationStatus.Succeeded) ? opHandle.Result : jsonHistoriaFallback;
+
+        parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(assetHistoria.text);
+
         if (parsedHistorias.aleatoria)
         {
             CargaPreguntasAleatorias();
@@ -146,37 +260,16 @@ public class HistoryManager : MonoBehaviour
             CargaAllPreguntas();
         }
         Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; NumHistorias={2}", parsedHistorias.historia, parsedHistorias.decisiones.Count, nPreguntas);
-
-
-        //Cargamos imágenes. 
-        //TODO: Filtrar retratos y cargar solo los que vayamos a usar.
-        Addressables.LoadAssetsAsync<Sprite>(assetsPersonajes, (sprite) =>
-        {
-            Debug.Log("Cargado retrato: " + sprite.name);
-            retratosPersonajes.Add(sprite.name, sprite);
-        }).WaitForCompletion();
-
-
-        selector = cartaPersonaje.AddComponent<AnswerSelector>();
-        selector.historyManager = this;
-
-        decisionActual = decisionesPartida[0];
-
-        SetTextosDecision();
-
-        SetEstadoDefault();
-
-        GameObject.FindGameObjectWithTag("GamePrincipalManager").GetComponent<GamePrincipalEstadoInicial>().TerminaTransicion();
     }
 
     private void CargaPreguntasAleatorias()
     {
         //Con cuantas preguntas aleatorias vamos a jugar
         nPreguntas = (nPreguntas > parsedHistorias.decisiones.Count) ? parsedHistorias.decisiones.Count : nPreguntas;
-        int[] indexHistorias = Enumerable   //Genera n numeros aleatorios entre 0 y X.
+        List<int> indexHistorias = Enumerable   //Genera n numeros aleatorios entre 0 y X.
                                 .Range(0, parsedHistorias.decisiones.Count)
                                 .OrderBy(x => Random.value)
-                                .Take(nPreguntas).ToArray();
+                                .Take(nPreguntas).ToList();
 
         //Llenamos decisionesPartida con nPreguntas decisiones aleatorias.
         decisionesPartida = new(nPreguntas);
@@ -193,133 +286,15 @@ public class HistoryManager : MonoBehaviour
         decisionesPartida.AddRange(parsedHistorias.decisiones);
     }
 
-    private void SetTextosDecision()
+    private void LoadRetratos()
     {
-        cartaActual = retratosPersonajes[decisionActual.imagen];
-        nombrePersonajeText.text = decisionActual.personaje;
-        preguntaText.text = decisionActual.desc;
-        anosText.SetText(numDecisionActual + " Años de Aventura");
-        textToSpeechManager.StartSpeaking(decisionActual.desc);
-    }
-
-
-    public void ShowRespuestaDerecha()
-    {
-        respuestaText.text = decisionActual.res_der.respuesta;
-        //flechaIzquierda.SetActive(false);
-        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
-        imagenCartaPersonaje.sprite = reversoCarta;
-        iconManager.PreviewEfectos(decisionActual.res_der.efectos);
-        textToSpeechManager.StartSpeaking(decisionActual.res_der.respuesta);
-
-    }
-
-    public void ShowRespuestaIzquierda()
-    {
-        respuestaText.text = decisionActual.res_izq.respuesta;
-        //flechaDerecha.SetActive(false);
-        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
-        imagenCartaPersonaje.sprite = reversoCarta;
-        iconManager.PreviewEfectos(decisionActual.res_izq.efectos);
-        Debug.Log(PlayerPrefs.GetInt("TTSEnable"));
-        textToSpeechManager.StartSpeaking(decisionActual.res_izq.respuesta);
-
-    }
-
-    public void ConfirmaRespuestaDerecha()
-    {
-        ConfirmaRespuesta(decisionActual.res_der.efectos);
-        //CheckFinPartida();
-        ChangeNextDecision(decisionActual.res_der);
-        anosText.SetText(numDecisionActual + 1 + " Años de Aventura");
-    }
-
-
-    public void ConfirmaRespuestaIzquierda()
-    {
-        if (tipoCartaActual == CardType.NORMAL)
+        //Cargamos imágenes. 
+        //TODO: Filtrar retratos y cargar solo los que vayamos a usar.
+        Addressables.LoadAssetsAsync<Sprite>(assetsPersonajes, (sprite) =>
         {
-            ConfirmaRespuesta(decisionActual.res_izq.efectos);
-            //CheckFinPartida();
-            ChangeNextDecision(decisionActual.res_izq);
-            anosText.SetText(numDecisionActual + 1 + " Años de Aventura");
-        }
-    }
-
-    private void ConfirmaRespuesta(short[] efectos)
-    {
-        cartaPersonaje.SetActive(false); // Escondemos carta
-
-        iconManager.AplicaEfectos(efectos, puntuacionMax);
-        UpdatePuntuacion(efectos);
-
-        respuestaText.text = "";
-        imagenCartaPersonaje.color = colorNormal;
-        //Devolvemos al centro
-        cartaPersonaje.transform.position = posicionInicial;
-        imagenCartaPersonaje.sprite = reversoCarta;
-
-        cartaPersonaje.SetActive(true);
-    }
-
-    public void SetEstadoDefault()
-    {
-        respuestaText.text = "";
-        explicacionText.text = "";
-        //flechaIzquierda.SetActive(true);
-        //flechaDerecha.SetActive(true);
-        imagenCartaPersonaje.DOColor(colorNormal, 0.2f);
-        imagenCartaPersonaje.sprite = cartaActual;
-        iconManager.SetEstadoDefault();
-        selector.SetEstadoDefault();
-    }
-
-    public void bindBtnDerecha()
-    {
-        selector.bindBtnDerecha();
-    }
-
-    public void bindBtnIzquierda()
-    {
-        selector.bindBtnIzquierda();
-    }
-
-    public void ShowTickDerecha()
-    {
-
-        flechaDerecha.transform.DOMove(posicionTickDerecha, 0.5f);
-        tickDerecho.transform.DOMove(posicionFlechaDerecha, 0.5f);
-    }
-
-    public void HideTickDerecha()
-    {
-        tickDerecho.transform.DOMove(posicionTickDerecha, 0.5f);
-        flechaDerecha.transform.DOMove(posicionFlechaDerecha, 0.5f);
-    }
-
-    public void ShowTickIzquierda()
-    {
-        flechaIzquierda.transform.DOMove(posicionTickIzquierda, 0.5f);
-        tickIzquierdo.transform.DOMove(posicionFlechaIzquierda, 0.5f);
-    }
-
-    public void HideTickIzquierda()
-    {
-        flechaIzquierda.transform.DOMove(posicionFlechaIzquierda, 0.5f);
-        tickIzquierdo.transform.DOMove(posicionTickIzquierda, 0.5f);
-    }
-
-    public void SetEstadoExplicacion(string textoExplicacion)
-    {
-        respuestaText.text = "";
-        explicacionText.text = textoExplicacion;
-        imagenCartaPersonaje.sprite = cartaActual;
-        iconManager.SetEstadoDefault();
-        //flechaIzquierda.SetActive(true);
-        //flechaDerecha.SetActive(true);
-        imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
-        textToSpeechManager.StartSpeaking(textoExplicacion);
-
+            Debug.Log("Cargado retrato: " + sprite.name);
+            retratosPersonajes.Add(sprite.name, sprite);
+        }).WaitForCompletion();
     }
 
     private void UpdatePuntuacion(short[] efectos)
@@ -333,140 +308,83 @@ public class HistoryManager : MonoBehaviour
 
     private bool CheckFinPartida()
     {
-        if (puntuacionDinero >= puntuacionMax)
+
+        if (numDecisionActual >= nPreguntas - 1)
         {
-            tipoFin = EndType.DINERO_MUCHO;
-            decisionActual = muerteDineroMucho;
+            trueIfVictoria = true;
+            decisionActual = decisionVictoria;
             return true;
         }
-        else if (puntuacionDinero <= 0)
+
+        else if (puntuacionDinero >= puntuacionMax || puntuacionDinero <= 0)
         {
-            tipoFin = EndType.DINERO_POCO;
-            decisionActual = muerteDineroPoco;
+            decisionActual = (puntuacionDinero >= puntuacionMax) ? muerteDineroMucho : muerteDineroPoco;
             return true;
         }
-        else if (puntuacionSocial >= puntuacionMax)
+
+        else if (puntuacionSocial >= puntuacionMax || puntuacionSocial <= 0)
         {
-            tipoFin = EndType.SOCIAL_MUCHO;
-            decisionActual = muerteSocialMucho;
+            decisionActual = (puntuacionSocial >= puntuacionMax) ? muerteSocialMucho : muerteSocialPoco;
             return true;
         }
-        else if (puntuacionSocial <= 0)
+
+        else if (puntuacionSalud >= puntuacionMax || puntuacionSalud <= 0)
         {
-            tipoFin = EndType.SOCIAL_POCO;
-            decisionActual = muerteSocialPoco;
+            decisionActual = (puntuacionSalud >= puntuacionMax) ? muerteSaludMucho : muerteSaludPoco;
             return true;
         }
-        else if (puntuacionSalud >= puntuacionMax)
+
+        else if (puntuacionEspecifico >= puntuacionMax || puntuacionEspecifico <= 0)
         {
-            tipoFin = EndType.SALUD_MUCHO;
-            decisionActual = muerteSaludMucho;
+            decisionActual = (puntuacionEspecifico >= puntuacionMax) ? muerteEspecificoMucho : muerteEspecificoPoco;
             return true;
         }
-        else if (puntuacionSalud <= 0)
-        {
-            tipoFin = EndType.SALUD_POCO;
-            decisionActual = muerteSaludPoco;
-            return true;
-        }
-        else if (puntuacionEspecifico >= puntuacionMax)
-        {
-            tipoFin = EndType.ESPECIFICO_MUCHO;
-            decisionActual = muerteEspecificoMucho;
-            return true;
-        }
-        else if (puntuacionEspecifico <= 0)
-        {   
-            decisionActual = muerteEspecificoPoco;
-            tipoFin = EndType.ESPECIFICO_POCO;
-            return true;
-        }
+
         return false;
     }
-    private void ChangeNextDecision(Respuesta respuesta)
-    {
-        //Carta normal con explicación -> Mostrar explicacion
-        if (tipoCartaActual == CardType.NORMAL && respuesta.explicacion != null)
-        {
-            tipoCartaActual = CardType.EXPLICACION;
-            cartaActual = cartaExplicacion;
-            StartCoroutine(selector.RotateAndExplicacion(respuesta.explicacion));
-        }
-        //Carta normal sin explicación / Explicacion -> Mostrar siguiente carta
-        else if ((tipoCartaActual == CardType.NORMAL && respuesta.explicacion == null) || tipoCartaActual == CardType.EXPLICACION)
-        {
-            cartaPersonaje.transform.eulerAngles = new Vector3(0, 180, 0);
-            explicacionText.text = "";
-            //Checkeamos fin de partida
-            if (CheckFinPartida())
-            {
-                tipoCartaActual = CardType.PRE_MUERTE;
-            }
-            else
-            {
 
-                decisionActual = (respuesta.siguiente != -1) ? parsedHistorias.decisiones_respuesta[respuesta.siguiente] : decisionesPartida[++numDecisionActual];
-                tipoCartaActual = CardType.NORMAL;
-            }
-            SetTextosDecision();
-            StartCoroutine(selector.RotateAndDefault());
-        }
-        else if (tipoCartaActual == CardType.PRE_MUERTE)
+
+
+
+    private void ChangeNextCarta()
+    {
+        /*4 Opciones
+            - Normal con explicacion -> Mostrar Explicacion
+            - FinPartida -> Sacar tarjeta muerte
+            - Normal sin explicacion con respuesta
+            - Normal sin explicacion sin respuesta
+        */
+
+        //Si tiene explicacion y no la está enseñando -> Enseña explicación
+        if (respuestaActual.explicacion != null && !maquinaEstados.EstaShowExplicacion())
         {
-            popUpMuertePanel.SetActive(true);
+            spriteCartaActual = spriteCartaExplicacion;
+            //TODO: Set Elementos decision????
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.SHOW_EXPLICACION);
+        }
+        //Acabamos de hacer commit de una decisión -> Checkeamos si hemos ganado/perdido
+        else if (CheckFinPartida())
+        {
+            //decision actual ya es la carta de victoria/derrota.
+            SetElementosDecision();
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.PRE_MUERTE);
+        }
+        //Si tiene decision encadenada -> Pillamos la decision encadenada.
+        else if (respuestaActual.siguiente != -1) //Comprobar si está commiting o no???
+        {
+
+            //Confiamos en que de verdad existe la siguiente decision xddd🍆🍆🍆
+            decisionActual = parsedHistorias.decisiones_respuesta[respuestaActual.siguiente];
+            SetElementosDecision();
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.ELIGE_CARTA);
+        }
+        //Si no tiene decision encadenada -> Pillamos la siguiente de la lista.
+        else if (respuestaActual.siguiente == -1)
+        {
+            decisionActual = decisionesPartida[++numDecisionActual];
+            Debug.Log($"Decision {numDecisionActual} de {nPreguntas}");
+            SetElementosDecision();
+            maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.ELIGE_CARTA);
         }
     }
 }
-
-
-public struct Decision
-{
-    public Decision(int _id, string _imagen, string _personaje, string _desc, Respuesta _res_der, Respuesta _res_izq)
-    {
-        id = _id;
-        imagen = _imagen;
-        personaje = _personaje;
-        desc = _desc;
-        res_der = _res_der;
-        res_izq = _res_izq;
-    }
-
-    public int id;
-    public string imagen;
-    public string personaje;
-    public string desc;
-    public Respuesta res_der;
-    public Respuesta res_izq;
-}
-
-public struct Respuesta
-{
-    public Respuesta(string _respuesta, short[] _efectos, string _explicacion, int _siguiente)
-    {
-        respuesta = _respuesta;
-        efectos = _efectos;
-        explicacion = _explicacion;
-        siguiente = _siguiente;
-    }
-
-    public string respuesta;
-    public short[] efectos;
-    public string explicacion;
-    public int siguiente;
-}
-
-
-
-public struct HistoryJsonRoot
-{
-    public string historia;
-    public string idioma;
-    public int nivel;
-    public bool aleatoria;
-    public List<Decision> decisiones;
-    public List<Decision> decisiones_respuesta;
-}
-
-
-
-

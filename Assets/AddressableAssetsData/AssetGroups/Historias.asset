@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Historias
+  m_EditorClassIdentifier: 
+  m_GroupName: Historias
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 14bab0f5a2d2cd488bb14286f019c47d
+  m_SerializeEntries:
+  - m_GUID: 57cbaf0964ab9b6a8921c2d5fa9725fe
+    m_Address: Files_Historias_ES
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58b17c06008bf2a33bd20d993e989627
+    m_Address: Files_Historias_EN
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: b1b906966e39fa0b4bc067d39bc97f32, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 19fd99b475b56f775834a732cf374e98, type: 2}
+    - {fileID: 11400000, guid: e5eb1ff0021856b34a870d25662bbe10, type: 2}

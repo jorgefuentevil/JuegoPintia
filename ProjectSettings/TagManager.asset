@@ -18,6 +18,7 @@ TagManager:
   - CanvaImagen
   - AudioManager
   - GamePrincipalManager
+  - MainMenuManager
   layers:
   - Default
   - TransparentFX
