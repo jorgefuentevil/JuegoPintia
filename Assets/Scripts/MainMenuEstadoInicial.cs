@@ -21,7 +21,7 @@ public class MainMenuEstadoInicial : MonoBehaviour{
         MainMenuPanel.SetActive(true);
         MenuAjustesPanel.SetActive(true);
         MenuAjustesPanel.SetActive(false);
-
+    
         PanelTransicion.SetActive(true);
         PanelTransicion.GetComponent<Image>().raycastTarget=false;
 
