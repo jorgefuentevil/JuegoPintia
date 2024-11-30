@@ -8,12 +8,13 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 using UnityEngine.Localization.SmartFormat;
 using Newtonsoft.Json;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using Unity.VisualScripting;
 
 public class HistoryManager : MonoBehaviour
 {
     [Header("---- ASSETS ----")]
-    [SerializeField] private TextAsset jsonHistoria;
-    [SerializeField] private TextAsset jsonTutorial;
+    [SerializeField] private TextAsset jsonHistoriaFallback;
     [SerializeField] private AssetLabelReference assetsPersonajes;
     [SerializeField] private Sprite spriteReversoCarta;
     [SerializeField] private Sprite spriteCartaExplicacion;
@@ -242,9 +243,13 @@ public class HistoryManager : MonoBehaviour
     private void CargaHistoria()
     {
         string historiaToLoad = GameManager.Instance.currentLevel;
-        historiaToLoad ??= "Tutorial";
+        AsyncOperationHandle<TextAsset> opHandle = Addressables.LoadAssetAsync<TextAsset>(historiaToLoad);
 
-        parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(jsonHistoria.text);
+        opHandle.WaitForCompletion();
+
+        TextAsset assetHistoria = (opHandle.Status == AsyncOperationStatus.Succeeded) ? opHandle.Result : jsonHistoriaFallback;
+
+        parsedHistorias = JsonConvert.DeserializeObject<HistoryJsonRoot>(assetHistoria.text);
 
         if (parsedHistorias.aleatoria)
         {
@@ -349,7 +354,7 @@ public class HistoryManager : MonoBehaviour
             - Normal sin explicacion con respuesta
             - Normal sin explicacion sin respuesta
         */
-        
+
         //Si tiene explicacion y no la está enseñando -> Enseña explicación
         if (respuestaActual.explicacion != null && !maquinaEstados.EstaShowExplicacion())
         {

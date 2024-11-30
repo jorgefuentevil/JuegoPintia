@@ -8,7 +8,7 @@
             "coste": "0",
             "imagen": "Guerrero_1",
             "atributo": "Espada",
-            "archivo": "Dumnorix_el_Guerrero_ES.json"
+            "archivo": "Files_Historias_ES/Dumnorix_el_Guerrero_ES.json"
         },
         {
             "personaje": "Aidan el Granjero",
@@ -16,7 +16,7 @@
             "coste": "0",
             "imagen": "Ganadero_1",
             "atributo": "Trigo",
-            "archivo": "Aidan_el_Granjero_ES.json"
+            "archivo": "Files_Historias_ES/Aidan_el_Granjero_ES.json"
         }
     ]
 }

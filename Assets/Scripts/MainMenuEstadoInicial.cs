@@ -21,7 +21,7 @@ public class MainMenuEstadoInicial : MonoBehaviour{
         MainMenuPanel.SetActive(true);
         MenuAjustesPanel.SetActive(true);
         MenuAjustesPanel.SetActive(false);
-    
+
         PanelTransicion.SetActive(true);
         PanelTransicion.GetComponent<Image>().raycastTarget=false;
 
@@ -44,11 +44,9 @@ public class MainMenuEstadoInicial : MonoBehaviour{
     }
 
     public void EmpiezaTransicion()
-    {
-        PanelTransicion.GetComponent<Image>().DOFade(1, 1).onComplete = () =>
-        {
-            PanelTransicion.SetActive(true);
-            PanelTransicion.GetComponent<Image>().raycastTarget=false;
-        };
+    {   
+        PanelTransicion.SetActive(true);
+        PanelTransicion.GetComponent<Image>().raycastTarget=false;
+        PanelTransicion.GetComponent<Image>().DOFade(1, 1).WaitForCompletion();
     }
 }

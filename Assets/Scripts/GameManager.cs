@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public AsyncOperation EstadoLoadScene; //TODO
-    public string currentLevel {get; private set;} = null;
+    public string currentLevel {get; private set;} = "";
 
     
     public void Awake()

@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: b12583de804d45cb38b89ab53bb08bb0
   m_currentHash:
     serializedVersion: 2
-    Hash: aa6eda85bd04186df52cdd84b9990485
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 2a52a99256973bd989f7f2148f0eb663, type: 2}
   - {fileID: 11400000, guid: af9690d308e03ef45a54b2be6e0dc9d0, type: 2}
+  - {fileID: 11400000, guid: f9c26f56afb9ba8aca5f52498f60142a, type: 2}
   - {fileID: 11400000, guid: 4fa608c8deff83b89bfd6f4cb156f3b3, type: 2}
   - {fileID: 11400000, guid: df86bb74b839ae531aedfd78314d782b, type: 2}
   - {fileID: 11400000, guid: 45dae477fcb871c2b870b18a348cd466, type: 2}

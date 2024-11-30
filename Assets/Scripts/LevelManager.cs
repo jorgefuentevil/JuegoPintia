@@ -125,7 +125,7 @@ public class LevelManager : MonoBehaviour
         //TODO: Aqui habría que pillar el nombre del fichero que contiene la historia.
         //La string que le pases al método da igual de momento.
         Vibracion();
-        GameManager.Instance.CambiaEscenaGamePrincipal("este texto da igual xd");
+        GameManager.Instance.CambiaEscenaGamePrincipal(parsedNiveles.historias[swiper.currentPage-1].archivo);
     }
 
     public void Vibracion()
@@ -158,6 +158,8 @@ public struct Historia
     public string desc;
     public int coste;
     public string imagen;
+    public string atributo;
+    public string archivo;
 }
 [System.Serializable]
 public struct LevelsJsonRoot
