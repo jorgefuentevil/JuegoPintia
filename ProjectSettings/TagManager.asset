@@ -19,6 +19,7 @@ TagManager:
   - AudioManager
   - GamePrincipalManager
   - MainMenuManager
+  - PanelTransicion
   layers:
   - Default
   - TransparentFX

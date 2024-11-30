@@ -22,6 +22,8 @@ public class GamePrincipalEstadoInicial : MonoBehaviour
             Instantiate(AudioManagerPrefab);
         }
 
+        DOTween.Init();
+
         GamePrincipalPanel.SetActive(true);
         PopUpFinPanel.SetActive(false);
         MenuAjustesPanel.SetActive(true);
@@ -32,12 +34,20 @@ public class GamePrincipalEstadoInicial : MonoBehaviour
     }
 
     public void TerminaTransicion()
-    {
+    {   
+        if(PanelTransicion == null) PanelTransicion = GameObject.FindGameObjectWithTag("PanelTransicion");
         PanelTransicion.GetComponent<Image>().DOFade(0, 1).onComplete = () =>
         {
             PanelTransicion.SetActive(false);
             PanelTransicion.GetComponent<Image>().raycastTarget=true;
         };
+    }
+
+    public void EmpiezaTransicion()
+    {   
+        PanelTransicion.SetActive(true);
+        PanelTransicion.GetComponent<Image>().raycastTarget=false;
+        PanelTransicion.GetComponent<Image>().DOFade(1, 1);
     }
 
 

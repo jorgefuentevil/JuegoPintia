@@ -31,8 +31,7 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI respuestaText;
     [SerializeField] private TextMeshProUGUI explicacionText;
     [SerializeField] private GameObject cartaPersonaje;
-
-
+    [SerializeField] private PopUpFinalPartida popupFin;
 
 
     [SerializeField] private TTS textToSpeechManager;
@@ -49,8 +48,8 @@ public class HistoryManager : MonoBehaviour
     private Respuesta respuestaActual;
 
 
-    public AnswerSelector selector;
-    public MaquinaEstadosCartas maquinaEstados;
+    [System.NonSerialized] public AnswerSelector selector;
+    [System.NonSerialized] public MaquinaEstadosCartas maquinaEstados;
 
     private Sprite spriteCartaActual;
     private Image imagenCartaPersonaje;
@@ -239,7 +238,7 @@ public class HistoryManager : MonoBehaviour
     public void SetEstadoCommitMuerte()
     {
         Debug.Log($"Fin de Partida por {(trueIfVictoria ? "victoria" : "derrota")}");
-        //TODO: Sacar popup aquí
+        popupFin.MostrarPopup(trueIfVictoria);
     }
 
     private void CargaHistoria()
@@ -312,14 +311,7 @@ public class HistoryManager : MonoBehaviour
     private bool CheckFinPartida()
     {
 
-        if (numDecisionActual >= nPreguntas - 1)
-        {
-            trueIfVictoria = true;
-            decisionActual = decisionVictoria;
-            return true;
-        }
-
-        else if (puntuacionDinero >= puntuacionMax || puntuacionDinero <= 0)
+        if (puntuacionDinero >= puntuacionMax || puntuacionDinero <= 0)
         {
             decisionActual = (puntuacionDinero >= puntuacionMax) ? muerteDineroMucho : muerteDineroPoco;
             return true;
@@ -340,6 +332,13 @@ public class HistoryManager : MonoBehaviour
         else if (puntuacionEspecifico >= puntuacionMax || puntuacionEspecifico <= 0)
         {
             decisionActual = (puntuacionEspecifico >= puntuacionMax) ? muerteEspecificoMucho : muerteEspecificoPoco;
+            return true;
+        }
+        //Priorizamos derrota a victoria....
+        else if (numDecisionActual >= nPreguntas - 1)
+        {
+            trueIfVictoria = true;
+            decisionActual = decisionVictoria;
             return true;
         }
 
