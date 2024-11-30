@@ -1,0 +1,1409 @@
+{
+    "historia": "Aidan el Granjero",
+    "idioma": "es_ES",
+    "nivel": 1,
+    "decisiones": [
+        {
+            "id": 0,
+            "personaje": "Cultivos",
+            "imagen": "Agricultor_4",
+            "desc": "Es primavera y el granjero debe decidir que cultivos sembrar al inicio de temporada",
+            "res_der": {
+                "respuesta": "Sembrar combinación de trigo y cebada",
+                "explicacion": "Tienen una temporada de crecimiento segura y son buenos para comercio",
+                "efectos": [
+                    "1",
+                    "0",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Sembrar vides de uva",
+                "explicacion": "Cosecha mas riesgosa y resulta no ser exitosa",
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 1,
+            "personaje": "Fiesta",
+            "imagen": "Fiesta_1",
+            "desc": "Es agosto y ha empezado una festividad para celebrar la cosecha de grano (Lughnasadh) y los dias son largos y agotadores",
+            "res_der": {
+                "respuesta": "Cosechar cuidadosamente y almacenar bien",
+                "explicacion": "Hay suficiente cosecha para hacer el festival pero te encuentras muy cansado",
+                "efectos": [
+                    "0",
+                    "1",
+                    "-1",
+                    "1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Estas cansado y decides apresurar la cosecha",
+                "explicacion": "No consigues sufiente cosecha para el festival y la gente esta descontenta pero consigues descansar",
+                "efectos": [
+                    "0",
+                    "-1",
+                    "1",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 2,
+            "personaje": "Almacén",
+            "imagen": "Almacen_1",
+            "desc": "La cosecha de grano ha sido buena, pero tienes que decidir cómo almacenarla.",
+            "res_der": {
+                "respuesta": "Decides construir un almacén adecuado para proteger la cosecha de las inclemencias del tiempo y las plagas",
+                "explicacion": "Conservas la cosecha en buen estado pero te has gastado demasiado dinero en construir el almacén",
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Lo guardas de manera improvisada",
+                "explicacion": "Pierdes parte de la cosecha debido a las humedades",
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 3,
+            "personaje": "Fiesta",
+            "imagen": "Baile_1",
+            "desc": "Marcando el fin del ciclo agricola llega el Samhain y te preguntas si deberías hacer una ofrenda para proteger tu tierra",
+            "res_der": {
+                "respuesta": "Ofreces parte de tu cosecha como ofrenda",
+                "explicacion": "Pierdes parte de tu cosecha pero obtienes reconocimiento social por parte de la gente de Pintia",
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Confias que tu esfuerzo será suficiente para el próximo año",
+                "explicacion": "Pierdes una oportunidad de fortalecer lazos comunitarios y tu siguiente cosecha no es tan prospera como de costumbre.",
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 4,
+            "personaje": "Granjeros",
+            "imagen": "Conversacion_1",
+            "desc": "Estas plantando cereales desde hace tiempo porque se vende a buen precio, pero escuchas de otros granjeros que cambiar el tipo de cultivo regularmente produce mayores cosechas",
+            "res_der": {
+                "respuesta": "Rotas los cultivos, plantando legumbres en vez de cereales esta vez",
+                "explicacion": "La tierra se hace más fértil debido a la rotación y la producción aumenta pero no se vende tan bien",
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Sigues plantando cereales",
+                "explicacion": "La calidad del suelo se reduce pero sigues ganando dinero de vender cereal",
+                "efectos": [
+                    "1",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 5,
+            "personaje": "Campos de cultivo",
+            "imagen": "Agricultor_3",
+            "desc": "Un mercader te hace una buena oferta de compra del grano de una gran cosecha que has tenido",
+            "res_der": {
+                "respuesta": "Vendes el grano",
+                "explicacion": "Obtienes una gran ganancia pero no guardas sufiente grano para ti y acabas pasando hambre",
+                "efectos": [
+                    "1",
+                    "0",
+                    "-1",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No vendes el grano",
+                "explicacion": "Los habitantes de Pintia te están agradecidos ya que tienen suficiente comida como para pasar el invierno",
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 6,
+            "personaje": "Mercader Angus",
+            "imagen": "Mercader_1",
+            "desc": "Debes comenzar a preparar los campos para sembrar cebada. Sin embargo, un comerciante ha llegado al poblado ofreciendo herramientas de hierro a cambio de parte de tus semillas.",
+            "res_der": {
+                "respuesta": "Conservas las semillas para la siembra.",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Intercambias semillas por herramientas nuevas",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 7,
+            "personaje": "Cian el Clerigo",
+            "imagen": "Clerigo_1",
+            "desc": "Los ancianos del pueblo piden que dones parte de tu ganado para el sacrificio ritual durante las hogueras de Beltane",
+            "res_der": {
+                "respuesta": "Donas parte de tu ganado",
+                "explicacion": "La fiesta de Beltane celebraba la llegada del verano. Era costumbre encender hogueras sagradas",
+                "efectos": [
+                    "-1",
+                    "1",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Decides no sacrificar, confiando en que tus propios métodos asegurarán la cosecha",
+                "explicacion": "La fiesta de Beltane celebraba la llegada del verano. Era costumbre encender hogueras sagradas",
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 8,
+            "personaje": "Bel el Clerigo ",
+            "imagen": "Clerigo_1",
+            "desc": "El trigo está listo para cosechar, pero el jefe tribal ha convocado una asamblea en honor al dios Lugh, pidiendo que participes perdiendo tiempo de cosecha.",
+            "res_der": {
+                "respuesta": "Participas en el torneo pero arriesgas a perder parte de la cosecha si el clima cambia.",
+                "explicacion": "Este festival marcaba el inicio de la cosecha y honraba al dios Lugh",
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Te centras en la cosecha asegurando el alimento para tu familia.",
+                "explicacion": "Este festival marcaba el inicio de la cosecha y honraba al dios Lugh",
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 9,
+            "personaje": "Dailin el Clérigo",
+            "imagen": "Clerigo_2",
+            "desc": "La tradición dicta que debes dejar parte de tu última cosecha como ofrenda para los ancestros y espíritus.",
+            "res_der": {
+                "respuesta": "Haces la ofrenda completa, esperando que los espíritus protejan a tu familia, pero reduces las provisiones de invierno.",
+                "explicacion": "El festival de Samhain marcaba el fin del año, el comienzo del invierno y un momento de conexión con los muertos.",
+                "efectos": [
+                    "-1",
+                    "1",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Guardas la cosecha para el invierno, pero corres el riesgo de descontentar a los espíritus.",
+                "explicacion": "El festival de Samhain marcaba el fin del año, el comienzo del invierno y un momento de conexión con los muertos.",
+                "efectos": [
+                    "0",
+                    "-1",
+                    "-1",
+                    "1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 10,
+            "personaje": "Aldea",
+            "imagen": "Aldea_1",
+            "desc": "Un eclipse ocurre en el equinoccio. ¿Realizas un ritual para apaciguar a los dioses, sacrificando parte de tu mejor ganado, o ignoras el presagio?",
+            "res_der": {
+                "respuesta": "Sacrificar parte del ganado ",
+                "explicacion": "Los eclipses eran un simbolo de un mal augurio para los vacceos",
+                "efectos": [
+                    "-1",
+                    "0",
+                    "1",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No sacarificar el ganado y confiar en el orden de la naturaleza",
+                "explicacion": "Los eclipses eran un simbolo de un mal augurio para los vacceos",
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 11,
+            "personaje": "Agua",
+            "imagen": "Lluvia_1",
+            "desc": "Las lluvias son escasas y el calor amenaza tus cultivos. ¿Riegas con tus últimas reservas de agua o las reservas para el ganado?",
+            "res_der": {
+                "respuesta": "Regar los cultivos",
+                "explicacion": "Los cultivos crecen muy bien y te dan muy buenos resultados",
+                "efectos": [
+                    "1",
+                    "0",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Dar las reservas al ganado",
+                "explicacion": "El agua no fue suficiente para tu ganado y parte de el murió.",
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 12,
+            "personaje": "Mercenario ",
+            "imagen": "Mercenario_1",
+            "desc": "Te estan intentando saquear",
+            "res_der": {
+                "respuesta": "Enfrentarte a ellos y proteger tus reservas",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "-1",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Dejarles ir con tus reservas",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "1",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 13,
+            "personaje": "Vecino Llyr",
+            "imagen": "Aldeano_1",
+            "desc": "Saquean a tu vecino, te pide ayuda para sobrvivir al invierno",
+            "res_der": {
+                "respuesta": "Aceptar y ayudarle dandole parte de tu cosecha",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No ayudarle, no crees que tengas suficiente para los dos",
+                "explicacion": "Se enfada contigo y os peleais",
+                "efectos": [
+                    "0",
+                    "-1",
+                    "-1",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 14,
+            "personaje": "Mael el Viajero",
+            "imagen": "Viajero_1",
+            "desc": "Te encuentras con un viajero que pide agua y comida. El hombre afirma que es de tierras lejanas y promete traer noticias valiosas de otros pueblos.",
+            "res_der": {
+                "respuesta": "Ofrecerle algo de agua y comida a cambio de información.",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "1",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Negarse, hay pocos recursos.",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "1",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 15,
+            "personaje": "Cazador Brann",
+            "imagen": "Cazador_1",
+            "desc": "Un grupo de cazadores va a salir y te invitan a unirte, pero también necesitas cuidar los cultivos.",
+            "res_der": {
+                "respuesta": "Cuidar los cultivos",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Unirse a la caza",
+                "explicacion": "tu cosecha empeora y no consigues cazar nada",
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 16,
+            "personaje": "Cosechas ",
+            "imagen": "Agricultor_3",
+            "desc": "Caes enfermo pero tienes que cosechar ya o se perdera el grano",
+            "res_der": {
+                "respuesta": "Cosechar ya",
+                "explicacion": null,
+                "efectos": [
+                    "1",
+                    "0",
+                    "-2",
+                    "1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Descansar y cosechar más tarde",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "-1",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 17,
+            "personaje": "Vecino Merlin",
+            "imagen": "Aldeano_1",
+            "desc": "El vecino te pide un poco de vino de tu cosecha para una comida importante",
+            "res_der": {
+                "respuesta": "Darle vino al vecino",
+                "explicacion": "Te da una gran propina a cambio",
+                "efectos": [
+                    "2",
+                    "1",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No darle vino al vecino",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-2",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 18,
+            "personaje": "Mercader Merlin",
+            "imagen": "Mercader_1",
+            "desc": "Hay una oportunidad de comprar una herramienta nueva que mejorara mucho tus tierras",
+            "res_der": {
+                "respuesta": "Comprar la herramienta",
+                "explicacion": null,
+                "efectos": [
+                    "-2",
+                    "0",
+                    "0",
+                    "2"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No comprar la herramiente",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 19,
+            "personaje": "Lobo",
+            "imagen": "Lobo_1",
+            "desc": "Se ha visto un lobo merodeando cerca de los campos y los corrales, lo que pone en peligro a los animales y los cultivos. ",
+            "res_der": {
+                "respuesta": "Organizar una caza",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Esperar su llegada y prepararte para ello",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 20,
+            "personaje": "Guerrero",
+            "imagen": "Guerrero_1",
+            "desc": "Se te acerca un guerrero de una aldea cercana pidiendote ayuda dado que en su pueblo se han queado sin recursos para el invierno ",
+            "res_der": {
+                "respuesta": "Decides ayudarle proporcionándole los bienes mínimos sin que afecte a tu despensa",
+                "explicacion": "Resulta que el guerrero te traiciona y tras una pelea te deja inconsciente",
+                "efectos": [
+                    "-2",
+                    "0",
+                    "-3",
+                    "-2"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No te fías del guerrero y decides echarlo de tu zona",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 21,
+            "personaje": "Explorador Ronan",
+            "imagen": "Explorador_2",
+            "desc": "Te llega información acerca de una bacteria en la tierra que está afectando los cultivos de los pueblos vecinos",
+            "res_der": {
+                "respuesta": "Desoyes los rumores y decides cultivar",
+                "explicacion": null,
+                "efectos": [
+                    "-2",
+                    "0",
+                    "0",
+                    "-3"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Haces caso y retrasas tu cultivo hasta estar seguro de que no hay peligro",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "1",
+                    "1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 22,
+            "personaje": "Aldeano Nuada",
+            "imagen": "Aldeano_2",
+            "desc": "Tu vecino te pide ayuda para reparar una cerca que divide sus tierras de las tuyas. Sin embargo, tienes muchas tareas pendientes en tu granja. ¿Qué decides?",
+            "res_der": {
+                "respuesta": "Ayudar al vecino con la cerca.",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "2",
+                    "-1",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Enfocarte en tus tareas y no ayudar.",
+                "explicacion": null,
+                "efectos": [
+                    "1",
+                    "-1",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 23,
+            "personaje": "Mercader Luchta",
+            "imagen": "Mercader_2",
+            "desc": "Es temporada de lluvias, y las semillas se están agotando en el mercado. Un vendedor te ofrece semillas resistentes a la lluvia, pero son caras. ¿Qué haces?",
+            "res_der": {
+                "respuesta": "Comprar las semillas resistentes a la lluvia.",
+                "explicacion": null,
+                "efectos": [
+                    "-3",
+                    "0",
+                    "0",
+                    "2"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Usar las semillas que ya tienes.",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "-1",
+                    "-2"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 24,
+            "personaje": "Cultivos ",
+            "imagen": "Cultivos_1",
+            "desc": "Una plaga amenaza con destruir tu cosecha. Un especialista en agricultura ofrece un pesticida caro, pero tienes la opción de intentar remedios caseros. ¿Qué haces?",
+            "res_der": {
+                "respuesta": "Comprar el pesticida.",
+                "explicacion": null,
+                "efectos": [
+                    "-2",
+                    "-1",
+                    "0",
+                    "2"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Usar remedios caseros.",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "1",
+                    "1",
+                    "-2"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 25,
+            "personaje": "Vacas",
+            "imagen": "Vacas_1",
+            "desc": "Una enfermedad está afectando a tus vacas. Estas son esenciales para tu tribu y para el comercio.",
+            "res_der": {
+                "respuesta": "Consultar al druida de la aldea para buscar remedios naturales",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "2",
+                    "2"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Sacrificar las vacas enfermas para evitar que la enfermedad se propague.",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "-2"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 26,
+            "personaje": "Pueblo vecino",
+            "imagen": "Celtas_1",
+            "desc": "Un grupo celta llega a tu aldea con intención de comerciar. Ofrecen armas y herramientas a cambio de cereales y ganado.",
+            "res_der": {
+                "respuesta": "Aceptar el intercambio y entregar parte de tu cosecha.",
+                "explicacion": null,
+                "efectos": [
+                    "2",
+                    "1",
+                    "0",
+                    "-2"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Negarte a comerciar y conservar tus recursos.",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-2",
+                    "0",
+                    "2"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 27,
+            "personaje": "Pueblo rival",
+            "imagen": "Guerreros_1",
+            "desc": "Un pueblo rival amenaza con atacar tus tierras. Debes decidir cómo prepararte.",
+            "res_der": {
+                "respuesta": "Ayudar a defender la aldea",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "3",
+                    "-2",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Ofrecer recursos a cambio de paz",
+                "explicacion": null,
+                "efectos": [
+                    "-2",
+                    "1",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 28,
+            "personaje": "Viajero herido",
+            "imagen": "Herido_1",
+            "desc": "Encuentras a un viajero herido en el camino. Parece necesitar ayuda urgente.",
+            "res_der": {
+                "respuesta": "Ayudarlo y llevarlo a la aldea para que reciba cuidados.",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "2",
+                    "-1",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Seguir tu camino y dejar al viajero.",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-2",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 29,
+            "personaje": "Banquete",
+            "imagen": "Banquete_1",
+            "desc": "Se organiza un gran banquete en la aldea para celebrar la cosecha. Te invitan a contribuir con dinero",
+            "res_der": {
+                "respuesta": "Contribuir generosamente.",
+                "explicacion": null,
+                "efectos": [
+                    "-2",
+                    "3",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No participar",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-2",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 30,
+            "personaje": "Entierro",
+            "imagen": "Fuego_1",
+            "desc": "Un miembro cercano de tu familia ha muerto. Debes decidir cómo llevar a cabo el ritual de su muerte.",
+            "res_der": {
+                "respuesta": "Incinerar al muerto y celebrar un gran banquete y ofrendas.",
+                "explicacion": "En la tradición vaccea los muertos eran quemados antes de enterralos.",
+                "efectos": [
+                    "-3",
+                    "2",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Incinerar al muerto con un sencilla ceremonia y sin banquete.",
+                "explicacion": "En la tradición vaccea los muertos eran quemados antes de enterralos.",
+                "efectos": [
+                    "-1",
+                    "-2",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 31,
+            "personaje": "Entierro",
+            "imagen": "Buitre_1",
+            "desc": "Tu hermano, un valiente guerrero de la tribu, ha muerto en combate. Tú debes decidir cómo llevar a cabo la ceremonia",
+            "res_der": {
+                "respuesta": "Organizar una ceremonia solemne con la entrega ritual a los buitres, acompañado de danzas y cantos.",
+                "explicacion": "En la tradición vaccea los guerreros al morir se les entregaba como alimento a las aves.",
+                "efectos": [
+                    "-2",
+                    "2",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Realizar una ceremonia sencilla sin festejos ni acompañamiento.",
+                "explicacion": "En la tradición vaccea los guerreros al morir se les entregaba como alimento a las aves.",
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 32,
+            "personaje": "Boda",
+            "imagen": "Boda_1",
+            "desc": "Tu hija ha llegado a la edad de casarse. Dos familias han propuesto un matrimonio. Debes decidir cuál alianza aceptar.",
+            "res_der": {
+                "respuesta": "Aceptar la propuesta de una familia rica pero distante.",
+                "explicacion": null,
+                "efectos": [
+                    "3",
+                    "1",
+                    "-1",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Aceptar la propuesta de una familia amiga de la aldea.",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "2",
+                    "1",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 33,
+            "personaje": "Nacimiento",
+            "imagen": "Ninos_2",
+            "desc": "Ha nacido tu hijo, y ahora debes decidir como educarle.",
+            "res_der": {
+                "respuesta": "Dedicarlo al aprendizaje de los druidas.",
+                "explicacion": null,
+                "efectos": [
+                    "-2",
+                    "3",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Criarlo para que herede tus labores y tierras.",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 34,
+            "personaje": "Vecino Ronan",
+            "imagen": "Aldeano_2",
+            "desc": "Tienes una deuda con un vecino. Ha llegado la hora de pagarle pero no tienes suficiente dinero.",
+            "res_der": {
+                "respuesta": "Pagar parte de la deuda con alimento y animales",
+                "explicacion": null,
+                "efectos": [
+                    "-3",
+                    "-1",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Pedirle más tiempo y no pagarle nada",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-2",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 35,
+            "personaje": "Incendio",
+            "imagen": "Fuego_2",
+            "desc": "En plena etapa de recolecta de tu cosecha se produce un incendio en la ciudad de Las Quintanas",
+            "res_der": {
+                "respuesta": "Decides acercarte para ayudar a mitigarlo con el resto de vecinos",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "2",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Sigues con tu recolecta dado que vas mal de tiempo y temes que se eche a perder",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-2",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 36,
+            "personaje": "Casa",
+            "imagen": "Casa_1",
+            "desc": "Tu familia ha crecido, y necesitas decidir cómo construir una nueva casa.",
+            "res_der": {
+                "respuesta": "Construir una casa grande con los mejores materiales.",
+                "explicacion": null,
+                "efectos": [
+                    "-3",
+                    "1",
+                    "1",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Construir una casa más modesta con materiales básicos.",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 37,
+            "personaje": "Animales",
+            "imagen": "Animales_1",
+            "desc": "Es época de cosecha y encuentras un grupo de animales de un vecino pisoteando parte de tu campo. Sabes que los animales se han escapado por descuido suyo. ¿Qué haces?",
+            "res_der": {
+                "respuesta": "Ahuyentas a los animales sin avisar a tu vecino",
+                "explicacion": "Tu vecino se entera y provoca una fuerte discusión entre ambos",
+                "efectos": [
+                    "0",
+                    "-2",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "\"Los devuelves a tu vecino y le reprochas\nque sea más responsable la próxima vez\"",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 38,
+            "personaje": "Agricultores",
+            "imagen": "Agricultor_4",
+            "desc": "Resulta que durante este año tus tierras son las más fértiles de toda la aldea, mientras que otros compañeros tuyos parecen no tener tanta suerte",
+            "res_der": {
+                "respuesta": "Informas al resto de agricultores tus grandes resultados",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Guardas en secreto parte de tus cosechas",
+                "explicacion": "Mientras lo haces te descubren y te obligan a dar parte de tu cosecha",
+                "efectos": [
+                    "1",
+                    "-2",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 39,
+            "personaje": "Anciano Fionn",
+            "imagen": "Jefe_2",
+            "desc": "Un anciano de la tribu te ofrece un remedio natural, preparado con hierbas y raíces.",
+            "res_der": {
+                "respuesta": "Tomar el remedio",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "2",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No tomar el remedio",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 40,
+            "personaje": "Niños",
+            "imagen": "Ninos_1",
+            "desc": "Te encuentras a unos niños jugando a dar patadas a una piedra",
+            "res_der": {
+                "respuesta": "Te unes a jugar con ellos ",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "1",
+                    "1",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No te unes a jugar con ellos ",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "-1",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 41,
+            "personaje": "Mercader Eoin",
+            "imagen": "Mercader_1",
+            "desc": "Un mercader te ofrece un grano exótico que nunca antes habías visto.¿Qué haces?",
+            "res_der": {
+                "respuesta": "Decides comprar el grano",
+                "explicacion": "Resulta que este tipo de grano no crece bajo las condicones de tu zona",
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "-2"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No te arriesgas a comprarlo",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 42,
+            "personaje": "Vacas",
+            "imagen": "Vacas_1",
+            "desc": "Has tenido un sueño en el cual una vaca va a tener un accidente si la sacas a pastar",
+            "res_der": {
+                "respuesta": "Sacar la vaca a pastar aun así",
+                "explicacion": "Tu sueño se hizo realidad.",
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "No sacar la vaca a pastar",
+                "explicacion": "Las vacas necesitan pastar",
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 43,
+            "personaje": "Fiesta de Imbolc",
+            "imagen": "Banquete_1",
+            "desc": "La festividad de Imbolc está cerca, marcando el inicio de la primavera y la purificación de la tierra y los hogares.",
+            "res_der": {
+                "respuesta": "Organizar una gran limpieza y purificación en el hogar.",
+                "explicacion": null,
+                "efectos": [
+                    "-2",
+                    "1",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Realizar una limpieza más modesta.",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 44,
+            "personaje": "Viajero",
+            "imagen": "Viajero_1",
+            "desc": "Se te acerca un viajero de una aldea cercana y te pregunta donde se ubica el ustrino",
+            "res_der": {
+                "respuesta": "Señalas en dirección al campo de incineración",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Señalas en dirección a la zona de reuniones de la aldea",
+                "explicacion": "Era el sitio dedicado a quemar los cuerpos de los difuntos.",
+                "efectos": [
+                    "0",
+                    "-2",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 45,
+            "personaje": "Dunein el Herrero",
+            "imagen": "Herrero_1",
+            "desc": "Decides ir a la forja a comprar nuevas herramientas",
+            "res_der": {
+                "respuesta": "Te compras una herramienta de segunda mano",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Te compras una herramienta hecha de cero",
+                "explicacion": null,
+                "efectos": [
+                    "-2",
+                    "0",
+                    "0",
+                    "2"
+                ],
+                "siguiente": -1
+            }
+        }
+    ],
+    "decisiones_respuesta": [
+        {
+            "id": 0,
+            "personaje": "Lobo",
+            "imagen": "Lobo_2",
+            "desc": "Has salido a buscar al lobo, que estrategia hacer",
+            "res_der": {
+                "respuesta": "Buscar rastros del lobo cerca del bosque",
+                "explicacion": "Mientras estabas en el bosque el lobo atacó ",
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "-2"
+                ],
+                "siguiente": null
+            },
+            "res_izq": {
+                "respuesta": "Esperar y tenderle una trampa cerca del corral",
+                "explicacion": "El lobo ataco y entre todos defendisteis el publo",
+                "efectos": [
+                    "0",
+                    "1",
+                    "-1",
+                    "1"
+                ],
+                "siguiente": null
+            }
+        },
+        {
+            "id": 1,
+            "personaje": "Aldea",
+            "imagen": "Aldea_1",
+            "desc": "Decides esperar en la aldea",
+            "res_der": {
+                "respuesta": "Pides ayuda a otros pastores para vigilar el pueblo",
+                "explicacion": "En tu turno el lobo ataco y saliste herido",
+                "efectos": [
+                    "0",
+                    "1",
+                    "-1",
+                    "1"
+                ],
+                "siguiente": null
+            },
+            "res_izq": {
+                "respuesta": "Mejoras las vallas del corral",
+                "explicacion": "Las vallas no fueron suficiente protección",
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": null
+            }
+        },
+        {
+            "id": 2,
+            "personaje": "Guerrero",
+            "imagen": "Agricultor_4",
+            "desc": "El guerrero te obece y se aleja\n",
+            "res_der": {
+                "respuesta": "Por miedo a un posible ataque vigilas tu cultivo durante toda la noche",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "-1",
+                    "0"
+                ],
+                "siguiente": null
+            },
+            "res_izq": {
+                "respuesta": "Decides no darle importancia",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": null
+            }
+        },
+        {
+            "id": 3,
+            "personaje": "Agricultores",
+            "imagen": "Agricultor_1",
+            "desc": "Viendo los resultados te piden que compartas parte de tus beneficios",
+            "res_der": {
+                "respuesta": "Aceptas y repartes a aquellos que peor cosecha han tenido",
+                "explicacion": null,
+                "efectos": [
+                    "1",
+                    "3",
+                    "0",
+                    "-2"
+                ],
+                "siguiente": null
+            },
+            "res_izq": {
+                "respuesta": "Rechazas la propuesta",
+                "explicacion": null,
+                "efectos": [
+                    "2",
+                    "-3",
+                    "0",
+                    "2"
+                ],
+                "siguiente": null
+            }
+        }
+    ]
+}
