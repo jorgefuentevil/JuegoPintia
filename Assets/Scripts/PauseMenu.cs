@@ -44,7 +44,7 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         pauseMenu.SetActive(true);
-        mainMenu.SetActive(false);
+        //mainMenu.SetActive(false);
         if(PlayerPrefs.GetInt("VibracionEnabled")==1){
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro al entrar en ajustes");
@@ -56,7 +56,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenu.SetActive(false);
-        mainMenu.SetActive(true);
+        //mainMenu.SetActive(true);
         if(PlayerPrefs.GetInt("VibracionEnabled")==1){
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro en volver");
