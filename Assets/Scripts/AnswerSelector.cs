@@ -29,7 +29,6 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     public void OnDrag(PointerEventData data)
     {
         float difference = data.pressPosition.x - data.position.x;
-        Debug.Log(difference);
         if ((maquinaEstados.EstaShowRespuestaDerecha() && difference < 0) ||
             (maquinaEstados.EstaShowRespuestaIzquierda() && difference > 0) ||
             maquinaEstados.EstaShowExplicacion()||

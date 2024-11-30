@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public AsyncOperation EstadoLoadScene; //TODO
     public string currentLevel {get; private set;} = "";
+    public LocalizedAsset<TextAsset> jsonTutorial;
 
     
     public void Awake()

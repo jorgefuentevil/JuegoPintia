@@ -10,11 +10,13 @@ using UnityEngine.Localization.SmartFormat;
 using Newtonsoft.Json;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Unity.VisualScripting;
+using UnityEngine.Localization;
 
 public class HistoryManager : MonoBehaviour
 {
     [Header("---- ASSETS ----")]
     [SerializeField] private TextAsset jsonHistoriaFallback;
+    [SerializeField] private LocalizedAsset<TextAsset> historiaTutorial;
     [SerializeField] private AssetLabelReference assetsPersonajes;
     [SerializeField] private Sprite spriteReversoCarta;
     [SerializeField] private Sprite spriteCartaExplicacion;
@@ -243,7 +245,8 @@ public class HistoryManager : MonoBehaviour
     private void CargaHistoria()
     {
         string historiaToLoad = GameManager.Instance.currentLevel;
-        AsyncOperationHandle<TextAsset> opHandle = Addressables.LoadAssetAsync<TextAsset>(historiaToLoad);
+
+        AsyncOperationHandle<TextAsset> opHandle = historiaToLoad.Equals("Tutorial") ? Addressables.LoadAssetAsync<TextAsset>(historiaTutorial) : Addressables.LoadAssetAsync<TextAsset>(historiaToLoad);
 
         opHandle.WaitForCompletion();
 

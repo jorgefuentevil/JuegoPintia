@@ -34,7 +34,7 @@ public class LoadingScreenEstadoInicial : MonoBehaviour
         yield return new WaitForSeconds(1);
 
 
-        if ( true || PlayerPrefs.HasKey("Tutorial")) //TODO: CAMBIAR ESTO
+        if (PlayerPrefs.HasKey("Tutorial")) //TODO: CAMBIAR ESTO
         {
             GameManager.Instance.CambiaEscenaMainMenu();
         }
