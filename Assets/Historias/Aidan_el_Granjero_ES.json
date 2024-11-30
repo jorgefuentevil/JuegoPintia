@@ -1307,7 +1307,7 @@
                     "0",
                     "-2"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Esperar y tenderle una trampa cerca del corral",
@@ -1318,7 +1318,7 @@
                     "-1",
                     "1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -1335,7 +1335,7 @@
                     "-1",
                     "1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Mejoras las vallas del corral",
@@ -1346,7 +1346,7 @@
                     "0",
                     "-1"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -1363,7 +1363,7 @@
                     "-1",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Decides no darle importancia",
@@ -1374,7 +1374,7 @@
                     "0",
                     "0"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         },
         {
@@ -1391,7 +1391,7 @@
                     "0",
                     "-2"
                 ],
-                "siguiente": null
+                "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "Rechazas la propuesta",
@@ -1402,7 +1402,7 @@
                     "0",
                     "2"
                 ],
-                "siguiente": null
+                "siguiente": -1
             }
         }
     ]

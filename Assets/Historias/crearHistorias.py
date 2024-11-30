@@ -7,8 +7,8 @@ class Decision(Toplevel):
          
         super().__init__(master = master)
         self.app = app
-        self.id_siguiente_izq= None
-        self.id_siguiente_der= None
+        self.id_siguiente_izq= -1
+        self.id_siguiente_der= -1
         self.isRespuesta=isRespuesta
         #Creamos la ventana2
         Label(self, text="Creacion de decision seguida de {xxxxxxx}").grid(row=0, column=0, sticky="w", padx=5, pady=5)
@@ -92,8 +92,7 @@ class Decision(Toplevel):
                 datos = json.load(f)
             if self.isRespuesta == False:
                 id=len(datos["decisiones"]) 
-                self.id_siguiente_der=-1
-                self.id_siguiente_izq=-1
+
             else:
                 id=self.app.siguiente
 
