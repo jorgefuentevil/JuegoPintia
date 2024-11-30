@@ -241,15 +241,15 @@ class JsonEditorApp:
                 raise Exception("La descripción es muy extensa")
             if len(self.historia_entry.get())>20:
                 raise Exception("El titulo es muy extenso")
-
+            self.titulo=self.historia_entry.get().replace(" ", "_")
             data_historia = {
                 "personaje": self.historia_entry.get(),
                 "desc": self.descripcion_entry.get(),
                 "coste": self.coste_entry.get(),
                 "imagen": self.imagen_entry.get(),
-                "atributo": self.nivel_atributo_especifico.get()
+                "atributo": self.nivel_atributo_especifico.get(),
+                "archivo": f"{self.titulo}_{self.idioma_entry.get()[-2:]}.json"
             }
-            self.titulo=self.historia_entry.get().replace(" ", "_")
             idioma=self.idioma_entry.get()[-2:]
             self.agregar_historia(f"Historias_{idioma}.json",data_historia)
 

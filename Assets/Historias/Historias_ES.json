@@ -1,27 +1,22 @@
 {
     "lenguaje": "es_ES",
-    "num_historias": 3,
+    "num_historias": 2,
     "historias": [
-        {
-            "personaje": "Togodumnus el Granjero",
-            "desc": "Eres un granjero del pueblo de Pintia, uno de los pueblos más grandes de toda la península Iberica",
-            "coste": "0",
-            "imagen": "Ganadero_1",
-            "atributo": "Espada"
-        },
         {
             "personaje": "Dumnorix el Guerrero",
             "desc": "Eres un guerrero del pueblo de Pintia, uno de los pueblos más grandes de toda la península Iberica",
             "coste": "0",
             "imagen": "Guerrero_1",
-            "atributo": "Espada"
+            "atributo": "Espada",
+            "archivo": "Dumnorix_el_Guerrero_ES.json"
         },
         {
-            "personaje": "Korean Muebles",
-            "desc": "Eres un koreano del pueblo de Pintia, uno de los pueblos más grandes de toda la península Iberica",
+            "personaje": "Aidan el Granjero",
+            "desc": "Eres un hombre sencillo pero sabio de Pintia. Tu vida esta marcada por el ciclo de las estaciones y la importacia de la comunidad",
             "coste": "0",
-            "imagen": "Mercenario_1",
-            "atributo": "Espada"
+            "imagen": "Ganadero_1",
+            "atributo": "Trigo",
+            "archivo": "Aidan_el_Granjero_ES.json"
         }
     ]
 }
