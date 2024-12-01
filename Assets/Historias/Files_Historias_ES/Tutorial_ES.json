@@ -345,26 +345,26 @@
             "id": 12,
             "personaje": "Entierro ",
             "imagen": "Entierro_Sanson",
-            "desc": "Te has desmayado y te has golpeado en la cabeza tras caerte por la borrachera",
+            "desc": "Estas un poco mareado, el mundo a tu alrededor esta cambiando",
             "res_der": {
                 "respuesta": "¿QUÉ?",
-                "explicacion": "Tras la muerte saliste de la maquina, estas tan ilusionado con como fue la experiencia que la repetirás en la carne de otros habitantes de pintia",
+                "explicacion": "Te dormiste y saliste de la maquina, estas tan ilusionado con como fue la experiencia que la repetirás en la carne de otros habitantes de pintia",
                 "efectos": [
-                    "-10",
-                    "-10",
-                    "-10",
-                    "-10"
+                    "0",
+                    "0",
+                    "0",
+                    "5"
                 ],
                 "siguiente": -1
             },
             "res_izq": {
                 "respuesta": "¿QUÉ?",
-                "explicacion": "Tras la muerte saliste de la maquina, estas tan ilusionado con como fue la experiencia que la repetirás en la carne de otros habitantes de pintia",
+                "explicacion": "Te dormiste y saliste de la maquina, estas tan ilusionado con como fue la experiencia que la repetirás en la carne de otros habitantes de pintia",
                 "efectos": [
-                    "-10",
-                    "-10",
-                    "-10",
-                    "-10"
+                    "0",
+                    "0",
+                    "0",
+                    "5"
                 ],
                 "siguiente": -1
             }

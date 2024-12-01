@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using System;
 
 public class IconManager : MonoBehaviour
@@ -200,28 +201,14 @@ public class IconManager : MonoBehaviour
     }
 
     public void loadSpriteEspecifico(string nombreAtributoEspecifico){
-        string imageDireccionContorno = "iconos/"+nombreAtributoEspecifico ;
-        string imageDireccionFilled= "iconos/"+nombreAtributoEspecifico+"Filled";
-        Sprite spriteCargado = Resources.Load<Sprite>(imageDireccionContorno);
-        if (spriteCargado != null)
-        {
-            especificoContorno.sprite = spriteCargado;
-            Debug.Log("Sprite cargado correctamente.");
-        }
-        else
-        {
-            Debug.LogError("No se pudo cargar el sprite del contorno.");
-        }
-         spriteCargado = Resources.Load<Sprite>(imageDireccionFilled);
-        if (spriteCargado != null)
-        {
-            especificoFill.sprite = spriteCargado;
-            Debug.Log("Sprite cargado correctamente.");
-        }
-        else
-        {
-            Debug.LogError("No se pudo cargar el sprite filled.");
-        }
+        string imageDireccionContorno = "iconosEspecificos/"+nombreAtributoEspecifico+".png" ;
+        string imageDireccionFilled= "iconosEspecificos/"+nombreAtributoEspecifico+"Filled.png";
+        AsyncOperationHandle<Sprite> opHandleContorno= Addressables.LoadAssetAsync<Sprite>(imageDireccionContorno);
+        AsyncOperationHandle<Sprite> opHandleFill= Addressables.LoadAssetAsync<Sprite>(imageDireccionFilled);
+        opHandleContorno.WaitForCompletion();
+        opHandleFill.WaitForCompletion();
+        especificoContorno.sprite = opHandleContorno.Result;
+        especificoFill.sprite = opHandleFill.Result;
 
 
     }

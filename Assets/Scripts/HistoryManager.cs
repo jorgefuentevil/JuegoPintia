@@ -302,6 +302,7 @@ public class HistoryManager : MonoBehaviour
         });
     }
 
+
     private void UpdatePuntuacion(short[] efectos)
     {
         puntuacionDinero += efectos[0];
