@@ -91,7 +91,7 @@
         {
             "id": 3,
             "personaje": "Fiesta",
-            "imagen": "Baile_1",
+            "imagen": "Fiesta_1",
             "desc": "Marcando el fin del ciclo agricola llega el Samhain y te preguntas si deberías hacer una ofrenda para proteger tu tierra",
             "res_der": {
                 "respuesta": "Ofreces parte de tu cosecha como ofrenda",
@@ -343,7 +343,7 @@
         {
             "id": 12,
             "personaje": "Mercenario ",
-            "imagen": "Mercenario_1",
+            "imagen": "Mercenario_2",
             "desc": "Te estan intentando saquear",
             "res_der": {
                 "respuesta": "Enfrentarte a ellos y proteger tus reservas",
@@ -399,7 +399,7 @@
         {
             "id": 14,
             "personaje": "Mael el Viajero",
-            "imagen": "Viajero_1",
+            "imagen": "Explorador_1",
             "desc": "Te encuentras con un viajero que pide agua y comida. El hombre afirma que es de tierras lejanas y promete traer noticias valiosas de otros pueblos.",
             "res_der": {
                 "respuesta": "Ofrecerle algo de agua y comida a cambio de información.",
@@ -511,7 +511,7 @@
         {
             "id": 18,
             "personaje": "Mercader Merlin",
-            "imagen": "Mercader_1",
+            "imagen": "Mercader_2",
             "desc": "Hay una oportunidad de comprar una herramienta nueva que mejorara mucho tus tierras",
             "res_der": {
                 "respuesta": "Comprar la herramienta",
@@ -987,7 +987,7 @@
         {
             "id": 35,
             "personaje": "Incendio",
-            "imagen": "Fuego_2",
+            "imagen": "Fuego_1",
             "desc": "En plena etapa de recolecta de tu cosecha se produce un incendio en la ciudad de Las Quintanas",
             "res_der": {
                 "respuesta": "Decides acercarte para ayudar a mitigarlo con el resto de vecinos",
@@ -1043,7 +1043,7 @@
         {
             "id": 37,
             "personaje": "Animales",
-            "imagen": "Animales_1",
+            "imagen": "Vacas_1",
             "desc": "Es época de cosecha y encuentras un grupo de animales de un vecino pisoteando parte de tu campo. Sabes que los animales se han escapado por descuido suyo. ¿Qué haces?",
             "res_der": {
                 "respuesta": "Ahuyentas a los animales sin avisar a tu vecino",
@@ -1211,7 +1211,7 @@
         {
             "id": 43,
             "personaje": "Fiesta de Imbolc",
-            "imagen": "Banquete_1",
+            "imagen": "Fiesta_2",
             "desc": "La festividad de Imbolc está cerca, marcando el inicio de la primavera y la purificación de la tierra y los hogares.",
             "res_der": {
                 "respuesta": "Organizar una gran limpieza y purificación en el hogar.",
@@ -1239,7 +1239,7 @@
         {
             "id": 44,
             "personaje": "Viajero",
-            "imagen": "Viajero_1",
+            "imagen": "Explorador_3",
             "desc": "Se te acerca un viajero de una aldea cercana y te pregunta donde se ubica el ustrino",
             "res_der": {
                 "respuesta": "Señalas en dirección al campo de incineración",
