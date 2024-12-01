@@ -39,7 +39,8 @@ public class LoadingScreenEstadoInicial : MonoBehaviour
             GameManager.Instance.CambiaEscenaMainMenu();
         }
         else
-        {
+        {   
+            PlayerPrefs.SetInt("Tutorial",1);
             GameManager.Instance.CambiaEscenaTutorial();
         }
         
