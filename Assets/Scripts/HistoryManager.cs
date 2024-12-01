@@ -140,6 +140,7 @@ public class HistoryManager : MonoBehaviour
         spriteCartaActual = retratosPersonajes[decisionActual.imagen];
         nombrePersonajeText.text = decisionActual.personaje;
         preguntaText.text = decisionActual.desc;
+        textToSpeechManager.StartSpeaking(decisionActual.desc);
         //TODO: ESTA STRING DEBERÍA ESTAR LOCALIZADA
         anosText.text = $"{numDecisionActual} Años de Aventura";
     }
@@ -152,7 +153,7 @@ public class HistoryManager : MonoBehaviour
         explicacionText.text = "";
         imagenCartaPersonaje.DOColor(colorNormal, 0.2f);
         imagenCartaPersonaje.sprite = spriteCartaActual;
-        //TODO: TTS HABLA DESCRIPCION
+        
     }
 
 
@@ -162,7 +163,7 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = spriteReversoCarta;
         iconManager.PreviewEfectos(decisionActual.res_der.efectos);
-        //TODO: TTS HABLA RESPUESTA
+        textToSpeechManager.StartSpeaking(decisionActual.res_der.respuesta);
     }
 
     public void SetEstadoShowRespuestaIzquierda()
@@ -171,7 +172,7 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         imagenCartaPersonaje.sprite = spriteReversoCarta;
         iconManager.PreviewEfectos(decisionActual.res_izq.efectos);
-        //TODO: TTS HABLA RESPUESTA
+        textToSpeechManager.StartSpeaking(decisionActual.res_izq.respuesta);
     }
 
     public void SetEstadoCommitRespuestaDerecha()
@@ -232,7 +233,7 @@ public class HistoryManager : MonoBehaviour
         imagenCartaPersonaje.sprite = spriteReversoCarta;
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         //TODO: IconManager estado Explicacion????
-        //TODO: TTS HABLA EXPLICACION
+        textToSpeechManager.StartSpeaking(respuestaActual.explicacion);
     }
 
     public void SetEstadoCommitMuerte()
