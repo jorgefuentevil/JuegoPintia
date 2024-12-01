@@ -13,7 +13,6 @@ using System.Collections;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GameObject levelHolder;        //Panel padre de todos los niveles (LevelHolder en el editor).
-    [SerializeField] private GameObject levelIcon;          //Creo que no lo necesitamos.
     [SerializeField] private GameObject thisCanvas;         //Canvas padre de toda la UI
     [SerializeField] private LocalizedAsset<TextAsset>  jsonHistorias;
     [SerializeField] private TextMeshProUGUI contadorText;
@@ -22,7 +21,14 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI personajeText;
     [SerializeField] private TextMeshProUGUI descripcionText;
     [SerializeField] private AssetLabelReference assetsPersonajes;
-    [SerializeField] private TTS textToSpeachManager;
+
+    [Header("---- Boton Jugar ----")]
+    [SerializeField] private TextMeshProUGUI textoBotonJugar;
+    [SerializeField] private Image candadoImagen;
+    [SerializeField] private Button botonJugarObjeto;
+
+    [Header("---- TTS Manager ----")]
+    [SerializeField] private TTS textToSpeechManager;
 
     private LevelsJsonRoot parsedNiveles;
     private int numberOfLevels = 1;
@@ -106,11 +112,30 @@ public class LevelManager : MonoBehaviour
         flechaIzq.transform.DOMoveX(level_index <= 0 ? posHideFlechaIzq : posShowFlechaIzq, 0.5f);
         flechaDer.transform.DOMoveX(level_index >= numberOfLevels - 1 ? posHideFlechaDer : posShowFlechaDer, 0.5f);
 
+        BotonJugarManager(level_index);
+
         contadorText.SetText(level_index + 1 + "/" + numberOfLevels);
         personajeText.SetText(parsedNiveles.historias[level_index].personaje);
         descripcionText.SetText(parsedNiveles.historias[level_index].desc);
         string textToSpeech = parsedNiveles.historias[level_index].personaje+"\n"+parsedNiveles.historias[level_index].desc;
-        textToSpeachManager.StartSpeaking(textToSpeech);       
+        textToSpeechManager.StartSpeaking(textToSpeech);       
+    }
+
+    private void BotonJugarManager(int level_index)
+    {   
+        //Está desbloqueado
+        if(GameManager.Instance.CheckLevelStatus(level_index))
+        {
+            textoBotonJugar.color = Color.white;
+            botonJugarObjeto.interactable = true;
+            candadoImagen.color = new Color(0f,0f,0f,0f);
+        }
+        else
+        {
+            textoBotonJugar.color = new Color(0f,0f,0f,0f);
+            botonJugarObjeto.interactable = false;
+            candadoImagen.color = Color.white;
+        }
     }
 
 
@@ -128,7 +153,8 @@ public class LevelManager : MonoBehaviour
     }
 
     public void JuegaHistoria()
-    {
+    {   
+        if(!GameManager.Instance.CheckLevelStatus(swiper.currentPage)) return;
         Vibracion();
         StartCoroutine(AuxTransicion());
     }

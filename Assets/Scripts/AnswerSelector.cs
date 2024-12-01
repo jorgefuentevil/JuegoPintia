@@ -31,7 +31,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         float difference = data.pressPosition.x - data.position.x;
         if ((maquinaEstados.EstaShowRespuestaDerecha() && difference < 0) ||
             (maquinaEstados.EstaShowRespuestaIzquierda() && difference > 0) ||
-            maquinaEstados.EstaShowExplicacion()||
+            maquinaEstados.EstaShowExplicacion() ||
             maquinaEstados.EstaPreMuerte())
         {
             transform.position = imageLocation - new Vector3(difference, 0, 0);
@@ -96,7 +96,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_EXPLICACION_DERECHA);
         }
-        else if(maquinaEstados.EstaPreMuerte())
+        else if (maquinaEstados.EstaPreMuerte())
         {
             maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_MUERTE_DERECHA);
         }
@@ -132,7 +132,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_EXPLICACION_IZQUIERDA);
         }
-        else if(maquinaEstados.EstaPreMuerte())
+        else if (maquinaEstados.EstaPreMuerte())
         {
             maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.COMMIT_MUERTE_IZQUIERDA);
         }
@@ -211,26 +211,53 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     }
 
 
+
     private IEnumerator RotateAndAccion(Action funcionMitad)
     {
+        float totalDuration = 0.67f;
         float t = 0f;
+
         Quaternion startRotation = transform.rotation;
+
+
+        Quaternion middleRotation = Quaternion.Euler(0, 90f, 0) * startRotation;
         Quaternion targetRotation = Quaternion.Euler(0, 180f, 0) * startRotation;
+
         bool respuestaActiva = false;
         audioManager.PlayFlipSFX();
 
+        // Agregar ligero escalado para efecto 3D
+        Vector3 startScale = transform.localScale;
+        Vector3 midScale = startScale * 1.1f; // Ligero estiramiento
+        Vector3 endScale = startScale;
+
         while (t <= 1f)
         {
-            t += Time.deltaTime / 0.67f;  // 0:40 segundos
-            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, Mathf.SmoothStep(0f, 1f, t));
 
-            if (!respuestaActiva && t >= 0.5f)
+            float smoothT = Mathf.SmoothStep(0f, 1f, t);
+
+
+            if (t <= 0.5f)
             {
-                respuestaActiva = true;
-                funcionMitad?.Invoke();
+                transform.rotation = Quaternion.Lerp(startRotation, middleRotation, smoothT * 2f);
+                transform.localScale = Vector3.Lerp(startScale, midScale, smoothT * 2f);
             }
+            else
+            {
+                transform.rotation = Quaternion.Lerp(middleRotation, targetRotation, (smoothT - 0.5f) * 2f);
+                transform.localScale = Vector3.Lerp(midScale, endScale, (smoothT - 0.5f) * 2f);
+                if(!respuestaActiva)
+                {
+                    respuestaActiva = true;
+                    funcionMitad?.Invoke();
+                }
+            }
+            t += Time.deltaTime / totalDuration;
             yield return null;
         }
+
+        transform.rotation = targetRotation;
+        transform.localScale = endScale;
 
         maquinaEstados.AvisaFinalAnimacion();
     }

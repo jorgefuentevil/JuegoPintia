@@ -34,15 +34,13 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
             Vector3 newLocation = panelLocation;
             if(percentage > 0 && currentPage < totalPages){
                 currentPage++;
-                Vibracion();
-                audioManager.PlaySlideSFX();
                 newLocation += new Vector3(-Screen.width, 0, 0);
             }else if(percentage < 0 && currentPage > 1){
                 currentPage--;
-                Vibracion();
-                audioManager.PlaySlideSFX();
                 newLocation += new Vector3(Screen.width, 0, 0); 
             }
+            Vibracion();
+            audioManager.PlaySlideSFX();
             StartCoroutine(SmoothMove(transform.position, newLocation, easing));
             panelLocation = newLocation;
             levelManager.SetLevelData(currentPage-1);
