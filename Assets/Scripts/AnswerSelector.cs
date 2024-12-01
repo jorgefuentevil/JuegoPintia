@@ -41,7 +41,6 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     public void OnEndDrag(PointerEventData data)
     {
         float percentage = (data.pressPosition.x - data.position.x) / Screen.width;
-        Debug.Log(percentage);
         if (Mathf.Abs(percentage) >= percentThreshold)
         {
 

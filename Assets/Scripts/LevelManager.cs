@@ -28,8 +28,11 @@ public class LevelManager : MonoBehaviour
     private int numberOfLevels = 1;
     private Rect panelDimensions;
     private PageSwiper swiper;
-    private Vector3 posFlechaDer;
-    private Vector3 posFlechaIzq;
+
+    private float posShowFlechaDer;
+    private float posShowFlechaIzq;
+    private float posHideFlechaDer;
+    private float posHideFlechaIzq;
 
 
     public void Start()
@@ -54,9 +57,6 @@ public class LevelManager : MonoBehaviour
         swiper.totalPages = numberOfLevels;
         swiper.levelManager = this;
         panelDimensions = levelHolder.GetComponent<RectTransform>().rect;
-        posFlechaDer=flechaDer.transform.position;
-        posFlechaIzq=flechaIzq.transform.position;
-
 
         for (int i = 0; i < numberOfLevels; i++)
         {
@@ -75,7 +75,13 @@ public class LevelManager : MonoBehaviour
             panel.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = aux;
         }
 
-        flechaIzq.transform.DOMoveX(-700,2);
+        posShowFlechaDer = flechaDer.transform.position.x;
+        posShowFlechaIzq = flechaIzq.transform.position.x;
+
+        posHideFlechaDer = posShowFlechaDer + 100;
+        posHideFlechaIzq = posShowFlechaIzq - 100;
+
+        flechaDer.transform.position = new(posHideFlechaDer,flechaDer.transform.position.y);
 
         Destroy(panelClone);
         Destroy(levelHolder.transform.GetChild(0).gameObject);
@@ -96,6 +102,10 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Error Level Index out of bounds " + level_index + " of " + numberOfLevels);
             return;
         }
+        
+        flechaIzq.transform.DOMoveX(level_index <= 0 ? posHideFlechaIzq : posShowFlechaIzq, 0.5f);
+        flechaDer.transform.DOMoveX(level_index >= numberOfLevels - 1 ? posHideFlechaDer : posShowFlechaDer, 0.5f);
+
         contadorText.SetText(level_index + 1 + "/" + numberOfLevels);
         personajeText.SetText(parsedNiveles.historias[level_index].personaje);
         descripcionText.SetText(parsedNiveles.historias[level_index].desc);
@@ -104,21 +114,17 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    public void BindBtnDerecha()
+    public void BindFlechaDerecha()
     {
-        Debug.Log("total lvl: "+numberOfLevels);        
         Vibracion();
-        swiper.BindBtnDerecha();
+        swiper.BindFlechaDerecha();
         
-        Debug.Log("lvl: "+swiper.getCurrentPage());
     }
 
-    public void BindBtnIzquierda()
+    public void BindFlechaIzquierda()
     {
-        Debug.Log("lvl: "+swiper.getCurrentPage());
         Vibracion();
-        swiper.BindBtnIzquierda();
-        
+        swiper.BindFlechaIzquierda();
     }
 
     public void JuegaHistoria()
@@ -135,27 +141,12 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    
-
     public void Vibracion()
     {
         if(PlayerPrefs.GetInt("VibracionEnabled")==1){
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro cambiando el lvl");
         }
-    }
-
-    public GameObject getFlechaDer(){
-        return flechaDer;
-    }
-    public GameObject getFlechaIzq(){
-        return flechaIzq;
-    }
-    public Vector3 getPosFlechaDer(){
-        return posFlechaDer;
-    }
-    public Vector3 getPosFlechaIzq(){
-        return posFlechaIzq;
     }
 
 }

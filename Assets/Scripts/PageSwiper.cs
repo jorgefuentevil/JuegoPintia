@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using CandyCoded.HapticFeedback;
-using DG.Tweening;
-
 
 public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     private Vector3 panelLocation;
@@ -35,70 +33,42 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
         if(Mathf.Abs(percentage) >= percentThreshold){
             Vector3 newLocation = panelLocation;
             if(percentage > 0 && currentPage < totalPages){
-                GestionarSwipeDerecha(newLocation);
+                currentPage++;
+                Vibracion();
+                audioManager.PlaySlideSFX();
+                newLocation += new Vector3(-Screen.width, 0, 0);
             }else if(percentage < 0 && currentPage > 1){
-                GestionarSwipeIzquierda(newLocation);
+                currentPage--;
+                Vibracion();
+                audioManager.PlaySlideSFX();
+                newLocation += new Vector3(Screen.width, 0, 0); 
             }
-            else
-            {
-                gestionarSwipeExtremo(newLocation);
-            }
+            StartCoroutine(SmoothMove(transform.position, newLocation, easing));
+            panelLocation = newLocation;
+            levelManager.SetLevelData(currentPage-1);
         }else{
             StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
             levelManager.SetLevelData(currentPage-1);
         }
     }
 
-    public void GestionarSwipeDerecha(Vector3 newLocation)
+
+    public void BindFlechaDerecha()
     {
-        currentPage++;
-        Vibracion();
-        audioManager.PlaySlideSFX();
-        newLocation += new Vector3(-Screen.width, 0, 0);
-        StartCoroutine(SmoothMove(transform.position, newLocation, easing));
-        panelLocation = newLocation;
-        levelManager.SetLevelData(currentPage-1);
-        if(currentPage==2) //si estamos en el lvl 1 desplazamos btn a la izq
-            levelManager.getFlechaIzq().transform.DOMoveX(levelManager.getPosFlechaIzq().x,1.5f);
-        else if(currentPage==totalPages)
-            levelManager.getFlechaDer().transform.DOMoveX(Screen.width+50,1.5f);
+        OnEndDrag(new (null){
+            pressPosition = Vector3.right * Screen.width
+        });
     }
 
-    public void GestionarSwipeIzquierda(Vector3 newLocation)
+    public void BindFlechaIzquierda()
     {
-        currentPage--;
-        Vibracion();
-        audioManager.PlaySlideSFX();
-        newLocation += new Vector3(Screen.width, 0, 0); 
-        StartCoroutine(SmoothMove(transform.position, newLocation, easing));
-        panelLocation = newLocation;
-        levelManager.SetLevelData(currentPage-1);
-        if(currentPage==1) //si estamos en el lvl 1 desplazamos btn a la izq
-            levelManager.getFlechaIzq().transform.DOMoveX(-50,1.5f);
-        else if(currentPage==totalPages-1)
-            levelManager.getFlechaDer().transform.DOMoveX(levelManager.getPosFlechaDer().x,1.5f);
-    }
-
-    public void gestionarSwipeExtremo(Vector3 newLocation)
-    {
-        StartCoroutine(SmoothMove(transform.position, newLocation, easing));
-        panelLocation = newLocation;
-        levelManager.SetLevelData(currentPage-1);
-    }
-
-    public void BindBtnDerecha()
-    {
-        GestionarSwipeDerecha(panelLocation);
-    }
-
-    public void BindBtnIzquierda()
-    {
-        GestionarSwipeIzquierda(panelLocation);
+        OnEndDrag(new (null){
+            pressPosition = Vector3.left * Screen.width
+        });
     }
 
 
-    IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds)
-    {
+    IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds){
         float t = 0f;
         while(t <= 1.0){
             t += Time.deltaTime / seconds;
@@ -113,8 +83,5 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro cambiando el lvl");
         }
-    }
-    public int getCurrentPage(){
-        return currentPage;
     }
 }
