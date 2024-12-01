@@ -2,7 +2,7 @@
     "historia": "Aidan el Granjero",
     "idioma": "es_ES",
     "nivel": 1,
-    "aleatoria": false,
+    "aleatoria": true,
     "decisiones": [
         {
             "id": 0,
