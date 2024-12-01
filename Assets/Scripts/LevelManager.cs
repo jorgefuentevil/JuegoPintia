@@ -154,7 +154,7 @@ public class LevelManager : MonoBehaviour
 
     public void JuegaHistoria()
     {   
-        if(!GameManager.Instance.CheckLevelStatus(swiper.currentPage)) return;
+        if(!GameManager.Instance.CheckLevelStatus(swiper.currentPage-1)) return;
         Vibracion();
         StartCoroutine(AuxTransicion());
     }
