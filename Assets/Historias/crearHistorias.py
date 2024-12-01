@@ -247,7 +247,6 @@ class JsonEditorApp:
                 "desc": self.descripcion_entry.get(),
                 "coste": self.coste_entry.get(),
                 "imagen": self.imagen_entry.get(),
-                "atributo": self.nivel_atributo_especifico.get(),
                 "archivo": archivo
             }
             idioma=self.idioma_entry.get()[-2:]
@@ -296,6 +295,7 @@ class JsonEditorApp:
             "historia": self.historia_entry.get(),
             "idioma": self.idioma_entry.get(),
             "nivel": nivel,
+            "atributo": self.nivel_atributo_especifico.get(),
             "decisiones": [],
             "decisiones_respuesta": []
         }

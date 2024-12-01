@@ -7,7 +7,6 @@
             "desc": "Eres un guerrero del pueblo de Pintia, uno de los pueblos más grandes de toda la península Iberica",
             "coste": "0",
             "imagen": "Guerrero_1",
-            "atributo": "Espada",
             "archivo": "Files_Historias_ES/Dumnorix_el_Guerrero_ES.json"
         },
         {
@@ -15,7 +14,6 @@
             "desc": "Eres un hombre sencillo pero sabio de Pintia. Tu vida esta marcada por el ciclo de las estaciones y la importacia de la comunidad",
             "coste": "0",
             "imagen": "Ganadero_1",
-            "atributo": "Trigo",
             "archivo": "Files_Historias_ES/Aidan_el_Granjero_ES.json"
         }
     ]

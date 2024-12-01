@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
+using System;
 
 public class IconManager : MonoBehaviour
 {
@@ -28,6 +30,9 @@ public class IconManager : MonoBehaviour
     [SerializeField] private GameObject especificoVariacion;
     [SerializeField] private Image especificoContorno;
     [SerializeField] private Image especificoFill;
+
+    [SerializeField] private Sprite spriteEspecificoFill;
+    [SerializeField] private Sprite spriteEspecificoContorno;
 
     [Header("FLECHAS SELECCION")]
     [SerializeField] private GameObject flechaDerecha;
@@ -65,6 +70,11 @@ public class IconManager : MonoBehaviour
         posicionShowIzquierda = flechaIzquierda.transform.position;
         posicionHideIzquierda = tickIzquierda.transform.position;
         posicionHideDerecha = tickDerecha.transform.position;
+
+        //Cargamos la imagen del atributo especifico
+        especificoContorno.sprite = spriteEspecificoContorno;
+        especificoFill.sprite= spriteEspecificoFill;
+
 
         //Escondemos variaciones
         dineroVariacion.transform.localScale = Vector3.zero;
@@ -195,5 +205,13 @@ public class IconManager : MonoBehaviour
         selector.LeftCheckPressed();
     }
 
+    public void loadSpriteEspecifico(string nombreAtributoEspecifico){
+        string imageDireccionContorno = "Images/iconos/"+nombreAtributoEspecifico ;
+        string imageDireccionFilled= "Images/iconos/"+nombreAtributoEspecifico+"Filled";
+        Debug.Log(imageDireccionContorno);
+        Debug.Log(imageDireccionFilled);
+        spriteEspecificoContorno = Resources.Load(imageDireccionContorno) as Sprite;
+        spriteEspecificoFill = Resources.Load(imageDireccionFilled) as Sprite;
+    }
 
 }

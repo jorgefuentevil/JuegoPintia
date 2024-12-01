@@ -3,6 +3,7 @@
     "idioma": "es_ES",
     "nivel": 1,
     "aleatoria": false,
+    "atributo": "Hambre",
     "decisiones": [
         {
             "id": 0,

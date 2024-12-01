@@ -245,6 +245,7 @@ public class HistoryManager : MonoBehaviour
     {
         string historiaToLoad = GameManager.Instance.currentLevel;
 
+
         AsyncOperationHandle<TextAsset> opHandle = historiaToLoad.Equals("Tutorial") ? historiaTutorial.LoadAssetAsync<TextAsset>() : Addressables.LoadAssetAsync<TextAsset>(historiaToLoad);
 
         opHandle.WaitForCompletion();
@@ -261,7 +262,9 @@ public class HistoryManager : MonoBehaviour
         {
             CargaAllPreguntas();
         }
-        Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; NumHistorias={2}", parsedHistorias.historia, parsedHistorias.decisiones.Count, nPreguntas);
+        iconManager.loadSpriteEspecifico(parsedHistorias.atributo); //TODO
+        
+        Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; Tiene atributo {3}; NumHistorias={2}", parsedHistorias.historia, parsedHistorias.decisiones.Count, nPreguntas,parsedHistorias.atributo);
     }
 
     private void CargaPreguntasAleatorias()
@@ -294,7 +297,7 @@ public class HistoryManager : MonoBehaviour
         //TODO: Filtrar retratos y cargar solo los que vayamos a usar.
         return Addressables.LoadAssetsAsync<Sprite>(assetsPersonajes, (sprite) =>
         {
-            Debug.Log("Cargado retrato: " + sprite.name);
+            //Debug.Log("Cargado retrato: " + sprite.name);
             retratosPersonajes.Add(sprite.name, sprite);
         });
     }

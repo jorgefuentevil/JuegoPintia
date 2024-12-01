@@ -38,6 +38,7 @@ public struct HistoryJsonRoot
 {
     public string historia;
     public string idioma;
+    public string atributo;
     public int nivel;
     public bool aleatoria;
     public System.Collections.Generic.List<Decision> decisiones;
