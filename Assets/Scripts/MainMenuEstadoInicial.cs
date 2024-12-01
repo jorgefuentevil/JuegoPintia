@@ -35,7 +35,8 @@ public class MainMenuEstadoInicial : MonoBehaviour{
 
 
     public void TerminaTransicion()
-    {
+    {   
+        if(PanelTransicion == null) PanelTransicion = GameObject.FindGameObjectWithTag("PanelTransicion");
         PanelTransicion.GetComponent<Image>().DOFade(0, 1).onComplete = () =>
         {
             PanelTransicion.SetActive(false);
