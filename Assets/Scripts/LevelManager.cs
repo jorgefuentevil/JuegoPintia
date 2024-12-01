@@ -34,6 +34,8 @@ public class LevelManager : MonoBehaviour
     private int numberOfLevels = 1;
     private Rect panelDimensions;
     private PageSwiper swiper;
+    private PauseMenu pause;
+    private GameObject botonFinPartida; 
 
     private float posShowFlechaDer;
     private float posShowFlechaIzq;
@@ -157,6 +159,8 @@ public class LevelManager : MonoBehaviour
         if(!GameManager.Instance.CheckLevelStatus(swiper.currentPage-1)) return;
         Vibracion();
         StartCoroutine(AuxTransicion());
+        botonFinPartida=pause.getBtnFinPartida();
+        botonFinPartida.SetActive(true);
     }
 
     private IEnumerator AuxTransicion()
@@ -164,7 +168,6 @@ public class LevelManager : MonoBehaviour
         GameObject.FindGameObjectWithTag("MainMenuManager").GetComponent<MainMenuEstadoInicial>().EmpiezaTransicion();
         yield return new WaitForSeconds(1);
         GameManager.Instance.CambiaEscenaGamePrincipal(parsedNiveles.historias[swiper.currentPage-1].archivo);
-
     }
 
     public void Vibracion()

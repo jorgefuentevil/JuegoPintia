@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using CandyCoded.HapticFeedback;
 using TextSpeech;
+using System.Collections;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -11,12 +12,14 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject toggleTTS;
     [SerializeField] private GameObject popupLegal;
     [SerializeField] private GameObject textoLegal;
+    [SerializeField] private GameObject botonFinPartida;
     [SerializeField] private TTS tts;
 
 
 
     public void Start()
     {
+        botonFinPartida.SetActive(false);
         popupLegal.SetActive(false);
         textoLegal.SetActive(true);
         gameObject.AddComponent<AudioSource>();
@@ -61,6 +64,11 @@ public class PauseMenu : MonoBehaviour
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro en volver");
         }
+    }
+
+    public void FinishGame()
+    {
+        StartCoroutine(Fin());
     }
 
     public void ToggleVibracion(bool value)
@@ -113,6 +121,18 @@ public class PauseMenu : MonoBehaviour
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro en salir terms legales");
         }
+    }
+
+    private IEnumerator Fin()
+    {
+        GameObject.FindGameObjectWithTag("GamePrincipalManager").GetComponent<GamePrincipalEstadoInicial>().EmpiezaTransicion();
+        yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.CambiaEscenaMainMenu();
+    }
+
+    public GameObject getBtnFinPartida()
+    {
+        return botonFinPartida;
     }
 
 }
