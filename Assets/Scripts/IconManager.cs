@@ -31,8 +31,6 @@ public class IconManager : MonoBehaviour
     [SerializeField] private Image especificoContorno;
     [SerializeField] private Image especificoFill;
 
-    [SerializeField] private Sprite spriteEspecificoFill;
-    [SerializeField] private Sprite spriteEspecificoContorno;
 
     [Header("FLECHAS SELECCION")]
     [SerializeField] private GameObject flechaDerecha;
@@ -70,10 +68,6 @@ public class IconManager : MonoBehaviour
         posicionShowIzquierda = flechaIzquierda.transform.position;
         posicionHideIzquierda = tickIzquierda.transform.position;
         posicionHideDerecha = tickDerecha.transform.position;
-
-        //Cargamos la imagen del atributo especifico
-        especificoContorno.sprite = spriteEspecificoContorno;
-        especificoFill.sprite= spriteEspecificoFill;
 
 
         //Escondemos variaciones
@@ -206,12 +200,30 @@ public class IconManager : MonoBehaviour
     }
 
     public void loadSpriteEspecifico(string nombreAtributoEspecifico){
-        string imageDireccionContorno = "Images/iconos/"+nombreAtributoEspecifico ;
-        string imageDireccionFilled= "Images/iconos/"+nombreAtributoEspecifico+"Filled";
-        Debug.Log(imageDireccionContorno);
-        Debug.Log(imageDireccionFilled);
-        spriteEspecificoContorno = Resources.Load(imageDireccionContorno) as Sprite;
-        spriteEspecificoFill = Resources.Load(imageDireccionFilled) as Sprite;
+        string imageDireccionContorno = "iconos/"+nombreAtributoEspecifico ;
+        string imageDireccionFilled= "iconos/"+nombreAtributoEspecifico+"Filled";
+        Sprite spriteCargado = Resources.Load<Sprite>(imageDireccionContorno);
+        if (spriteCargado != null)
+        {
+            especificoContorno.sprite = spriteCargado;
+            Debug.Log("Sprite cargado correctamente.");
+        }
+        else
+        {
+            Debug.LogError("No se pudo cargar el sprite del contorno.");
+        }
+         spriteCargado = Resources.Load<Sprite>(imageDireccionFilled);
+        if (spriteCargado != null)
+        {
+            especificoFill.sprite = spriteCargado;
+            Debug.Log("Sprite cargado correctamente.");
+        }
+        else
+        {
+            Debug.LogError("No se pudo cargar el sprite filled.");
+        }
+
+
     }
 
 }
