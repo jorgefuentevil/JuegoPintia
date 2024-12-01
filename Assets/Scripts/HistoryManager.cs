@@ -114,7 +114,7 @@ public class HistoryManager : MonoBehaviour
     public void SetEstadoInicializando()
     {
         CargaHistoria();
-        LoadRetratos();
+        AsyncOperationHandle<IList<Sprite>> asyncOperationHandle = LoadRetratos();
 
         decisionActual = decisionesPartida[0];
 
@@ -128,7 +128,7 @@ public class HistoryManager : MonoBehaviour
 
         //TODO: Meter aqui animacion de inicio
 
-
+        asyncOperationHandle.WaitForCompletion();
         SetElementosDecision();
 
     }
@@ -288,15 +288,15 @@ public class HistoryManager : MonoBehaviour
         decisionesPartida.AddRange(parsedHistorias.decisiones);
     }
 
-    private void LoadRetratos()
+    private AsyncOperationHandle<IList<Sprite>> LoadRetratos()
     {
         //Cargamos imágenes. 
         //TODO: Filtrar retratos y cargar solo los que vayamos a usar.
-        Addressables.LoadAssetsAsync<Sprite>(assetsPersonajes, (sprite) =>
+        return Addressables.LoadAssetsAsync<Sprite>(assetsPersonajes, (sprite) =>
         {
             Debug.Log("Cargado retrato: " + sprite.name);
             retratosPersonajes.Add(sprite.name, sprite);
-        }).WaitForCompletion();
+        });
     }
 
     private void UpdatePuntuacion(short[] efectos)
