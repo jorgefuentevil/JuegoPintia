@@ -263,7 +263,7 @@ public class HistoryManager : MonoBehaviour
         {
             CargaAllPreguntas();
         }
-        iconManager.loadSpriteEspecifico(parsedHistorias.atributo); //TODO
+        iconManager.LoadSpriteEspecifico(parsedHistorias.atributo); //TODO
         
         Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; Tiene atributo {3}; NumHistorias={2}", parsedHistorias.historia, parsedHistorias.decisiones.Count, nPreguntas,parsedHistorias.atributo);
     }
@@ -288,8 +288,7 @@ public class HistoryManager : MonoBehaviour
     private void CargaAllPreguntas()
     {
         nPreguntas = parsedHistorias.decisiones.Count;
-        decisionesPartida = new(nPreguntas);
-        decisionesPartida.AddRange(parsedHistorias.decisiones);
+        decisionesPartida = new(parsedHistorias.decisiones);
     }
 
     private AsyncOperationHandle<IList<Sprite>> LoadRetratos()

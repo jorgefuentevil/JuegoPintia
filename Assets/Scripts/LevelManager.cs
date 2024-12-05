@@ -7,7 +7,6 @@ using UnityEngine.Localization;
 using System.Linq;
 using DG.Tweening;
 using CandyCoded.HapticFeedback;
-using UnityEngine.Localization.Settings;
 using System.Collections;
 
 public class LevelManager : MonoBehaviour

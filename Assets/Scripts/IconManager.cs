@@ -200,17 +200,13 @@ public class IconManager : MonoBehaviour
         selector.LeftCheckPressed();
     }
 
-    public void loadSpriteEspecifico(string nombreAtributoEspecifico){
-        string imageDireccionContorno = "iconosEspecificos/"+nombreAtributoEspecifico+".png" ;
-        string imageDireccionFilled= "iconosEspecificos/"+nombreAtributoEspecifico+"Filled.png";
-        AsyncOperationHandle<Sprite> opHandleContorno= Addressables.LoadAssetAsync<Sprite>(imageDireccionContorno);
-        AsyncOperationHandle<Sprite> opHandleFill= Addressables.LoadAssetAsync<Sprite>(imageDireccionFilled);
+    public void LoadSpriteEspecifico(string nombreAtributoEspecifico){
+        AsyncOperationHandle<Sprite> opHandleContorno= Addressables.LoadAssetAsync<Sprite>($"iconosEspecificos/{nombreAtributoEspecifico}.png");
+        AsyncOperationHandle<Sprite> opHandleFill= Addressables.LoadAssetAsync<Sprite>($"iconosEspecificos/{nombreAtributoEspecifico}Filled.png");
         opHandleContorno.WaitForCompletion();
         opHandleFill.WaitForCompletion();
         especificoContorno.sprite = opHandleContorno.Result;
         especificoFill.sprite = opHandleFill.Result;
-
-
     }
 
 }
