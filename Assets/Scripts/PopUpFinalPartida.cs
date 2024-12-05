@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class PopUpFinalPartida : MonoBehaviour
-{
-
+{   
+    //TODO: Personalizar mensajes y localizarlos
+    [SerializeField] private LocalizedString stringTextoSuperior;
+    [SerializeField] private LocalizedString stringTextoDescripcion;
     [SerializeField] private TextMeshProUGUI textoSuperior;
     [SerializeField] private TextMeshProUGUI textoDescripcion;
 
