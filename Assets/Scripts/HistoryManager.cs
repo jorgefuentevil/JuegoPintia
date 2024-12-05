@@ -153,7 +153,7 @@ public class HistoryManager : MonoBehaviour
         explicacionText.text = "";
         imagenCartaPersonaje.DOColor(colorNormal, 0.2f);
         imagenCartaPersonaje.sprite = spriteCartaActual;
-        
+
     }
 
 
@@ -264,8 +264,8 @@ public class HistoryManager : MonoBehaviour
             CargaAllPreguntas();
         }
         iconManager.LoadSpriteEspecifico(parsedHistorias.atributo); //TODO
-        
-        Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; Tiene atributo {3}; NumHistorias={2}", parsedHistorias.historia, parsedHistorias.decisiones.Count, nPreguntas,parsedHistorias.atributo);
+
+        Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; Tiene atributo {3}; NumHistorias={2}", parsedHistorias.historia, parsedHistorias.decisiones.Count, nPreguntas, parsedHistorias.atributo);
     }
 
     private void CargaPreguntasAleatorias()
