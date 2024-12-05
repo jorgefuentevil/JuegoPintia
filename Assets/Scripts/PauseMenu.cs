@@ -132,7 +132,7 @@ public class PauseMenu : MonoBehaviour
     private IEnumerator Fin()
     {
         GameObject.FindGameObjectWithTag("GamePrincipalManager").GetComponent<GamePrincipalEstadoInicial>().EmpiezaTransicion();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         GameManager.Instance.CambiaEscenaMainMenu();
     }
 
