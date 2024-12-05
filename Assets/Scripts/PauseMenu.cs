@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
 
 
 
-    public void Start()
+    public void Awake()
     {
         botonFinPartida.SetActive(false);
         popupLegal.SetActive(false);
@@ -123,6 +123,12 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+
+    public void SetMenuPlaying()
+    {
+        botonFinPartida.SetActive(true);
+    }
+
     private IEnumerator Fin()
     {
         GameObject.FindGameObjectWithTag("GamePrincipalManager").GetComponent<GamePrincipalEstadoInicial>().EmpiezaTransicion();
@@ -130,9 +136,6 @@ public class PauseMenu : MonoBehaviour
         GameManager.Instance.CambiaEscenaMainMenu();
     }
 
-    public GameObject getBtnFinPartida()
-    {
-        return botonFinPartida;
-    }
+
 
 }
