@@ -246,7 +246,7 @@ public class HistoryManager : MonoBehaviour
     {
         string historiaToLoad = GameManager.Instance.currentLevel;
 
-
+        //Esto va a lanzar una excepción si arrancamos directamente desde GamePrincipal. No pasa nada, la manejamos con jsonHistoriaFallback un poco más abajo :)
         AsyncOperationHandle<TextAsset> opHandle = historiaToLoad.Equals("Tutorial") ? historiaTutorial.LoadAssetAsync<TextAsset>() : Addressables.LoadAssetAsync<TextAsset>(historiaToLoad);
 
         opHandle.WaitForCompletion();
