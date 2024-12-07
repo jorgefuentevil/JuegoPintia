@@ -75,6 +75,10 @@ MonoBehaviour:
     m_Localized: Selecciona tu edad
     m_Metadata:
       m_Items: []
+  - m_Id: 10888941423529984
+    m_Localized: "A\xF1os de Aventura"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

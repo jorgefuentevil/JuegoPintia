@@ -71,6 +71,10 @@ MonoBehaviour:
     m_Key: Texto Popup Edad
     m_Metadata:
       m_Items: []
+  - m_Id: 10888941423529984
+    m_Key: "A\xF1os de Aventura"
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

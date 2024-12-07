@@ -8,6 +8,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 using Newtonsoft.Json;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.Localization;
 
 public class HistoryManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private AssetLabelReference assetsPersonajes;
     [SerializeField] private Sprite spriteReversoCarta;
     [SerializeField] private Sprite spriteCartaExplicacion;
+    [SerializeField] private LocalizedString stringYearsVividos;
     private readonly Dictionary<string, Sprite> retratosPersonajes = new();
 
 
@@ -24,10 +26,12 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI usuarioText;
     [SerializeField] private TextMeshProUGUI preguntaText;
     [SerializeField] private TextMeshProUGUI anosText;
+    private string anosTextAux;
     [SerializeField] private TextMeshProUGUI respuestaText;
     [SerializeField] private TextMeshProUGUI explicacionText;
     [SerializeField] private GameObject cartaPersonaje;
     [SerializeField] private PopUpFinalPartida popupFin;
+    [SerializeField] private CanvasGroup canvasGroupTextos;
 
 
     [SerializeField] private TTS textToSpeechManager;
@@ -99,7 +103,8 @@ public class HistoryManager : MonoBehaviour
         selector.maquinaEstados = maquinaEstados;
         iconManager.selector = selector;
 
-
+        anosTextAux = stringYearsVividos.GetLocalizedString();
+        anosText.text = anosTextAux;
         puntuacionDinero = puntuacionSocial = puntuacionSalud = puntuacionEspecifico = (short)(puntuacionMax / 2);
 
         maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.INICIALIZANDO);
@@ -133,12 +138,18 @@ public class HistoryManager : MonoBehaviour
     {
         //TODO: ¿ABSTRAER A UN ASSET MANAGER?
         spriteCartaActual = retratosPersonajes[decisionActual.imagen];
-        nombrePersonajeText.text = decisionActual.personaje;
-        preguntaText.text = decisionActual.desc;
-        textToSpeechManager.StartSpeaking(decisionActual.desc);
-        //TODO: ESTA STRING DEBERÍA ESTAR LOCALIZADA
-        anosText.text = $"{numDecisionActual} Años de Aventura";
+
+        canvasGroupTextos.DOFade(0f, 0.3f).OnComplete(() =>
+        {
+            nombrePersonajeText.text = decisionActual.personaje;
+            preguntaText.text = decisionActual.desc;
+            textToSpeechManager.StartSpeaking(decisionActual.desc);
+            anosText.text = $"{numDecisionActual} {anosTextAux}";
+            canvasGroupTextos.DOFade(1,0.3f);
+        });
+
     }
+
 
 
     public void SetEstadoEligeCarta()
@@ -227,14 +238,13 @@ public class HistoryManager : MonoBehaviour
         explicacionText.text = respuestaActual.explicacion;
         imagenCartaPersonaje.sprite = spriteReversoCarta;
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
-        //TODO: IconManager estado Explicacion????
         textToSpeechManager.StartSpeaking(respuestaActual.explicacion);
     }
 
     public void SetEstadoCommitMuerte()
     {
         Debug.Log($"Fin de Partida por {(trueIfVictoria ? "victoria" : "derrota")}");
-        if(trueIfVictoria)
+        if (trueIfVictoria)
         {
             GameManager.Instance.UnlockNextLevel();
         }
@@ -298,7 +308,6 @@ public class HistoryManager : MonoBehaviour
         //TODO: Filtrar retratos y cargar solo los que vayamos a usar.
         return Addressables.LoadAssetsAsync<Sprite>(assetsPersonajes, (sprite) =>
         {
-            //Debug.Log("Cargado retrato: " + sprite.name);
             retratosPersonajes.Add(sprite.name, sprite);
         });
     }
@@ -366,7 +375,6 @@ public class HistoryManager : MonoBehaviour
         if (respuestaActual.explicacion != null && !maquinaEstados.EstaShowExplicacion())
         {
             spriteCartaActual = spriteCartaExplicacion;
-            //TODO: Set Elementos decision????
             maquinaEstados.CambiarDeEstado(MaquinaEstadosCartas.GameState.SHOW_EXPLICACION);
         }
         //Acabamos de hacer commit de una decisión -> Checkeamos si hemos ganado/perdido
