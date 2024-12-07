@@ -50,6 +50,26 @@ MonoBehaviour:
     m_Localized: Legal Terms & Conditions
     m_Metadata:
       m_Items: []
+  - m_Id: 10750327809085440
+    m_Localized: YOU WON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10750785051136000
+    m_Localized: You have gone through all the decisions!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10751602919444480
+    m_Localized: GAME OVER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10753007700905984
+    m_Localized: 'One of your attributes reached the maximum or minimum value
+
+
+      You
+      have lasted {0} years'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

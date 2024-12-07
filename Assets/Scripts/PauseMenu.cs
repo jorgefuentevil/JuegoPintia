@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using CandyCoded.HapticFeedback;
-using TextSpeech;
 using System.Collections;
 
 public class PauseMenu : MonoBehaviour
@@ -13,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject popupLegal;
     [SerializeField] private GameObject textoLegal;
     [SerializeField] private GameObject botonFinPartida;
+    [SerializeField] private GameObject contenidoTextoLegal;
     [SerializeField] private TTS tts;
 
 
@@ -104,7 +104,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void ShowTerms()
-    {
+    {   
+        contenidoTextoLegal.transform.position = Vector3.zero;
         popupLegal.SetActive(true);
         textoLegal.SetActive(false);
         if(PlayerPrefs.GetInt("VibracionEnabled")==1){

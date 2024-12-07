@@ -47,6 +47,22 @@ MonoBehaviour:
     m_Key: Texto Legal
     m_Metadata:
       m_Items: []
+  - m_Id: 10750327809085440
+    m_Key: Titulo Victoria Popup Final
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10750785051136000
+    m_Key: Descripcion Victoria Popup Final
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10751602919444480
+    m_Key: Titulo Derrota Popup Final
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10753007700905984
+    m_Key: Descripcion Derrota Popup Final
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

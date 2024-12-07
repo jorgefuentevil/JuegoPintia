@@ -239,7 +239,7 @@ public class HistoryManager : MonoBehaviour
     public void SetEstadoCommitMuerte()
     {
         Debug.Log($"Fin de Partida por {(trueIfVictoria ? "victoria" : "derrota")}");
-        popupFin.MostrarPopup(trueIfVictoria);
+        popupFin.MostrarPopup(trueIfVictoria, numDecisionActual);
     }
 
     private void CargaHistoria()
