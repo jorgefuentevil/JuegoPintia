@@ -63,6 +63,10 @@ MonoBehaviour:
     m_Key: Descripcion Derrota Popup Final
     m_Metadata:
       m_Items: []
+  - m_Id: 10777711442628608
+    m_Key: Boton Volver Menu Pausa
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

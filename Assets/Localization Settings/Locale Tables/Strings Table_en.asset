@@ -70,6 +70,10 @@ MonoBehaviour:
       have lasted {0} years'
     m_Metadata:
       m_Items: []
+  - m_Id: 10777711442628608
+    m_Localized: Return to Main Menu
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

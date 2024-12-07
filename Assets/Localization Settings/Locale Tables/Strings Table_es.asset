@@ -67,6 +67,10 @@ MonoBehaviour:
       aguantado {0} a\xF1os"
     m_Metadata:
       m_Items: []
+  - m_Id: 10777711442628608
+    m_Localized: "Volver al Men\xFA Principal"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
