@@ -7,20 +7,20 @@ using UnityEngine.Localization;
 using System.Linq;
 using DG.Tweening;
 using CandyCoded.HapticFeedback;
-using UnityEngine.Localization.Settings;
 using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GameObject levelHolder;        //Panel padre de todos los niveles (LevelHolder en el editor).
     [SerializeField] private GameObject thisCanvas;         //Canvas padre de toda la UI
-    [SerializeField] private LocalizedAsset<TextAsset>  jsonHistorias;
+    [SerializeField] private LocalizedAsset<TextAsset> jsonHistorias;
     [SerializeField] private TextMeshProUGUI contadorText;
     [SerializeField] private GameObject flechaIzq;
     [SerializeField] private GameObject flechaDer;
     [SerializeField] private TextMeshProUGUI personajeText;
     [SerializeField] private TextMeshProUGUI descripcionText;
     [SerializeField] private AssetLabelReference assetsPersonajes;
+    [SerializeField] private CanvasGroup textosPersonaje;
 
     [Header("---- Boton Jugar ----")]
     [SerializeField] private TextMeshProUGUI textoBotonJugar;
@@ -34,8 +34,6 @@ public class LevelManager : MonoBehaviour
     private int numberOfLevels = 1;
     private Rect panelDimensions;
     private PageSwiper swiper;
-    private PauseMenu pause;
-    private GameObject botonFinPartida; 
 
     private float posShowFlechaDer;
     private float posShowFlechaIzq;
@@ -44,11 +42,11 @@ public class LevelManager : MonoBehaviour
 
 
     public void Start()
-    {      
-    
+    {
+
         //Cargamos Historias del Json
         parsedNiveles = JsonUtility.FromJson<LevelsJsonRoot>(jsonHistorias.LoadAsset().text);
-        
+
         numberOfLevels = parsedNiveles.num_historias;
         Dictionary<string, Sprite> retratosPersonajes = new Dictionary<string, Sprite>();
 
@@ -75,7 +73,8 @@ public class LevelManager : MonoBehaviour
             panel.GetComponent<RectTransform>().localPosition = new Vector2(panelDimensions.width * (i), 0);
 
             Sprite aux;
-            if(!retratosPersonajes.TryGetValue(parsedNiveles.historias[i].imagen, out aux)){
+            if (!retratosPersonajes.TryGetValue(parsedNiveles.historias[i].imagen, out aux))
+            {
                 Debug.Log("Error cargando retrato: " + parsedNiveles.historias[i].imagen);
                 aux = retratosPersonajes.ElementAt(0).Value;
             }
@@ -89,12 +88,12 @@ public class LevelManager : MonoBehaviour
         posHideFlechaDer = posShowFlechaDer + 100;
         posHideFlechaIzq = posShowFlechaIzq - 100;
 
-        flechaDer.transform.position = new(posHideFlechaDer,flechaDer.transform.position.y);
+        flechaDer.transform.position = new(posHideFlechaDer, flechaDer.transform.position.y);
 
         Destroy(panelClone);
         Destroy(levelHolder.transform.GetChild(0).gameObject);
 
-        SetLevelData(0);
+        UpdateText(0);
 
         Canvas.ForceUpdateCanvases();
 
@@ -110,7 +109,17 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Error Level Index out of bounds " + level_index + " of " + numberOfLevels);
             return;
         }
-        
+
+        textosPersonaje.DOFade(0f, 0.2f).OnComplete(() =>
+            {
+                UpdateText(level_index);
+                textosPersonaje.DOFade(1f, 0.2f);
+            });
+
+    }
+
+    private void UpdateText(int level_index)
+    {
         flechaIzq.transform.DOMoveX(level_index <= 0 ? posHideFlechaIzq : posShowFlechaIzq, 0.5f);
         flechaDer.transform.DOMoveX(level_index >= numberOfLevels - 1 ? posHideFlechaDer : posShowFlechaDer, 0.5f);
 
@@ -119,22 +128,22 @@ public class LevelManager : MonoBehaviour
         contadorText.SetText(level_index + 1 + "/" + numberOfLevels);
         personajeText.SetText(parsedNiveles.historias[level_index].personaje);
         descripcionText.SetText(parsedNiveles.historias[level_index].desc);
-        string textToSpeech = parsedNiveles.historias[level_index].personaje+"\n"+parsedNiveles.historias[level_index].desc;
-        textToSpeechManager.StartSpeaking(textToSpeech);       
+        string textToSpeech = parsedNiveles.historias[level_index].personaje + "\n" + parsedNiveles.historias[level_index].desc;
+        textToSpeechManager.StartSpeaking(textToSpeech);
     }
 
     private void BotonJugarManager(int level_index)
-    {   
+    {
         //Está desbloqueado
-        if(GameManager.Instance.CheckLevelStatus(level_index))
+        if (GameManager.Instance.CheckLevelStatus(level_index))
         {
             textoBotonJugar.color = Color.white;
             botonJugarObjeto.interactable = true;
-            candadoImagen.color = new Color(0f,0f,0f,0f);
+            candadoImagen.color = new Color(0f, 0f, 0f, 0f);
         }
         else
         {
-            textoBotonJugar.color = new Color(0f,0f,0f,0f);
+            textoBotonJugar.color = new Color(0f, 0f, 0f, 0f);
             botonJugarObjeto.interactable = false;
             candadoImagen.color = Color.white;
         }
@@ -145,7 +154,7 @@ public class LevelManager : MonoBehaviour
     {
         Vibracion();
         swiper.BindFlechaDerecha();
-        
+
     }
 
     public void BindFlechaIzquierda()
@@ -155,24 +164,23 @@ public class LevelManager : MonoBehaviour
     }
 
     public void JuegaHistoria()
-    {   
-        if(!GameManager.Instance.CheckLevelStatus(swiper.currentPage-1)) return;
+    {
+        if (!GameManager.Instance.CheckLevelStatus(swiper.currentPage - 1)) return;
         Vibracion();
         StartCoroutine(AuxTransicion());
-        botonFinPartida=pause.getBtnFinPartida();
-        botonFinPartida.SetActive(true);
     }
 
     private IEnumerator AuxTransicion()
-    {   
+    {
         GameObject.FindGameObjectWithTag("MainMenuManager").GetComponent<MainMenuEstadoInicial>().EmpiezaTransicion();
         yield return new WaitForSeconds(1);
-        GameManager.Instance.CambiaEscenaGamePrincipal(parsedNiveles.historias[swiper.currentPage-1].archivo);
+        GameManager.Instance.CambiaEscenaGamePrincipal(parsedNiveles.historias[swiper.currentPage - 1].archivo);
     }
 
     public void Vibracion()
     {
-        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+        if (PlayerPrefs.GetInt("VibracionEnabled") == 1)
+        {
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro cambiando el lvl");
         }

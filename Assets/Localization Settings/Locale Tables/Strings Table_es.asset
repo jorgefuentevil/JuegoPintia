@@ -50,6 +50,27 @@ MonoBehaviour:
     m_Localized: "Aviso y T\xE9rmino Legal"
     m_Metadata:
       m_Items: []
+  - m_Id: 10750327809085440
+    m_Localized: HAS GANADO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10750785051136000
+    m_Localized: "\xA1Has superado todas las decisiones de la historia\xA1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10751602919444480
+    m_Localized: FIN DE LA PARTIDA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10753007700905984
+    m_Localized: "Uno de tus atributos ha alcanzado el m\xE1ximo o el m\xEDnimo\n\nHas
+      aguantado {0} a\xF1os"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10777711442628608
+    m_Localized: "Volver al Men\xFA Principal"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

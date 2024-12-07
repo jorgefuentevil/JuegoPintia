@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class PopUpFinalPartida : MonoBehaviour
-{
+{   
 
+    [SerializeField] private LocalizedString stringTextoSuperiorVictoria;
+    [SerializeField] private LocalizedString stringTextoDescripcionVictoria;
+    [SerializeField] private LocalizedString stringTextoSuperiorDerrota;
+    [SerializeField] private LocalizedString stringTextoDescripcionDerrota;
     [SerializeField] private TextMeshProUGUI textoSuperior;
     [SerializeField] private TextMeshProUGUI textoDescripcion;
 
@@ -13,18 +18,19 @@ public class PopUpFinalPartida : MonoBehaviour
     public void Awake() { }
 
 
-    public void MostrarPopup(bool trueIfVictoria)
+    public void MostrarPopup(bool trueIfVictoria, int numYears)
     {
         gameObject.SetActive(true);
         if(trueIfVictoria)
         {   
-            textoSuperior.text = "VICTORIA";
-            textoDescripcion.text = "Has superado todas las decisiones con éxito";
+            textoSuperior.text = stringTextoSuperiorVictoria.GetLocalizedString();
+            textoDescripcion.text = stringTextoDescripcionVictoria.GetLocalizedString();
         }
         else
         {
-            textoSuperior.text = "FIN DE LA PARTIDA";
-            textoDescripcion.text = "Uno de tus atributos ha llegado al máximo o al mínimo";  
+            textoSuperior.text = stringTextoSuperiorDerrota.GetLocalizedString();
+            stringTextoDescripcionDerrota.Arguments = new object[] {numYears};
+            textoDescripcion.text = stringTextoDescripcionDerrota.GetLocalizedString();
         }
     }
 

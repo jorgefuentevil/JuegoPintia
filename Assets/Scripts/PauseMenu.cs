@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using CandyCoded.HapticFeedback;
-using TextSpeech;
 using System.Collections;
 
 public class PauseMenu : MonoBehaviour
@@ -13,11 +12,12 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject popupLegal;
     [SerializeField] private GameObject textoLegal;
     [SerializeField] private GameObject botonFinPartida;
+    [SerializeField] private ScrollRect scrollTextoLegal;
     [SerializeField] private TTS tts;
 
 
 
-    public void Start()
+    public void Awake()
     {
         botonFinPartida.SetActive(false);
         popupLegal.SetActive(false);
@@ -104,7 +104,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void ShowTerms()
-    {
+    {   
         popupLegal.SetActive(true);
         textoLegal.SetActive(false);
         if(PlayerPrefs.GetInt("VibracionEnabled")==1){
@@ -117,22 +117,26 @@ public class PauseMenu : MonoBehaviour
     {
         popupLegal.SetActive(false);
         textoLegal.SetActive(true);
+        scrollTextoLegal.verticalNormalizedPosition = 1;
         if(PlayerPrefs.GetInt("VibracionEnabled")==1){
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro en salir terms legales");
         }
     }
 
+
+    public void SetMenuPlaying()
+    {
+        botonFinPartida.SetActive(true);
+    }
+
     private IEnumerator Fin()
     {
         GameObject.FindGameObjectWithTag("GamePrincipalManager").GetComponent<GamePrincipalEstadoInicial>().EmpiezaTransicion();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         GameManager.Instance.CambiaEscenaMainMenu();
     }
 
-    public GameObject getBtnFinPartida()
-    {
-        return botonFinPartida;
-    }
+
 
 }

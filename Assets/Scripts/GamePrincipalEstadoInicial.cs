@@ -24,10 +24,14 @@ public class GamePrincipalEstadoInicial : MonoBehaviour
 
         DOTween.Init();
 
+
         GamePrincipalPanel.SetActive(true);
         PopUpFinPanel.SetActive(false);
         MenuAjustesPanel.SetActive(true);
+        MenuAjustesPanel.GetComponent<PauseMenu>().SetMenuPlaying();
         MenuAjustesPanel.SetActive(false);
+        
+
         PanelTransicion.SetActive(true);
         PanelTransicion.GetComponent<Image>().raycastTarget=false;
 

@@ -130,7 +130,6 @@ public class HistoryManager : MonoBehaviour
 
         asyncOperationHandle.WaitForCompletion();
         SetElementosDecision();
-
     }
 
 
@@ -153,7 +152,7 @@ public class HistoryManager : MonoBehaviour
         explicacionText.text = "";
         imagenCartaPersonaje.DOColor(colorNormal, 0.2f);
         imagenCartaPersonaje.sprite = spriteCartaActual;
-        
+
     }
 
 
@@ -239,14 +238,14 @@ public class HistoryManager : MonoBehaviour
     public void SetEstadoCommitMuerte()
     {
         Debug.Log($"Fin de Partida por {(trueIfVictoria ? "victoria" : "derrota")}");
-        popupFin.MostrarPopup(trueIfVictoria);
+        popupFin.MostrarPopup(trueIfVictoria, numDecisionActual);
     }
 
     private void CargaHistoria()
     {
         string historiaToLoad = GameManager.Instance.currentLevel;
 
-
+        //Esto va a lanzar una excepción si arrancamos directamente desde GamePrincipal. No pasa nada, la manejamos con jsonHistoriaFallback un poco más abajo :)
         AsyncOperationHandle<TextAsset> opHandle = historiaToLoad.Equals("Tutorial") ? historiaTutorial.LoadAssetAsync<TextAsset>() : Addressables.LoadAssetAsync<TextAsset>(historiaToLoad);
 
         opHandle.WaitForCompletion();
@@ -263,9 +262,11 @@ public class HistoryManager : MonoBehaviour
         {
             CargaAllPreguntas();
         }
-        iconManager.loadSpriteEspecifico(parsedHistorias.atributo); //TODO
-        
-        Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; Tiene atributo {3}; NumHistorias={2}", parsedHistorias.historia, parsedHistorias.decisiones.Count, nPreguntas,parsedHistorias.atributo);
+        iconManager.LoadSpriteEspecifico(parsedHistorias.atributo); //TODO
+
+        usuarioText.text = parsedHistorias.historia;
+
+        Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; Tiene atributo {3}; NumHistorias={2}", parsedHistorias.historia, parsedHistorias.decisiones.Count, nPreguntas, parsedHistorias.atributo);
     }
 
     private void CargaPreguntasAleatorias()
@@ -288,8 +289,7 @@ public class HistoryManager : MonoBehaviour
     private void CargaAllPreguntas()
     {
         nPreguntas = parsedHistorias.decisiones.Count;
-        decisionesPartida = new(nPreguntas);
-        decisionesPartida.AddRange(parsedHistorias.decisiones);
+        decisionesPartida = new(parsedHistorias.decisiones);
     }
 
     private AsyncOperationHandle<IList<Sprite>> LoadRetratos()

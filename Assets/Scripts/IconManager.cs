@@ -7,7 +7,6 @@ using DG.Tweening;
 using System.Linq;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using System;
 
 public class IconManager : MonoBehaviour
 {
@@ -45,10 +44,6 @@ public class IconManager : MonoBehaviour
     private Vector3 posicionHideIzquierda;
 
     [System.NonSerialized] public AnswerSelector selector;
-
-    private readonly short puntuacionInicial = 10;
-    private readonly short multiplicadorNormal = 1;
-    private readonly short multiplicadorDoble = 2;
 
 
     private readonly Color colorRojo = Color.red;
@@ -200,17 +195,13 @@ public class IconManager : MonoBehaviour
         selector.LeftCheckPressed();
     }
 
-    public void loadSpriteEspecifico(string nombreAtributoEspecifico){
-        string imageDireccionContorno = "iconosEspecificos/"+nombreAtributoEspecifico+".png" ;
-        string imageDireccionFilled= "iconosEspecificos/"+nombreAtributoEspecifico+"Filled.png";
-        AsyncOperationHandle<Sprite> opHandleContorno= Addressables.LoadAssetAsync<Sprite>(imageDireccionContorno);
-        AsyncOperationHandle<Sprite> opHandleFill= Addressables.LoadAssetAsync<Sprite>(imageDireccionFilled);
+    public void LoadSpriteEspecifico(string nombreAtributoEspecifico){
+        AsyncOperationHandle<Sprite> opHandleContorno= Addressables.LoadAssetAsync<Sprite>($"iconosEspecificos/{nombreAtributoEspecifico}.png");
+        AsyncOperationHandle<Sprite> opHandleFill= Addressables.LoadAssetAsync<Sprite>($"iconosEspecificos/{nombreAtributoEspecifico}Filled.png");
         opHandleContorno.WaitForCompletion();
         opHandleFill.WaitForCompletion();
         especificoContorno.sprite = opHandleContorno.Result;
         especificoFill.sprite = opHandleFill.Result;
-
-
     }
 
 }
