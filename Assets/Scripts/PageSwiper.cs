@@ -43,7 +43,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
                 currentPage++;
                 newLocation += new Vector3(-Screen.width, 0, 0);
                 panelLocation = newLocation;
-                levelManager.SetLevelData(currentPage - 1);
+                levelManager.SetLevelDataAnimacion(currentPage - 1);
                 Vibracion();
                 audioManager.PlaySlideSFX();
             }
@@ -52,7 +52,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
                 currentPage--;
                 newLocation += new Vector3(Screen.width, 0, 0);
                 panelLocation = newLocation;
-                levelManager.SetLevelData(currentPage - 1);
+                levelManager.SetLevelDataAnimacion(currentPage - 1);
                 Vibracion();
                 audioManager.PlaySlideSFX();
             }
@@ -63,8 +63,14 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
         else
         {
             StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
-            levelManager.SetLevelData(currentPage - 1);
         }
+    }
+
+    public void MoveToPagina(int index)
+    {
+        transform.position += new Vector3(-Screen.width*index, 0, 0); 
+        panelLocation = transform.position;
+        currentPage = index+1;
     }
 
 

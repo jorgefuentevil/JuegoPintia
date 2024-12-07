@@ -71,6 +71,10 @@ MonoBehaviour:
     m_Localized: "Volver al Men\xFA Principal"
     m_Metadata:
       m_Items: []
+  - m_Id: 10778859792732160
+    m_Localized: Selecciona tu edad
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

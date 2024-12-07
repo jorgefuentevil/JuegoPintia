@@ -1,20 +1,28 @@
 {
     "lenguaje": "es_ES",
-    "num_historias": 2,
+    "num_historias": 3,
     "historias": [
+        {
+            "personaje": "Tutorial",
+            "desc": "Repasa los conceptos básicos del juego. Con las imágenes del humorista gráfico \"Sansón\"",
+            "coste": "0",
+            "imagen": "Gente_Sanson",
+            "archivo": "Files_Historias_ES/Historia_Prueba.json"
+
+        },
         {
             "personaje": "Dumnorix el Guerrero",
             "desc": "Eres un guerrero del pueblo de Pintia, uno de los pueblos más grandes de toda la península Iberica",
             "coste": "0",
             "imagen": "Guerrero_1",
-            "archivo": "Files_Historias_ES/Dumnorix_el_Guerrero_ES.json"
+            "archivo": "Files_Historias_ES/Historia_Prueba.json"
         },
         {
             "personaje": "Aidan el Granjero",
             "desc": "Eres un hombre sencillo pero sabio de Pintia. Tu vida esta marcada por el ciclo de las estaciones y la importacia de la comunidad",
             "coste": "0",
             "imagen": "Ganadero_1",
-            "archivo": "Files_Historias_ES/Aidan_el_Granjero_ES.json"
+            "archivo": "Files_Historias_ES/Historia_Prueba.json"
         }
     ]
 }

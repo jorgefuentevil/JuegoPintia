@@ -6,17 +6,13 @@ using DG.Tweening;
 using System.Linq;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
-using UnityEngine.Localization.SmartFormat;
 using Newtonsoft.Json;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using Unity.VisualScripting;
-using UnityEngine.Localization;
 
 public class HistoryManager : MonoBehaviour
 {
     [Header("---- ASSETS ----")]
     [SerializeField] private TextAsset jsonHistoriaFallback;
-    [SerializeField] private LocalizedAsset<TextAsset> historiaTutorial;
     [SerializeField] private AssetLabelReference assetsPersonajes;
     [SerializeField] private Sprite spriteReversoCarta;
     [SerializeField] private Sprite spriteCartaExplicacion;
@@ -238,6 +234,10 @@ public class HistoryManager : MonoBehaviour
     public void SetEstadoCommitMuerte()
     {
         Debug.Log($"Fin de Partida por {(trueIfVictoria ? "victoria" : "derrota")}");
+        if(trueIfVictoria)
+        {
+            GameManager.Instance.UnlockNextLevel();
+        }
         popupFin.MostrarPopup(trueIfVictoria, numDecisionActual);
     }
 
@@ -246,7 +246,7 @@ public class HistoryManager : MonoBehaviour
         string historiaToLoad = GameManager.Instance.currentLevel;
 
         //Esto va a lanzar una excepción si arrancamos directamente desde GamePrincipal. No pasa nada, la manejamos con jsonHistoriaFallback un poco más abajo :)
-        AsyncOperationHandle<TextAsset> opHandle = historiaToLoad.Equals("Tutorial") ? historiaTutorial.LoadAssetAsync<TextAsset>() : Addressables.LoadAssetAsync<TextAsset>(historiaToLoad);
+        AsyncOperationHandle<TextAsset> opHandle = Addressables.LoadAssetAsync<TextAsset>(historiaToLoad);
 
         opHandle.WaitForCompletion();
 
@@ -262,7 +262,7 @@ public class HistoryManager : MonoBehaviour
         {
             CargaAllPreguntas();
         }
-        iconManager.LoadSpriteEspecifico(parsedHistorias.atributo); //TODO
+        iconManager.LoadSpriteEspecifico(parsedHistorias.atributo);
 
         usuarioText.text = parsedHistorias.historia;
 

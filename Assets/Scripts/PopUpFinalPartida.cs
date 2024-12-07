@@ -50,7 +50,7 @@ public class PopUpFinalPartida : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("GamePrincipalManager").GetComponent<GamePrincipalEstadoInicial>().EmpiezaTransicion();
         yield return new WaitForSeconds(1.5f);
-        GameManager.Instance.CambiaEscenaGamePrincipal(GameManager.Instance.currentLevel);
+        GameManager.Instance.CambiaEscenaGamePrincipal(GameManager.Instance.currentLevel, GameManager.Instance.currentLevelIndex);
     }
 
     private IEnumerator AuxHome()

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4db626ad063b13545924a9839ac5fa83, type: 3}
-  m_Name: Historias Table
+  m_Name: Historias
   m_EditorClassIdentifier: 
-  m_SharedTableData: {fileID: 11400000, guid: 29bfb880618c3f4489c0db45bf43fb6d, type: 2}
+  m_SharedTableData: {fileID: 11400000, guid: 147994230b52baca1bd883f94803eb76, type: 2}
   m_Tables:
-  - {fileID: 11400000, guid: 1073f24c51f4e0990be77067df21c496, type: 2}
-  - {fileID: 11400000, guid: 8be32bdf20800a4df8d9867c8f6e039c, type: 2}
+  - {fileID: 11400000, guid: a7fde6df999a46c19bbda7c567bca242, type: 2}
+  - {fileID: 11400000, guid: 4accb43449ed4f8ff8d636842b10486d, type: 2}
   m_Extensions: []
   m_Group: Asset Table
   references:

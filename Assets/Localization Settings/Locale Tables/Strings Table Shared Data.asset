@@ -67,6 +67,10 @@ MonoBehaviour:
     m_Key: Boton Volver Menu Pausa
     m_Metadata:
       m_Items: []
+  - m_Id: 10778859792732160
+    m_Key: Texto Popup Edad
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

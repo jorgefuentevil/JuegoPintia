@@ -10,21 +10,21 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public AsyncOperation EstadoLoadScene; //TODO
-    public string currentLevel {get; private set;} = "";
+    public string currentLevel { get; private set; } = "";
+    public int currentLevelIndex = 0;
 
     private string SaveFilePath;
     private GameSaveData savedData;
 
     public void Awake()
-    {   
+    {
         SaveFilePath = Application.persistentDataPath + "/SaveFile.json";
         if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
         else
-        {   
-            
+        {
             Instance = this;
             DontDestroyOnLoad(this);
             LoadGameData();
@@ -32,27 +32,24 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void CambiaEscenaMainMenu(){
+    public void CambiaEscenaMainMenu()
+    {
         SceneManager.LoadScene("MainMenuScene");
     }
 
-    public void CambiaEscenaGamePrincipal(string nivel){
+    public void CambiaEscenaGamePrincipal(string nivel, int levelIndex)
+    {
         currentLevel = nivel;
+        currentLevelIndex = levelIndex;
         SceneManager.LoadScene("GamePrincipalScene");
     }
-
-    public void CambiaEscenaTutorial(){
-        currentLevel = "Tutorial";
-        SceneManager.LoadScene("GamePrincipalScene");
-    }
-
 
     public void SaveGameData()
     {
         try
         {
-            string jsonData = JsonConvert.SerializeObject(savedData, Formatting.Indented); 
-            File.WriteAllText(SaveFilePath,jsonData);
+            string jsonData = JsonConvert.SerializeObject(savedData, Formatting.Indented);
+            File.WriteAllText(SaveFilePath, jsonData);
             Debug.Log($"Guardando progreso en: {SaveFilePath}");
 
         }
@@ -79,17 +76,19 @@ public class GameManager : MonoBehaviour
                 Debug.Log($"Creado nuevo fichero de guardado: {SaveFilePath}");
                 SaveGameData();
             }
-        }catch(System.Exception e){
+        }
+        catch (System.Exception e)
+        {
             Debug.LogError($"Error cargando fichero de guardado: {e.Message}");
             savedData = CreateDefaultSaveData();
         }
-        
+
     }
-    
+
 
     public bool CheckLevelStatus(int index)
     {
-        if(index >= savedData.unlockedLevels.Count) AumentaSaveData(index);
+        if (index >= savedData.unlockedLevels.Count) AumentaSaveData(index);
 
         return savedData.unlockedLevels[index];
     }
@@ -98,16 +97,34 @@ public class GameManager : MonoBehaviour
     {
         return new GameSaveData
         {
-            unlockedLevels = new List<bool> {true}
+            unlockedLevels = new List<bool> { true }
         };
     }
 
     private void AumentaSaveData(int nuevaCapacidad)
     {
-        while(savedData.unlockedLevels.Count <= nuevaCapacidad)
+        while (savedData.unlockedLevels.Count <= nuevaCapacidad)
         {
             savedData.unlockedLevels.Add(false);
         }
+    }
+
+    public void UnlockNextLevel()
+    {
+        if (currentLevelIndex < savedData.unlockedLevels.Count - 1)
+        {
+            savedData.unlockedLevels[currentLevelIndex + 1] = true;
+            SaveGameData();
+        }
+    }
+
+    public int GetLastUnlockedLevel()
+    {   
+        for(int i = savedData.unlockedLevels.Count - 1; i >=0; i--){
+            if(savedData.unlockedLevels[i]) return i;
+        }
+
+        return savedData.unlockedLevels.Count-1;
     }
 
 }
