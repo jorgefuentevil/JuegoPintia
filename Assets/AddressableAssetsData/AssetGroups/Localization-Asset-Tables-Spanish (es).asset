@@ -17,11 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 390c81a3a3b552bb9ac062054578f6f7
   m_SerializeEntries:
-  - m_GUID: 8be32bdf20800a4df8d9867c8f6e039c
-    m_Address: Historias Table_es
+  - m_GUID: 4accb43449ed4f8ff8d636842b10486d
+    m_Address: Historias_es
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: b1b906966e39fa0b4bc067d39bc97f32, type: 2}

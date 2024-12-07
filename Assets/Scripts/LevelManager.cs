@@ -72,8 +72,7 @@ public class LevelManager : MonoBehaviour
             panel.name = "Page-" + (i + 1);
             panel.GetComponent<RectTransform>().localPosition = new Vector2(panelDimensions.width * (i), 0);
 
-            Sprite aux;
-            if (!retratosPersonajes.TryGetValue(parsedNiveles.historias[i].imagen, out aux))
+            if (!retratosPersonajes.TryGetValue(parsedNiveles.historias[i].imagen, out Sprite aux))
             {
                 Debug.Log("Error cargando retrato: " + parsedNiveles.historias[i].imagen);
                 aux = retratosPersonajes.ElementAt(0).Value;
@@ -93,7 +92,11 @@ public class LevelManager : MonoBehaviour
         Destroy(panelClone);
         Destroy(levelHolder.transform.GetChild(0).gameObject);
 
-        UpdateText(0);
+
+        int lastUnlocked = GameManager.Instance.GetLastUnlockedLevel();
+
+        swiper.MoveToPagina(lastUnlocked);
+        SetLevelData(lastUnlocked);
 
         Canvas.ForceUpdateCanvases();
 
@@ -102,7 +105,7 @@ public class LevelManager : MonoBehaviour
     }
 
     //level_index es [0,numLvl-1]
-    public void SetLevelData(int level_index)
+    public void SetLevelDataAnimacion(int level_index)
     {
         if (level_index < 0 || level_index >= numberOfLevels)
         {
@@ -112,13 +115,13 @@ public class LevelManager : MonoBehaviour
 
         textosPersonaje.DOFade(0f, 0.2f).OnComplete(() =>
             {
-                UpdateText(level_index);
+                SetLevelData(level_index);
                 textosPersonaje.DOFade(1f, 0.2f);
             });
 
     }
 
-    private void UpdateText(int level_index)
+    private void SetLevelData(int level_index)
     {
         flechaIzq.transform.DOMoveX(level_index <= 0 ? posHideFlechaIzq : posShowFlechaIzq, 0.5f);
         flechaDer.transform.DOMoveX(level_index >= numberOfLevels - 1 ? posHideFlechaDer : posShowFlechaDer, 0.5f);
@@ -174,7 +177,7 @@ public class LevelManager : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("MainMenuManager").GetComponent<MainMenuEstadoInicial>().EmpiezaTransicion();
         yield return new WaitForSeconds(1);
-        GameManager.Instance.CambiaEscenaGamePrincipal(parsedNiveles.historias[swiper.currentPage - 1].archivo);
+        GameManager.Instance.CambiaEscenaGamePrincipal(parsedNiveles.historias[swiper.currentPage - 1].archivo, swiper.currentPage-1);
     }
 
     public void Vibracion()

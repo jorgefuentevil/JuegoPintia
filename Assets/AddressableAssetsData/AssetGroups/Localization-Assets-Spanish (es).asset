@@ -15,14 +15,8 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Spanish (es)
   m_Data:
     m_SerializedData: []
-  m_GUID: fcda1fd765a0a63439eadad7cf4fe164
+  m_GUID: 029cd0473e81d37c78545058e868b7d4
   m_SerializeEntries:
-  - m_GUID: 16f45b9c52ea6ce2bb40c85c62c0594e
-    m_Address: Tutorial_ES
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-es
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2cb567d21873f954ca9c9d4ab684615a
     m_Address: Historias_ES
     m_ReadOnly: 1

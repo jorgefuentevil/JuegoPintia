@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 9e8c67167745e0af683a344565003938
   m_SerializeEntries:
+  - m_GUID: 147994230b52baca1bd883f94803eb76
+    m_Address: Assets/Localization Settings/Locale Tables/Historias Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 29bfb880618c3f4489c0db45bf43fb6d
     m_Address: Assets/Localization Settings/Locale Tables/Historias Table Shared
       Data.asset

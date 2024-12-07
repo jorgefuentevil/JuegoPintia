@@ -10,20 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97269afb30aa84742ae3f3342603618a, type: 3}
-  m_Name: Historias Table_es
+  m_Name: Historias_en
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: es
-  m_SharedData: {fileID: 11400000, guid: 29bfb880618c3f4489c0db45bf43fb6d, type: 2}
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 147994230b52baca1bd883f94803eb76, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 16345698304
-    m_Localized: 2cb567d21873f954ca9c9d4ab684615a
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8303717766369280
-    m_Localized: 16f45b9c52ea6ce2bb40c85c62c0594e
+  - m_Id: 5453090816
+    m_Localized: 115e178843c81a2849c2aa7ed746e205
     m_Metadata:
       m_Items: []
   references:

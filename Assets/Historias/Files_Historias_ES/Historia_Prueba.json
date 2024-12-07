@@ -2,6 +2,7 @@
     "historia": "El Guerrero",
     "idioma": "es_ES",
     "nivel": 1,
+    "atributo": "Espada",
     "aleatoria": false,
     "decisiones": [
         {
