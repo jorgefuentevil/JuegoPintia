@@ -43,6 +43,10 @@ public struct HistoryJsonRoot
     public bool aleatoria;
     public System.Collections.Generic.List<Decision> decisiones;
     public System.Collections.Generic.List<Decision> decisiones_respuesta;
+    public Decision decision_victoria;
+    public System.Collections.Generic.List<Decision> decisiones_derrota;
+
+
 }
 
 [System.Serializable]

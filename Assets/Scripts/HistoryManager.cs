@@ -67,25 +67,6 @@ public class HistoryManager : MonoBehaviour
 
     private bool trueIfVictoria = false;
 
-
-
-    private readonly Decision muerteDineroPoco = new(-1, "Mendigo_1", "muerte", "¡Has perdido todo tu dinero, eres una decepción para tu familia y tus amigos!", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
-    private readonly Decision muerteDineroMucho = new(-1, "Ladron_1", "muerte", "¡No puedes ir con tanto dinero por la calle! Un ladrón te roba en mitad de la noche", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
-
-    private readonly Decision muerteSocialPoco = new(-1, "tumba", "muerte", "Nadie te considera su amigo. Deberías comportarte mejor con el resto", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
-    private readonly Decision muerteSocialMucho = new(-1, "tumba", "muerte", "Eres una persona exitosa, pero tus enemigos te envidian. Eso nunca es bueno...", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
-
-    private readonly Decision muerteSaludPoco = new(-1, "tumba", "muerte", "Tienes que cuidarte más, con tan poca salud no llegarás a viejo", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
-    private readonly Decision muerteSaludMucho = new(-1, "tumba", "muerte", "Te creías el mas fuerte de la aldea, pero había alguien mejor que tú...", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
-
-
-    private readonly Decision muerteEspecificoPoco = new(-1, "tumba", "muerte", "Especifico Poco", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
-    private readonly Decision muerteEspecificoMucho = new(-1, "tumba", "muerte", "Especifico mucho", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
-
-    private readonly Decision decisionVictoria = new(-1, "tumba", "VICTORIA", "Victoria suuuuu", new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1), new Respuesta("Que...", new short[] { 0, 0, 0, 0 }, null, -1));
-
-
-
     public void Start()
     {
         imagenCartaPersonaje = cartaPersonaje.GetComponent<Image>();
@@ -324,35 +305,36 @@ public class HistoryManager : MonoBehaviour
 
     private bool CheckFinPartida()
     {
+        List<Decision> auxDecision = parsedHistorias.decisiones_derrota;
 
         if (puntuacionDinero >= puntuacionMax || puntuacionDinero <= 0)
         {
-            decisionActual = (puntuacionDinero >= puntuacionMax) ? muerteDineroMucho : muerteDineroPoco;
+            decisionActual = (puntuacionDinero >= puntuacionMax) ? auxDecision[2] : auxDecision[3];
             return true;
         }
 
         else if (puntuacionSocial >= puntuacionMax || puntuacionSocial <= 0)
         {
-            decisionActual = (puntuacionSocial >= puntuacionMax) ? muerteSocialMucho : muerteSocialPoco;
+            decisionActual = (puntuacionSocial >= puntuacionMax) ? auxDecision[0] : auxDecision[1];
             return true;
         }
 
         else if (puntuacionSalud >= puntuacionMax || puntuacionSalud <= 0)
         {
-            decisionActual = (puntuacionSalud >= puntuacionMax) ? muerteSaludMucho : muerteSaludPoco;
+            decisionActual = (puntuacionSalud >= puntuacionMax) ? auxDecision[4] : auxDecision[5];
             return true;
         }
 
         else if (puntuacionEspecifico >= puntuacionMax || puntuacionEspecifico <= 0)
         {
-            decisionActual = (puntuacionEspecifico >= puntuacionMax) ? muerteEspecificoMucho : muerteEspecificoPoco;
+            decisionActual = (puntuacionEspecifico >= puntuacionMax) ? auxDecision[6] : auxDecision[7];
             return true;
         }
         //Priorizamos derrota a victoria....
         else if (numDecisionActual >= nPreguntas - 1)
         {
             trueIfVictoria = true;
-            decisionActual = decisionVictoria;
+            decisionActual = parsedHistorias.decision_victoria;
             return true;
         }
 
