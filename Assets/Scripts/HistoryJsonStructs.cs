@@ -44,3 +44,21 @@ public struct HistoryJsonRoot
     public System.Collections.Generic.List<Decision> decisiones;
     public System.Collections.Generic.List<Decision> decisiones_respuesta;
 }
+
+[System.Serializable]
+public struct Historia
+{
+    public string personaje;
+    public string desc;
+    public int coste;
+    public string imagen;
+    public string atributo;
+    public string archivo;
+}
+[System.Serializable]
+public struct LevelsJsonRoot
+{
+    public string lenguaje;
+    public int num_historias;
+    public Historia[] historias;
+}
