@@ -33,5 +33,258 @@
             }
         }
     ],
-    "decisiones_respuesta": []
+    "decisiones_respuesta": [],
+    "decision_victoria": {
+        "personaje": "VICTORIA",
+        "imagen": "tumba",
+        "desc": "VICTORIA",
+        "res_der": {
+            "respuesta": null,
+            "explicacion": null,
+            "efectos": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "siguiente": -1
+        },
+        "res_izq": {
+            "respuesta": null,
+            "explicacion": null,
+            "efectos": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "siguiente": -1
+        }
+    },
+    "decisiones_derrota": [
+        {
+            "tipo": "Social_Alto",
+            "personaje": "Muerte",
+            "imagen": "Ladron_1",
+            "desc": "Te confiaste mucho de la gente, sin embargo no todos son tan buenos como tu",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Social_Bajo",
+            "personaje": "Muerte",
+            "imagen": "Mendigo_1",
+            "desc": "Pasaste una mala etapa y por no ayudar a la gente esta tampoco te ayudo a tí. Acabaste de mendigo en las calles.",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Dinero_Alto",
+            "personaje": "Muerte",
+            "imagen": "Ladron_1",
+            "desc": "¡Has perdido todo tu dinero, eres una decepción para tu familia y tus amigos!",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Dinero_Bajo",
+            "personaje": "Muerte",
+            "imagen": "Mendigo_1",
+            "desc": "¡Has perdido todo tu dinero, eres una decepción para tu familia y tus amigos!",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Salud_Alto",
+            "personaje": "Muerte",
+            "imagen": "Pelea_1",
+            "desc": "Te creías el mas fuerte de la aldea, pero había alguien mejor que tú...",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Salud_Bajo",
+            "personaje": "Muerte",
+            "imagen": "Herido_1",
+            "desc": "Tienes que cuidarte más, con tan poca salud no llegarás a viejo",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Especifico_Bajo",
+            "personaje": "Muerte",
+            "imagen": "tumba",
+            "desc": "Debes tener más cuidado con las decisiones que tomas",
+            "res_der": {
+                "respuesta":null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Especifico_Alto",
+            "personaje": "Muerte",
+            "imagen": "tumba",
+            "desc": "Debes tener más cuidado con las decisiones que tomas",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        }
+    ]
 }
