@@ -3088,7 +3088,7 @@ MonoBehaviour:
   popupLegal: {fileID: 7069822697999422374}
   textoLegal: {fileID: 7696731017320793737}
   botonFinPartida: {fileID: 7508270496397788642}
-  contenidoTextoLegal: {fileID: 8161903379544486234}
+  scrollTextoLegal: {fileID: 4556227621243669094}
   tts: {fileID: 0}
 --- !u!114 &2159253644784753578
 MonoBehaviour:

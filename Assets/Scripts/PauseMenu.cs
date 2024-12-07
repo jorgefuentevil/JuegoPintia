@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject popupLegal;
     [SerializeField] private GameObject textoLegal;
     [SerializeField] private GameObject botonFinPartida;
-    [SerializeField] private GameObject contenidoTextoLegal;
+    [SerializeField] private ScrollRect scrollTextoLegal;
     [SerializeField] private TTS tts;
 
 
@@ -105,7 +105,6 @@ public class PauseMenu : MonoBehaviour
 
     public void ShowTerms()
     {   
-        contenidoTextoLegal.transform.position = Vector3.zero;
         popupLegal.SetActive(true);
         textoLegal.SetActive(false);
         if(PlayerPrefs.GetInt("VibracionEnabled")==1){
@@ -118,6 +117,7 @@ public class PauseMenu : MonoBehaviour
     {
         popupLegal.SetActive(false);
         textoLegal.SetActive(true);
+        scrollTextoLegal.verticalNormalizedPosition = 1;
         if(PlayerPrefs.GetInt("VibracionEnabled")==1){
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro en salir terms legales");

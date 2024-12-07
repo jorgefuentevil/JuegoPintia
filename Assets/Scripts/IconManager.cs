@@ -7,7 +7,6 @@ using DG.Tweening;
 using System.Linq;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using System;
 
 public class IconManager : MonoBehaviour
 {
@@ -45,10 +44,6 @@ public class IconManager : MonoBehaviour
     private Vector3 posicionHideIzquierda;
 
     [System.NonSerialized] public AnswerSelector selector;
-
-    private readonly short puntuacionInicial = 10;
-    private readonly short multiplicadorNormal = 1;
-    private readonly short multiplicadorDoble = 2;
 
 
     private readonly Color colorRojo = Color.red;

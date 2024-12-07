@@ -130,7 +130,6 @@ public class HistoryManager : MonoBehaviour
 
         asyncOperationHandle.WaitForCompletion();
         SetElementosDecision();
-
     }
 
 
@@ -264,6 +263,8 @@ public class HistoryManager : MonoBehaviour
             CargaAllPreguntas();
         }
         iconManager.LoadSpriteEspecifico(parsedHistorias.atributo); //TODO
+
+        usuarioText.text = parsedHistorias.historia;
 
         Debug.LogFormat("Cargada historia: {0}; Tiene {1} historias; Tiene atributo {3}; NumHistorias={2}", parsedHistorias.historia, parsedHistorias.decisiones.Count, nPreguntas, parsedHistorias.atributo);
     }

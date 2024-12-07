@@ -6,7 +6,7 @@ using UnityEngine.Localization;
 
 public class PopUpFinalPartida : MonoBehaviour
 {   
-    //TODO: Personalizar mensajes y localizarlos
+
     [SerializeField] private LocalizedString stringTextoSuperiorVictoria;
     [SerializeField] private LocalizedString stringTextoDescripcionVictoria;
     [SerializeField] private LocalizedString stringTextoSuperiorDerrota;
