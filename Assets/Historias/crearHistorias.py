@@ -1,8 +1,163 @@
 import json
 from tkinter import Tk, Label, Entry, Button, Text, END, messagebox, ttk , Toplevel, Spinbox
 
-class Decision(Toplevel):
-     
+
+class Decision_Derrota(Toplevel):
+    def __init__(self, master = None, app=None,):
+         
+        super().__init__(master = master)
+        self.app = app
+        self.id_siguiente_izq= -1
+        self.id_siguiente_der= -1
+        #Creamos la ventana2
+        Label(self, text="Creacion de decision de derrota").grid(row=0, column=0, sticky="w", padx=5, pady=5)
+
+        Label(self, text="Descripción decision:").grid(row=1, column=0, sticky="w", padx=5, pady=5)
+        self.decision_descripcion_entry = Entry(self, width=30)
+        self.decision_descripcion_entry.grid(row=1, column=1, padx=5, pady=5)
+
+        Label(self, text="Imagen:").grid(row=2, column=0, sticky="w", padx=5, pady=5)
+        self.decision_img_entry = Entry(self, width=30)
+        self.decision_img_entry.grid(row=2, column=1, padx=5, pady=5)
+
+        Label(self, text="Personaje decision:").grid(row=3, column=0, sticky="w", padx=5, pady=5)
+        self.decision_personaje = Entry(self, width=30)
+        self.decision_personaje.grid(row=3, column=1, padx=5, pady=5)
+
+        Label(self, text="Tipo").grid(row=4, column=0, sticky="w", padx=5, pady=5)
+        self.tipo = ttk.Combobox(self,state="readonly",values=["Dinero_Alto", "Social_Alto","Salud_Alto","Especifico_Alto","Dinero_Bajo", "Social_Bajo","Salud_Bajo","Especifico_Bajo"])
+        self.tipo.grid(row=4, column=1, padx=5, pady=5)
+
+
+        Button(self, text="Cambiar Atributo", command=self.close).grid(row=5, column=1, padx=5, pady=10)
+        Button(self, text="Finalizar", command=self.exit).grid(row=5, column=1, padx=5, pady=10)
+    def exit(self):
+        self.destroy()
+    def close(self):
+        try:
+            if len(self.decision_descripcion_entry.get())>200:
+                raise Exception("La descripción es muy extensa")
+            if self.decision_descripcion_entry.get()==""  or self.decision_img_entry.get()=="" or self.decision_personaje.get()=="":
+                raise Exception("Todos los campos deben de estar rellenos")
+            with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'r', encoding='utf-8') as f:
+                datos = json.load(f)
+
+            decision = {
+                "tipo": self.tipo.get(),
+                "personaje": self.decision_personaje.get(),
+                "imagen": self.decision_img_entry.get(),
+                "desc": self.decision_descripcion_entry.get(),
+                "res_der": {
+                    "respuesta": None,
+                    "explicacion": None,
+                    "efectos": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "siguiente": -1
+                },
+                "res_izq": {
+                    "respuesta": None,
+                    "explicacion": None,
+                    "efectos": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "siguiente": -1
+                }
+            }
+            print(datos["decisiones_derrota"])
+            for decision_derrota in datos["decisiones_derrota"]:
+                print(decision_derrota["tipo"])
+                if decision_derrota["tipo"]==self.tipo.get():
+                    datos["decisiones_derrota"].remove(decision_derrota)
+            datos["decisiones_derrota"].append(decision)
+            with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'w', encoding='utf-8') as f:
+                json.dump(datos, f, indent=4, ensure_ascii=False)
+
+            Decision_Derrota(self.app.root,self.app)
+            self.destroy()
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo guardar el archivo: {e}")
+
+
+class Decision_Victoria(Toplevel):
+    def __init__(self, master = None, app=None,):
+         
+        super().__init__(master = master)
+        self.app = app
+        self.id_siguiente_izq= -1
+        self.id_siguiente_der= -1
+        #Creamos la ventana2
+        Label(self, text="Creacion de decision de victoria").grid(row=0, column=0, sticky="w", padx=5, pady=5)
+        Label(self, text="Descripción decision:").grid(row=1, column=0, sticky="w", padx=5, pady=5)
+        self.decision_descripcion_entry = Entry(self, width=30)
+        self.decision_descripcion_entry.grid(row=1, column=1, padx=5, pady=5)
+
+        Label(self, text="Imagen:").grid(row=2, column=0, sticky="w", padx=5, pady=5)
+        self.decision_img_entry = Entry(self, width=30)
+        self.decision_img_entry.grid(row=2, column=1, padx=5, pady=5)
+
+        Label(self, text="Personaje decision:").grid(row=3, column=0, sticky="w", padx=5, pady=5)
+        self.decision_personaje = Entry(self, width=30)
+        self.decision_personaje.grid(row=3, column=1, padx=5, pady=5)
+
+
+        Button(self, text="Actualizar Victoria", command=self.close).grid(row=4, column=1, padx=5, pady=10)
+        Button(self, text="Actualizar Victoria", command=self.exit).grid(row=4, column=1, padx=5, pady=10)
+    def exit(self):
+        self.destroy()
+
+    def close(self):
+        try:
+            if len(self.decision_descripcion_entry.get())>200:
+                raise Exception("La descripción es muy extensa")
+            if self.decision_descripcion_entry.get()==""  or self.decision_img_entry.get()=="" or self.decision_personaje.get()=="":
+                raise Exception("Todos los campos deben de estar rellenos")
+            with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'r', encoding='utf-8') as f:
+                datos = json.load(f)
+
+            decision = {
+                "personaje": self.decision_personaje.get(),
+                "imagen": self.decision_img_entry.get(),
+                "desc": self.decision_descripcion_entry.get(),
+                "res_der": {
+                    "respuesta": None,
+                    "explicacion": None,
+                    "efectos": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "siguiente": -1
+                },
+                "res_izq": {
+                    "respuesta": None,
+                    "explicacion": None,
+                    "efectos": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "siguiente": -1
+                }
+            }
+            datos["decision_victoria"]=decision
+            with open(f"{self.app.titulo}_{self.app.idioma_entry.get()[-2:]}.json", 'w', encoding='utf-8') as f:
+                json.dump(datos, f, indent=4, ensure_ascii=False)
+
+            Decision_Derrota(self.app.root,self.app)
+            self.destroy()
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo guardar el archivo: {e}")
+
+class Decision(Toplevel):     
     def __init__(self, master = None, app=None, isRespuesta=False):
          
         super().__init__(master = master)
@@ -75,7 +230,8 @@ class Decision(Toplevel):
         Button(self, text="Añadir nueva decisión", command=self.agregar_decision).grid(row=10, column=2, padx=5, pady=10)
 
     def close(self):
-        exit(0)
+        Decision_Victoria(self.app.root,self.app)
+        self.destroy()
         
     def agregar_decision(self):
         try:
@@ -297,7 +453,261 @@ class JsonEditorApp:
             "nivel": nivel,
             "atributo": self.nivel_atributo_especifico.get(),
             "decisiones": [],
-            "decisiones_respuesta": []
+            "decisiones_respuesta": [],
+            "decision_victoria": {
+                "personaje": "VICTORIA",
+                "imagen": "tumba",
+                "desc": "VICTORIA",
+                "res_der": {
+                    "respuesta": None,
+                    "explicacion": None,
+                    "efectos": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "siguiente": -1
+                },
+                "res_izq": {
+                    "respuesta": None,
+                    "explicacion": None,
+                    "efectos": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "siguiente": -1
+                }
+            },
+            "decisiones_derrota": [
+                {
+                    "tipo": "Social_Alto",
+                    "personaje": "Muerte",
+                    "imagen": "Ladron_1",
+                    "desc": "Te confiaste mucho de la gente, sin embargo no todos son tan buenos como tu",
+                    "res_der": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    },
+                    "res_izq": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    }
+                },
+                {
+                    "tipo": "Social_Bajo",
+                    "personaje": "Muerte",
+                    "imagen": "Mendigo_1",
+                    "desc": "Pasaste una mala etapa y por no ayudar a la gente esta tampoco te ayudo a tí. Acabaste de mendigo en las calles.",
+                    "res_der": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    },
+                    "res_izq": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    }
+                },
+                {
+                    "tipo": "Dinero_Alto",
+                    "personaje": "Muerte",
+                    "imagen": "Ladron_1",
+                    "desc": "¡Has perdido todo tu dinero, eres una decepción para tu familia y tus amigos!",
+                    "res_der": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    },
+                    "res_izq": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    }
+                },
+                {
+                    "tipo": "Dinero_Bajo",
+                    "personaje": "Muerte",
+                    "imagen": "Mendigo_1",
+                    "desc": "¡Has perdido todo tu dinero, eres una decepción para tu familia y tus amigos!",
+                    "res_der": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    },
+                    "res_izq": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    }
+                },
+                {
+                    "tipo": "Salud_Alto",
+                    "personaje": "Muerte",
+                    "imagen": "Pelea_1",
+                    "desc": "Te creías el mas fuerte de la aldea, pero había alguien mejor que tú...",
+                    "res_der": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    },
+                    "res_izq": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    }
+                },
+                {
+                    "tipo": "Salud_Bajo",
+                    "personaje": "Muerte",
+                    "imagen": "Herido_1",
+                    "desc": "Tienes que cuidarte más, con tan poca salud no llegarás a viejo",
+                    "res_der": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    },
+                    "res_izq": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    }
+                },
+                {
+                    "tipo": "Especifico_Bajo",
+                    "personaje": "Muerte",
+                    "imagen": "tumba",
+                    "desc": "Debes tener más cuidado con las decisiones que tomas",
+                    "res_der": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    },
+                    "res_izq": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    }
+                },
+                {
+                    "tipo": "Especifico_Alto",
+                    "personaje": "Muerte",
+                    "imagen": "tumba",
+                    "desc": "Debes tener más cuidado con las decisiones que tomas",
+                    "res_der": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    },
+                    "res_izq": {
+                        "respuesta": None,
+                        "explicacion": None,
+                        "efectos": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "siguiente": -1
+                    }
+                }
+
+            ]
         }
         with open(f"{self.titulo}_{self.idioma_entry.get()[-2:]}.json", "w", encoding="utf-8") as archivo:
             json.dump(datos, archivo, ensure_ascii=False, indent=4)
