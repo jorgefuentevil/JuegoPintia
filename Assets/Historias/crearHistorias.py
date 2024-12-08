@@ -175,7 +175,7 @@ class Decision(Toplevel):
         self.decision_img_entry = Entry(self, width=30)
         self.decision_img_entry.grid(row=2, column=1, padx=5, pady=5)
 
-        Label(self, text="Respuesta 1:").grid(row=3, column=0, sticky="w", padx=5, pady=5)
+        Label(self, text="Respuesta Der:").grid(row=3, column=0, sticky="w", padx=5, pady=5)
         self.decision_res1_entry = Entry(self, width=30)
         self.decision_res1_entry.grid(row=3, column=1, padx=5, pady=5)
 
@@ -198,7 +198,7 @@ class Decision(Toplevel):
         self.decision_res1_exp_entry = Entry(self, width=30)
         self.decision_res1_exp_entry.grid(row=5, column=1, padx=5, pady=5)
 
-        Label(self, text="Respuesta 2:").grid(row=6, column=0, sticky="w", padx=5, pady=5)
+        Label(self, text="Respuesta Izq:").grid(row=6, column=0, sticky="w", padx=5, pady=5)
         self.decision_res2_entry = Entry(self, width=30)
         self.decision_res2_entry.grid(row=6, column=1, padx=5, pady=5)
         
