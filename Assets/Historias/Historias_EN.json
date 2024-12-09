@@ -3,6 +3,13 @@
     "num_historias": 1,
     "historias": [
         {
+            "personaje": "Tutorial",
+            "desc": "You are studying the town of Pintia when suddenly the machine begins to act strangely... \nWith illustrations by the cartoonist \"Sansón\"",
+            "coste": "0",
+            "imagen": "Gente_Sanson",
+            "archivo": "Files_Historias_EN/Tutorial_EN.json"
+        },
+        {
             "personaje": "Merlin the magician",
             "desc": "You are a magician",
             "coste": "0",
