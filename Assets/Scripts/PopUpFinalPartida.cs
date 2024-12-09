@@ -25,6 +25,7 @@ public class PopUpFinalPartida : MonoBehaviour
         {   
             textoSuperior.text = stringTextoSuperiorVictoria.GetLocalizedString();
             textoDescripcion.text = stringTextoDescripcionVictoria.GetLocalizedString();
+            GameManager.Instance.UnlockNextLevel();
         }
         else
         {
