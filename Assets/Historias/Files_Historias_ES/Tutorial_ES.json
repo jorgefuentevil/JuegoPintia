@@ -68,7 +68,7 @@
             "desc": "Un hombre mayor se te acerca y te pregunta de dónde vienes. (Los atributos de arriba variarán según tus decisiones)",
             "res_der": {
                 "respuesta": "Inventar una historia convincente.",
-                "explicacion": "Se cree la historia que le cuentas (Esto es una explicación de la decisión)",
+                "explicacion": "Se cree la historia que le cuentas (Esto es una explicación del resultado de la decisión)",
                 "efectos": [
                     "0",
                     "1",
@@ -79,7 +79,7 @@
             },
             "res_izq": {
                 "respuesta": "Decir que eres un viajero del tiempo.",
-                "explicacion": "Se cree que le estas engañando(Esto es una explicación de la decisión)",
+                "explicacion": "Se cree que le estas engañando (Esto es una explicación del resultado de la decisión)",
                 "efectos": [
                     "0",
                     "-1",
@@ -93,9 +93,9 @@
             "id": 3,
             "personaje": "Togodumnus",
             "imagen": "Agricultor_Sanson",
-            "desc": "Al avanzar un poco más te encuentras a un chico cargando paja. Te pide ayuda para llevarla",
+            "desc": "Al avanzar un poco más te encuentras a un chico cargando paja. Te pide ayuda para llevarla (El primer atributo son tu dinero)",
             "res_der": {
-                "respuesta": "Ayudarle con la paja",
+                "respuesta": "Ayudarle a cargar la paja",
                 "explicacion": "Te da unas monedas que no reconoces a la que llaman \"Denarios\"",
                 "efectos": [
                     "4",
@@ -121,7 +121,7 @@
             "id": 4,
             "personaje": "Muchedumbre",
             "imagen": "Gente_Sanson",
-            "desc": "Al llegar al centro del pueblo ves una gran muchedumbre haciendo cola, la gente parece entusiasmada. ",
+            "desc": "Al llegar al centro del pueblo ves una gran muchedumbre haciendo cola, la gente parece entusiasmada. (El segundo atributo son tus relaciones sociales)",
             "res_der": {
                 "respuesta": "Colarte y descubrir que hace la gente",
                 "explicacion": null,
@@ -149,7 +149,7 @@
             "id": 5,
             "personaje": "Mercader Caelus",
             "imagen": "Mercader_Sanson",
-            "desc": "Tras un rato de espera descubres que la gente hacia cola para comprar al mercader del pueblo vecino",
+            "desc": "Tras un rato de espera descubres que la gente hacia cola para comprar al mercader del pueblo vecino. (El tercer atributo es tu salud)",
             "res_der": {
                 "respuesta": "Comprar especias con la moneda del chico de antes",
                 "explicacion": null,
@@ -177,7 +177,7 @@
             "id": 6,
             "personaje": "Amaia",
             "imagen": "Uvas_Sanson",
-            "desc": "El viaje te ha dejado tan hambriento que decides acercarte a una señora recogiendo uvas",
+            "desc": "El viaje te ha dejado tan hambriento que decides acercarte a una señora recogiendo uvas (El ultimo atributo cambiará según el personaje)",
             "res_der": {
                 "respuesta": "Pedirla un racimo por una moneda",
                 "explicacion": null,
