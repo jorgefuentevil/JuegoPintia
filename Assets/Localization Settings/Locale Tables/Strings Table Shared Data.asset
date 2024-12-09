@@ -75,6 +75,10 @@ MonoBehaviour:
     m_Key: "A\xF1os de Aventura"
     m_Metadata:
       m_Items: []
+  - m_Id: 11547798214774784
+    m_Key: Texto_Narrador
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
