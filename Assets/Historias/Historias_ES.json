@@ -4,7 +4,7 @@
     "historias": [
         {
             "personaje": "Tutorial",
-            "desc": "Estas estudiando el pueblo de pintia cuando de repente la maquina empieza ha hacer algo extraño...  \nCon imágenes del humorista gráfico \"Sansón\"",
+            "desc": "Estas estudiando el pueblo de pintia cuando de repente la máquina empieza ha hacer algo extraño...  \nCon imágenes del humorista gráfico \"Sansón\"",
             "coste": "0",
             "imagen": "Gente_Sanson",
             "archivo": "Files_Historias_ES/Tutorial_ES.json"
@@ -18,7 +18,7 @@
         },
         {
             "personaje": "Dumnorix el Guerrero",
-            "desc": "Eres un guerrero del pueblo de Pintia, uno de los pueblos más grandes de toda la península Iberica",
+            "desc": "Eres un guerrero del pueblo de Pintia, uno de los pueblos más grandes de toda la península Ibérica",
             "coste": "0",
             "imagen": "Guerrero_1",
             "archivo": "Files_Historias_ES/Dumnorix_el_Guerrero_ES.json"

@@ -7,7 +7,7 @@
     "decisiones": [
         {
             "id": 0,
-            "personaje": "Maecader Merlin",
+            "personaje": "Mercader Merlin",
             "imagen": "Mercader_1",
             "desc": "Izquierda para ganar, derecha para perder",
             "res_der": {

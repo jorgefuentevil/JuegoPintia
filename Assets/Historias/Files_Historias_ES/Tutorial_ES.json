@@ -177,7 +177,7 @@
             "id": 6,
             "personaje": "Amaia",
             "imagen": "Uvas_Sanson",
-            "desc": "El viaje te ha dejado tan hambriento que decides acercarte a una señora recogiendo uvas (El ultimo atributo cambiará según el personaje)",
+            "desc": "El viaje te ha dejado tan hambriento que decides acercarte a una señora recogiendo uvas (El último atributo cambiará según el personaje)",
             "res_der": {
                 "respuesta": "Pedirla un racimo por una moneda",
                 "explicacion": null,
@@ -233,7 +233,7 @@
             "id": 8,
             "personaje": "Constructor Artius",
             "imagen": "Constructor_Sanson",
-            "desc": "Pasas al lado de una casa en construccion y el constructor te reconoce como \"Ambatus\"",
+            "desc": "Pasas al lado de una casa en construcción y el constructor te reconoce como \"Ambatus\"",
             "res_der": {
                 "respuesta": "Le preguntas que quién es Ambatus",
                 "explicacion": "¡Resulta que estas en el cuerpo de otra persona!",
@@ -320,7 +320,7 @@
             "desc": "No encuentras agua pero sí un vendedor de vino. Estas muy sediento",
             "res_der": {
                 "respuesta": "Comprar vino para beber ",
-                "explicacion": "Si un atributo llega al minimo o al maximo perderas la partida",
+                "explicacion": "Si un atributo llega al mínimo o al máximo perderás la partida",
                 "efectos": [
                     "-1",
                     "0",
@@ -331,7 +331,7 @@
             },
             "res_izq": {
                 "respuesta": "Comprar vino para beber ",
-                "explicacion": "Si un atributo llega al minimo o al maximo perderas la partida",
+                "explicacion": "Si un atributo llega al mínimo o al máximo perderás la partida",
                 "efectos": [
                     "-1",
                     "0",
@@ -375,7 +375,7 @@
             "tipo": "Social_Alto",
             "personaje": "Muerte",
             "imagen": "Ladron_1",
-            "desc": "Te confiaste mucho de la gente, sin embargo no todos son tan buenos como tu",
+            "desc": "Te confiaste mucho de la gente, sin embargo no todos son tan buenos como tú",
             "res_der": {
                 "respuesta": null,
                 "explicacion": null,

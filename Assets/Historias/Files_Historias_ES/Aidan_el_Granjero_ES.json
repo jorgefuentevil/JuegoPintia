@@ -37,7 +37,7 @@
             "id": 1,
             "personaje": "Fiesta",
             "imagen": "Fiesta_1",
-            "desc": "Es agosto y ha empezado una festividad para celebrar la cosecha de grano (Lughnasadh) y los dias son largos y agotadores",
+            "desc": "Es agosto y ha empezado una festividad para celebrar la cosecha de grano (Lughnasadh) y los días son largos y agotadores",
             "res_der": {
                 "respuesta": "Cosechar cuidadosamente y almacenar bien",
                 "explicacion": "Hay suficiente cosecha para hacer el festival pero te encuentras muy cansado",
@@ -106,7 +106,7 @@
                 "siguiente": -1
             },
             "res_izq": {
-                "respuesta": "Confias que tu esfuerzo será suficiente para el próximo año",
+                "respuesta": "Confías que tu esfuerzo será suficiente para el próximo año",
                 "explicacion": "Pierdes una oportunidad de fortalecer lazos comunitarios y tu siguiente cosecha no es tan prospera como de costumbre.",
                 "efectos": [
                     "0",
@@ -292,7 +292,7 @@
             "desc": "Un eclipse ocurre en el equinoccio. ¿Realizas un ritual para apaciguar a los dioses, sacrificando parte de tu mejor ganado, o ignoras el presagio?",
             "res_der": {
                 "respuesta": "Sacrificar parte del ganado ",
-                "explicacion": "Los eclipses eran un simbolo de un mal augurio para los vacceos",
+                "explicacion": "Los eclipses eran un símbolo de un mal augurio para los vacceos",
                 "efectos": [
                     "-1",
                     "0",
@@ -303,7 +303,7 @@
             },
             "res_izq": {
                 "respuesta": "No sacarificar el ganado y confiar en el orden de la naturaleza",
-                "explicacion": "Los eclipses eran un simbolo de un mal augurio para los vacceos",
+                "explicacion": "Los eclipses eran un símbolo de un mal augurio para los vacceos",
                 "efectos": [
                     "0",
                     "1",
@@ -443,7 +443,7 @@
             },
             "res_izq": {
                 "respuesta": "Unirse a la caza",
-                "explicacion": "tu cosecha empeora y no consigues cazar nada",
+                "explicacion": "Tu cosecha empeora y no consigues cazar nada",
                 "efectos": [
                     "0",
                     "1",
@@ -569,7 +569,7 @@
             "id": 20,
             "personaje": "Guerrero",
             "imagen": "Guerrero_1",
-            "desc": "Se te acerca un guerrero de una aldea cercana pidiendote ayuda dado que en su pueblo se han queado sin recursos para el invierno ",
+            "desc": "Se te acerca un guerrero de una aldea cercana pidiéndote ayuda dado que en su pueblo se han queado sin recursos para el invierno ",
             "res_der": {
                 "respuesta": "Decides ayudarle proporcionándole los bienes mínimos sin que afecte a tu despensa",
                 "explicacion": "Resulta que el guerrero te traiciona y tras una pelea te deja inconsciente",
@@ -1058,7 +1058,7 @@
                 "siguiente": -1
             },
             "res_izq": {
-                "respuesta": "\"Los devuelves a tu vecino y le reprochas\nque sea más responsable la próxima vez\"",
+                "respuesta": "Los devuelves a tu vecino y le reprochas que sea más responsable la próxima vez",
                 "explicacion": null,
                 "efectos": [
                     "0",
@@ -1241,7 +1241,7 @@
             "id": 44,
             "personaje": "Viajero",
             "imagen": "Explorador_3",
-            "desc": "Se te acerca un viajero de una aldea cercana y te pregunta donde se ubica el ustrino",
+            "desc": "Se te acerca un viajero de una aldea cercana y te pregunta dónde se ubica el ustrino",
             "res_der": {
                 "respuesta": "Señalas en dirección al campo de incineración",
                 "explicacion": null,
