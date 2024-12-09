@@ -217,7 +217,7 @@ public class HistoryManager : MonoBehaviour
     {
         respuestaText.text = "";
         explicacionText.text = respuestaActual.explicacion;
-        imagenCartaPersonaje.sprite = spriteReversoCarta;
+        imagenCartaPersonaje.sprite = spriteCartaExplicacion;
         imagenCartaPersonaje.DOColor(sombreadoCarta, 0.2f);
         textToSpeechManager.StartSpeaking(respuestaActual.explicacion);
     }
