@@ -70,7 +70,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-/[Aa]ssets/Historias/crearHistorias.py
+/[Aa]ssets/Historias/crearHistorias.py*
 
 # Excepción para AndroidManifest.xml en la carpeta ignorada
 !/[Ll]ibrary/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml
