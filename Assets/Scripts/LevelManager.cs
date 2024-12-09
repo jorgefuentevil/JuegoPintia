@@ -48,6 +48,7 @@ public class LevelManager : MonoBehaviour
         parsedNiveles = JsonUtility.FromJson<LevelsJsonRoot>(jsonHistorias.LoadAsset().text);
 
         numberOfLevels = parsedNiveles.num_historias;
+        GameManager.Instance.AumentaSaveData(numberOfLevels-1);
         Dictionary<string, Sprite> retratosPersonajes = new Dictionary<string, Sprite>();
 
 

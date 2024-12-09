@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError($"Error cargando fichero de guardado: {e.Message}");
             savedData = CreateDefaultSaveData();
+            SaveGameData();
         }
 
     }
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour
         };
     }
 
-    private void AumentaSaveData(int nuevaCapacidad)
+    public void AumentaSaveData(int nuevaCapacidad)
     {
         while (savedData.unlockedLevels.Count <= nuevaCapacidad)
         {
@@ -110,9 +111,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void UnlockNextLevel()
-    {
+    {   
+        Debug.Log("Intento desbloquear");
         if (currentLevelIndex < savedData.unlockedLevels.Count - 1)
-        {
+        {   
+            Debug.Log("Desbloqueo");
             savedData.unlockedLevels[currentLevelIndex + 1] = true;
             SaveGameData();
         }
