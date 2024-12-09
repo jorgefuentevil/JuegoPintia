@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
     public void AumentaSaveData(int nuevaCapacidad)
     {   
         Debug.Log($"Aumento SaveData de {savedData.unlockedLevels.Count} a {nuevaCapacidad}");
-        while (savedData.unlockedLevels.Count <= nuevaCapacidad)
+        while (savedData.unlockedLevels.Count < nuevaCapacidad)
         {
             savedData.unlockedLevels.Add(false);
         }
