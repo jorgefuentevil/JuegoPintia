@@ -98,16 +98,18 @@ public class GameManager : MonoBehaviour
     {
         return new GameSaveData
         {
-            unlockedLevels = new List<bool> { true }
+            unlockedLevels = new List<bool> { true , false }
         };
     }
 
     public void AumentaSaveData(int nuevaCapacidad)
-    {
+    {   
+        Debug.Log($"Aumento SaveData de {savedData.unlockedLevels.Count} a {nuevaCapacidad}");
         while (savedData.unlockedLevels.Count <= nuevaCapacidad)
         {
             savedData.unlockedLevels.Add(false);
         }
+        SaveGameData();
     }
 
     public void UnlockNextLevel()

@@ -48,14 +48,13 @@ public class LevelManager : MonoBehaviour
         parsedNiveles = JsonUtility.FromJson<LevelsJsonRoot>(jsonHistorias.LoadAsset().text);
 
         numberOfLevels = parsedNiveles.num_historias;
-        GameManager.Instance.AumentaSaveData(numberOfLevels-1);
+        GameManager.Instance.AumentaSaveData(numberOfLevels);
         Dictionary<string, Sprite> retratosPersonajes = new Dictionary<string, Sprite>();
 
 
         //Cargamos Sprites de personajes .....
         Addressables.LoadAssetsAsync<Sprite>(assetsPersonajes, (sprite) =>
         {
-            Debug.Log("Cargado retrato: " + sprite.name);
             retratosPersonajes.Add(sprite.name, sprite);
         }).WaitForCompletion();
 
