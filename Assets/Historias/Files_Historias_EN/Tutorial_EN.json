@@ -2,6 +2,598 @@
     "historia": "Tutorial",
     "idioma": "en_EN",
     "nivel": 1,
-    "decisiones": [],
-    "decisiones_respuesta": []
+    "aleatoria": false,
+    "atributo": "Hambre",
+    "decisiones": [
+        {
+            "id": 0,
+            "personaje": "Machine",
+            "imagen": "Maquina_Sanson",
+            "desc": "The experiment went wrong. Instead of observing the history of the Vaccei... now you're trapped in it. Swipe sideways to see the possible decisions to make.",
+            "res_der": {
+                "respuesta": "Examine your surroundings. (swipe again to confirm)",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Talk to the locals. (swipe again to confirm)",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 1,
+            "personaje": "Village",
+            "imagen": "Aldea_Sanson",
+            "desc": "Men and women work the land and organize around a communal granary. (By pressing the arrows, you can also decide.)",
+            "res_der": {
+                "respuesta": "Approach without fear (press the tick to confirm or the arrow to go back)",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Approach slowly (press the tick to confirm or the arrow to go back)",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 2,
+            "personaje": "Herdsman Branus",
+            "imagen": "Ganadero_Sanson",
+            "desc": "An older man approaches you and asks where you come from. (The attributes above will change based on your decisions)",
+            "res_der": {
+                "respuesta": "Invent a convincing story.",
+                "explicacion": "He believes the story you tell him. (This is an explanation of the outcome of the decision)",
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Say you are a time traveler.",
+                "explicacion": "He believes you're trying to deceive him. (This is an explanation of the outcome of the decision)",
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 3,
+            "personaje": "Togodumnus",
+            "imagen": "Agricultor_Sanson",
+            "desc": "As you move forward a bit, you encounter a boy carrying hay. He asks for your help in carrying it. (The first attribute is your money)",
+            "res_der": {
+                "respuesta": "Help him carry the hay.",
+                "explicacion": "He gives you some coins you don’t recognize, which they call \"Denarii\"",
+                "efectos": [
+                    "4",
+                    "1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Don’t help him",
+                "explicacion": "You find some coins further along the path. The locals call them \"Denarii\"",
+                "efectos": [
+                    "4",
+                    "-1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 4,
+            "personaje": "Crowd",
+            "imagen": "Gente_Sanson",
+            "desc": "When you reach the center of the village, you see a large crowd lining up. The people seem excited. (The second attribute is your social relationships)",
+            "res_der": {
+                "respuesta": "Cut in line and find out what people are doing",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "-1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Wait in line patiently",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "-1",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 5,
+            "personaje": "Merchant Caelus",
+            "imagen": "Mercader_Sanson",
+            "desc": "After a while of waiting, you discover that people were lining up to buy from the merchant of the neighboring village. (The third attribute is your health)",
+            "res_der": {
+                "respuesta": "Buy spices with the coin from the boy earlier",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Don’t buy anything",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 6,
+            "personaje": "Amaia",
+            "imagen": "Uvas_Sanson",
+            "desc": "The journey has left you so hungry that you decide to approach a woman picking grapes. (The last attribute will change depending on the character)",
+            "res_der": {
+                "respuesta": "Ask her for a bunch of grapes in exchange for a coin",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "4"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Ask her for a bunch of grapes in exchange for working for a while",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "-1",
+                    "4"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 7,
+            "personaje": "Lia",
+            "imagen": "Telar_Sanson",
+            "desc": "You have very modern clothes for the time, and they're torn from the explosion. You decide to approach a seamstress you see working at the loom",
+            "res_der": {
+                "respuesta": "Buy appropriate clothing",
+                "explicacion": "She gives you the clothes as she sees your clothes torn from the explosion",
+                "efectos": [
+                    "0",
+                    "1",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Don’t buy clothes and stay as you were",
+                "explicacion": null,
+                "efectos": [
+                    "0",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 8,
+            "personaje": "Builder Artius",
+            "imagen": "Constructor_Sanson",
+            "desc": "You pass by a house under construction, and the builder recognizes you as \"Ambatus\"",
+            "res_der": {
+                "respuesta": "You ask him who Ambatus is",
+                "explicacion": "It turns out you’re in someone else’s body!",
+                "efectos": [
+                    "0",
+                    "0",
+                    "1",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "You pretend to be him and ask how he’s doing",
+                "explicacion": "It turns out you’re in someone else’s body!",
+                "efectos": [
+                    "0",
+                    "0",
+                    "1",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 9,
+            "personaje": "Blacksmith Viriatus",
+            "imagen": "Herrero_Sanson",
+            "desc": "You come across a blacksmith forging swords",
+            "res_der": {
+                "respuesta": "You want to learn and decide to help him",
+                "explicacion": "You burned yourself with the fire",
+                "efectos": [
+                    "0",
+                    "1",
+                    "-1",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "You stay watching how he does it",
+                "explicacion": "You catch your breath after taking a walk around Pintia",
+                "efectos": [
+                    "0",
+                    "0",
+                    "1",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 10,
+            "personaje": "Potter Drusila",
+            "imagen": "Alfarera_Sanson",
+            "desc": "You’re thirsty and approach the potter to ask for a vessel to fill with water",
+            "res_der": {
+                "respuesta": "Buy a large jug ",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Buy a small vessel",
+                "explicacion": null,
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "-1"
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "id": 11,
+            "personaje": "Ambicatus",
+            "imagen": "Vino_Sanson",
+            "desc": "You can’t find water, but you do find a wine vendor. You’re very thirsty.",
+            "res_der": {
+                "respuesta": "Buy wine to drink ",
+                "explicacion": "If any attribute reaches the minimum or maximum, you will lose the game",
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "4"
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": "Buy wine to drink ",
+                "explicacion": "If any attribute reaches the minimum or maximum, you will lose the game",
+                "efectos": [
+                    "-1",
+                    "0",
+                    "0",
+                    "4"
+                ],
+                "siguiente": -1
+            }
+        }
+    ],
+    "decisiones_respuesta": [],
+    "decision_victoria": {
+        "personaje": "VICTORY",
+        "imagen": "tumba",
+        "desc": "VICTORY",
+        "res_der": {
+            "respuesta": null,
+            "explicacion": null,
+            "efectos": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "siguiente": -1
+        },
+        "res_izq": {
+            "respuesta": null,
+            "explicacion": null,
+            "efectos": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "siguiente": -1
+        }
+    },
+    "decisiones_derrota": [
+        {
+            "tipo": "Social_Alto",
+            "personaje": "Muerte",
+            "imagen": "Ladron_1",
+            "desc": "Te confiaste mucho de la gente, sin embargo no todos son tan buenos como tu",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Social_Bajo",
+            "personaje": "Muerte",
+            "imagen": "Mendigo_1",
+            "desc": "Pasaste una mala etapa y por no ayudar a la gente esta tampoco te ayudo a tí. Acabaste de mendigo en las calles.",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Dinero_Alto",
+            "personaje": "Muerte",
+            "imagen": "Ladron_1",
+            "desc": "¡Has perdido todo tu dinero, eres una decepción para tu familia y tus amigos!",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Dinero_Bajo",
+            "personaje": "Muerte",
+            "imagen": "Mendigo_1",
+            "desc": "¡Has perdido todo tu dinero, eres una decepción para tu familia y tus amigos!",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Salud_Alto",
+            "personaje": "Muerte",
+            "imagen": "Pelea_1",
+            "desc": "Te creías el más fuerte de la aldea, pero había alguien mejor que tú...",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Salud_Bajo",
+            "personaje": "Muerte",
+            "imagen": "Herido_1",
+            "desc": "Tienes que cuidarte más, con tan poca salud no llegarás a viejo",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Especifico_Bajo",
+            "personaje": "Muerte",
+            "imagen": "tumba",
+            "desc": "Debes tener más cuidado con las decisiones que tomas",
+            "res_der": {
+                "respuesta":null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        },
+        {
+            "tipo": "Especifico_Alto",
+            "personaje": "Muerte",
+            "imagen": "tumba",
+            "desc": "Debes tener más cuidado con las decisiones que tomas",
+            "res_der": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            },
+            "res_izq": {
+                "respuesta": null,
+                "explicacion": null,
+                "efectos": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "siguiente": -1
+            }
+        }
+    ]
 }
