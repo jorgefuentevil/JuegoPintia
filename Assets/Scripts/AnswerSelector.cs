@@ -18,6 +18,7 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private AudioManager audioManager;
 
+    private bool escondePopup = true;
 
     private void Awake()
     {
@@ -27,7 +28,11 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
     }
 
     public void OnDrag(PointerEventData data)
-    {
+    {   
+        if(escondePopup){
+            historyManager.EscondePopup();
+            escondePopup = false;
+        }
         float difference = data.pressPosition.x - data.position.x;
         if ((maquinaEstados.EstaShowRespuestaDerecha() && difference < 0) ||
             (maquinaEstados.EstaShowRespuestaIzquierda() && difference > 0) ||
