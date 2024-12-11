@@ -33,7 +33,7 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private PopUpFinalPartida popupFin;
     [SerializeField] private CanvasGroup canvasGroupTextos;
 
-
+    [SerializeField] private Animator animation;
     [SerializeField] private TTS textToSpeechManager;
 
     [Header("--- ICON MANAGER ----")]
@@ -112,6 +112,8 @@ public class HistoryManager : MonoBehaviour
 
         asyncOperationHandle.WaitForCompletion();
         SetElementosDecision();
+        
+
     }
 
 
@@ -126,10 +128,12 @@ public class HistoryManager : MonoBehaviour
             preguntaText.text = decisionActual.desc;
             textToSpeechManager.StartSpeaking(decisionActual.desc);
             anosText.text = $"{numDecisionActual} {anosTextAux}";
-            canvasGroupTextos.DOFade(1,0.3f);
+            canvasGroupTextos.DOFade(1,0.3f).OnComplete(() => {animation.Play("inactivity");} );
+            
         });
 
     }
+
 
 
 
