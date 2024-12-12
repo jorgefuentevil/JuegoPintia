@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject botonFinPartida;
     [SerializeField] private ScrollRect scrollTextoLegal;
     [SerializeField] private TTS tts;
+    private bool esPartida = false;
 
 
 
@@ -48,7 +49,8 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         //mainMenu.SetActive(false);
-        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+        if (PlayerPrefs.GetInt("VibracionEnabled") == 1)
+        {
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro al entrar en ajustes");
         }
@@ -60,7 +62,8 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         //mainMenu.SetActive(true);
-        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+        if (PlayerPrefs.GetInt("VibracionEnabled") == 1)
+        {
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro en volver");
         }
@@ -75,12 +78,12 @@ public class PauseMenu : MonoBehaviour
     {
 
         if (value)
-        {            
+        {
             PlayerPrefs.SetInt("VibracionEnabled", 1);
-            #if UNITY_ANDROID || UNITY_IOS
-                HapticFeedback.HeavyFeedback();
-                Debug.Log("Vibro al pulsar el toggle");
-            #endif
+#if UNITY_ANDROID || UNITY_IOS
+            HapticFeedback.HeavyFeedback();
+            Debug.Log("Vibro al pulsar el toggle");
+#endif
         }
         else
         {
@@ -93,7 +96,7 @@ public class PauseMenu : MonoBehaviour
     public void ToggleTTS(bool value)
     {
         if (value)
-        {            
+        {
             PlayerPrefs.SetInt("TTSEnable", 1);
         }
         else
@@ -104,10 +107,12 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void ShowTerms()
-    {   
+    {
         popupLegal.SetActive(true);
         textoLegal.SetActive(false);
-        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+        botonFinPartida.SetActive(false);
+        if (PlayerPrefs.GetInt("VibracionEnabled") == 1)
+        {
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro en entrar terms legales");
         }
@@ -117,8 +122,13 @@ public class PauseMenu : MonoBehaviour
     {
         popupLegal.SetActive(false);
         textoLegal.SetActive(true);
+        if (esPartida)
+        {
+            botonFinPartida.SetActive(true);
+        }
         scrollTextoLegal.verticalNormalizedPosition = 1;
-        if(PlayerPrefs.GetInt("VibracionEnabled")==1){
+        if (PlayerPrefs.GetInt("VibracionEnabled") == 1)
+        {
             HapticFeedback.HeavyFeedback();
             Debug.Log("vibro en salir terms legales");
         }
@@ -127,6 +137,7 @@ public class PauseMenu : MonoBehaviour
 
     public void SetMenuPlaying()
     {
+        esPartida = true;
         botonFinPartida.SetActive(true);
     }
 

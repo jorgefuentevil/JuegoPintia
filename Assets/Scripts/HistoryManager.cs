@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using Newtonsoft.Json;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.Localization;
+using Unity.VisualScripting;
 
 public class HistoryManager : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class HistoryManager : MonoBehaviour
     [SerializeField] private GameObject cartaPersonaje;
     [SerializeField] private PopUpFinalPartida popupFin;
     [SerializeField] private CanvasGroup canvasGroupTextos;
+    [SerializeField] private PopupSlide popupSlide;
 
 
     [SerializeField] private TTS textToSpeechManager;
@@ -112,6 +114,12 @@ public class HistoryManager : MonoBehaviour
 
         asyncOperationHandle.WaitForCompletion();
         SetElementosDecision();
+        popupSlide.IniciaPopup();
+    }
+
+    public void EscondePopup()
+    {
+        popupSlide.TerminarAnimacion();
     }
 
 
