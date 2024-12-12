@@ -72,5 +72,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /[Aa]ssets/Historias/crearHistorias.py*
 
-# Excepción para AndroidManifest.xml en la carpeta ignorada
+# Excepción para AndroidManifest.xml en la carpeta ignorada para carpeta build
 !/[Ll]ibrary/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml
