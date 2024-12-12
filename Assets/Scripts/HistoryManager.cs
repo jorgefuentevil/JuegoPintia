@@ -122,6 +122,9 @@ public class HistoryManager : MonoBehaviour
         popupSlide.TerminarAnimacion();
     }
 
+    public PopupSlide GetPopupSlide(){
+        return popupSlide;
+    }
 
     private void SetElementosDecision()
     {

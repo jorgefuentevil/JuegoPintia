@@ -29,10 +29,9 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnDrag(PointerEventData data)
     {
-        if (escondePopup)
+        if (historyManager.GetPopupSlide().IsEmpezado())
         {
             historyManager.EscondePopup();
-            escondePopup = false;
         }
         float difference = data.pressPosition.x - data.position.x;
         if ((maquinaEstados.EstaShowRespuestaDerecha() && difference < 0) ||
@@ -198,20 +197,18 @@ public class AnswerSelector : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void RightArrowPressed()
     {
-        if (escondePopup)
+        if (historyManager.GetPopupSlide().IsEmpezado())
         {
             historyManager.EscondePopup();
-            escondePopup = false;
         }
         GestionarSwipeDerecha();
     }
 
     public void LeftArrowPressed()
     {
-        if (escondePopup)
+        if (historyManager.GetPopupSlide().IsEmpezado())
         {
             historyManager.EscondePopup();
-            escondePopup = false;
         }
         GestionarSwipeIzquierda();
     }

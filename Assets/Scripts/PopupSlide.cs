@@ -63,5 +63,8 @@ public class PopupSlide : MonoBehaviour
         }
     }
 
+    public bool IsEmpezado(){
+        return haEmpezado;
+    }
 
 }
